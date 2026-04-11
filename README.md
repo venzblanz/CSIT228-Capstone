@@ -24,7 +24,7 @@
 - Database (SQLite/MySQL)
 
 ## Evaluation Criteria Mapping (Initial)
-- OOP: Planned use of classes such as UserList, QueueList and more
+- OOP: Planned use of classes such as Account, User, Queue, and many more
 - GUI: JavaFX with FXML views
 - UML: Use Case and Class Diagram included
 - Design Pattern: (Tentative, e.g., Singleton for DB connection)
