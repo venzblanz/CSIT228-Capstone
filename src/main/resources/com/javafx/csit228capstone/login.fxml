@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../../../styles/login.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.LoginController">
+   <top>
+      <HBox alignment="BOTTOM_LEFT" prefHeight="59.0" prefWidth="1240.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <Label prefHeight="41.0" prefWidth="159.0" text="MedServe">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </BorderPane.margin>
+      </HBox>
+   </top>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0" />
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="508.0" styleClass="login_card" StackPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="84.0" layoutY="61.0" text="Email Address" />
+                  <HBox alignment="CENTER" layoutX="82.0" layoutY="99.0" prefHeight="34.0" prefWidth="346.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                        <TextField prefHeight="25.0" prefWidth="313.0" />
+                     </children>
+                  </HBox>
+                  <Label layoutX="83.0" layoutY="143.0" text="Email Address" />
+                  <HBox alignment="CENTER" layoutX="84.0" layoutY="181.0" prefHeight="34.0" prefWidth="343.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                        <TextField prefHeight="25.0" prefWidth="370.0" />
+                     </children>
+                  </HBox>
+                  <Hyperlink layoutX="282.0" layoutY="255.0" prefHeight="23.0" prefWidth="125.0" text="Forgot Password?" />
+                  <Button fx:id="loginBtn" layoutX="90.0" layoutY="289.0" mnemonicParsing="false" onAction="#onLogin" prefHeight="41.0" prefWidth="339.0" text="Log in" />
+                  <HBox alignment="CENTER" layoutX="92.0" layoutY="338.0" prefHeight="23.0" prefWidth="335.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="145.0" text="Don't have an account?" />
+                        <Hyperlink contentDisplay="RIGHT" prefHeight="23.0" prefWidth="83.0" text="Sign up" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+               </padding>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>
