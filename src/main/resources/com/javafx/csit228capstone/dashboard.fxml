@@ -8,31 +8,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.DashboardController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../../../styles/dashboard.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.DashboardController">
    <left>
-      <VBox maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+      <VBox maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0" styleClass="menu-pane" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="63.0" prefWidth="260.0">
+            <HBox alignment="CENTER" prefHeight="63.0" prefWidth="260.0">
                <children>
-                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label prefHeight="47.0" prefWidth="250.0" text="MedServe">
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" styleClass="dashboard-logo" />
+                  <Label alignment="CENTER" prefHeight="47.0" prefWidth="135.0" text="MedServe">
                      <font>
-                        <Font name="SansSerif Regular" size="36.0" />
+                        <Font name="SansSerif Regular" size="24.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="118.0" prefWidth="280.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="240.0" styleClass="profile-pane">
                <children>
-                  <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </ImageView>
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="33.0" styleClass="profile-icon" />
                   <VBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="176.0">
                      <children>
                         <Label text="Juan Dela Cruz">
@@ -47,20 +44,20 @@
                   </VBox>
                </children>
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
                <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
                </padding>
             </HBox>
             <Separator prefWidth="200.0" />
-            <VBox prefHeight="275.0" prefWidth="260.0">
+            <VBox prefHeight="243.0" prefWidth="240.0">
                <children>
                   <Label text="MAIN MENU">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="31.0" prefWidth="301.0" text="Dashboard">
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="31.0" prefWidth="301.0" styleClass="menu-button" text="Dashboard">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -70,7 +67,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Button>
-                  <Button alignment="TOP_LEFT" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="322.0" text="Queue">
+                  <Button alignment="TOP_LEFT" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="322.0" styleClass="menu-button" text="Queue">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -80,7 +77,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Button>
-                  <Button alignment="TOP_LEFT" layoutX="10.0" layoutY="52.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="325.0" text="Schedule">
+                  <Button alignment="TOP_LEFT" layoutX="10.0" layoutY="52.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="325.0" styleClass="menu-button" text="Schedule">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -90,7 +87,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Button>
-                  <Button alignment="TOP_LEFT" layoutX="10.0" layoutY="77.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="341.0" text="My Account">
+                  <Button alignment="TOP_LEFT" layoutX="10.0" layoutY="77.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="341.0" styleClass="menu-button" text="My Account">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -102,13 +99,20 @@
                      </font></Button>
                </children>
                <padding>
-                  <Insets top="10.0" />
+                  <Insets top="20.0" />
                </padding>
             </VBox>
             <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
             <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="260.0">
                <children>
-                  <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" />
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="20.0" styleClass="logout-icon">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Pane>
                   <Label text="Log out">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -117,22 +121,22 @@
             </HBox>
          </children>
          <padding>
-            <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
          </padding>
       </VBox>
    </left>
    <center>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="71.0" prefWidth="920.0">
                <children>
                   <Label text="Dashboard">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </Label>
                   <Region maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="35.0" styleClass="dashboard-notification" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
@@ -311,11 +315,8 @@
             <Insets />
          </BorderPane.margin>
          <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
          </padding>
       </VBox>
    </center>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
 </BorderPane>

@@ -1,4 +1,56 @@
-.login_card {
-    -fx-background-color: white;
-    -fx-background-radius: 12;
-}
+/* More on Background and layout designs*/
+    .login-logo {
+        -fx-background-image: url("../images/black-square.png");
+        -fx-background-size: cover;
+        -fx-background-position: center;
+    }
+    .login-card {
+        -fx-background-color: white;
+        -fx-background-radius: 30;
+    }
+    .login-background{
+        -fx-background-image: url("../images/bg1.jpg");
+        -fx-background-size: cover;
+        -fx-background-position: center;
+        -fx-background-repeat: no-repeat;
+    }
+    .login-bgoverlay{
+        -fx-background-color: rgba(0,0,0,0.3);
+    }
+ /* -- BUTTON -- */
+    .login-button{
+        -fx-text-fill: white;
+        -fx-background-radius: 10;
+        -fx-background-color: black;
+    }
+
+/* -- FIELDS -- */
+    .email-icon {
+        -fx-background-image: url("../images/mail.png");
+        -fx-background-size: cover;
+        -fx-background-position: center;
+    }
+    .email-field {
+        -fx-background-color: lightgray;
+        -fx-prompt-text-fill: black;
+        -fx-background-radius: 10;
+    }
+    .password-icon {
+        -fx-background-image: url("../images/lock_icon.png");
+        -fx-background-size: cover;
+        -fx-background-position: center;
+    }
+    .password-field {
+        -fx-background-color: lightgray;
+        -fx-prompt-text-fill: black;
+        -fx-background-radius: 10;
+    }
+/*-- Hyoerlink layout --*/
+    .forgot-pass {
+        -fx-underline: true;
+        -fx-text-fill: black;
+    }
+    .signup {
+        -fx-underline: true;
+        -fx-text-fill: black;
+    }

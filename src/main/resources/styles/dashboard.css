@@ -1,0 +1,36 @@
+.menu-pane{
+    -fx-background-color: lightgray;
+}
+.profile-pane{
+    -fx-background-color: #DCE0DD;
+    -fx-background-radius: 10;
+}
+.dashboard-logo{
+    -fx-background-image: url("../images/black-square.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.dashboard-notification{
+    -fx-background-image: url("../images/notification_icon.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.logout-icon{
+    -fx-background-image: url("../images/logout_icon.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.profile-icon{
+    -fx-background-image: url("../images/profile_icon.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.menu-button{
+    -fx-background-radius: 10;
+    -fx-background-color: rgba(0,0,0,0);
+}
+.menu-button:hover {
+    -fx-background-color: rgba(0,0,0,1);
+    -fx-text-fill: white;
+    -fx-style: bold;
+}
