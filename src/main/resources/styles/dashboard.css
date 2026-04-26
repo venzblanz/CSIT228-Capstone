@@ -1,14 +1,20 @@
 .menu-pane{
-    -fx-background-color: lightgray;
+    -fx-background-color: #CEE4F4;
+}
+.main-pane{
+    -fx-background-color: #EBF2F6;
 }
 .profile-pane{
-    -fx-background-color: #DCE0DD;
+    -fx-background-color: #CEE4F4;
     -fx-background-radius: 10;
 }
 .dashboard-logo{
-    -fx-background-image: url("../images/black-square.png");
+    -fx-background-image: url("../images/medserveLogo.png");
     -fx-background-size: cover;
     -fx-background-position: center;
+}
+.dashboard-medserve{
+    -fx-text-fill: #218AD5;
 }
 .dashboard-notification{
     -fx-background-image: url("../images/notification_icon.png");
@@ -30,7 +36,59 @@
     -fx-background-color: rgba(0,0,0,0);
 }
 .menu-button:hover {
-    -fx-background-color: rgba(0,0,0,1);
+    -fx-background-color: #218AD5;
     -fx-text-fill: white;
     -fx-style: bold;
+}
+
+/*main pane*/
+.q-utilities{
+    -fx-text-fill: #77ACC5;
+}
+.separator .line {
+    -fx-border-color: #77ACC5;
+    -fx-border-width: 0.5;
+}
+.active-dot{
+    -fx-text-fill: #5DAE52;
+}
+.q-active{
+    -fx-text-fill: #D82F2F;
+}
+.q-position{
+    -fx-text-fill: #D82F2F;
+}
+.dashboard-recent-card1{
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+}
+.dashboard-recent-card2{
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+}
+.recent{
+    -fx-text-fill: gray;
+}
+.q-active-pane{
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+}
+.q-utilities-pane{
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+}
+.q-utilities-icon{
+    -fx-background-image: url("../images/down-arrow.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.q-schedule-icon{
+    -fx-background-image: url("../images/calendar.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.q-time-icon{
+    -fx-background-image: url("../images/clock.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
 }
