@@ -1,4 +1,4 @@
-package com.javafx.csit228capstone.login;
+package com.javafx.csit228capstone.screens;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +23,7 @@ public class LoginController {
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/javafx/csit228capstone/dashboard.fxml"));
             Scene scene = new Scene(loader.load(),1280,800);
+            scene.getStylesheets().add(getClass().getResource("/styles/dashboard.css").toExternalForm());
             Stage stage = (Stage) loginBtn.getScene().getWindow();
             stage.setScene(scene);
         }catch (IOException e){

@@ -1,3 +1,9 @@
+/*
+    TODO clean up HAHAHAHAHAHAHAH
+*/
+
+@import "menu-pane.css";
+
 .menu-pane{
     -fx-background-color: #CEE4F4;
 }
@@ -44,6 +50,10 @@
 /*main pane*/
 .q-utilities{
     -fx-text-fill: #77ACC5;
+}
+.q-utilities .line{
+    -fx-border-color: #77ACC5;
+    -fx-border-width: 0.5;
 }
 .separator .line {
     -fx-border-color: #77ACC5;

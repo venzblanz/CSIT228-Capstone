@@ -1,0 +1,63 @@
+@import "menu-pane.css";
+
+.main-pane{
+    -fx-background-color: #EBF2F6;
+}
+.notification-icon{
+    -fx-background-image: url("../images/notification_icon.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.card-pane{
+    -fx-background-radius: 10;
+    -fx-background-color: #98C9ED;
+}
+.card-pane:hover{
+    -fx-background-color: #218AD5;
+    -fx-text-fill: white;
+}
+.wh-card:hover{
+    -fx-background-color: #FFBCD3;
+    -fx-text-fill: white;
+}
+.sf-card:hover{
+    -fx-background-color: #91F9EA;
+    -fx-text-fill: white;
+}
+.dl-card:hover{
+    -fx-background-color: #543BE9;
+    -fx-text-fill: white;
+}
+
+.gw-card:hover .label{
+    -fx-text-fill: white;
+}
+.dl-card:hover .label{
+    -fx-text-fill: white;
+}
+
+.gw-icon{
+    -fx-background-image: url("../images/stethescope.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.wh-icon{
+    -fx-background-image: url("../images/femenine.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.sf-icon{
+    -fx-background-image: url("../images/doctor.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.dl-icon{
+    -fx-background-image: url("../images/science-lab-equipment.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.arrow-icon{
+    -fx-background-image: url("../images/right-arrow.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}

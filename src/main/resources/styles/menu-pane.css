@@ -1,0 +1,41 @@
+.menu-pane{
+    -fx-background-color: #CEE4F4;
+}
+.logo{
+    -fx-background-image: url("../images/medserveLogo.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.medserve{
+    -fx-text-fill: #218AD5;
+}
+.profile-pane{
+    -fx-background-color: #CEE4F4;
+    -fx-background-radius: 10;
+}
+.profile-icon{
+    -fx-background-image: url("../images/profile_icon.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.separator .line{
+    -fx-border-color: #77ACC5;
+    -fx-border-width: 0.5;
+}
+.mainmenu-label{
+    -fx-text-fill: gray;
+}
+.menu-button{
+    -fx-background-radius: 10;
+    -fx-background-color: rgba(0,0,0,0);
+}
+.menu-button:hover {
+    -fx-background-color: #218AD5;
+    -fx-text-fill: white;
+    -fx-style: bold;
+}
+.logout-icon{
+    -fx-background-image: url("../images/logout_icon.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
