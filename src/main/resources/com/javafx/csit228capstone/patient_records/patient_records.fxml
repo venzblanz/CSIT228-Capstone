@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="871.0" style="-fx-background-color: #EBF2F6;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.patient_records.PatientRecordsController">
+   <children>
+      <VBox fx:id="root" maxWidth="300.0" minHeight="-Infinity" minWidth="300.0" prefHeight="700.0" prefWidth="584.0" style="-fx-background-color: #CEE4F4;" styleClass="menu-pane">
+          <children>
+              <HBox alignment="CENTER" prefHeight="63.0" prefWidth="260.0">
+                  <children>
+                      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" styleClass="logo" />
+                      <Label alignment="CENTER" prefHeight="47.0" prefWidth="135.0" styleClass="medserve" text="MedServe">
+                          <font>
+                              <Font name="SansSerif Regular" size="24.0" />
+                          </font>
+                      </Label>
+                  </children>
+              </HBox>
+              <HBox fx:id="profileBtn" alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="240.0" styleClass="profile-pane">
+                  <children>
+                      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="33.0" styleClass="profile-icon" />
+                      <VBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="176.0">
+                          <children>
+                              <Label text="Juan Dela Cruz">
+                                  <font>
+                                      <Font name="System Bold" size="12.0" />
+                                  </font>
+                        </Label>
+                              <Label layoutX="10.0" layoutY="10.0" text="123-233-2345" />
+                          </children>
+                          <HBox.margin>
+                              <Insets left="10.0" />
+                          </HBox.margin>
+                      </VBox>
+                  </children>
+                  <VBox.margin>
+                      <Insets bottom="20.0" top="20.0" />
+                  </VBox.margin>
+                  <padding>
+                      <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
+                  </padding>
+              </HBox>
+              <Separator prefWidth="200.0" style="-fx-background-color: #AACCDE;" />
+              <VBox prefHeight="243.0" prefWidth="240.0">
+                  <children>
+                      <Label styleClass="mainmenu-label" text="MAIN MENU" textFill="#817c85">
+                          <font>
+                              <Font size="14.0" />
+                          </font>
+                  </Label>
+                      <Button fx:id="dashboardBtn" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="31.0" prefWidth="301.0" style="-fx-background-color: #CEE4F4;" styleClass="menu-button" text="Dashboard">
+                          <VBox.margin>
+                              <Insets top="10.0" />
+                          </VBox.margin>
+                          <padding>
+                              <Insets bottom="9.0" left="14.0" right="14.0" top="9.0" />
+                          </padding>
+                          <font>
+                              <Font size="14.0" />
+                          </font>
+                  </Button>
+                      <Button fx:id="queueBtn" alignment="TOP_LEFT" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="322.0" style="-fx-background-color: #CEE4F4;" styleClass="menu-button" text="Queue">
+                          <VBox.margin>
+                              <Insets top="10.0" />
+                          </VBox.margin>
+                          <padding>
+                              <Insets bottom="9.0" left="14.0" right="14.0" top="9.0" />
+                          </padding>
+                          <font>
+                              <Font size="14.0" />
+                          </font>
+                  </Button>
+                      <Button fx:id="scheduleBtn" alignment="TOP_LEFT" layoutX="10.0" layoutY="52.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="325.0" style="-fx-background-color: #CEE4F4;" styleClass="menu-button" text="Schedule">
+                          <VBox.margin>
+                              <Insets top="10.0" />
+                          </VBox.margin>
+                          <padding>
+                              <Insets bottom="9.0" left="14.0" right="14.0" top="9.0" />
+                          </padding>
+                          <font>
+                              <Font size="14.0" />
+                          </font>
+                  </Button>
+                      <Button fx:id="accountBtn" alignment="TOP_LEFT" layoutX="10.0" layoutY="77.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="341.0" style="-fx-background-color: #218AD5; -fx-background-radius: 9;" styleClass="menu-button" text="My Account" textFill="WHITE">
+                          <VBox.margin>
+                              <Insets top="10.0" />
+                          </VBox.margin>
+                          <padding>
+                              <Insets bottom="9.0" left="14.0" right="14.0" top="9.0" />
+                          </padding>
+                          <font>
+                              <Font name="System Bold" size="14.0" />
+                          </font>
+                  </Button>
+                  </children>
+                  <padding>
+                      <Insets top="20.0" />
+                  </padding>
+              </VBox>
+              <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+              <HBox fx:id="logoutBtn" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="260.0" style="-fx-background-color: F5F5F5; -fx-background-radius: 9;">
+                  <children>
+                      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="20.0" styleClass="logout-icon">
+                          <opaqueInsets>
+                              <Insets />
+                          </opaqueInsets>
+                          <HBox.margin>
+                              <Insets right="10.0" />
+                          </HBox.margin>
+                      </Pane>
+                      <Label text="Log out">
+                          <font>
+                              <Font name="System Bold" size="12.0" />
+                          </font>
+                  </Label>
+                  </children>
+              </HBox>
+          </children>
+          <padding>
+              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+          </padding>
+      </VBox>
+      <Label layoutX="345.0" layoutY="42.0" text="PATIENT RECORDS">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <ChoiceBox layoutX="345.0" layoutY="134.0" prefHeight="30.0" prefWidth="159.0" />
+      <ChoiceBox layoutX="527.0" layoutY="134.0" prefHeight="30.0" prefWidth="139.0" />
+      <ChoiceBox layoutX="689.0" layoutY="134.0" prefHeight="30.0" prefWidth="139.0" />
+      <TableView layoutX="347.0" layoutY="178.0" prefHeight="479.0" prefWidth="482.0">
+        <columns>
+          <TableColumn prefWidth="78.0" resizable="false" text="Date" />
+          <TableColumn prefWidth="70.0" resizable="false" text="Queue #" />
+            <TableColumn prefWidth="107.0" resizable="false" text="Service" />
+            <TableColumn prefWidth="78.0" resizable="false" text="Status" />
+            <TableColumn prefWidth="148.0" resizable="false" text="Staff" />
+        </columns>
+      </TableView>
+      <ChoiceBox layoutX="690.0" layoutY="44.0" prefHeight="30.0" prefWidth="139.0" />
+      <Separator layoutX="346.0" layoutY="109.0" prefHeight="4.0" prefWidth="482.0" style="-fx-background-color: AACCDE;" />
+      <Label layoutX="347.0" layoutY="75.0" text="Queue History" textFill="#817c85" />
+   </children>
+</AnchorPane>
