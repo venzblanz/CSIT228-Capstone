@@ -28,7 +28,6 @@
     -fx-background-color: #543BE9;
     -fx-text-fill: white;
 }
-
 .gw-card:hover .label{
     -fx-text-fill: white;
 }
@@ -60,4 +59,8 @@
     -fx-background-image: url("../images/right-arrow.png");
     -fx-background-size: cover;
     -fx-background-position: center;
+}
+.active-queue-card{
+    -fx-background-color: white;
+    -fx-background-radius: 10;
 }

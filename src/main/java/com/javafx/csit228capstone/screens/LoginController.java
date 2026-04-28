@@ -24,12 +24,19 @@ public class LoginController {
     public void onLogin(){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/javafx/csit228capstone/dashboard.fxml"));
-            Scene scene = new Scene(loader.load(), 1280,800);
-            scene.getStylesheets().add(getClass().getResource("/styles/dashboard.css").toExternalForm());
             Stage stage = (Stage) loginBtn.getScene().getWindow();
-            stage.setMinWidth(1024);
-            stage.setMinHeight(700);
+
+            double width = stage.getWidth() - 16.00;
+            double height = stage.getHeight() - 39.00;
+            boolean wasMaximized = stage.isMaximized();
+
+            Scene scene = new Scene(loader.load(), width, height);
+            scene.getStylesheets().add(getClass().getResource("/styles/dashboard.css").toExternalForm());
             stage.setScene(scene);
+            if (wasMaximized) {
+                stage.setMaximized(true);
+            }
+            stage.setResizable(true);
         }catch (IOException e){
             e.printStackTrace();
         }

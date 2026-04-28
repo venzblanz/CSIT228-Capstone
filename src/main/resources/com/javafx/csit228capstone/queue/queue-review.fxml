@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.queue.QueueFormController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.queue.QueueReviewController">
     <left>
         <fx:include fx:id="menu" source="../menu-pane.fxml" />
     </left>
@@ -41,14 +41,14 @@
                     <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="25.0" styleClass="back-to-queuetype">
                             <children>
-                        <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                           <image>
-                              <Image url="@../../../../images/arrow.png" />
-                           </image>
-                        </ImageView>
+                                <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+                                    <HBox.margin>
+                                        <Insets right="10.0" />
+                                    </HBox.margin>
+                                    <image>
+                                        <Image url="@../../../../images/arrow.png" />
+                                    </image>
+                                </ImageView>
                                 <Label prefHeight="0.0" text="Back to Queue Types" />
                             </children>
                         </HBox>
@@ -61,11 +61,11 @@
 
                 <HBox alignment="CENTER_LEFT" styleClass="notice">
                     <children>
-                  <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../images/exclamation-mark.png" />
-                     </image>
-                  </ImageView>
+                        <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../../images/exclamation-mark.png" />
+                            </image>
+                        </ImageView>
                         <Label maxWidth="1.7976931348623157E308" text="For general checkups and basic healthcare needs. Our staff will assess your information and call your queue number when it's your turn." wrapText="true" HBox.hgrow="ALWAYS">
                             <HBox.margin><Insets left="10.0" /></HBox.margin>
                         </Label>
@@ -100,17 +100,17 @@
                                     <children>
                                         <Label text="First Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                                         <Label text="M.I" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                                        <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <TextField editable="false" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                        <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                         <Label text="Last Name" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                        <TextField GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                                        <TextField editable="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                                         <Label text="Age" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                                        <TextField maxWidth="80.0" prefWidth="80.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                                        <TextField editable="false" maxWidth="80.0" prefWidth="80.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
                                         <Label text="Gender" GridPane.columnIndex="0" GridPane.rowIndex="6" />
                                         <HBox alignment="CENTER_LEFT" spacing="20.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7">
                                             <children>
-                                                <RadioButton mnemonicParsing="false" text="Male" />
-                                                <RadioButton mnemonicParsing="false" text="Female" />
+                                                <RadioButton disable="true" mnemonicParsing="false" text="Male" />
+                                                <RadioButton disable="true" mnemonicParsing="false" text="Female" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -131,16 +131,16 @@
                                     </rowConstraints>
                                     <children>
                                         <Label text="Purpose of Visit" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                        <ComboBox maxWidth="1.7976931348623157E308" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                                        <ComboBox disable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                                         <Label text="Symptoms" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                        <TextField GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                                        <TextField editable="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                                         <Label text="Patient Type" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                                         <HBox alignment="CENTER_LEFT" spacing="20.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5">
                                             <children>
-                                                <RadioButton mnemonicParsing="false" text="Regular" />
-                                                <RadioButton mnemonicParsing="false" text="Person with Disability" />
-                                                <RadioButton mnemonicParsing="false" text="Senior Citizen" />
-                                                <RadioButton layoutX="10.0" layoutY="19.0" mnemonicParsing="false" text="Pregnant" />
+                                                <RadioButton disable="true" mnemonicParsing="false" text="Regular" />
+                                                <RadioButton disable="true" mnemonicParsing="false" text="Person with Disability" />
+                                                <RadioButton disable="true" mnemonicParsing="false" text="Senior Citizen" />
+                                                <RadioButton disable="true" layoutX="10.0" layoutY="19.0" mnemonicParsing="false" text="Pregnant" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -149,7 +149,7 @@
                                 <VBox spacing="5.0">
                                     <children>
                                         <Label text="Contact Number" />
-                                        <TextField maxWidth="1.7976931348623157E308" />
+                                        <TextField editable="false" maxWidth="1.7976931348623157E308" />
                                     </children>
                                 </VBox>
 

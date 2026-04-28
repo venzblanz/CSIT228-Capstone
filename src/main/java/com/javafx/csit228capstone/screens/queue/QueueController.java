@@ -30,13 +30,19 @@ public class QueueController {
     private void goToGeneral(){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/javafx/csit228capstone/queue/queue-form.fxml"));
-            Scene scene = new Scene(loader.load(),1280,800);
-            scene.getStylesheets().add(getClass().getResource("/styles/queue-form.css").toExternalForm());
             Stage stage = (Stage) gwBtn.getScene().getWindow();
+
+            double width = stage.getWidth() - 16.00;
+            double height = stage.getHeight() - 39.00;
+            boolean wasMaximized = stage.isMaximized();
+
+            Scene scene = new Scene(loader.load(), width, height);
+            scene.getStylesheets().add(getClass().getResource("/styles/queue-form.css").toExternalForm());
             stage.setScene(scene);
-            stage.setMinWidth(1024);
-            stage.setMinHeight(700);
-            stage.show();
+            if (wasMaximized) {
+                stage.setMaximized(true);
+            }
+            stage.setResizable(true);
         }catch(Exception e){
             e.printStackTrace();
         }
