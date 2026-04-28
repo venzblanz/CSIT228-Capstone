@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.queue.QueueController">
+    <left>
+        <fx:include fx:id="menu" source="../menu-pane.fxml" />
+    </left>
+    <center>
+        <VBox fillWidth="true" maxWidth="1.7976931348623157E308" styleClass="main-pane" BorderPane.alignment="CENTER">
+            <children>
+
+                <!-- Top bar -->
+                <HBox alignment="CENTER" prefHeight="71.0">
+                    <children>
+                        <Label text="Queue">
+                            <font><Font size="24.0" /></font>
+                        </Label>
+                        <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                        <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="notification-icon" />
+                    </children>
+                </HBox>
+
+                <!-- Subtitle -->
+                <VBox alignment="CENTER_LEFT">
+                    <children>
+                        <Label text="What can we help you with?">
+                            <font><Font name="System Bold" size="28.0" /></font>
+                        </Label>
+                        <Label styleClass="recent" text="Choose a department to get started">
+                            <font><Font size="18.0" /></font>
+                        </Label>
+                    </children>
+                    <VBox.margin><Insets bottom="10.0" top="10.0" /></VBox.margin>
+                </VBox>
+
+                <!-- 2x2 card grid -->
+                <HBox fillHeight="true" maxWidth="1.7976931348623157E308" spacing="10.0">
+                    <VBox.margin><Insets top="10.0" /></VBox.margin>
+                    <children>
+
+                        <!-- Left column -->
+                        <VBox maxWidth="1.7976931348623157E308" minWidth="0" prefWidth="0" spacing="10.0" HBox.hgrow="ALWAYS">
+                            <children>
+
+                                <!-- General Wellness card -->
+                                <VBox maxWidth="1.7976931348623157E308" prefHeight="160.0" spacing="8.0">
+                                    <styleClass>
+                                        <String fx:value="card-pane" />
+                                        <String fx:value="gw-card" />
+                                    </styleClass>
+                                    <padding><Insets bottom="14.0" left="14.0" right="14.0" top="14.0" /></padding>
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                            <children>
+                                                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" styleClass="gw-icon" />
+                                                <Label text="General Wellness">
+                                                    <font><Font name="System Bold" size="18.0" /></font>
+                                                </Label>
+                                            </children>
+                                        </HBox>
+                                        <Label maxWidth="1.7976931348623157E308" text="Primary care and general consultations. Including Checkups, Vaccinations, Basic Treatment, Vital Signs Check, and Health Counseling" textAlignment="JUSTIFY" wrapText="true">
+                                            <font><Font size="14.0" /></font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+
+                                <!-- Specialized Fields card -->
+                                <VBox maxWidth="1.7976931348623157E308" prefHeight="160.0" spacing="8.0">
+                                    <styleClass>
+                                        <String fx:value="card-pane" />
+                                        <String fx:value="sf-card" />
+                                    </styleClass>
+                                    <padding><Insets bottom="14.0" left="14.0" right="14.0" top="14.0" /></padding>
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                            <children>
+                                                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" styleClass="sf-icon" />
+                                                <Label text="Specialized Fields">
+                                                    <font><Font name="System Bold" size="18.0" /></font>
+                                                </Label>
+                                            </children>
+                                        </HBox>
+                                        <Label maxWidth="1.7976931348623157E308" text="Expert care for specific conditions. Like Cardiology, Dermatology, Orthopedics, Pediatrics and many more" textAlignment="JUSTIFY" wrapText="true">
+                                            <font><Font size="14.0" /></font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </VBox>
+
+                        <!-- Right column -->
+                        <VBox maxWidth="1.7976931348623157E308" minWidth="0" prefWidth="0" spacing="10.0" HBox.hgrow="ALWAYS">
+                            <children>
+
+                                <!-- Women's Health card -->
+                                <VBox maxWidth="1.7976931348623157E308" prefHeight="160.0" spacing="8.0">
+                                    <styleClass>
+                                        <String fx:value="card-pane" />
+                                        <String fx:value="wh-card" />
+                                    </styleClass>
+                                    <padding><Insets bottom="14.0" left="14.0" right="14.0" top="14.0" /></padding>
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                            <children>
+                                                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" styleClass="wh-icon" />
+                                                <Label text="Women's Health">
+                                                    <font><Font name="System Bold" size="18.0" /></font>
+                                                </Label>
+                                            </children>
+                                        </HBox>
+                                        <Label maxWidth="1.7976931348623157E308" text="Care tailored for women's wellness. Prenatal Checkups, Postnatal, Breast, and Menstrual concerns and more" textAlignment="JUSTIFY" wrapText="true">
+                                            <font><Font size="14.0" /></font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+
+                                <!-- Diagnostics & Laboratory card -->
+                                <VBox maxWidth="1.7976931348623157E308" prefHeight="160.0" spacing="8.0">
+                                    <styleClass>
+                                        <String fx:value="card-pane" />
+                                        <String fx:value="dl-card" />
+                                    </styleClass>
+                                    <padding><Insets bottom="14.0" left="14.0" right="14.0" top="14.0" /></padding>
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                            <children>
+                                                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" styleClass="dl-icon" />
+                                                <Label text="Diagnostics &amp; Laboratory">
+                                                    <font><Font name="System Bold" size="18.0" /></font>
+                                                </Label>
+                                            </children>
+                                        </HBox>
+                                        <Label maxWidth="1.7976931348623157E308" text="Advanced testing and diagnostics. That includes Blood tests, urinalysis and x-ray" textAlignment="JUSTIFY" wrapText="true">
+                                            <font><Font size="14.0" /></font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </VBox>
+
+                    </children>
+                </HBox>
+
+                <!-- Active Queue header -->
+                <HBox alignment="CENTER" prefHeight="55.0">
+                    <VBox.margin><Insets top="10.0" /></VBox.margin>
+                    <children>
+                        <Label text="Active Queue">
+                            <font><Font name="SansSerif Bold" size="18.0" /></font>
+                        </Label>
+                        <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                        <Label text="See All">
+                            <font><Font size="14.0" /></font>
+                        </Label>
+                    </children>
+                </HBox>
+
+                <!-- Active Queue card -->
+                <HBox alignment="CENTER" prefHeight="80.0" styleClass="dashboard-recent-card1">
+                    <VBox.margin><Insets bottom="10.0" /></VBox.margin>
+                    <children>
+                        <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label text="General Wellness">
+                                    <font><Font name="System Bold" size="16.0" /></font>
+                                </Label>
+                                <Label styleClass="recent" text="Queue # G-025">
+                                    <font><Font size="16.0" /></font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <Label alignment="CENTER_RIGHT" styleClass="recent" text="Position #3" textAlignment="RIGHT">
+                            <font><Font name="System Bold" size="16.0" /></font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </HBox>
+
+            </children>
+            <padding>
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+            </padding>
+        </VBox>
+    </center>
+</BorderPane>

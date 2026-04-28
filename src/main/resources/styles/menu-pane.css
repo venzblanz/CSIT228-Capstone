@@ -13,8 +13,20 @@
     -fx-background-color: #CEE4F4;
     -fx-background-radius: 10;
 }
+.profile-pane:hover {
+    -fx-background-color: #218AD5;
+}
+.profile-pane:hover .profile-icon{
+    -fx-background-image: url("../images/user_white.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.profile-pane:hover .label{
+    -fx-text-fill: white;
+    -fx-style: bold;
+}
 .profile-icon{
-    -fx-background-image: url("../images/profile_icon.png");
+    -fx-background-image: url("../images/user_black.png");
     -fx-background-size: cover;
     -fx-background-position: center;
 }
@@ -31,6 +43,7 @@
 }
 .menu-button:hover {
     -fx-background-color: #218AD5;
+    -fx-cursor: hand;
     -fx-text-fill: white;
     -fx-style: bold;
 }

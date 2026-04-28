@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../../../styles/login.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.LoginController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.LoginController">
    <top>
-      <HBox alignment="BOTTOM_LEFT" prefHeight="36.0" prefWidth="1240.0" BorderPane.alignment="CENTER">
+      <HBox alignment="BOTTOM_LEFT" BorderPane.alignment="CENTER">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
@@ -37,11 +37,11 @@
       </HBox>
    </top>
    <center>
-      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <StackPane BorderPane.alignment="CENTER">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" styleClass="login-background" />
             <Pane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="login-bgoverlay" />
-            <AnchorPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="508.0" styleClass="login-card" StackPane.alignment="CENTER">
+            <AnchorPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="login-card" StackPane.alignment="CENTER">
                <children>
                   <Label layoutX="82.0" layoutY="71.0" text="Email Address" />
                   <HBox alignment="CENTER" layoutX="82.0" layoutY="99.0" prefHeight="34.0" prefWidth="346.0" styleClass="email-field">
@@ -79,7 +79,7 @@
                   <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
                </padding>
             </AnchorPane>
-            <AnchorPane fx:id="registerPane" layoutX="396.0" layoutY="149.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="508.0" styleClass="login-card">
+            <AnchorPane fx:id="registerPane" layoutX="396.0" layoutY="149.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="login-card">
                <children>
                   <Pane fx:id="backBtn" layoutX="61.0" layoutY="41.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="20.0" styleClass="register-back-icon" />
                   <Label layoutX="165.0" layoutY="31.0" text="Create Account">

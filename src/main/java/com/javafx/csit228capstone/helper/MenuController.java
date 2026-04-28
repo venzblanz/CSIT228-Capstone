@@ -2,16 +2,19 @@ package com.javafx.csit228capstone.helper;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class MenuController {
-    @FXML
-    private HBox profileBtn;
+    @FXML private VBox root;
+    @FXML private HBox profileBtn;
     @FXML private Button dashboardBtn;
     @FXML private Button queueBtn;
     @FXML private Button scheduleBtn;
@@ -25,6 +28,11 @@ public class MenuController {
 
     @FXML
     public void initialize(){
+        root.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                root.prefHeightProperty().bind(newScene.heightProperty());
+            }
+        });
         queueBtn.setOnAction(e -> onQueue());
         dashboardBtn.setOnAction(e -> onDashboard());
     }
@@ -44,12 +52,13 @@ public class MenuController {
 
     public void goToQueue() {
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/javafx/csit228capstone/queue.fxml"));
-            Scene scene = new Scene(loader.load(), 1280, 800);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/javafx/csit228capstone/queue/queue.fxml"));
+            Scene scene = new Scene(loader.load(), 1280,800);
             scene.getStylesheets().add(getClass().getResource("/styles/queue.css").toExternalForm());
             Stage stage = (Stage) queueBtn.getScene().getWindow();
+            stage.setMinWidth(1024);
+            stage.setMinHeight(700);
             stage.setScene(scene);
-            stage.show();
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -57,11 +66,12 @@ public class MenuController {
     public void goToDashboard(){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/javafx/csit228capstone/dashboard.fxml"));
-            Scene scene = new Scene(loader.load(), 1280, 800);
+            Scene scene = new Scene(loader.load(), 1280,800);
             scene.getStylesheets().add(getClass().getResource("/styles/dashboard.css").toExternalForm());
-            Stage stage = (Stage) queueBtn.getScene().getWindow();
+            Stage stage = (Stage) dashboardBtn.getScene().getWindow();
+            stage.setMinWidth(1024);
+            stage.setMinHeight(700);
             stage.setScene(scene);
-            stage.show();
         }catch (IOException e){
             e.printStackTrace();
         }

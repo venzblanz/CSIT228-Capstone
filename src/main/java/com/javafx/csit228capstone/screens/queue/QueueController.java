@@ -1,4 +1,4 @@
-package com.javafx.csit228capstone.screens;
+package com.javafx.csit228capstone.screens.queue;
 
 import com.javafx.csit228capstone.helper.MenuController;
 import javafx.animation.RotateTransition;

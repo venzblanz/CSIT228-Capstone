@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0" styleClass="menu-pane" stylesheets="@../../../styles/menu-pane.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.helper.MenuController">
+<VBox fx:id="root" maxWidth="300.0" minHeight="-Infinity" minWidth="300.0" prefHeight="700.0" prefWidth="300.0" styleClass="menu-pane" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.helper.MenuController">
     <children>
         <HBox alignment="CENTER" prefHeight="63.0" prefWidth="260.0">
             <children>

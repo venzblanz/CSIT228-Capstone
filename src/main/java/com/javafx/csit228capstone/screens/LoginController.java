@@ -2,11 +2,13 @@ package com.javafx.csit228capstone.screens;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,9 +24,11 @@ public class LoginController {
     public void onLogin(){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/javafx/csit228capstone/dashboard.fxml"));
-            Scene scene = new Scene(loader.load(),1280,800);
+            Scene scene = new Scene(loader.load(), 1280,800);
             scene.getStylesheets().add(getClass().getResource("/styles/dashboard.css").toExternalForm());
             Stage stage = (Stage) loginBtn.getScene().getWindow();
+            stage.setMinWidth(1024);
+            stage.setMinHeight(700);
             stage.setScene(scene);
         }catch (IOException e){
             e.printStackTrace();
