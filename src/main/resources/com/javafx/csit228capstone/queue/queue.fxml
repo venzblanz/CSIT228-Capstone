@@ -18,7 +18,6 @@
         <VBox fillWidth="true" maxWidth="1.7976931348623157E308" styleClass="main-pane" BorderPane.alignment="CENTER">
             <children>
 
-                <!-- Top bar -->
                 <HBox alignment="CENTER" prefHeight="71.0">
                     <children>
                         <Label text="Queue">
@@ -29,7 +28,6 @@
                     </children>
                 </HBox>
 
-                <!-- Subtitle -->
                 <VBox alignment="CENTER_LEFT">
                     <children>
                         <Label text="What can we help you with?">
@@ -42,26 +40,26 @@
                     <VBox.margin><Insets bottom="10.0" top="10.0" /></VBox.margin>
                 </VBox>
 
-                <!-- 2x2 card grid -->
                 <HBox fillHeight="true" maxWidth="1.7976931348623157E308" spacing="10.0">
                     <VBox.margin><Insets top="10.0" /></VBox.margin>
                     <children>
 
-                        <!-- Left column -->
                         <VBox maxWidth="1.7976931348623157E308" minWidth="0" prefWidth="0" spacing="10.0" HBox.hgrow="ALWAYS">
                             <children>
 
-                                <!-- General Wellness card -->
-                                <VBox maxWidth="1.7976931348623157E308" prefHeight="160.0" spacing="8.0">
+                                <VBox fx:id="gwBtn" maxWidth="1.7976931348623157E308" prefHeight="160.0" spacing="8.0">
                                     <styleClass>
                                         <String fx:value="card-pane" />
                                         <String fx:value="gw-card" />
                                     </styleClass>
-                                    <padding><Insets bottom="14.0" left="14.0" right="14.0" top="14.0" /></padding>
+                                    <padding><Insets bottom="25.0" left="25.0" right="25.0" top="25.0" /></padding>
                                     <children>
                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                             <children>
-                                                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" styleClass="gw-icon" />
+                                                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" styleClass="gw-icon">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="20.0" />
+                                       </HBox.margin></Pane>
                                                 <Label text="General Wellness">
                                                     <font><Font name="System Bold" size="18.0" /></font>
                                                 </Label>
@@ -73,17 +71,19 @@
                                     </children>
                                 </VBox>
 
-                                <!-- Specialized Fields card -->
                                 <VBox maxWidth="1.7976931348623157E308" prefHeight="160.0" spacing="8.0">
                                     <styleClass>
                                         <String fx:value="card-pane" />
                                         <String fx:value="sf-card" />
                                     </styleClass>
-                                    <padding><Insets bottom="14.0" left="14.0" right="14.0" top="14.0" /></padding>
+                                    <padding><Insets bottom="25.0" left="25.0" right="25.0" top="25.0" /></padding>
                                     <children>
                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                             <children>
-                                                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" styleClass="sf-icon" />
+                                                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" styleClass="sf-icon">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="20.0" />
+                                       </HBox.margin></Pane>
                                                 <Label text="Specialized Fields">
                                                     <font><Font name="System Bold" size="18.0" /></font>
                                                 </Label>
@@ -98,21 +98,22 @@
                             </children>
                         </VBox>
 
-                        <!-- Right column -->
                         <VBox maxWidth="1.7976931348623157E308" minWidth="0" prefWidth="0" spacing="10.0" HBox.hgrow="ALWAYS">
                             <children>
 
-                                <!-- Women's Health card -->
                                 <VBox maxWidth="1.7976931348623157E308" prefHeight="160.0" spacing="8.0">
                                     <styleClass>
                                         <String fx:value="card-pane" />
                                         <String fx:value="wh-card" />
                                     </styleClass>
-                                    <padding><Insets bottom="14.0" left="14.0" right="14.0" top="14.0" /></padding>
+                                    <padding><Insets bottom="25.0" left="25.0" right="25.0" top="25.0" /></padding>
                                     <children>
                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                             <children>
-                                                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" styleClass="wh-icon" />
+                                                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" styleClass="wh-icon">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="20.0" />
+                                       </HBox.margin></Pane>
                                                 <Label text="Women's Health">
                                                     <font><Font name="System Bold" size="18.0" /></font>
                                                 </Label>
@@ -124,17 +125,19 @@
                                     </children>
                                 </VBox>
 
-                                <!-- Diagnostics & Laboratory card -->
                                 <VBox maxWidth="1.7976931348623157E308" prefHeight="160.0" spacing="8.0">
                                     <styleClass>
                                         <String fx:value="card-pane" />
                                         <String fx:value="dl-card" />
                                     </styleClass>
-                                    <padding><Insets bottom="14.0" left="14.0" right="14.0" top="14.0" /></padding>
+                                    <padding><Insets bottom="25.0" left="25.0" right="25.0" top="25.0" /></padding>
                                     <children>
                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                             <children>
-                                                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" styleClass="dl-icon" />
+                                                <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" styleClass="dl-icon">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="20.0" />
+                                       </HBox.margin></Pane>
                                                 <Label text="Diagnostics &amp; Laboratory">
                                                     <font><Font name="System Bold" size="18.0" /></font>
                                                 </Label>
@@ -152,7 +155,6 @@
                     </children>
                 </HBox>
 
-                <!-- Active Queue header -->
                 <HBox alignment="CENTER" prefHeight="55.0">
                     <VBox.margin><Insets top="10.0" /></VBox.margin>
                     <children>
@@ -166,7 +168,6 @@
                     </children>
                 </HBox>
 
-                <!-- Active Queue card -->
                 <HBox alignment="CENTER" prefHeight="80.0" styleClass="dashboard-recent-card1">
                     <VBox.margin><Insets bottom="10.0" /></VBox.margin>
                     <children>

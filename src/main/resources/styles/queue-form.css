@@ -1,0 +1,55 @@
+@import "menu-pane.css";
+
+.back-to-queuetype{
+
+}
+.notice{
+    -fx-background-color: #CEE4F4;
+    -fx-background-radius: 10;
+}
+.notice-icon{
+    -fx-background-image: url("../images/notification_icon.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.form{
+    -fx-background-color: #CEE4F4;
+    -fx-background-radius: 10;
+}
+.form .textfield{
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 10;
+}
+.combobox{
+    -fx-background-color: white;
+    -fx-text-fill: #CEE4F4;
+}
+.cancel-button{
+    -fx-background-color: transparent;
+    -fx-border-color: #218AD5;
+    -fx-text-fill: #218AD5;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+
+}
+.next-button{
+    -fx-background-color: #218AD5;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+}
+
+.scroll-pane:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
