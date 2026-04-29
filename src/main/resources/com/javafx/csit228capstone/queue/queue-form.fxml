@@ -7,6 +7,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -41,18 +42,18 @@
                     <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="25.0" styleClass="back-to-queuetype">
                             <children>
-                        <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="backIconBtn" fitHeight="16.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="arrow-back">
                            <HBox.margin>
-                              <Insets right="10.0" />
+                              <Insets right="5.0" />
                            </HBox.margin>
                            <image>
-                              <Image url="@../../../../images/arrow.png" />
+                              <Image url="@../../../../images/arrow_blue.png" />
                            </image>
                         </ImageView>
-                                <Label prefHeight="0.0" text="Back to Queue Types" />
+                                <Label fx:id="backBtn" prefHeight="0.0" styleClass="back-to-queue" text="Back to Queue Types" />
                             </children>
                         </HBox>
-                        <Label text="General Care Form">
+                        <Label fx:id="typeLabel" text="General Care Form">
                             <font><Font name="System Bold" size="22.0" /></font>
                         </Label>
                     </children>
@@ -66,7 +67,7 @@
                         <Image url="@../../../../images/exclamation-mark.png" />
                      </image>
                   </ImageView>
-                        <Label maxWidth="1.7976931348623157E308" text="For general checkups and basic healthcare needs. Our staff will assess your information and call your queue number when it's your turn." wrapText="true" HBox.hgrow="ALWAYS">
+                        <Label maxWidth="1.7976931348623157E308" styleClass="notice-message" text="Our staff will assess your information and call your queue number when it's your turn." wrapText="true" HBox.hgrow="ALWAYS">
                             <HBox.margin><Insets left="10.0" /></HBox.margin>
                         </Label>
                     </children>
@@ -76,7 +77,7 @@
 
                 <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
                     <content>
-                        <VBox spacing="16.0" styleClass="form">
+                        <VBox fx:id="form" spacing="16.0" styleClass="form">
                             <padding>
                                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                             </padding>
@@ -109,8 +110,11 @@
                                         <Label text="Gender" GridPane.columnIndex="0" GridPane.rowIndex="6" />
                                         <HBox alignment="CENTER_LEFT" spacing="20.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7">
                                             <children>
-                                                <RadioButton mnemonicParsing="false" text="Male" />
-                                                <RadioButton mnemonicParsing="false" text="Female" />
+                                                <RadioButton fx:id="maleRadio" mnemonicParsing="false" styleClass="gender-radio" text="Male">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="genedrRadio" />
+                                       </toggleGroup></RadioButton>
+                                                <RadioButton fx:id="femaleRadio" mnemonicParsing="false" styleClass="gender-radio" text="Female" toggleGroup="$genedrRadio" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -131,16 +135,19 @@
                                     </rowConstraints>
                                     <children>
                                         <Label text="Purpose of Visit" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                        <ComboBox maxWidth="1.7976931348623157E308" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                                        <ComboBox fx:id="purposeCombo" maxWidth="1.7976931348623157E308" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                                         <Label text="Symptoms" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                                         <TextField GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                                         <Label text="Patient Type" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                                         <HBox alignment="CENTER_LEFT" spacing="20.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5">
                                             <children>
-                                                <RadioButton mnemonicParsing="false" text="Regular" />
-                                                <RadioButton mnemonicParsing="false" text="Person with Disability" />
-                                                <RadioButton mnemonicParsing="false" text="Senior Citizen" />
-                                                <RadioButton layoutX="10.0" layoutY="19.0" mnemonicParsing="false" text="Pregnant" />
+                                                <RadioButton fx:id="regularRadio" mnemonicParsing="false" styleClass="patient-type-radio" text="Regular">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="patientTypeRadio" />
+                                       </toggleGroup></RadioButton>
+                                                <RadioButton fx:id="pwdRadio" mnemonicParsing="false" styleClass="patient-type-radio" text="Person with Disability" toggleGroup="$patientTypeRadio" />
+                                                <RadioButton fx:id="seniorRadio" mnemonicParsing="false" styleClass="patient-type-radio" text="Senior Citizen" toggleGroup="$patientTypeRadio" />
+                                                <RadioButton fx:id="pregnantRadio" layoutX="10.0" layoutY="19.0" mnemonicParsing="false" styleClass="patient-type-radio" text="Pregnant" toggleGroup="$patientTypeRadio" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -155,8 +162,8 @@
 
                                 <HBox alignment="CENTER_RIGHT" spacing="10.0">
                                     <children>
-                                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" styleClass="cancel-button" text="Cancel" />
-                                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="145.0" styleClass="next-button" text="Next" />
+                                        <Button fx:id="cancelBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" styleClass="cancel-button" text="Cancel" />
+                                        <Button fx:id="nextBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="145.0" styleClass="next-button" text="Next" />
                                     </children>
                                 </HBox>
 

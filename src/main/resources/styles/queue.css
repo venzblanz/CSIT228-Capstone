@@ -8,6 +8,9 @@
     -fx-background-size: cover;
     -fx-background-position: center;
 }
+.notification-icon:hover {
+    -fx-cursor: hand;
+}
 .card-pane{
     -fx-background-radius: 10;
     -fx-background-color: #98C9ED;
@@ -15,18 +18,22 @@
 .card-pane:hover{
     -fx-background-color: #218AD5;
     -fx-text-fill: white;
+    -fx-cursor: hand;
 }
 .wh-card:hover{
     -fx-background-color: #FFBCD3;
     -fx-text-fill: white;
+    -fx-cursor: hand;
 }
 .sf-card:hover{
     -fx-background-color: #91F9EA;
     -fx-text-fill: white;
+    -fx-cursor: hand;
 }
 .dl-card:hover{
     -fx-background-color: #543BE9;
     -fx-text-fill: white;
+    -fx-cursor: hand;
 }
 .gw-card:hover .label{
     -fx-text-fill: white;

@@ -71,7 +71,7 @@
                                     </children>
                                 </VBox>
 
-                                <VBox maxWidth="1.7976931348623157E308" prefHeight="160.0" spacing="8.0">
+                                <VBox fx:id="sfBtn" maxWidth="1.7976931348623157E308" prefHeight="160.0" spacing="8.0">
                                     <styleClass>
                                         <String fx:value="card-pane" />
                                         <String fx:value="sf-card" />
@@ -101,7 +101,7 @@
                         <VBox maxWidth="1.7976931348623157E308" minWidth="0" prefWidth="0" spacing="10.0" HBox.hgrow="ALWAYS">
                             <children>
 
-                                <VBox maxWidth="1.7976931348623157E308" prefHeight="160.0" spacing="8.0">
+                                <VBox fx:id="whBtn" maxWidth="1.7976931348623157E308" prefHeight="160.0" spacing="8.0">
                                     <styleClass>
                                         <String fx:value="card-pane" />
                                         <String fx:value="wh-card" />
@@ -125,7 +125,7 @@
                                     </children>
                                 </VBox>
 
-                                <VBox maxWidth="1.7976931348623157E308" prefHeight="160.0" spacing="8.0">
+                                <VBox fx:id="dlBtn" maxWidth="1.7976931348623157E308" prefHeight="160.0" spacing="8.0">
                                     <styleClass>
                                         <String fx:value="card-pane" />
                                         <String fx:value="dl-card" />

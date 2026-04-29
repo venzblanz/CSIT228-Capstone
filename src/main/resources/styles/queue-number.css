@@ -1,0 +1,59 @@
+@import "menu-pane.css";
+
+.notification-icon{
+    -fx-background-image: url("../images/notification_icon.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.notification-icon:hover {
+    -fx-cursor: hand;
+}
+.card{
+    -fx-background-color: #CEE4F4;
+    -fx-background-radius: 10;
+}
+.message{
+    -fx-font-weight: bold;
+}
+.p-name{
+
+}
+.q-type{
+
+}
+.q-time{
+
+}
+.q-number{
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+}
+.q-date{
+
+}
+.save-image-button{
+    -fx-background-color: transparent;
+    -fx-border-color: #218AD5;
+    -fx-text-fill: #218AD5;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+.save-image-button:hover{
+    -fx-border-color: #98C9ED;
+    -fx-background-color: #98C9ED;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
+}
+.done-button{
+    -fx-background-color: #218AD5;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+}
+.done-button:hover{
+    -fx-background-color: #98C9ED;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
+}

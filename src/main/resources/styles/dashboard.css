@@ -27,6 +27,9 @@
     -fx-background-size: cover;
     -fx-background-position: center;
 }
+.dashboard-notification:hover {
+    -fx-cursor: hand;
+}
 .logout-icon{
     -fx-background-image: url("../images/logout_icon.png");
     -fx-background-size: cover;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -37,23 +38,32 @@
                 </HBox>
 
                 <!-- Section title -->
-                <Label text="General Care Schedule">
+                <Label fx:id="scheduleLabel" text="General Care Schedule">
                     <font><Font name="System Bold" size="18.0" /></font>
                     <VBox.margin><Insets bottom="10.0" /></VBox.margin>
                 </Label>
 
                 <!-- Search bar -->
-                <HBox alignment="CENTER" spacing="0.0" styleClass="search-bar">
+                <HBox alignment="CENTER" prefHeight="37.0" prefWidth="485.0" spacing="0.0" styleClass="search-bar">
                     <children>
-                        <TextField fx:id="searchField" maxWidth="1.7976931348623157E308" promptText="" styleClass="search-field" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="searchButton" mnemonicParsing="false" styleClass="search-button">
+                        <TextField fx:id="searchField" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="453.0" promptText="" styleClass="search-field" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="36.0" prefWidth="35.0" styleClass="search-button">
                             <graphic>
-                                <ImageView fitHeight="16.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../../../../images/square.png" />
+                                        <Image url="@../../../../images/magnifying-glass.png" />
                                     </image>
+                           <rotationAxis>
+                              <Point3D />
+                           </rotationAxis>
                                 </ImageView>
                             </graphic>
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <HBox.margin>
+                        <Insets bottom="1.0" />
+                     </HBox.margin>
                         </Button>
                     </children>
                     <VBox.margin><Insets bottom="12.0" /></VBox.margin>
@@ -68,28 +78,40 @@
                             <children>
                                 <Label fx:id="selectedDateLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="schedule-date-header" text="Saturday, April 11">
                                     <font><Font size="12.0" /></font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
                                 </Label>
-                                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
+                                <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="full-service-panel" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
                                     <content>
-                                        <VBox fx:id="timeSlotsContainer" spacing="0.0">
+                                        <VBox fx:id="timeSlotsContainer" spacing="0.0" styleClass="services-panel">
                                             <children>
 
                                                 <!-- 08:00 AM (empty) -->
-                                                <HBox alignment="TOP_LEFT" minHeight="38.0" spacing="8.0" styleClass="time-row">
+                                                <HBox alignment="TOP_LEFT" maxHeight="-Infinity" minHeight="38.0" prefHeight="80.0" prefWidth="169.0" spacing="8.0" styleClass="time-row">
                                                     <children>
                                                         <Label minWidth="55.0" styleClass="time-label" text="08:00 AM" />
-                                                        <Pane HBox.hgrow="ALWAYS" />
+                                                        <Pane HBox.hgrow="ALWAYS">
+                                             <padding>
+                                                <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+                                             </padding></Pane>
                                                     </children>
                                                     <padding><Insets bottom="4.0" left="10.0" right="10.0" top="4.0" /></padding>
                                                 </HBox>
 
                                                 <!-- 09:00 AM — Service 1 (selected/active) -->
-                                                <HBox alignment="TOP_LEFT" minHeight="55.0" spacing="8.0" styleClass="time-row">
+                                                <HBox alignment="TOP_LEFT" spacing="8.0" styleClass="time-row">
                                                     <children>
                                                         <Label minWidth="55.0" styleClass="time-label" text="09:00 AM" />
                                                         <VBox styleClass="slot-card-active" HBox.hgrow="ALWAYS">
                                                             <children>
-                                                                <Label styleClass="slot-name-active" text="Service 1" />
+                                                                <Label styleClass="slot-name-active" text="Service 1">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font></Label>
                                                                 <HBox alignment="CENTER_LEFT" spacing="4.0">
                                                                     <children>
                                                                         <ImageView fitHeight="9.0" fitWidth="9.0" pickOnBounds="true" preserveRatio="true">
@@ -99,19 +121,22 @@
                                                                     </children>
                                                                 </HBox>
                                                             </children>
-                                                            <padding><Insets bottom="6.0" left="9.0" right="9.0" top="6.0" /></padding>
+                                                            <padding><Insets bottom="20.0" left="30.0" right="30.0" top="20.0" /></padding>
                                                         </VBox>
                                                     </children>
                                                     <padding><Insets bottom="4.0" left="10.0" right="10.0" top="4.0" /></padding>
                                                 </HBox>
 
                                                 <!-- 10:00 AM — Service 2 -->
-                                                <HBox alignment="TOP_LEFT" minHeight="55.0" spacing="8.0" styleClass="time-row">
+                                                <HBox alignment="TOP_LEFT" spacing="8.0" styleClass="time-row">
                                                     <children>
                                                         <Label minWidth="55.0" styleClass="time-label" text="10:00 AM" />
                                                         <VBox styleClass="slot-card" HBox.hgrow="ALWAYS">
                                                             <children>
-                                                                <Label styleClass="slot-name" text="Service 2" />
+                                                                <Label styleClass="slot-name" text="Service 2">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font></Label>
                                                                 <HBox alignment="CENTER_LEFT" spacing="4.0">
                                                                     <children>
                                                                         <ImageView fitHeight="9.0" fitWidth="9.0" pickOnBounds="true" preserveRatio="true">
@@ -121,19 +146,22 @@
                                                                     </children>
                                                                 </HBox>
                                                             </children>
-                                                            <padding><Insets bottom="6.0" left="9.0" right="9.0" top="6.0" /></padding>
+                                                            <padding><Insets bottom="20.0" left="30.0" right="30.0" top="20.0" /></padding>
                                                         </VBox>
                                                     </children>
                                                     <padding><Insets bottom="4.0" left="10.0" right="10.0" top="4.0" /></padding>
                                                 </HBox>
 
                                                 <!-- 11:00 AM — Service 3 -->
-                                                <HBox alignment="TOP_LEFT" minHeight="55.0" spacing="8.0" styleClass="time-row">
+                                                <HBox alignment="TOP_LEFT" spacing="8.0" styleClass="time-row">
                                                     <children>
                                                         <Label minWidth="55.0" styleClass="time-label" text="11:00 AM" />
                                                         <VBox styleClass="slot-card" HBox.hgrow="ALWAYS">
                                                             <children>
-                                                                <Label styleClass="slot-name" text="Service 3" />
+                                                                <Label styleClass="slot-name" text="Service 3">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font></Label>
                                                                 <HBox alignment="CENTER_LEFT" spacing="4.0">
                                                                     <children>
                                                                         <ImageView fitHeight="9.0" fitWidth="9.0" pickOnBounds="true" preserveRatio="true">
@@ -143,19 +171,22 @@
                                                                     </children>
                                                                 </HBox>
                                                             </children>
-                                                            <padding><Insets bottom="6.0" left="9.0" right="9.0" top="6.0" /></padding>
+                                                            <padding><Insets bottom="20.0" left="30.0" right="30.0" top="20.0" /></padding>
                                                         </VBox>
                                                     </children>
                                                     <padding><Insets bottom="4.0" left="10.0" right="10.0" top="4.0" /></padding>
                                                 </HBox>
 
                                                 <!-- 12:00 PM — Service 4 -->
-                                                <HBox alignment="TOP_LEFT" minHeight="55.0" spacing="8.0" styleClass="time-row">
+                                                <HBox alignment="TOP_LEFT" spacing="8.0" styleClass="time-row">
                                                     <children>
                                                         <Label minWidth="55.0" styleClass="time-label" text="12:00 PM" />
                                                         <VBox styleClass="slot-card" HBox.hgrow="ALWAYS">
                                                             <children>
-                                                                <Label styleClass="slot-name" text="Service 4" />
+                                                                <Label styleClass="slot-name" text="Service 4">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font></Label>
                                                                 <HBox alignment="CENTER_LEFT" spacing="4.0">
                                                                     <children>
                                                                         <ImageView fitHeight="9.0" fitWidth="9.0" pickOnBounds="true" preserveRatio="true">
@@ -165,37 +196,174 @@
                                                                     </children>
                                                                 </HBox>
                                                             </children>
-                                                            <padding><Insets bottom="6.0" left="9.0" right="9.0" top="6.0" /></padding>
+                                                            <padding><Insets bottom="20.0" left="30.0" right="30.0" top="20.0" /></padding>
                                                         </VBox>
                                                     </children>
                                                     <padding><Insets bottom="4.0" left="10.0" right="10.0" top="4.0" /></padding>
                                                 </HBox>
+                                    <HBox alignment="TOP_LEFT" layoutX="10.0" layoutY="385.0" spacing="8.0" styleClass="time-row">
+                                       <children>
+                                          <Label minWidth="55.0" styleClass="time-label" text="1:00 PM" />
+                                          <VBox styleClass="slot-card" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="slot-name" text="Service 5">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <HBox alignment="CENTER_LEFT" spacing="4.0">
+                                                   <children>
+                                                      <ImageView fitHeight="9.0" fitWidth="9.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../images/maps-and-flags.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label styleClass="slot-location" text="Location 5" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="4.0" left="10.0" right="10.0" top="4.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox alignment="TOP_LEFT" layoutX="10.0" layoutY="480.0" spacing="8.0" styleClass="time-row">
+                                       <children>
+                                          <Label minWidth="55.0" styleClass="time-label" text="2:00 PM" />
+                                          <VBox styleClass="slot-card" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="slot-name" text="Service 6">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <HBox alignment="CENTER_LEFT" spacing="4.0">
+                                                   <children>
+                                                      <ImageView fitHeight="9.0" fitWidth="9.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../images/maps-and-flags.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label styleClass="slot-location" text="Location 6" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="4.0" left="10.0" right="10.0" top="4.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox alignment="TOP_LEFT" layoutX="10.0" layoutY="575.0" spacing="8.0" styleClass="time-row">
+                                       <children>
+                                          <Label minWidth="55.0" styleClass="time-label" text="3:00 PM" />
+                                          <VBox styleClass="slot-card" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="slot-name" text="Service 7">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <HBox alignment="CENTER_LEFT" spacing="4.0">
+                                                   <children>
+                                                      <ImageView fitHeight="9.0" fitWidth="9.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../images/maps-and-flags.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label styleClass="slot-location" text="Location 7" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="4.0" left="10.0" right="10.0" top="4.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox alignment="TOP_LEFT" layoutX="10.0" layoutY="670.0" spacing="8.0" styleClass="time-row">
+                                       <children>
+                                          <Label minWidth="55.0" styleClass="time-label" text="4:00 PM" />
+                                          <VBox styleClass="slot-card" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="slot-name" text="Service 8">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <HBox alignment="CENTER_LEFT" spacing="4.0">
+                                                   <children>
+                                                      <ImageView fitHeight="9.0" fitWidth="9.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../images/maps-and-flags.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label styleClass="slot-location" text="Location 8" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="4.0" left="10.0" right="10.0" top="4.0" />
+                                       </padding>
+                                    </HBox>
 
                                             </children>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
                                         </VBox>
                                     </content>
                                 </ScrollPane>
                             </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                         </VBox>
 
                         <!-- Calendar panel -->
-                        <VBox prefWidth="230.0" spacing="0.0" styleClass="calendar-panel">
+                        <VBox prefWidth="330.0" spacing="0.0" styleClass="calendar-panel">
                             <children>
 
                                 <!-- Month navigation -->
                                 <HBox alignment="CENTER" spacing="10.0" styleClass="calendar-nav">
                                     <children>
-                                        <Button fx:id="prevMonthButton" mnemonicParsing="false" styleClass="cal-arrow-button" text="‹" />
+                                        <Button fx:id="prevMonthButton" mnemonicParsing="false" styleClass="cal-arrow-button" text="⮜">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></Button>
                                         <Label fx:id="monthYearLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" text="April 2026" HBox.hgrow="ALWAYS">
                                             <font><Font name="System Bold" size="13.0" /></font>
                                         </Label>
-                                        <Button fx:id="nextMonthButton" mnemonicParsing="false" styleClass="cal-arrow-button" text="›" />
+                                        <Button fx:id="nextMonthButton" mnemonicParsing="false" styleClass="cal-arrow-button" text="⮞">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></Button>
                                     </children>
-                                    <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                           </padding>
                                 </HBox>
 
                                 <!-- Day-of-week headers -->
-                                <GridPane hgap="2.0" vgap="2.0">
+                                <GridPane hgap="2.0" styleClass="day-panel" vgap="2.0">
                                     <columnConstraints>
                                         <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
                                         <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
@@ -212,16 +380,19 @@
                                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="cal-day-label" text="Su" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="cal-day-label" text="Mo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="cal-day-label" text="Tu" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="cal-day-label" text="We" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="cal-day-label" text="We" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin></Label>
                                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="cal-day-label" text="Th" GridPane.columnIndex="4" GridPane.rowIndex="0" />
                                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="cal-day-label" text="Fr" GridPane.columnIndex="5" GridPane.rowIndex="0" />
                                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="cal-day-label" text="Sa" GridPane.columnIndex="6" GridPane.rowIndex="0" />
                                     </children>
-                                    <padding><Insets left="10.0" right="10.0" /></padding>
+                                    <padding><Insets left="10.0" right="10.0" top="10.0" /></padding>
                                 </GridPane>
 
                                 <!-- Calendar day cells (populated by controller) -->
-                                <GridPane fx:id="calendarGrid" hgap="2.0" vgap="2.0" VBox.vgrow="ALWAYS">
+                                <GridPane fx:id="calendarGrid" hgap="8.0" styleClass="cal-days-panel" vgap="8.0" VBox.vgrow="ALWAYS">
                                     <columnConstraints>
                                         <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
                                         <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
@@ -231,8 +402,9 @@
                                         <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
                                         <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
                                     </columnConstraints>
-                                    <padding><Insets bottom="10.0" left="10.0" right="10.0" top="4.0" /></padding>
+                                    <padding><Insets bottom="20.0" left="10.0" right="10.0" top="4.0" /></padding>
                                 </GridPane>
+                        <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
 
                                 <!-- Previous / Confirm buttons -->
                                 <HBox spacing="8.0">

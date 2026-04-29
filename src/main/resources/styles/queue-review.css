@@ -1,17 +1,36 @@
-
 @import "menu-pane.css";
 
 .main-pane{
     -fx-background-color: #EBF2F6;
+}
+.back-to-schedule{
+    -fx-text-fill: #218AD5;
+}
+.back-to-queueschedule:hover{
+    -fx-cursor: hand;
+}
+.back-to-queueschedule:hover .back-to-schedule{
+    -fx-font-weight: bold;
 }
 .notification-icon{
     -fx-background-image: url("../images/notification_icon.png");
     -fx-background-size: cover;
     -fx-background-position: center;
 }
+.notification-icon:hover {
+    -fx-cursor: hand;
+}
 .notice{
     -fx-background-color: #CEE4F4;
     -fx-background-radius: 10;
+}
+.notice:hover{
+    -fx-background-color: #218AD5;
+    -fx-background-radius: 10;
+}
+
+.notice:hover .notice-message{
+    -fx-text-fill: white;
 }
 .form{
     -fx-background-color: #CEE4F4;
@@ -27,21 +46,32 @@
     -fx-background-color: white;
     -fx-text-fill: #CEE4F4;
 }
-.cancel-button{
+.edit-button{
     -fx-background-color: transparent;
     -fx-border-color: #218AD5;
     -fx-text-fill: #218AD5;
     -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
-
+}
+.edit-button:hover{
+    -fx-border-color: #98C9ED;
+    -fx-background-color: #98C9ED;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
 }
 .next-button{
     -fx-background-color: #218AD5;
     -fx-text-fill: white;
     -fx-background-radius: 8;
 }
-
+.next-button:hover{
+    -fx-background-color: #98C9ED;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
+}
 .scroll-pane:focused {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;

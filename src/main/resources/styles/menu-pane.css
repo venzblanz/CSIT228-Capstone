@@ -23,7 +23,7 @@
 }
 .profile-pane:hover .label{
     -fx-text-fill: white;
-    -fx-style: bold;
+    -fx-font-weight: bold;
 }
 .profile-icon{
     -fx-background-image: url("../images/profile_icon.png");
@@ -45,7 +45,7 @@
     -fx-background-color: #218AD5;
     -fx-cursor: hand;
     -fx-text-fill: white;
-    -fx-style: bold;
+    -fx-font-weight: bold;
 }
 .logout-icon{
     -fx-background-image: url("../images/logout_icon.png");
