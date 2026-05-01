@@ -1,0 +1,41 @@
+.login-logo {
+    -fx-background-image: url("../images/medserveLogo.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.login-title {
+    -fx-text-fill: #218AD5;
+}
+.login-card {
+    -fx-background-color: white;
+    -fx-background-radius: 30;
+}
+.login-background {
+    -fx-background-image: url("../images/loginbg1.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+.login-bgoverlay {
+    -fx-background-color: rgba(0,0,0,0.3);
+}
+.login-register-button {
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-background-color: #218AD5;
+}
+.email-field {
+    -fx-background-color: lightgray;
+    -fx-prompt-text-fill: black;
+    -fx-background-radius: 10;
+}
+.password-field {
+    -fx-background-color: lightgray;
+    -fx-prompt-text-fill: black;
+    -fx-background-radius: 10;
+}
+.register-back-icon {
+    -fx-background-image: url("../images/arrow.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
