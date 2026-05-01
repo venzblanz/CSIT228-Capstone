@@ -31,25 +31,25 @@ public class PatientRecordsController {
         LocalDate selectedDateFrom = dateFromFilter.getValue();
         LocalDate selectedDateTo = dateToFilter.getValue();
 
-        pendingStatus.selectedProperty().addListener((obs, oldVal, newVal) -> updateMenuText());
-        completedStatus.selectedProperty().addListener((obs, oldVal, newVal) -> updateMenuText());
-        cancelledStatus.selectedProperty().addListener((obs, oldVal, newVal) -> updateMenuText());
+        pendingStatus.selectedProperty().addListener((obs, oldVal, newVal) -> updateMenuText("Select Status", statusFilter));
+        completedStatus.selectedProperty().addListener((obs, oldVal, newVal) -> updateMenuText("Select Status", statusFilter));
+        cancelledStatus.selectedProperty().addListener((obs, oldVal, newVal) -> updateMenuText("Select Status", statusFilter));
     }
 
-    private void updateMenuText() {
+    private void updateMenuText(String text, MenuButton menuButton) {
 
         List<String> selected = new ArrayList<>();
 
-        for (MenuItem item : statusFilter.getItems()) {
+        for (MenuItem item : menuButton.getItems()) {
             if (item instanceof CheckMenuItem cmi && cmi.isSelected()) {
                 selected.add(cmi.getText());
             }
         }
 
         if (selected.isEmpty()) {
-            statusFilter.setText("Select Status");
+            menuButton.setText(text);
         } else {
-            statusFilter.setText(String.join(", ", selected));
+            menuButton.setText(String.join(", ", selected));
         }
     }
 }
