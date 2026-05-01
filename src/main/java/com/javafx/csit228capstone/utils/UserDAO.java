@@ -17,7 +17,7 @@ public class UserDAO {
 
     // authentication
     public static User authenticate(String username, String password){
-        String sql = "select * from <tblname> where username = ?";
+        String sql = "select * from users where email = ?";
         try(Connection c = DatabaseConfig.getConnection();
             PreparedStatement ps = c.prepareStatement(sql)){
             ps.setString(1, username);
@@ -28,11 +28,11 @@ public class UserDAO {
                     if(storedPass.equals(password)){
                         return new User(
                                 rs.getInt("id"),
-                                rs.getString("username"),
                                 rs.getString("full_name"),
-                                rs.getInt("mobile_number"),
+                                rs.getString("mobile_number"),
                                 rs.getString("email"),
-                                storedPass
+                                storedPass,
+                                rs.getString("role")
                         );
                     }
                 }
@@ -44,17 +44,17 @@ public class UserDAO {
     }
 
     // register
-    public static int register(String username, String fullname, int mobilenumber, String email, String password){
-        if(usernameExists(username)) return -2;
-        String sql = "insert into <tblname> (username, full_name, mobile_number, email, password) values (?, ?, ?, ?, ?)";
+    public static int register(String fullname, String mobilenumber, String email, String password){
+        if(emailExists(email)) return -2;
+        String sql = "insert into users (full_name, mobile_number, email, password) values (?, ?, ?, ?)";
         try(Connection c = DatabaseConfig.getConnection();
             PreparedStatement ps = c.prepareStatement(sql)){
-            ps.setString(1, username);
-            ps.setString(2, fullname);
-            ps.setInt(3, mobilenumber);
-            ps.setString(4, email);
-            ps.setString(5, password);
-
+            ps.setString(1, fullname);
+            ps.setString(2, mobilenumber);
+            ps.setString(3, email);
+            ps.setString(4, password);
+            int rows = ps.executeUpdate();
+            if (rows > 0) return 1;
             try(ResultSet rs = ps.getResultSet()){
                 if(rs.next()){
                     return rs.getInt("id");
@@ -68,17 +68,16 @@ public class UserDAO {
     }
 
     // username verify
-    public static boolean usernameExists(String username){
-        String sql = "select 1 from <tblname> where username = ?";
-        try(Connection c = DatabaseConfig.getConnection();
-            PreparedStatement ps = c.prepareStatement(sql)){
-            ps.setString(1, username);
-
-            try(ResultSet rs = ps.executeQuery()){
+    public static boolean emailExists(String email) {
+        String sql = "SELECT 1 FROM users WHERE email = ?";
+        try (Connection c = DatabaseConfig.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
                 return rs.next();
             }
-        }catch(Exception e){
-            System.err.println("[UserDAO] Username already exists: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("[UserDAO] Error checking email: " + e.getMessage());
         }
         return false;
     }

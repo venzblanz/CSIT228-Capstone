@@ -1,45 +1,72 @@
 package com.javafx.csit228capstone.screens;
 
+import com.javafx.csit228capstone.model.User;
 import com.javafx.csit228capstone.utils.SceneNavigator;
+import com.javafx.csit228capstone.utils.SessionManager;
+import com.javafx.csit228capstone.utils.UserDAO;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
-
-import java.io.IOException;
+import javafx.scene.control.*;
 
 public class LoginController {
+    @FXML private TextField emailField;
+    @FXML private PasswordField passwordField;
     @FXML private Button loginBtn;
-    @FXML private Pane backBtn;
-    @FXML private AnchorPane loginPane;
-    @FXML private AnchorPane registerPane;
     @FXML private Hyperlink signupLink;
-
-    private boolean isSignup = false;
+    @FXML private Label errorLabel;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
 
-    public void onLogin(){
-        sceneNavigator.navigate("/com/javafx/csit228capstone/dashboard.fxml", loginBtn, "/styles/dashboard.css");
-    }
-    public void onSignup() {
-        isSignup = !isSignup;
-        loginPane.setVisible(!isSignup);
-        loginPane.setManaged(!isSignup);
-        registerPane.setVisible(isSignup);
-        registerPane.setManaged(isSignup);
-    }
-    @FXML private void initialize() {
-        registerPane.setVisible(false);
-        registerPane.setManaged(false);
-        signupLink.setOnAction(e -> onSignup());
-        backBtn.setOnMouseClicked(e -> onSignup());
+    @FXML
+    private void initialize() {
         loginBtn.setOnAction(e -> onLogin());
+    }
+    @FXML
+    private void onLogin() {
+        String email = emailField.getText().trim();
+        String password = passwordField.getText().trim();
+
+        // Basic validation
+        if (email.isEmpty() || password.isEmpty()) {
+            showError("Please fill in all fields.");
+            return;
+        }
+
+        User user = UserDAO.authenticate(email, password);
+
+        if (user == null) {
+            showError("Invalid email or password.");
+            return;
+        }
+
+        // Save session
+        SessionManager.getInstance().saveSession(user);
+
+        // Navigate based on role
+        if (user.getRole().equals("admin")) {
+            sceneNavigator.navigate(
+                    "/com/javafx/csit228capstone/admin_dashboard.fxml",
+                    loginBtn,
+                    "/styles/dashboard.css"
+            );
+        } else {
+            sceneNavigator.navigate(
+                    "/com/javafx/csit228capstone/dashboard.fxml",
+                    loginBtn,
+                    "/styles/dashboard.css"
+            );
+        }
+    }
+    @FXML
+    private void onSignup() {
+        sceneNavigator.navigate(
+                "/com/javafx/csit228capstone/register.fxml",
+                signupLink,
+                "/styles/register.css"
+        );
+    }
+
+    private void showError(String message) {
+        errorLabel.setText(message);
+        errorLabel.setVisible(true);
     }
 }
