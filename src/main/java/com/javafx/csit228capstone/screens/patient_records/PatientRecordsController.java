@@ -1,9 +1,11 @@
 package com.javafx.csit228capstone.screens.patient_records;
 
 import com.javafx.csit228capstone.model.QueueHistory;
+import com.javafx.csit228capstone.model.User;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,7 +14,6 @@ import java.util.List;
 public class PatientRecordsController {
     @FXML private TableView<QueueHistory> queueTable;
     @FXML private TableColumn<QueueHistory, Integer> queueNumberColumn;
-    @FXML private TableColumn<QueueHistory, String> patientColumn;
     @FXML private TableColumn<QueueHistory, String> serviceColumn;
     @FXML private TableColumn<QueueHistory, String> statusColumn;
     @FXML private TableColumn<QueueHistory, String> dateColumn;
@@ -43,7 +44,21 @@ public class PatientRecordsController {
     }
 
     @FXML private void loadHistory() {
+        List<QueueHistory> samples = new ArrayList<>();
 
+        // Creating sample Users (Patients)
+        User p1 = new User(1, "jdoe", "Johnathan Doe", 9123456, "john@email.com", "pass123");
+        User p2 = new User(2, "asmith", "Alice Smith", 9178888, "alice@email.com", "pass456");
+        User p3 = new User(3, "btables", "Bobby Tables", 9155555, "bobby@email.com", "pass789");
+
+        // Creating sample QueueHistory entries
+        // Constructor: (int queueNumber, String service, String status, LocalDate date, String department, User patient)
+        samples.add(new QueueHistory(101, "General Consultation", "Completed", LocalDate.now().minusDays(2), "General Wellness", p1));
+        samples.add(new QueueHistory(102, "Flu Vaccine", "Pending", LocalDate.now().minusDays(1), "General Wellness", p2));
+        samples.add(new QueueHistory(103, "Routine X-Ray", "Cancelled", LocalDate.now(), "Diagnostics & Lab", p3));
+        samples.add(new QueueHistory(104, "OB-GYN Checkup", "Completed", LocalDate.now().minusDays(5), "Women's Health", p2));
+
+        queueTable.getItems().setAll(samples);
     }
 
     private void initializeDatePicker() {
@@ -183,7 +198,29 @@ public class PatientRecordsController {
     }
 
     private void initializeTable() {
-        queueTable.getColumns().forEach(col -> col.setReorderable(false));
+        queueTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+        serviceColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.30));
+        statusColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.10));
+        dateColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.25));
+        staffColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.25));
+        queueNumberColumn.setCellValueFactory(new PropertyValueFactory<>("queueNumber"));
+
+        // 3. Service
+        serviceColumn.setCellValueFactory(new PropertyValueFactory<>("service"));
+
+        // 4. Status
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        // 5. Date (Formatting LocalDate to String)
+        dateColumn.setCellValueFactory(cellData -> {
+            LocalDate date = cellData.getValue().getDate();
+            return new javafx.beans.property.SimpleStringProperty(date != null ? date.toString() : "N/A");
+        });
+
+        // 6. Department (Mapping to your staffColumn or a dedicated dept column)
+        staffColumn.setCellValueFactory(new PropertyValueFactory<>("department"));
+
+        loadHistory();
     }
 
     private void updateMenuText(String text, MenuButton menuButton) {

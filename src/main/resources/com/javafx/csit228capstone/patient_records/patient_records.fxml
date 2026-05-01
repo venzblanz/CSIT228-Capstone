@@ -30,7 +30,7 @@
                   </HBox.margin>
                   </Label>
                <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-               <Button fx:id="loadHistoryBtn" mnemonicParsing="false" onAction="#loadHistory" prefHeight="37.0" prefWidth="178.0" text="Load">
+               <Button fx:id="loadHistoryBtn" mnemonicParsing="false" onAction="#loadHistory" prefHeight="37.0" prefWidth="178.0" styleClass="btn" text="Load" textFill="WHITE">
                   <font>
                      <Font name="System Bold" size="16.0" />
                   </font>
@@ -44,52 +44,65 @@
             <padding>
                <Insets bottom="10.0" />
             </padding></Label>
-            <Separator layoutX="346.0" layoutY="109.0" prefHeight="4.0" prefWidth="482.0" style="-fx-background-color: AACCDE;">
+            <Separator layoutX="346.0" layoutY="109.0" prefHeight="4.0" prefWidth="482.0" style="-fx-background-color: #EBF2F6;">
             <VBox.margin>
                <Insets top="10.0" />
             </VBox.margin></Separator>
-         <HBox prefHeight="16.0" prefWidth="460.0">
+         <HBox alignment="CENTER" prefHeight="33.0" prefWidth="460.0" spacing="10.0">
             <children>
-               <Label prefHeight="17.0" prefWidth="212.0" text="From" />
-               <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="136.0" text="To" />
+               <VBox prefHeight="200.0" prefWidth="246.0">
+                  <children>
+                     <Label prefHeight="17.0" prefWidth="212.0" text="From" />
+                     <DatePicker fx:id="dateFromFilter" prefHeight="29.0" prefWidth="282.0" promptText="Start Date" styleClass="date-picker" />
+                  </children>
+               </VBox>
+               <VBox prefHeight="200.0" prefWidth="246.0">
+                  <children>
+                     <Label prefHeight="17.0" prefWidth="136.0" text="To" />
+                     <DatePicker fx:id="dateToFilter" prefHeight="29.0" prefWidth="282.0" promptText="End Date" styleClass="date-picker" />
+                  </children>
+               </VBox>
+               <Region layoutX="109.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
+               <VBox prefHeight="42.0" prefWidth="302.0">
+                  <children>
+                     <Label prefHeight="17.0" prefWidth="201.0" text="Status" />
+                     <MenuButton fx:id="statusFilter" mnemonicParsing="false" prefHeight="25.0" prefWidth="345.0" styleClass="filter-menu" text="Select Status" textFill="#218ad5" wrapText="true">
+                       <items>
+                           <CheckMenuItem fx:id="pendingStatus" mnemonicParsing="false" text="Pending" />
+                           <CheckMenuItem fx:id="completedStatus" mnemonicParsing="false" text="Completed" />
+                           <CheckMenuItem fx:id="cancelledStatus" mnemonicParsing="false" text="Cancelled" />
+                           <CheckMenuItem fx:id="allStatus" mnemonicParsing="false" text="All" />
+                       </items>
+                        <font>
+                           <Font name="System Bold" size="12.0" />
+                        </font>
+                     </MenuButton>
+                  </children>
+               </VBox>
                <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-               <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="201.0" text="Status" />
-               <Region prefHeight="200.0" prefWidth="200.0" />
-               <Label layoutX="35.0" layoutY="10.0" prefHeight="17.0" prefWidth="329.0" text="Department" />
+               <VBox prefHeight="200.0" prefWidth="345.0">
+                  <children>
+                     <Label prefHeight="17.0" prefWidth="329.0" text="Department" />
+                     <MenuButton fx:id="departmentFilter" mnemonicParsing="false" prefHeight="25.0" prefWidth="413.0" styleClass="filter-menu" text="Select Department" textFill="#218ad5">
+                       <items>
+                           <CheckMenuItem fx:id="genWellnessDept" mnemonicParsing="false" text="General Wellness" />
+                           <CheckMenuItem fx:id="womenHealthDept" mnemonicParsing="false" text="Women's Health" />
+                           <CheckMenuItem fx:id="specialFieldsDept" mnemonicParsing="false" text="Specialized Fields" />
+                           <CheckMenuItem fx:id="diagnosticsLabDept" mnemonicParsing="false" text="Diagnostics and Laboratory" />
+                           <CheckMenuItem fx:id="allDept" mnemonicParsing="false" text="All" />
+                       </items>
+                        <font>
+                           <Font name="System Bold" size="12.0" />
+                        </font>
+                     </MenuButton>
+                  </children>
+               </VBox>
             </children>
             <VBox.margin>
                <Insets top="20.0" />
             </VBox.margin>
          </HBox>
-         <HBox alignment="CENTER" prefHeight="33.0" prefWidth="460.0" spacing="10.0">
-            <children>
-               <DatePicker fx:id="dateFromFilter" prefHeight="29.0" prefWidth="282.0" />
-               <DatePicker fx:id="dateToFilter" layoutX="10.0" layoutY="12.0" prefHeight="29.0" prefWidth="282.0" />
-               <Region layoutX="109.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
-               <MenuButton fx:id="statusFilter" mnemonicParsing="false" prefHeight="25.0" prefWidth="345.0" text="Select Status">
-                 <items>
-                     <CheckMenuItem fx:id="pendingStatus" mnemonicParsing="false" text="Pending" />
-                     <CheckMenuItem fx:id="completedStatus" mnemonicParsing="false" text="Completed" />
-                     <CheckMenuItem fx:id="cancelledStatus" mnemonicParsing="false" text="Cancelled" />
-                     <CheckMenuItem fx:id="allStatus" mnemonicParsing="false" text="All" />
-                 </items>
-               </MenuButton>
-               <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-               <MenuButton fx:id="departmentFilter" mnemonicParsing="false" prefHeight="25.0" prefWidth="413.0" text="Select Department">
-                 <items>
-                     <CheckMenuItem fx:id="genWellnessDept" mnemonicParsing="false" text="General Wellness" />
-                     <CheckMenuItem fx:id="womenHealthDept" mnemonicParsing="false" text="Women's Health" />
-                     <CheckMenuItem fx:id="specialFieldsDept" mnemonicParsing="false" text="Specialized Fields" />
-                     <CheckMenuItem fx:id="diagnosticsLabDept" mnemonicParsing="false" text="Diagnostics and Laboratory" />
-                     <CheckMenuItem fx:id="allDept" mnemonicParsing="false" text="All" />
-                 </items>
-               </MenuButton>
-            </children>
-            <VBox.margin>
-               <Insets />
-            </VBox.margin>
-         </HBox>
-            <TableView fx:id="queueTable" layoutX="347.0" layoutY="178.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="queueTable" layoutX="347.0" layoutY="178.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="dateColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="173.0" resizable="false" text="Date" />
                     <TableColumn fx:id="queueNumberColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="114.0" resizable="false" text="Queue #" />
@@ -98,7 +111,7 @@
                     <TableColumn fx:id="staffColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="270.0" resizable="false" text="Staff" />
                 </columns>
             <VBox.margin>
-               <Insets top="15.0" />
+               <Insets top="20.0" />
             </VBox.margin>
             <columnResizePolicy>
                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
