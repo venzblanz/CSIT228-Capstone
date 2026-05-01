@@ -21,16 +21,16 @@
             <VBox prefHeight="696.0" prefWidth="347.0" style="-fx-background-color: EBF2F6;">
          <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="460.0">
             <children>
-                  <Label alignment="TOP_LEFT" text="PATIENT RECORDS">
+                  <Label alignment="TOP_LEFT" text="Patient Records">
                       <font>
-                          <Font name="System Bold" size="21.0" />
+                          <Font size="24.0" />
                       </font>
                   <HBox.margin>
                      <Insets />
                   </HBox.margin>
                   </Label>
                <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-               <Button fx:id="loadHistoryBtn" mnemonicParsing="false" prefHeight="37.0" prefWidth="178.0" text="Load">
+               <Button fx:id="loadHistoryBtn" mnemonicParsing="false" onAction="#loadHistory" prefHeight="37.0" prefWidth="178.0" text="Load">
                   <font>
                      <Font name="System Bold" size="16.0" />
                   </font>
@@ -50,21 +50,12 @@
             </VBox.margin></Separator>
          <HBox prefHeight="16.0" prefWidth="460.0">
             <children>
-               <Label text="From" />
-               <Region prefHeight="17.0" prefWidth="67.0" HBox.hgrow="ALWAYS" />
-               <Label layoutX="10.0" layoutY="10.0" text="To" />
-               <Region layoutX="64.0" layoutY="10.0" prefHeight="17.0" prefWidth="130.0" HBox.hgrow="ALWAYS" />
-               <Label layoutX="10.0" layoutY="10.0" text="Status">
-                  <padding>
-                     <Insets left="25.0" />
-                  </padding>
-               </Label>
-               <Region prefHeight="17.0" prefWidth="177.0" HBox.hgrow="ALWAYS" />
-               <Label layoutX="35.0" layoutY="10.0" text="Service">
-                  <padding>
-                     <Insets left="25.0" />
-                  </padding></Label>
-               <Region layoutX="434.0" layoutY="10.0" prefHeight="17.0" prefWidth="177.0" HBox.hgrow="ALWAYS" />
+               <Label prefHeight="17.0" prefWidth="212.0" text="From" />
+               <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="136.0" text="To" />
+               <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+               <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="201.0" text="Status" />
+               <Region prefHeight="200.0" prefWidth="200.0" />
+               <Label layoutX="35.0" layoutY="10.0" prefHeight="17.0" prefWidth="329.0" text="Department" />
             </children>
             <VBox.margin>
                <Insets top="20.0" />
@@ -80,14 +71,17 @@
                      <CheckMenuItem fx:id="pendingStatus" mnemonicParsing="false" text="Pending" />
                      <CheckMenuItem fx:id="completedStatus" mnemonicParsing="false" text="Completed" />
                      <CheckMenuItem fx:id="cancelledStatus" mnemonicParsing="false" text="Cancelled" />
+                     <CheckMenuItem fx:id="allStatus" mnemonicParsing="false" text="All" />
                  </items>
                </MenuButton>
                <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-               <MenuButton fx:id="serviceFilter" mnemonicParsing="false" prefHeight="25.0" prefWidth="413.0" text="Select Service">
+               <MenuButton fx:id="departmentFilter" mnemonicParsing="false" prefHeight="25.0" prefWidth="413.0" text="Select Department">
                  <items>
-                     <CheckMenuItem fx:id="pendingStatus1" mnemonicParsing="false" text="Service1" />
-                     <CheckMenuItem fx:id="completedStatus1" mnemonicParsing="false" text="Service 2" />
-                     <CheckMenuItem fx:id="cancelledStatus1" mnemonicParsing="false" text="Service 3" />
+                     <CheckMenuItem fx:id="genWellnessDept" mnemonicParsing="false" text="General Wellness" />
+                     <CheckMenuItem fx:id="womenHealthDept" mnemonicParsing="false" text="Women's Health" />
+                     <CheckMenuItem fx:id="specialFieldsDept" mnemonicParsing="false" text="Specialized Fields" />
+                     <CheckMenuItem fx:id="diagnosticsLabDept" mnemonicParsing="false" text="Diagnostics and Laboratory" />
+                     <CheckMenuItem fx:id="allDept" mnemonicParsing="false" text="All" />
                  </items>
                </MenuButton>
             </children>
@@ -95,13 +89,13 @@
                <Insets />
             </VBox.margin>
          </HBox>
-            <TableView fx:id="queueTable" layoutX="347.0" layoutY="178.0" prefHeight="483.0" prefWidth="460.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="queueTable" layoutX="347.0" layoutY="178.0" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="dateColumn" editable="false" prefWidth="173.0" resizable="false" text="Date" />
-                    <TableColumn fx:id="queueNumberColumn" editable="false" prefWidth="114.0" resizable="false" text="Queue #" />
-                    <TableColumn fx:id="serviceColumn" editable="false" prefWidth="265.0" resizable="false" text="Service" />
-                    <TableColumn fx:id="statusColumn" editable="false" minWidth="0.0" prefWidth="137.0" resizable="false" text="Status" />
-                    <TableColumn fx:id="staffColumn" editable="false" prefWidth="270.0" resizable="false" text="Staff" />
+                    <TableColumn fx:id="dateColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="173.0" resizable="false" text="Date" />
+                    <TableColumn fx:id="queueNumberColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="114.0" resizable="false" text="Queue #" />
+                    <TableColumn fx:id="serviceColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="265.0" resizable="false" text="Service" />
+                    <TableColumn fx:id="statusColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="137.0" resizable="false" text="Status" />
+                    <TableColumn fx:id="staffColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="270.0" resizable="false" text="Staff" />
                 </columns>
             <VBox.margin>
                <Insets top="15.0" />
