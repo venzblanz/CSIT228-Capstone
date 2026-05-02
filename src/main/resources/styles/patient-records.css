@@ -1,3 +1,5 @@
+@import "menu-pane.css";
+
 .btn {
     -fx-background-color: #218AD5;
     -fx-background-radius: 9;
@@ -60,4 +62,9 @@
 .table-view .column-header .label {
     -fx-text-fill: white;
     -fx-font-weight: bold;
+}
+
+.separator .line {
+    -fx-border-color: #77ACC5;
+    -fx-border-width: 0.5;
 }

@@ -1,5 +1,6 @@
 package com.javafx.csit228capstone.screens.patient_records;
 
+import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.QueueHistory;
 import com.javafx.csit228capstone.model.User;
 import javafx.beans.value.ChangeListener;
@@ -32,12 +33,15 @@ public class PatientRecordsController {
     @FXML private CheckMenuItem allDept;
     @FXML private DatePicker dateFromFilter;
     @FXML private DatePicker dateToFilter;
+    @FXML private MenuController menuController;
 
     @FXML private Button loadHistoryBtn;
 
     private boolean updating;
 
     public void initialize() {
+        menuController.setActiveButton(menuController.getAccountBtn());
+
         initializeDatePicker();
         initializeFilters();
         initializeTable();

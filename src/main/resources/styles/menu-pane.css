@@ -42,10 +42,11 @@
     -fx-background-color: rgba(0,0,0,0);
 }
 .menu-button:hover {
-    -fx-background-color: #218AD5;
+    -fx-background-color: #6fa5d5;
     -fx-cursor: hand;
     -fx-text-fill: white;
     -fx-font-weight: bold;
+    -fx-font-size: 14px;
 }
 .logout-icon{
     -fx-background-image: url("../images/logout_icon.png");
