@@ -44,21 +44,49 @@ public class PatientRecordsController {
     }
 
     @FXML private void loadHistory() {
-        List<QueueHistory> samples = new ArrayList<>();
+        LocalDate fromDate = dateFromFilter.getValue();
+        LocalDate toDate = dateToFilter.getValue();
 
-        // Creating sample Users (Patients)
-        User p1 = new User(1, "jdoe", "Johnathan Doe", 9123456, "john@email.com", "pass123");
-        User p2 = new User(2, "asmith", "Alice Smith", 9178888, "alice@email.com", "pass456");
-        User p3 = new User(3, "btables", "Bobby Tables", 9155555, "bobby@email.com", "pass789");
+        List<String> selectedStatuses = new ArrayList<>();
+        if (pendingStatus.isSelected()) selectedStatuses.add("Pending");
+        if (completedStatus.isSelected()) selectedStatuses.add("Completed");
+        if (cancelledStatus.isSelected()) selectedStatuses.add("Cancelled");
 
-        // Creating sample QueueHistory entries
-        // Constructor: (int queueNumber, String service, String status, LocalDate date, String department, User patient)
-        samples.add(new QueueHistory(101, "General Consultation", "Completed", LocalDate.now().minusDays(2), "General Wellness", p1));
-        samples.add(new QueueHistory(102, "Flu Vaccine", "Pending", LocalDate.now().minusDays(1), "General Wellness", p2));
-        samples.add(new QueueHistory(103, "Routine X-Ray", "Cancelled", LocalDate.now(), "Diagnostics & Lab", p3));
-        samples.add(new QueueHistory(104, "OB-GYN Checkup", "Completed", LocalDate.now().minusDays(5), "Women's Health", p2));
+        List<String> selectedDepts = new ArrayList<>();
+        if (genWellnessDept.isSelected()) selectedDepts.add("General Wellness");
+        if (womenHealthDept.isSelected()) selectedDepts.add("Women's Health");
+        if (specialFieldsDept.isSelected()) selectedDepts.add("Specialized Fields");
+        if (diagnosticsLabDept.isSelected()) selectedDepts.add("Diagnostics & Laboratory");
 
-        queueTable.getItems().setAll(samples);
+        if (selectedStatuses.isEmpty() || selectedDepts.isEmpty()) {
+            queueTable.getItems().clear();
+            return;
+        }
+
+        List<QueueHistory> allRecords = retrieveRecordsFromDB();
+        if (allRecords == null) {
+            allRecords = new ArrayList<>();
+        }
+
+        List<QueueHistory> filteredList = allRecords.stream()
+                .filter(record -> selectedStatuses.contains(record.getStatus()))
+                .filter(record -> selectedDepts.contains(record.getDepartment()))
+                .filter(record -> {
+                    if (fromDate == null && toDate == null) return true;
+                    LocalDate d = record.getDate();
+                    if (d == null) return false;
+                    boolean afterFrom = (fromDate == null || !d.isBefore(fromDate));
+                    boolean beforeTo = (toDate == null || !d.isAfter(toDate));
+                    return afterFrom && beforeTo;
+                })
+                .toList();
+
+        queueTable.getItems().setAll(filteredList);
+    }
+
+    // TODO
+    private List<QueueHistory> retrieveRecordsFromDB() {
+        return null;
     }
 
     private void initializeDatePicker() {
@@ -205,19 +233,15 @@ public class PatientRecordsController {
         staffColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.25));
         queueNumberColumn.setCellValueFactory(new PropertyValueFactory<>("queueNumber"));
 
-        // 3. Service
         serviceColumn.setCellValueFactory(new PropertyValueFactory<>("service"));
 
-        // 4. Status
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        // 5. Date (Formatting LocalDate to String)
         dateColumn.setCellValueFactory(cellData -> {
             LocalDate date = cellData.getValue().getDate();
             return new javafx.beans.property.SimpleStringProperty(date != null ? date.toString() : "N/A");
         });
 
-        // 6. Department (Mapping to your staffColumn or a dedicated dept column)
         staffColumn.setCellValueFactory(new PropertyValueFactory<>("department"));
 
         loadHistory();
