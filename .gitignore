@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .kotlin
+user_session.ser
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
