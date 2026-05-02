@@ -66,6 +66,6 @@ public class MenuController {
         scheduleBtn.setStyle("");
         accountBtn.setStyle("");
 
-        active.setStyle("-fx-background-color: #218AD5; -fx-text-fill: white; -fx-style: bold;");
+        active.setStyle("-fx-background-color: #218AD5; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;");
     }
 }
