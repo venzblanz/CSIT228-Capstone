@@ -3,11 +3,17 @@ package com.javafx.csit228capstone.screens.patient_records;
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.QueueHistory;
 import com.javafx.csit228capstone.model.User;
+import com.javafx.csit228capstone.utils.QueueHistoryDAO;
+import com.javafx.csit228capstone.utils.SessionManager;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +41,13 @@ public class PatientRecordsController {
     @FXML private DatePicker dateToFilter;
     @FXML private MenuController menuController;
 
-    @FXML private Button loadHistoryBtn;
+    private final QueueHistoryDAO historyDAO = new  QueueHistoryDAO();
 
     private boolean updating;
 
     public void initialize() {
         menuController.setActiveButton(menuController.getAccountBtn());
+        queueTable.setSelectionModel(null);
 
         initializeDatePicker();
         initializeFilters();
@@ -64,15 +71,23 @@ public class PatientRecordsController {
 
         if (selectedStatuses.isEmpty() || selectedDepts.isEmpty()) {
             queueTable.getItems().clear();
+            queueTable.setPlaceholder(new Label("Select filters and click Load button to view records."));
             return;
         }
 
-        List<QueueHistory> allRecords = retrieveRecordsFromDB();
-        if (allRecords == null) {
-            allRecords = new ArrayList<>();
+        User currentUser = SessionManager.getInstance().getCurrentUser();
+
+        if (currentUser == null) {
+            System.out.println("No user logged in!");
+            return;
         }
 
-        List<QueueHistory> filteredList = allRecords.stream()
+        List<QueueHistory> userRecords = historyDAO.getRecordsByUserId(currentUser);
+        if (userRecords == null) {
+            userRecords = new ArrayList<>();
+        }
+
+        List<QueueHistory> filteredList = userRecords.stream()
                 .filter(record -> selectedStatuses.contains(record.getStatus()))
                 .filter(record -> selectedDepts.contains(record.getDepartment()))
                 .filter(record -> {
@@ -86,11 +101,6 @@ public class PatientRecordsController {
                 .toList();
 
         queueTable.getItems().setAll(filteredList);
-    }
-
-    // TODO
-    private List<QueueHistory> retrieveRecordsFromDB() {
-        return null;
     }
 
     private void initializeDatePicker() {
@@ -229,6 +239,7 @@ public class PatientRecordsController {
         diagnosticsLabDept.selectedProperty().addListener(syncAllDept);
     }
 
+    // TODO: Add department column
     private void initializeTable() {
         queueTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
         serviceColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.30));
@@ -246,7 +257,7 @@ public class PatientRecordsController {
             return new javafx.beans.property.SimpleStringProperty(date != null ? date.toString() : "N/A");
         });
 
-        staffColumn.setCellValueFactory(new PropertyValueFactory<>("department"));
+        staffColumn.setCellValueFactory(new PropertyValueFactory<>("staff"));
 
         loadHistory();
     }

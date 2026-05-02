@@ -9,14 +9,16 @@ public class QueueHistory {
     private LocalDate date;
     private String department;
     private User patient;
+    private String staff;
 
-    public QueueHistory(int queueNumber, String service, String status, LocalDate date, String department, User patient) {
+    public QueueHistory(int queueNumber, String service, String status, LocalDate date, String department, User patient, String staff) {
         this.queueNumber = queueNumber;
         this.service = service;
         this.status = status;
         this.date = date;
         this.department = department;
         this.patient = patient;
+        this.staff = staff;
     }
 
     public int getQueueNumber() {
@@ -41,5 +43,9 @@ public class QueueHistory {
 
     public User getPatient() {
         return patient;
+    }
+
+    public String getStaff() {
+        return staff;
     }
 }

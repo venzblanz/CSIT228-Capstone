@@ -39,6 +39,7 @@ public class MenuController {
         });
         queueBtn.setOnAction(e -> onQueue());
         dashboardBtn.setOnAction(e -> onDashboard());
+        accountBtn.setOnAction(e -> onAccount());
     }
 
     private void onQueue() {
@@ -47,9 +48,12 @@ public class MenuController {
     private void onSchedule(){
 
     }
-    private void onAccount(){
 
+    // TODO: Change to Account page
+    private void onAccount(){
+        sceneNavigator.navigate("/com/javafx/csit228capstone/patient_records/patient_records.fxml", accountBtn,"/styles/patient-records.css");
     }
+
     private void onDashboard(){
         goToDashboard();
     }

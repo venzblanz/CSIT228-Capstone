@@ -37,11 +37,11 @@
 .mainmenu-label{
     -fx-text-fill: gray;
 }
-.menu-button{
+.mainmenu-button{
     -fx-background-radius: 10;
     -fx-background-color: rgba(0,0,0,0);
 }
-.menu-button:hover {
+.mainmenu-button:hover {
     -fx-background-color: #6fa5d5;
     -fx-cursor: hand;
     -fx-text-fill: white;
