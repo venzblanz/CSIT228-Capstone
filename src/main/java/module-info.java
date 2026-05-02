@@ -17,4 +17,6 @@ module com.javafx.csit228capstone {
     opens com.javafx.csit228capstone.screens.queue to javafx.fxml;
     exports com.javafx.csit228capstone.screens.patient_records;
     opens com.javafx.csit228capstone.screens.patient_records to javafx.fxml;
+    exports com.javafx.csit228capstone.model;
+    opens com.javafx.csit228capstone.model to javafx.fxml;
 }

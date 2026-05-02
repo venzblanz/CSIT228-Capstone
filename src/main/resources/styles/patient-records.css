@@ -1,0 +1,63 @@
+.btn {
+    -fx-background-color: #218AD5;
+    -fx-background-radius: 9;
+    -fx-border-color: #206596;
+    -fx-border-radius: 9;
+    -fx-background-insets: 2;
+}
+
+.btn:hover {
+    -fx-background-color: #407eb3;
+}
+
+.btn:pressed {
+    -fx-background-color: #145a8a;
+}
+
+.filter-menu, .date-picker {
+    -fx-background-color: transparent;
+    -fx-border-color: #218AD5;
+    -fx-border-radius: 5;
+}
+
+.date-picker .text-field {
+    -fx-text-fill: #218AD5;
+    -fx-background-color: transparent;
+}
+
+.date-picker .text-field:focused {
+    -fx-prompt-text-fill: derive(#218AD5, 50%);
+    -fx-background-color: transparent;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #218AD5;
+    -fx-background-insets: 0;
+}
+
+.date-picker .arrow-button:hover {
+    -fx-background-color: #407eb3;
+}
+
+.date-picker .arrow-button:pressed {
+    -fx-background-color: #145a8a;
+}
+
+.date-picker .arrow-button .arrow {
+    -fx-background-color: white;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #218AD5;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
