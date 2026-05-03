@@ -1,16 +1,10 @@
 @import "menu-pane.css";
 
+@import "menu-pane.css";
+
+/* -- Page -- */
 .main-pane{
     -fx-background-color: #EBF2F6;
-}
-.back-to-schedule{
-    -fx-text-fill: #218AD5;
-}
-.back-to-queueschedule:hover{
-    -fx-cursor: hand;
-}
-.back-to-queueschedule:hover .back-to-schedule{
-    -fx-font-weight: bold;
 }
 .notification-icon{
     -fx-background-image: url("../images/notification_icon.png");
@@ -28,7 +22,6 @@
     -fx-background-color: #218AD5;
     -fx-background-radius: 10;
 }
-
 .notice:hover .notice-message{
     -fx-text-fill: white;
 }
@@ -36,17 +29,82 @@
     -fx-background-color: #CEE4F4;
     -fx-background-radius: 10;
 }
-.form .textfield{
+
+
+/* -- Text Fields -- */
+.text-field{
     -fx-border-color: black;
     -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 10;
 }
-.combobox{
-    -fx-background-color: white;
-    -fx-text-fill: #CEE4F4;
+.text-field:focused {
+    -fx-border-color: #218AD5;
+    -fx-border-width: 2;
 }
-.edit-button{
+.text-field:hover {
+    -fx-border-color: #8bbce6;
+}
+
+
+/* -- Scroll Pane -- */
+.scroll-pane .scroll-bar:vertical,
+.scroll-pane .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
+
+
+/* -- Combo Box -- */
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 10;
+}
+.combo-box:hover{
+    -fx-border-color: #8bbce6;
+}
+.combo-box:focused{
+    -fx-border-color: #218AD5;
+    -fx-border-width: 2;
+}
+.combo-box .list-cell {
+    -fx-text-fill: #333;
+    -fx-font-size: 13px;
+}
+.combo-box .list-cell:hover {
+    -fx-text-fill: white;
+    -fx-background-color: #218AD5;
+}
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+.combo-box .arrow {
+    -fx-background-color: #218AD5;
+}
+.combo-box-popup .list-view {
+    -fx-background-color: white;
+    -fx-border-width: 2;
+    -fx-border-color: #218AD5;
+    -fx-border-radius: 8;
+    -fx-background-radius: 10;
+}
+
+
+/* -- Buttons -- */
+.back-to-queue{
+    -fx-text-fill: #218AD5;
+}
+.back-to-queuetype:hover{
+    -fx-cursor: hand;
+}
+.back-to-queuetype:hover .back-to-queue{
+    -fx-font-weight: bold;
+}
+.cancel-button{
     -fx-background-color: transparent;
     -fx-border-color: #218AD5;
     -fx-text-fill: #218AD5;
@@ -54,7 +112,7 @@
     -fx-border-radius: 8;
     -fx-background-radius: 8;
 }
-.edit-button:hover{
+.cancel-button:hover{
     -fx-border-color: #98C9ED;
     -fx-background-color: #98C9ED;
     -fx-text-fill: white;
@@ -72,6 +130,9 @@
     -fx-cursor: hand;
     -fx-background-radius: 8;
 }
+
+
+/* -- Scroll -- */
 .scroll-pane:focused {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
@@ -80,7 +141,53 @@
     -fx-background-color: transparent;
     -fx-padding: 0;
 }
-
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
+}
+
+
+/* -- Radio -- */
+.radio-button {
+    -fx-text-fill: #333;
+}
+.radio-button .radio {
+    -fx-background-color: white;
+    -fx-border-color: #218AD5;
+    -fx-border-radius: 50%;
+    -fx-padding: 2;
+}
+.radio-button:selected .dot {
+    -fx-background-color: #218AD5;
+}
+.radio-button:hover .radio {
+    -fx-border-color: #1F7FC4;
+}
+.radio-button:hover .radio {
+    -fx-border-color: #1F7FC4;
+    -fx-cursor: hand;
+}
+
+.back-to-schedule{
+    -fx-text-fill: #218AD5;
+}
+.back-to-queueschedule:hover{
+    -fx-cursor: hand;
+}
+.back-to-queueschedule:hover .back-to-schedule{
+    -fx-font-weight: bold;
+}
+.edit-button{
+    -fx-background-color: transparent;
+    -fx-border-color: #218AD5;
+    -fx-text-fill: #218AD5;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+.edit-button:hover{
+    -fx-border-color: #98C9ED;
+    -fx-background-color: #98C9ED;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
 }

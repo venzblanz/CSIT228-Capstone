@@ -14,26 +14,31 @@
 .card-pane{
     -fx-background-radius: 10;
     -fx-background-color: #98C9ED;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 15, 0, 0, 6);
 }
 .card-pane:hover{
-    -fx-background-color: #218AD5;
-    -fx-text-fill: white;
+    -fx-background-color: #1F7FC4 ;
     -fx-cursor: hand;
+    -fx-translate-y: -4;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0, 0, 6);
 }
 .wh-card:hover{
     -fx-background-color: #FFBCD3;
-    -fx-text-fill: white;
     -fx-cursor: hand;
+    -fx-translate-y: -4;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 15, 0, 0, 6);
 }
 .sf-card:hover{
     -fx-background-color: #91F9EA;
-    -fx-text-fill: white;
     -fx-cursor: hand;
+    -fx-translate-y: -4;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 15, 0, 0, 6);
 }
 .dl-card:hover{
     -fx-background-color: #543BE9;
-    -fx-text-fill: white;
     -fx-cursor: hand;
+    -fx-translate-y: -4;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 15, 0, 0, 6);
 }
 .gw-card:hover .label{
     -fx-text-fill: white;

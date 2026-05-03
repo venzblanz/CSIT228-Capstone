@@ -6,6 +6,7 @@ module com.javafx.csit228capstone {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires mysql.connector.j;
 
     opens com.javafx.csit228capstone to javafx.fxml;
     exports com.javafx.csit228capstone;

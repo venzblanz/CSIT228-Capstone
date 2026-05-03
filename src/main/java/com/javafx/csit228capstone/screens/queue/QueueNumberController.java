@@ -1,11 +1,14 @@
 package com.javafx.csit228capstone.screens.queue;
 
+import com.javafx.csit228capstone.model.Form;
+import com.javafx.csit228capstone.utils.FormManager;
+import com.javafx.csit228capstone.utils.QueueFormDAO;
 import com.javafx.csit228capstone.utils.SceneNavigator;
+import com.javafx.csit228capstone.utils.SessionManager;
+import com.mysql.cj.Session;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 
 public class QueueNumberController {
     @FXML private Button saveBtn;
@@ -13,6 +16,10 @@ public class QueueNumberController {
     @FXML private Label qTypeLabel;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
+    private final FormManager formManager = FormManager.getInstance();
+
+
+    private final Form loadedForm = formManager.loadForm();
     private String qType;
 
     public void initializeData(String type){
@@ -33,7 +40,6 @@ public class QueueNumberController {
         saveBtn.setOnAction(e -> onSave());
         doneBtn.setOnAction(e -> onDone());
     }
-
     private void onSave(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
@@ -42,6 +48,18 @@ public class QueueNumberController {
         alert.showAndWait();
     }
     private void onDone(){
+        Form f = formManager.loadForm();
+        QueueFormDAO.addForm(f.getFirstName(),
+                f.getMiddleName(),
+                f.getLastName(),
+                f.getAge(),
+                f.getGender(),
+                f.getPurpose(),
+                f.getSymptoms(),
+                f.getPatientType(),
+                f.getContactNumber(),
+                f.getFormType());
+        formManager.clearForm();
         sceneNavigator.navigate("/com/javafx/csit228capstone/dashboard.fxml", doneBtn, "/styles/dashboard.css");
     }
 }

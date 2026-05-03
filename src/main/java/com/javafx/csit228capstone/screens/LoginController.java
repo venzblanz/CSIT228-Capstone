@@ -14,6 +14,9 @@ public class LoginController {
     @FXML private Hyperlink signupLink;
     @FXML private Label errorLabel;
 
+    private int user_id;
+
+    private SessionManager sessionManager = SessionManager.getInstance();
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
 
     @FXML
@@ -24,6 +27,7 @@ public class LoginController {
     private void onLogin() {
         String email = emailField.getText().trim();
         String password = passwordField.getText().trim();
+
 
         // Basic validation
         if (email.isEmpty() || password.isEmpty()) {
@@ -39,7 +43,7 @@ public class LoginController {
         }
 
         // Save session
-        SessionManager.getInstance().saveSession(user);
+        sessionManager.saveSession(user);
 
         // Navigate based on role
         if (user.getRole().equals("admin")) {
@@ -68,5 +72,10 @@ public class LoginController {
     private void showError(String message) {
         errorLabel.setText(message);
         errorLabel.setVisible(true);
+    }
+
+    // email copy getter
+    public String getEmail(){
+        return emailField.getText().trim();
     }
 }

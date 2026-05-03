@@ -27,7 +27,7 @@ public class UserDAO {
                     String storedPass = rs.getString("password");
                     if(storedPass.equals(password)){
                         return new User(
-                                rs.getInt("id"),
+                                rs.getInt("user_id"),
                                 rs.getString("full_name"),
                                 rs.getString("mobile_number"),
                                 rs.getString("email"),
@@ -57,7 +57,7 @@ public class UserDAO {
             if (rows > 0) return 1;
             try(ResultSet rs = ps.getResultSet()){
                 if(rs.next()){
-                    return rs.getInt("id");
+                    return rs.getInt("user_id");
                 }
             }
 

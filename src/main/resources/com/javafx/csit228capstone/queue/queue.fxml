@@ -65,7 +65,7 @@
                                                 </Label>
                                             </children>
                                         </HBox>
-                                        <Label maxWidth="1.7976931348623157E308" text="Primary care and general consultations. Including Checkups, Vaccinations, Basic Treatment, Vital Signs Check, and Health Counseling" textAlignment="JUSTIFY" wrapText="true">
+                                        <Label fx:id="gwLabel" maxWidth="1.7976931348623157E308" text="Primary care and general consultations. Including Checkups, Vaccinations, Basic Treatment, Vital Signs Check, and Health Counseling" textAlignment="JUSTIFY" wrapText="true">
                                             <font><Font size="14.0" /></font>
                                         </Label>
                                     </children>
@@ -89,7 +89,7 @@
                                                 </Label>
                                             </children>
                                         </HBox>
-                                        <Label maxWidth="1.7976931348623157E308" text="Expert care for specific conditions. Like Cardiology, Dermatology, Orthopedics, Pediatrics and many more" textAlignment="JUSTIFY" wrapText="true">
+                                        <Label fx:id="sfLabel" maxWidth="1.7976931348623157E308" text="Expert care for specific conditions. Like Cardiology, Dermatology, Orthopedics, Pediatrics and many more" textAlignment="JUSTIFY" wrapText="true">
                                             <font><Font size="14.0" /></font>
                                         </Label>
                                     </children>
@@ -119,7 +119,7 @@
                                                 </Label>
                                             </children>
                                         </HBox>
-                                        <Label maxWidth="1.7976931348623157E308" text="Care tailored for women's wellness. Prenatal Checkups, Postnatal, Breast, and Menstrual concerns and more" textAlignment="JUSTIFY" wrapText="true">
+                                        <Label fx:id="whLabel" maxWidth="1.7976931348623157E308" text="Care tailored for women's wellness. Prenatal Checkups, Postnatal, Breast, and Menstrual concerns and more" textAlignment="JUSTIFY" wrapText="true">
                                             <font><Font size="14.0" /></font>
                                         </Label>
                                     </children>
@@ -143,7 +143,7 @@
                                                 </Label>
                                             </children>
                                         </HBox>
-                                        <Label maxWidth="1.7976931348623157E308" text="Advanced testing and diagnostics. That includes Blood tests, urinalysis and x-ray" textAlignment="JUSTIFY" wrapText="true">
+                                        <Label fx:id="dlLabel" maxWidth="1.7976931348623157E308" text="Advanced testing and diagnostics. That includes Blood tests, urinalysis and x-ray" textAlignment="JUSTIFY" wrapText="true">
                                             <font><Font size="14.0" /></font>
                                         </Label>
                                     </children>

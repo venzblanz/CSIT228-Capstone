@@ -101,20 +101,20 @@
                                     <children>
                                         <Label text="First Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                                         <Label text="M.I" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                                        <TextField editable="false" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                        <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <TextField fx:id="fnameField" editable="false" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                        <TextField fx:id="miField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                         <Label text="Last Name" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                        <TextField editable="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                                        <TextField fx:id="lnameField" editable="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                                         <Label text="Age" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                                        <TextField editable="false" maxWidth="80.0" prefWidth="80.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                                        <TextField fx:id="ageField" editable="false" maxWidth="80.0" prefWidth="80.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
                                         <Label text="Gender" GridPane.columnIndex="0" GridPane.rowIndex="6" />
                                         <HBox alignment="CENTER_LEFT" spacing="20.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7">
                                             <children>
                                                 <RadioButton fx:id="maleRadio" disable="true" mnemonicParsing="false" styleClass="gender-radio" text="Male">
-                                                    <toggleGroup>
-                                                        <ToggleGroup fx:id="genedrRadio" />
-                                                    </toggleGroup></RadioButton>
-                                                <RadioButton fx:id="femaleRadio" disable="true" mnemonicParsing="false" styleClass="gender-radio" text="Female" toggleGroup="$genedrRadio" />
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="genderRadio" />
+                                       </toggleGroup></RadioButton>
+                                                <RadioButton fx:id="femaleRadio" disable="true" mnemonicParsing="false" styleClass="gender-radio" text="Female" toggleGroup="$genderRadio" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -137,7 +137,7 @@
                                         <Label text="Purpose of Visit" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                                         <ComboBox fx:id="purposeCombo" disable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                                         <Label text="Symptoms" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                        <TextField editable="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                                        <TextField fx:id="symptomsField" editable="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                                         <Label text="Patient Type" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                                         <HBox alignment="CENTER_LEFT" spacing="20.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5">
                                             <children>
@@ -156,7 +156,7 @@
                                 <VBox spacing="5.0">
                                     <children>
                                         <Label text="Contact Number" />
-                                        <TextField editable="false" maxWidth="1.7976931348623157E308" />
+                                        <TextField fx:id="contactField" editable="false" maxWidth="1.7976931348623157E308" />
                                     </children>
                                 </VBox>
 
