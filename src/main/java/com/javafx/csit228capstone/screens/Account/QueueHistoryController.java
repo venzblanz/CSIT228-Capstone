@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class QueueHistoryController {
     @FXML private TableColumn<QueueHistory, String> statusColumn;
     @FXML private TableColumn<QueueHistory, String> dateColumn;
     @FXML private TableColumn<QueueHistory, String> staffColumn;
+    @FXML private TableColumn<QueueHistory, String> departmentColumn;
 
     @FXML private MenuButton departmentFilter;
     @FXML private MenuButton statusFilter;
@@ -235,13 +237,20 @@ public class QueueHistoryController {
         diagnosticsLabDept.selectedProperty().addListener(syncAllDept);
     }
 
-    // TODO: Add department column
     private void initializeTable() {
+        serviceColumn.setReorderable(false);
+        statusColumn.setReorderable(false);
+        dateColumn.setReorderable(false);
+        staffColumn.setReorderable(false);
+        queueNumberColumn.setReorderable(false);
+        departmentColumn.setReorderable(false);
         queueTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-        serviceColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.30));
+        serviceColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.25));
         statusColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.10));
-        dateColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.25));
-        staffColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.25));
+        dateColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.15));
+        departmentColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.20));
+        staffColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.20));
+        queueNumberColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.10));
         queueNumberColumn.setCellValueFactory(new PropertyValueFactory<>("queueNumber"));
 
         serviceColumn.setCellValueFactory(new PropertyValueFactory<>("service"));
@@ -254,6 +263,8 @@ public class QueueHistoryController {
         });
 
         staffColumn.setCellValueFactory(new PropertyValueFactory<>("staff"));
+
+        departmentColumn.setCellValueFactory(new PropertyValueFactory<>("department"));
 
         loadHistory();
     }
