@@ -74,6 +74,11 @@
                     <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
                     <VBox.margin><Insets bottom="10.0" /></VBox.margin>
                 </HBox>
+            <HBox fx:id="error_container" alignment="CENTER">
+               <children>
+                  <Label fx:id="error_message" styleClass="error-message" text="Label" wrapText="true" />
+               </children>
+            </HBox>
 
                 <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
                     <content>
@@ -101,20 +106,20 @@
                                     <children>
                                         <Label text="First Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                                         <Label text="M.I" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                                        <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <TextField fx:id="fname_field" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                        <TextField fx:id="mi_field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                         <Label text="Last Name" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                        <TextField GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                                        <TextField fx:id="lname_field" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                                         <Label text="Age" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                                        <TextField maxWidth="80.0" prefWidth="80.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                                        <TextField fx:id="age_field" maxWidth="80.0" prefWidth="80.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
                                         <Label text="Gender" GridPane.columnIndex="0" GridPane.rowIndex="6" />
                                         <HBox alignment="CENTER_LEFT" spacing="20.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7">
                                             <children>
                                                 <RadioButton fx:id="maleRadio" mnemonicParsing="false" styleClass="gender-radio" text="Male">
                                        <toggleGroup>
-                                          <ToggleGroup fx:id="genedrRadio" />
+                                          <ToggleGroup fx:id="genderRadio" />
                                        </toggleGroup></RadioButton>
-                                                <RadioButton fx:id="femaleRadio" mnemonicParsing="false" styleClass="gender-radio" text="Female" toggleGroup="$genedrRadio" />
+                                                <RadioButton fx:id="femaleRadio" mnemonicParsing="false" styleClass="gender-radio" text="Female" toggleGroup="$genderRadio" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -135,9 +140,9 @@
                                     </rowConstraints>
                                     <children>
                                         <Label text="Purpose of Visit" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                        <ComboBox fx:id="purposeCombo" maxWidth="1.7976931348623157E308" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                                        <ComboBox fx:id="purposeCombo" maxWidth="1.7976931348623157E308" styleClass="-purpose-cb" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                                         <Label text="Symptoms" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                        <TextField GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                                        <TextField fx:id="symptoms_field" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                                         <Label text="Patient Type" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                                         <HBox alignment="CENTER_LEFT" spacing="20.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5">
                                             <children>
@@ -156,7 +161,7 @@
                                 <VBox spacing="5.0">
                                     <children>
                                         <Label text="Contact Number" />
-                                        <TextField maxWidth="1.7976931348623157E308" />
+                                        <TextField fx:id="contact_field" maxWidth="1.7976931348623157E308" />
                                     </children>
                                 </VBox>
 

@@ -1,5 +1,7 @@
 package com.javafx.csit228capstone.screens.queue;
 
+import com.javafx.csit228capstone.model.Form;
+import com.javafx.csit228capstone.utils.FormManager;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,49 +13,106 @@ public class QueueReviewController {
     private ScrollPane scrollPane;
     @FXML private Button editBtn;
     @FXML private Button nextBtn;
-    @FXML private RadioButton maleRadio;
-    @FXML private RadioButton femaleRadio;
-    @FXML private RadioButton regularRadio;
-    @FXML private RadioButton pwdRadio;
-    @FXML private RadioButton seniorRadio;
-    @FXML private RadioButton pregnantRadio;
-    @FXML private ComboBox<String> purposeCombo;
     @FXML private ImageView backIconBtn;
     @FXML private Label backBtn;
 
+    // Form
+    @FXML private TextField         fnameField;
+    @FXML private TextField         miField;
+    @FXML private TextField         lnameField;
+    @FXML private TextField         ageField;
+    @FXML private TextField         symptomsField;
+    @FXML private TextField         contactField;
+    @FXML private ToggleGroup       genderRadio;
+    @FXML private ToggleGroup       patientTypeRadio;
+    @FXML private RadioButton       maleRadio;
+    @FXML private RadioButton       femaleRadio;
+    @FXML private ComboBox<String>  purposeCombo;
+    @FXML private RadioButton       regularRadio;
+    @FXML private RadioButton       pwdRadio;
+    @FXML private RadioButton       seniorRadio;
+    @FXML private RadioButton       pregnantRadio;
+
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
+    private final FormManager formManager = FormManager.getInstance();
+
+
+    private final Form loadedForm = formManager.loadForm();
+    RadioButton[] patientRadios;
+    RadioButton[] genderRadios;
+
     private String formType;
+
 
     public void initializeData(String type){
         formType = type;
         if(type.equals("General Wellness")){
             backBtn.setText("Back to General Wellness Schedule");
+            reloadForm();
         }else if (type.equals("Women's Health")){
             backBtn.setText("Back to Women's Health Schedule");
+            reloadForm();
         }else if (type.equals("Specialized Fields")){
             backBtn.setText("Back to Specialized Fields Schedule");
+            reloadForm();
         }else{
             backBtn.setText("Back to Diagnostics and Laboratory Schedule");
+            reloadForm();
         }
     }
 
     @FXML
     public void initialize() {
-//         Bind scroll pane height to scene height minus the top content
-//         Use this only when the layout is broken after using Scroll Pane
-//        scrollPane.sceneProperty().addListener((obs, oldScene, newScene) -> {
-//            if (newScene != null) {
-//                newScene.heightProperty().addListener((o, oldH, newH) -> {
-//                    scrollPane.setPrefHeight(newH.doubleValue() - 420);
-//                });
-//            }
-//        });
+        // Radio
+        maleRadio.setUserData("Male");
+        femaleRadio.setUserData("Female");
+        regularRadio.setUserData("Regular");
+        pregnantRadio.setUserData("Pregnant");
+        pwdRadio.setUserData("Person with Disability");
+        seniorRadio.setUserData("Senior Citizen");
+
+        // initialize the Radio Arrays
+        patientRadios = new RadioButton[]{
+                regularRadio,
+                pregnantRadio,
+                pwdRadio,
+                seniorRadio
+        };
+        genderRadios = new RadioButton[] {
+                maleRadio,
+                femaleRadio
+        };
+
         backIconBtn.setOnMouseClicked(e -> onBack());
         backBtn.setOnMouseClicked(e -> onBack());
         editBtn.setOnAction(e -> onEdit());
         nextBtn.setOnAction(e -> onNext());
     }
-
+    private void reloadForm(){
+        if(loadedForm != null){
+            String type = loadedForm.getPatientType();
+            String gender = loadedForm.getGender();
+            fnameField.setText(loadedForm.getFirstName());
+            miField.setText(loadedForm.getMiddleName());
+            lnameField.setText(loadedForm.getLastName());
+            ageField.setText(String.valueOf(loadedForm.getAge()));
+            for(RadioButton rb : genderRadios){
+                if(rb.getUserData().equals(gender)){
+                    genderRadio.selectToggle(rb);
+                    break;
+                }
+            }
+            purposeCombo.getSelectionModel().select(loadedForm.getPurpose());
+            symptomsField.setText(loadedForm.getSymptoms());
+            for(RadioButton rb : patientRadios){
+                if(rb.getUserData().equals(type)){
+                    patientTypeRadio.selectToggle(rb);
+                    break;
+                }
+            }
+            contactField.setText(loadedForm.getContactNumber());
+        }
+    }
     private void onBack(){
         sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue-schedule.fxml", backBtn, "/styles/queue-schedule.css", (QueueScheduleController queueScheduleController) -> queueScheduleController.initializeData(formType));
     }
