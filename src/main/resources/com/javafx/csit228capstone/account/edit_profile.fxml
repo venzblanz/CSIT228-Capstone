@@ -18,110 +18,121 @@
     </left>
 
     <center>
-        <VBox styleClass="main-content">
-            <children>
-                <HBox alignment="CENTER_LEFT" styleClass="top-bar">
+        <!-- The ScrollPane wraps the main content VBox -->
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: #F8FAFC;">
+            <content>
+                <VBox styleClass="main-content">
                     <children>
-                        <Label styleClass="page-title" text="My Account" />
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Button fx:id="notifBtn" mnemonicParsing="false" styleClass="notif-btn">
-                            <graphic>
-                                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
-                                    <image><Image url="@../../../../images/notification_icon.png" /></image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                    </children>
-                    <VBox.margin><Insets top="30.0" /></VBox.margin>
-                </HBox>
-
-                <Separator styleClass="top-separator">
-                    <VBox.margin><Insets top="10.0" /></VBox.margin>
-                </Separator>
-
-                <VBox alignment="CENTER" spacing="8.0">
-                    <children>
-                        <ImageView fx:id="profileImageView" fitHeight="110.0" fitWidth="110.0" preserveRatio="true">
-                            <image><Image url="@../../../../images/profile_icon.png" /></image>
-                        </ImageView>
-                        <Button fx:id="changePictureBtn" mnemonicParsing="false" onAction="#handleChangePicture" styleClass="change-picture-btn" text="Change Picture" />
-                    </children>
-                    <VBox.margin><Insets bottom="10.0" top="24.0" /></VBox.margin>
-                </VBox>
-                <VBox spacing="14.0">
-                    <children>
-                        <VBox spacing="6.0">
+                        <!-- TOP BAR -->
+                        <HBox alignment="CENTER_LEFT" styleClass="top-bar">
                             <children>
-                                <Label styleClass="field-label" text="Full Name" />
-                                <TextField fx:id="fullNameField" prefHeight="40.0" promptText="Enter full name" styleClass="field-input" />
+                                <Label styleClass="page-title" text="My Account" />
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Button fx:id="notifBtn" mnemonicParsing="false" styleClass="notif-btn">
+                                    <graphic>
+                                        <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                            <image><Image url="@../../../../images/notification_icon.png" /></image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
                             </children>
-                        </VBox>
-
-                        <HBox spacing="12.0">
-                            <children>
-                                <VBox spacing="6.0" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Label styleClass="field-label" text="Birthday" />
-                                        <TextField fx:id="birthdayField" prefHeight="40.0" promptText="MM/DD/YYYY" styleClass="field-input" />
-                                    </children>
-                                </VBox>
-                                <VBox maxWidth="90.0" minWidth="90.0" spacing="6.0">
-                                    <children>
-                                        <Label styleClass="field-label" text="Age" />
-                                        <TextField fx:id="ageField" prefHeight="40.0" promptText="Age" styleClass="field-input" />
-                                    </children>
-                                </VBox>
-                                <VBox maxWidth="160.0" minWidth="160.0" spacing="6.0">
-                                    <children>
-                                        <Label styleClass="field-label" text="Gender" />
-                                        <ComboBox fx:id="genderComboBox" maxWidth="Infinity" prefHeight="40.0" promptText="Select" styleClass="field-combo">
-                                            <items>
-                                                <FXCollections fx:factory="observableArrayList">
-                                                    <String fx:value="Male" />
-                                                    <String fx:value="Female" />
-                                                </FXCollections>
-                                            </items>
-                                        </ComboBox>
-                                    </children>
-                                </VBox>
-                            </children>
+                            <VBox.margin><Insets top="30.0" /></VBox.margin>
                         </HBox>
 
-                        <VBox spacing="6.0">
+                        <Separator styleClass="top-separator">
+                            <VBox.margin><Insets top="10.0" /></VBox.margin>
+                        </Separator>
+
+                        <!-- AVATAR SECTION -->
+                        <VBox alignment="CENTER" spacing="8.0">
                             <children>
-                                <Label styleClass="field-label" text="Address" />
-                                <TextField fx:id="addressField" prefHeight="40.0" promptText="Enter address" styleClass="field-input" />
+                                <ImageView fx:id="profileImageView" fitHeight="110.0" fitWidth="110.0" preserveRatio="true">
+                                    <image><Image url="@../../../../images/profile_icon.png" /></image>
+                                </ImageView>
+                                <Button fx:id="changePictureBtn" mnemonicParsing="false" onAction="#handleChangePicture" styleClass="change-picture-btn" text="Change Picture" />
+                            </children>
+                            <VBox.margin><Insets bottom="10.0" top="24.0" /></VBox.margin>
+                        </VBox>
+
+                        <!-- FORM FIELDS -->
+                        <VBox spacing="14.0">
+                            <children>
+                                <VBox spacing="6.0">
+                                    <children>
+                                        <Label styleClass="field-label" text="Full Name" />
+                                        <TextField fx:id="fullNameField" prefHeight="40.0" promptText="Enter full name" styleClass="field-input" />
+                                    </children>
+                                </VBox>
+
+                                <HBox spacing="12.0">
+                                    <children>
+                                        <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label styleClass="field-label" text="Birthday" />
+                                                <TextField fx:id="birthdayField" prefHeight="40.0" promptText="MM/DD/YYYY" styleClass="field-input" />
+                                            </children>
+                                        </VBox>
+                                        <VBox maxWidth="90.0" minWidth="90.0" spacing="6.0">
+                                            <children>
+                                                <Label styleClass="field-label" text="Age" />
+                                                <TextField fx:id="ageField" prefHeight="40.0" promptText="Age" styleClass="field-input" />
+                                            </children>
+                                        </VBox>
+                                        <VBox maxWidth="160.0" minWidth="160.0" spacing="6.0">
+                                            <children>
+                                                <Label styleClass="field-label" text="Gender" />
+                                                <ComboBox fx:id="genderComboBox" maxWidth="Infinity" prefHeight="40.0" promptText="Select" styleClass="field-combo">
+                                                    <items>
+                                                        <FXCollections fx:factory="observableArrayList">
+                                                            <String fx:value="Male" />
+                                                            <String fx:value="Female" />
+                                                        </FXCollections>
+                                                    </items>
+                                                </ComboBox>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+
+                                <VBox spacing="6.0">
+                                    <children>
+                                        <Label styleClass="field-label" text="Address" />
+                                        <TextField fx:id="addressField" prefHeight="40.0" promptText="Enter address" styleClass="field-input" />
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="6.0">
+                                    <children>
+                                        <Label styleClass="field-label" text="Phone Number" />
+                                        <TextField fx:id="phoneField" prefHeight="40.0" promptText="Enter phone number" styleClass="field-input" />
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="6.0">
+                                    <children>
+                                        <Label styleClass="field-label" text="Email Address" />
+                                        <TextField fx:id="emailField" prefHeight="40.0" promptText="Enter email address" styleClass="field-input" />
+                                    </children>
+                                </VBox>
                             </children>
                         </VBox>
 
-                        <VBox spacing="6.0">
-                            <children>
-                                <Label styleClass="field-label" text="Phone Number" />
-                                <TextField fx:id="phoneField" prefHeight="40.0" promptText="Enter phone number" styleClass="field-input" />
-                            </children>
-                        </VBox>
+                        <Region VBox.vgrow="ALWAYS" />
 
-                        <VBox spacing="6.0">
+                        <!-- BOTTOM BUTTONS -->
+                        <HBox alignment="CENTER" spacing="16.0">
                             <children>
-                                <Label styleClass="field-label" text="Email Address" />
-                                <TextField fx:id="emailField" prefHeight="40.0" promptText="Enter email address" styleClass="field-input" />
+                                <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#handleCancel" prefHeight="40.0" prefWidth="200.0" styleClass="cancel-btn" text="Cancel" />
+                                <Button fx:id="updateBtn" mnemonicParsing="false" onAction="#handleUpdate" prefHeight="40.0" prefWidth="200.0" styleClass="update-btn" text="Update" />
                             </children>
-                        </VBox>
+                            <VBox.margin><Insets bottom="24.0" top="30.0" /></VBox.margin>
+                        </HBox>
                     </children>
+                    <padding>
+                        <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
+                    </padding>
                 </VBox>
-
-                <Region VBox.vgrow="ALWAYS" />
-                <HBox alignment="CENTER" spacing="16.0">
-                    <children>
-                        <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#handleCancel" prefHeight="40.0" prefWidth="200.0" styleClass="cancel-btn" text="Cancel" />
-                        <Button fx:id="updateBtn" mnemonicParsing="false" onAction="#handleUpdate" prefHeight="40.0" prefWidth="200.0" styleClass="update-btn" text="Update" />
-                    </children>
-                    <VBox.margin><Insets bottom="24.0" /></VBox.margin>
-                </HBox>
-            </children>
-            <padding>
-                <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
-            </padding>
-        </VBox>
+            </content>
+        </ScrollPane>
     </center>
 </BorderPane>
