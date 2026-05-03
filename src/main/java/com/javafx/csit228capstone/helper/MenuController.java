@@ -39,6 +39,7 @@ public class MenuController {
         });
         queueBtn.setOnAction(e -> onQueue());
         dashboardBtn.setOnAction(e -> onDashboard());
+        accountBtn.setOnAction(e -> onAccount());
     }
 
     private void onQueue() {
@@ -48,7 +49,7 @@ public class MenuController {
 
     }
     private void onAccount(){
-
+        goToAccount();
     }
     private void onDashboard(){
         goToDashboard();
@@ -67,5 +68,11 @@ public class MenuController {
         accountBtn.setStyle("");
 
         active.setStyle("-fx-background-color: #218AD5; -fx-text-fill: white; -fx-style: bold;");
+    }
+    public void goToAccount() {
+        sceneNavigator.navigate(
+                "/com/javafx/csit228capstone/account/myaccount.fxml", accountBtn, "/styles/account.css"
+        );
+
     }
 }

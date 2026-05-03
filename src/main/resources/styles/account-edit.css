@@ -1,0 +1,146 @@
+
+.main-content {
+    -fx-background-color: #EBF2F6;
+}
+
+
+.top-bar {
+    -fx-pref-height: 37px;
+}
+
+.page-title {
+    -fx-font-size: 21px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1A1A2E;
+}
+
+.notif-btn {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-pref-height: 37px;
+    -fx-pref-width: 37px;
+}
+
+.notif-btn:hover {
+    -fx-background-color: #D4E8F5;
+    -fx-background-radius: 20px;
+}
+
+
+.top-separator {
+    -fx-background-color: #AACCDE;
+    -fx-pref-height: 4px;
+}
+
+
+.avatar-circle {
+    -fx-background-color: #1A1A2E;
+    -fx-background-radius: 55px;
+    -fx-min-width: 110px;
+    -fx-min-height: 110px;
+    -fx-max-width: 110px;
+    -fx-max-height: 110px;
+    -fx-pref-width: 110px;
+    -fx-pref-height: 110px;
+}
+
+.change-picture-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-size: 13px;
+    -fx-text-fill: #5A6A7A;
+    -fx-cursor: hand;
+}
+
+.change-picture-btn:hover {
+    -fx-text-fill: #2C87D4;
+}
+
+
+.form-container {
+    -fx-pref-width: 860px;
+    -fx-max-width: 860px;
+}
+
+
+.field-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1A1A2E;
+}
+
+
+.field-input {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-border-color: #D0D8E4;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1.5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #2C3E50;
+    -fx-pref-height: 40px;
+    -fx-padding: 0 12px;
+}
+
+.field-input:focused {
+    -fx-border-color: #2C87D4;
+    -fx-effect: dropshadow(gaussian, rgba(44,135,212,0.2), 6, 0, 0, 0);
+}
+
+
+.field-combo {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-border-color: #D0D8E4;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1.5px;
+    -fx-font-size: 14px;
+    -fx-pref-height: 40px;
+}
+
+.field-combo:focused {
+    -fx-border-color: #2C87D4;
+    -fx-effect: dropshadow(gaussian, rgba(44,135,212,0.2), 6, 0, 0, 0);
+}
+
+.field-combo .list-cell {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2C3E50;
+}
+
+/* ── Bottom buttons ── */
+.bottom-actions {
+    -fx-padding: 8px 0 0 0;
+}
+
+.cancel-btn {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-border-color: #D0D8E4;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1.5px;
+    -fx-font-size: 13px;
+    -fx-text-fill: #3A4A5A;
+    -fx-cursor: hand;
+}
+
+.cancel-btn:hover {
+    -fx-background-color: #F0F4F8;
+}
+
+.update-btn {
+    -fx-background-color: #2C87D4;
+    -fx-background-radius: 8px;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.update-btn:hover {
+    -fx-background-color: #2272B8;
+}
+
+.update-btn:pressed {
+    -fx-background-color: #1A5F9C;
+}

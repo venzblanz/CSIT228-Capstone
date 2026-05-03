@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../../../../styles/account.css,@../../../../styles/menu-pane.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.Account.AccountController">
+
+    <center>
+        <VBox styleClass="main-content">
+
+
+            <HBox alignment="CENTER_LEFT" styleClass="top-bar">
+                <children>
+                    <Label styleClass="page-title" text="MY ACCOUNT" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button fx:id="notifBtn" mnemonicParsing="false" styleClass="notif-btn">
+                        <graphic>
+
+                            <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                <image><Image url="@../../../../images/notification_icon.png" /></image>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </children>
+                <VBox.margin><Insets top="30.0" /></VBox.margin>
+            </HBox>
+
+            <Separator styleClass="top-separator">
+                <VBox.margin><Insets top="10.0" /></VBox.margin>
+            </Separator>
+
+
+            <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="profile-card">
+                <children>
+
+                    <ImageView fitHeight="60.0" fitWidth="60.0" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../../images/profile_icon.png" />
+                        </image>
+                    </ImageView>
+
+                    <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                        <children>
+                            <Label fx:id="profileNameLabel" styleClass="profile-name" text="Juan dela Cruz" />
+                            <Label fx:id="profileIdLabel" styleClass="profile-id" text="123-134-1342" />
+                        </children>
+                    </VBox>
+
+                    <Button fx:id="editBtn" contentDisplay="LEFT" graphicTextGap="6.0" mnemonicParsing="false" styleClass="edit-btn" text="Edit">
+                        <graphic>
+                            <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true">
+                                <image><Image url="@../../../../images/edit.png" /></image>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </children>
+                <padding><Insets bottom="16.0" left="20.0" right="20.0" top="16.0" /></padding>
+                <VBox.margin><Insets top="20.0" /></VBox.margin>
+            </HBox>
+
+            <Label styleClass="section-title" text="Manage">
+                <VBox.margin><Insets bottom="8.0" top="22.0" /></VBox.margin>
+            </Label>
+
+            <VBox styleClass="section-card">
+                <children>
+                    <HBox fx:id="patientRecordsRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
+                        <children>
+                            <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
+                                <image><Image url="@../../../../images/patient-record.png" /></image>
+                            </ImageView>
+                            <Label styleClass="menu-row-label" text="Patient Records" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <ImageView fx:id="patientRecordsBtn" fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
+                                <image>
+                                    <Image url="@../../../../images/arrow-acc.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                        <padding><Insets left="16.0" right="16.0" /></padding>
+                    </HBox>
+
+                    <Separator styleClass="row-separator" />
+
+                    <HBox fx:id="myAppointmentsRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
+                        <children>
+                            <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
+                                <image><Image url="@../../../../images/appointments.png" /></image>
+                            </ImageView>
+                            <Label styleClass="menu-row-label" text="My Appointments" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
+                                <image>
+                                    <Image url="@../../../../images/arrow-acc.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                        <padding><Insets left="16.0" right="16.0" /></padding>
+                    </HBox>
+
+                    <Separator styleClass="row-separator" />
+
+                    <HBox fx:id="queueStatusRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
+                        <children>
+                            <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
+                                <image><Image url="@../../../../images/queue-status.png" /></image>
+                            </ImageView>
+                            <Label styleClass="menu-row-label" text="Check Queue Status" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
+                                <image>
+                                    <Image url="@../../../../images/arrow-acc.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                        <padding><Insets left="16.0" right="16.0" /></padding>
+                    </HBox>
+                </children>
+            </VBox>
+
+           <Label styleClass="section-title" text="Settings &amp; Privacy">
+                <VBox.margin><Insets bottom="8.0" top="22.0" /></VBox.margin>
+            </Label>
+
+            <VBox styleClass="section-card">
+                <children>
+                   <HBox fx:id="notificationSettingsRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
+                        <children>
+                            <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
+                                <image><Image url="@../../../../images/notifications.png" /></image>
+                            </ImageView>
+                            <Label styleClass="menu-row-label" text="Notification Settings" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
+                                <image>
+                                    <Image url="@../../../../images/arrow-acc.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                        <padding><Insets left="16.0" right="16.0" /></padding>
+                    </HBox>
+
+                    <Separator styleClass="row-separator" />
+
+                    <HBox fx:id="securityRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
+                        <children>
+                            <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
+                                <image><Image url="@../../../../images/Security.png" /></image>
+                            </ImageView>
+                            <Label styleClass="menu-row-label" text="Security &amp; Privacy" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
+                                <image>
+                                    <Image url="@../../../../images/arrow-acc.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                        <padding><Insets left="16.0" right="16.0" /></padding>
+                    </HBox>
+                </children>
+            </VBox>
+
+
+            <Label styleClass="section-title" text="Others">
+                <VBox.margin><Insets bottom="8.0" top="22.0" /></VBox.margin>
+            </Label>
+
+            <VBox styleClass="section-card">
+                <children>
+                   <HBox fx:id="supportRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
+                        <children>
+                            <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
+                                <image><Image url="@../../../../images/support.png" /></image>
+                            </ImageView>
+                            <Label styleClass="menu-row-label" text="Contact MedServe Support" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
+                                <image>
+                                    <Image url="@../../../../images/arrow-acc.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                        <padding><Insets left="16.0" right="16.0" /></padding>
+                    </HBox>
+
+                    <Separator styleClass="row-separator" />
+
+                    <HBox fx:id="termsRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
+                        <children>
+                            <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
+                                <image><Image url="@../../../../images/terms.png" /></image>
+                            </ImageView>
+                            <Label styleClass="menu-row-label" text="Terms and Condition" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
+                                <image>
+                                    <Image url="@../../../../images/arrow-acc.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                        <padding><Insets left="16.0" right="16.0" /></padding>
+                    </HBox>
+
+                    <Separator styleClass="row-separator" />
+
+                    <HBox fx:id="aboutRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
+                        <children>
+                            <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../../images/about.png" />
+                                </image>
+                            </ImageView>
+
+                            <Label styleClass="menu-row-label" text="About MedServe" />
+
+                            <Region HBox.hgrow="ALWAYS" />
+
+                            <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
+                                <image>
+                                    <Image url="@../../../../images/arrow-acc.png" />
+                                </image>
+                            </ImageView>
+                        </children>
+                        <padding><Insets left="16.0" right="16.0" /></padding>
+                    </HBox>
+                </children>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS" />
+            <VBox alignment="CENTER" spacing="12.0" styleClass="bottom-actions">
+                <children>
+                    <Button fx:id="deleteAccountBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="320.0" styleClass="delete-btn" text="Delete my account" />
+                </children>
+                <VBox.margin><Insets bottom="24.0" /></VBox.margin>
+            </VBox>
+
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+        </VBox>
+    </center>
+
+    <left>
+        <fx:include fx:id="menu" source="../menu-pane.fxml" />
+    </left>
+
+
+</BorderPane>
