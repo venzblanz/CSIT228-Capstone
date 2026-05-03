@@ -100,9 +100,10 @@
          </HBox>
             <TableView fx:id="queueTable" layoutX="347.0" layoutY="178.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="dateColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="173.0" resizable="false" text="Date" />
-                    <TableColumn fx:id="queueNumberColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="114.0" resizable="false" text="Queue #" />
-                    <TableColumn fx:id="serviceColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="265.0" resizable="false" text="Service" />
+                    <TableColumn fx:id="dateColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="135.0" resizable="false" text="Date" />
+                    <TableColumn fx:id="queueNumberColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="73.0" resizable="false" text="Queue #" />
+               <TableColumn fx:id="departmentColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="178.0" resizable="false" text="Department" />
+                    <TableColumn fx:id="serviceColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="243.0" resizable="false" text="Service" />
                     <TableColumn fx:id="statusColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="137.0" resizable="false" text="Status" />
                     <TableColumn fx:id="staffColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="270.0" resizable="false" text="Staff" />
                 </columns>
