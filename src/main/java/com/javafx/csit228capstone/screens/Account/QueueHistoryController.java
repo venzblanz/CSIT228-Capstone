@@ -1,4 +1,4 @@
-package com.javafx.csit228capstone.screens.patient_records;
+package com.javafx.csit228capstone.screens.Account;
 
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.QueueHistory;
@@ -10,15 +10,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PatientRecordsController {
+public class QueueHistoryController {
     @FXML private TableView<QueueHistory> queueTable;
     @FXML private TableColumn<QueueHistory, Integer> queueNumberColumn;
     @FXML private TableColumn<QueueHistory, String> serviceColumn;
