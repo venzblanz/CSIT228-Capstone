@@ -98,7 +98,7 @@
             </padding>
         </VBox>
         <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-        <HBox fx:id="logoutBtn" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="260.0">
+        <HBox fx:id="logoutBtn" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="260.0" styleClass="logout">
             <children>
                 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="20.0" styleClass="logout-icon">
                     <opaqueInsets>

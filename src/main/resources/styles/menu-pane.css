@@ -48,6 +48,9 @@
     -fx-font-weight: bold;
     -fx-font-size: 14px;
 }
+.logout:hover{
+    -fx-cursor: hand;
+}
 .logout-icon{
     -fx-background-image: url("../images/logout_icon.png");
     -fx-background-size: cover;

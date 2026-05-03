@@ -1,6 +1,11 @@
 package com.javafx.csit228capstone.helper;
 
+import com.javafx.csit228capstone.utils.FormManager;
 import com.javafx.csit228capstone.utils.SceneNavigator;
+import com.javafx.csit228capstone.utils.SessionManager;
+import com.mysql.cj.Session;
+import javafx.animation.Interpolator;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -10,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -23,6 +29,8 @@ public class MenuController {
     @FXML private HBox logoutBtn;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
+    private final SessionManager sessionManager = SessionManager.getInstance();
+    private final FormManager formManager = FormManager.getInstance();
 
     public Button getQueueBtn() { return queueBtn; }
     public Button getDashboardBtn() { return dashboardBtn; }
@@ -37,6 +45,8 @@ public class MenuController {
                 root.prefHeightProperty().bind(newScene.heightProperty());
             }
         });
+        logoutBtnTransition();
+        logoutBtn.setOnMouseClicked(event -> onLogout());
         queueBtn.setOnAction(e -> onQueue());
         dashboardBtn.setOnAction(e -> onDashboard());
         accountBtn.setOnAction(e -> onAccount());
@@ -51,11 +61,16 @@ public class MenuController {
     private void onAccount(){
         goToAccount();
     }
-
     private void onDashboard(){
         goToDashboard();
     }
+    private void onLogout(){ goToLogin(); }
 
+    public void goToLogin(){
+        sessionManager.clearSession();
+        formManager.clearForm();
+        sceneNavigator.navigate("/com/javafx/csit228capstone/login.fxml", queueBtn,"/styles/login.css");
+    }
     public void goToQueue() {
         sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue.fxml", queueBtn,"/styles/queue.css");
     }
@@ -75,5 +90,23 @@ public class MenuController {
                 "/com/javafx/csit228capstone/account/myaccount.fxml", accountBtn, "/styles/account.css"
         );
 
+    }
+
+    // TRANSITIONS
+    private void logoutBtnTransition(){
+        ScaleTransition grow = new ScaleTransition(new Duration(200), logoutBtn);
+        grow.setToX(1.05); grow.setToY(1.05);
+        grow.setInterpolator(Interpolator.EASE_OUT);
+
+        ScaleTransition back = new ScaleTransition(new Duration(200), logoutBtn);
+        back.setToX(1.0); back.setToY(1.0);
+        back.setInterpolator(Interpolator.EASE_IN);
+
+        logoutBtn.setOnMouseEntered(event -> {
+            grow.playFromStart();
+        });
+        logoutBtn.setOnMouseExited(event -> {
+            back.playFromStart();
+        });
     }
 }
