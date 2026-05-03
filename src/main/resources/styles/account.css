@@ -1,0 +1,150 @@
+.main-content {
+    -fx-background-color: #EBF2F6;
+    -fx-pref-height: 800px;
+    -fx-pref-width: 1040px;
+}
+
+/* ── Top bar ── */
+.top-bar {
+    -fx-pref-height: 37px;
+    -fx-pref-width: 1040px;
+}
+
+.page-title {
+    -fx-font-size: 21px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1A1A2E;
+}
+
+.notif-btn {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-pref-height: 37px;
+    -fx-pref-width: 37px;
+}
+
+.notif-btn:hover {
+    -fx-background-color: #D4E8F5;
+    -fx-background-radius: 20px;
+}
+
+.top-separator {
+    -fx-background-color: #AACCDE;
+    -fx-pref-height: 4px;
+    -fx-pref-width: 1000px;
+}
+
+.profile-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 8, 0, 0, 2);
+}
+
+
+.profile-name {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1A1A2E;
+}
+
+.profile-id {
+    -fx-font-size: 13px;
+    -fx-text-fill: #7A8A9A;
+}
+
+.edit-btn {
+    -fx-background-color: #E8EDF2;
+    -fx-background-radius: 8px;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-pref-height: 34px;
+    -fx-pref-width: 90px;
+}
+
+.edit-btn:hover {
+    -fx-background-color: #D0D8E4;
+}
+
+
+.section-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1A1A2E;
+}
+
+
+.section-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 8, 0, 0, 2);
+}
+
+
+.menu-row {
+    -fx-cursor: hand;
+    -fx-background-color: transparent;
+}
+
+.menu-row:hover {
+    -fx-background-color: #F0F6FB;
+}
+
+.menu-row-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2C3E50;
+}
+
+.arrow-label {
+    -fx-font-size: 15px;
+    -fx-text-fill: #9AABB8;
+}
+
+/* ── Row separators ── */
+.row-separator {
+    -fx-background-color: #EEF2F7;
+}
+
+.row-separator .line {
+    -fx-background-color: #EEF2F7;
+    -fx-border-color: transparent;
+}
+
+/* ── Bottom action buttons ── */
+.bottom-actions {
+    -fx-padding: 8px 0 0 0;
+}
+
+.delete-btn {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-border-color: #D0D8E4;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1.5px;
+    -fx-font-size: 13px;
+    -fx-text-fill: #3A4A5A;
+    -fx-cursor: hand;
+}
+
+.delete-btn:hover {
+    -fx-background-color: #FFF0F0;
+    -fx-border-color: #E88A8A;
+    -fx-text-fill: #C0392B;
+}
+
+.logout-btn {
+    -fx-background-color: #2C87D4;
+    -fx-background-radius: 8px;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.logout-btn:hover {
+    -fx-background-color: #2272B8;
+}
+
+.logout-btn:pressed {
+    -fx-background-color: #1A5F9C;
+}

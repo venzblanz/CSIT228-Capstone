@@ -48,10 +48,8 @@ public class MenuController {
     private void onSchedule(){
 
     }
-
-    // TODO: Change to Account page
     private void onAccount(){
-        sceneNavigator.navigate("/com/javafx/csit228capstone/patient_records/patient_records.fxml", accountBtn,"/styles/patient-records.css");
+        goToAccount();
     }
 
     private void onDashboard(){
@@ -71,5 +69,11 @@ public class MenuController {
         accountBtn.setStyle("");
 
         active.setStyle("-fx-background-color: #218AD5; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;");
+    }
+    public void goToAccount() {
+        sceneNavigator.navigate(
+                "/com/javafx/csit228capstone/account/myaccount.fxml", accountBtn, "/styles/account.css"
+        );
+
     }
 }
