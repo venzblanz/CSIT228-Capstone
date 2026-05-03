@@ -44,11 +44,6 @@
     -fx-background-radius: 10;
     -fx-background-color: rgba(0,0,0,0);
 }
-.menu-button:hover {
-    -fx-background-color: #218AD5;
-    -fx-text-fill: white;
-    -fx-style: bold;
-}
 
 /*main pane*/
 .q-utilities{

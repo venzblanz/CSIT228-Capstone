@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2026 at 01:40 PM
+-- Generation Time: May 02, 2026 at 05:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `javacapstone`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `queue_history`
+--
+
+CREATE TABLE `queue_history` (
+  `id` int(11) NOT NULL,
+  `queue_number` int(11) NOT NULL,
+  `service` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `queue_date` date NOT NULL,
+  `department` varchar(100) NOT NULL,
+  `patient_id` int(11) NOT NULL,
+  `staff_name` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `queue_history`
+--
+
+INSERT INTO `queue_history` (`id`, `queue_number`, `service`, `status`, `queue_date`, `department`, `patient_id`, `staff_name`) VALUES
+(1, 101, 'General Consultation', 'Completed', '2026-04-15', 'General Wellness', 1, 'Dr. Smith'),
+(2, 102, 'Blood Test', 'Pending', '2026-05-01', 'Diagnostics & Laboratory', 1, 'Nurse Joy'),
+(3, 102, 'Blood Test', 'Pending', '2026-05-01', 'Diagnostics & Laboratory', 1, 'Nurse Joy');
 
 -- --------------------------------------------------------
 
@@ -49,6 +75,13 @@ INSERT INTO `users` (`id`, `full_name`, `mobile_number`, `email`, `password`, `r
 --
 
 --
+-- Indexes for table `queue_history`
+--
+ALTER TABLE `queue_history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_patient` (`patient_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -60,10 +93,26 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `queue_history`
+--
+ALTER TABLE `queue_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `queue_history`
+--
+ALTER TABLE `queue_history`
+  ADD CONSTRAINT `fk_patient` FOREIGN KEY (`patient_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -52,7 +52,7 @@
                     <font>
                         <Font size="14.0" />
                     </font></Label>
-                <Button fx:id="dashboardBtn" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="31.0" prefWidth="301.0" styleClass="menu-button" text="Dashboard">
+                <Button fx:id="dashboardBtn" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="31.0" prefWidth="301.0" styleClass="mainmenu-button" text="Dashboard">
                     <VBox.margin>
                         <Insets top="10.0" />
                     </VBox.margin>
@@ -62,7 +62,7 @@
                     <font>
                         <Font size="14.0" />
                     </font></Button>
-                <Button fx:id="queueBtn" alignment="TOP_LEFT" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="322.0" styleClass="menu-button" text="Queue">
+                <Button fx:id="queueBtn" alignment="TOP_LEFT" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="322.0" styleClass="mainmenu-button" text="Queue">
                     <VBox.margin>
                         <Insets top="10.0" />
                     </VBox.margin>
@@ -72,7 +72,7 @@
                     <font>
                         <Font size="14.0" />
                     </font></Button>
-                <Button fx:id="scheduleBtn" alignment="TOP_LEFT" layoutX="10.0" layoutY="52.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="325.0" styleClass="menu-button" text="Schedule">
+                <Button fx:id="scheduleBtn" alignment="TOP_LEFT" layoutX="10.0" layoutY="52.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="325.0" styleClass="mainmenu-button" text="Schedule">
                     <VBox.margin>
                         <Insets top="10.0" />
                     </VBox.margin>
@@ -82,7 +82,7 @@
                     <font>
                         <Font size="14.0" />
                     </font></Button>
-                <Button fx:id="accountBtn" alignment="TOP_LEFT" layoutX="10.0" layoutY="77.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="341.0" styleClass="menu-button" text="My Account">
+                <Button fx:id="accountBtn" alignment="TOP_LEFT" layoutX="10.0" layoutY="77.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="341.0" styleClass="mainmenu-button" text="My Account">
                     <VBox.margin>
                         <Insets top="10.0" />
                     </VBox.margin>
