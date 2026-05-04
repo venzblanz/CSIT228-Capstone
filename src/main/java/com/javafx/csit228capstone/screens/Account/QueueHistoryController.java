@@ -52,6 +52,24 @@ public class QueueHistoryController {
         initializeTable();
     }
 
+    @FXML private void clearFilters() {
+        dateFromFilter.setValue(null);
+        dateToFilter.setValue(null);
+
+        allDept.setSelected(false);
+        genWellnessDept.setSelected(false);
+        womenHealthDept.setSelected(false);
+        specialFieldsDept.setSelected(false);
+        diagnosticsLabDept.setSelected(false);
+        updateMenuText("Select Department", departmentFilter);
+
+        allStatus.setSelected(false);
+        pendingStatus.setSelected(false);
+        completedStatus.setSelected(false);
+        cancelledStatus.setSelected(false);
+        updateMenuText("Select Status", statusFilter);
+    }
+
     @FXML private void loadHistory() {
         LocalDate fromDate = dateFromFilter.getValue();
         LocalDate toDate = dateToFilter.getValue();

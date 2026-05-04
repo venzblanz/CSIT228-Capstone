@@ -34,10 +34,7 @@ public class QueueHistoryDAO {
         try (Connection conn = DatabaseConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            // Debug (optional)
-            System.out.println("Executing SQL: " + sql);
             if (filterId != null) {
-                System.out.println("Filter ID: " + filterId);
                 stmt.setInt(1, filterId);
             }
 
@@ -46,13 +43,11 @@ public class QueueHistoryDAO {
                 while (rs.next()) {
                     int queueNumber = rs.getInt("queue_number");
 
-                    // Get raw values once
                     String rawName = rs.getString("full_name");
                     String rawMobile = rs.getString("mobile_number");
                     String rawEmail = rs.getString("email");
                     String rawRole = rs.getString("role");
 
-                    // Handle nulls
                     String name = (rawName != null) ? rawName : "Unknown Patient";
                     String mobile = (rawMobile != null) ? rawMobile : "N/A";
                     String email = (rawEmail != null) ? rawEmail : "N/A";
