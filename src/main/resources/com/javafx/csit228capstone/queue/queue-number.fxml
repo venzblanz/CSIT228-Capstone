@@ -32,55 +32,68 @@
             <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
             <HBox styleClass="card">
                <children>
+                  <Pane fx:id="qColorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="6.0" styleClass="number-color-bar" />
                   <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="301.0">
                      <children>
                         <Label styleClass="message" text="SUCCESSFULLY ADDED TO QUEUE!">
                            <font>
-                              <Font size="14.0" />
+                              <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="10.0" layoutY="10.0" styleClass="p-name" text="Juan Dela Cruz">
+                        <Label fx:id="qNameLabel" layoutX="10.0" layoutY="10.0" styleClass="p-name" text="Juan Dela Cruz">
                            <VBox.margin>
                               <Insets bottom="50.0" top="30.0" />
                            </VBox.margin>
                            <font>
-                              <Font size="13.0" />
+                              <Font size="16.0" />
                            </font>
                         </Label>
                         <Label fx:id="qTypeLabel" layoutX="10.0" layoutY="10.0" styleClass="q-type" text="General Wellness">
                            <VBox.margin>
                               <Insets bottom="10.0" top="10.0" />
                            </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </Label>
-                        <Label layoutX="10.0" layoutY="27.0" styleClass="q-time" text="9:00 AM to 10:00 AM" />
+                        <Label fx:id="qTimeLabel" layoutX="10.0" layoutY="27.0" styleClass="q-time" text="9:00 AM to 10:00 AM">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
                      </children>
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </HBox.margin>
                   </VBox>
-                  <Region HBox.hgrow="ALWAYS" />
+                  <Region HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></Region>
                   <VBox alignment="CENTER">
                      <children>
-                        <ImageView fitHeight="107.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="qQrImage" fitHeight="107.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../images/qr.png" />
                            </image></ImageView>
-                        <Label styleClass="q-number" text="Q123">
+                        <Label fx:id="qNumberLabel" styleClass="q-number" text="Q123">
                            <VBox.margin>
                               <Insets bottom="20.0" top="20.0" />
                            </VBox.margin>
                            <font>
-                              <Font size="24.0" />
+                              <Font name="System Bold" size="36.0" />
                            </font>
                         </Label>
-                        <Label layoutX="10.0" layoutY="160.0" styleClass="q-date" text="April 29, 2026">
+                        <Label fx:id="qDateLabel" layoutX="10.0" layoutY="160.0" styleClass="q-date" text="April 29, 2026">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
                         </Label>
                      </children>
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </HBox.margin>
                   </VBox>
                </children>
-               <padding>
-                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-               </padding>
                <VBox.margin>
                   <Insets left="120.0" right="120.0" />
                </VBox.margin>

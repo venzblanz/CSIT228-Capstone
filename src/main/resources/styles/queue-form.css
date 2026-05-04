@@ -24,8 +24,12 @@
     -fx-text-fill: white;
 }
 .form{
-    -fx-background-color: #CEE4F4;
+    -fx-background-color: white;
     -fx-background-radius: 10;
+}
+.form-color{
+    -fx-background-color: #218AD5;
+    -fx-background-radius: 16 16 0 0;
 }
 
 /* -- Text Fields -- */
@@ -50,6 +54,18 @@
     -fx-opacity: 0;
     -fx-pref-width: 0;
     -fx-pref-height: 0;
+}
+.scroll-pane:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
+}
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
 }
 
 
@@ -126,20 +142,6 @@
    -fx-text-fill: white;
    -fx-cursor: hand;
    -fx-background-radius: 8;
-}
-
-
-/* -- Scroll -- */
-.scroll-pane:focused {
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
-}
-.scroll-pane {
-    -fx-background-color: transparent;
-    -fx-padding: 0;
-}
-.scroll-pane > .viewport {
-    -fx-background-color: transparent;
 }
 
 

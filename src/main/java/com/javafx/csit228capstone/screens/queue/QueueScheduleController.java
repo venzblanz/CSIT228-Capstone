@@ -1,5 +1,6 @@
 package com.javafx.csit228capstone.screens.queue;
 
+import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +18,7 @@ import java.util.ResourceBundle;
 
 public class QueueScheduleController implements Initializable{
 
+    @FXML private MenuController menuController;
     @FXML private Label scheduleLabel;
     @FXML private Label selectedDateLabel;
     @FXML private Label monthYearLabel;
@@ -40,6 +42,7 @@ public class QueueScheduleController implements Initializable{
     private static final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
 
     public void initializeData(String type){
+        menuController.setActiveButton(menuController.getQueueBtn());
         schedType = type;
         if(type.equals("General Wellness")){
             scheduleLabel.setText("General Wellness Schedule");

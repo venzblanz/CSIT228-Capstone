@@ -43,10 +43,12 @@ public class QueueFormDAO {
             ps.setString(10, contactnumber);
             ps.setString(11, formtype);
             int rows = ps.executeUpdate();
-            if(rows > 0) return 1;
-            try(ResultSet rs = ps.getResultSet()) {
+            if(rows == 0) {
+                return -1;
+            }
+            try(ResultSet rs = ps.getGeneratedKeys()) {
                 if(rs.next()){
-                    return rs.getInt("form_id");
+                    return rs.getInt(1);
                 }
             }
         }catch(Exception e){

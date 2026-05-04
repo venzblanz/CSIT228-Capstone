@@ -8,18 +8,18 @@ import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 
 public class QueueController {
     @FXML private MenuController menuController;
     @FXML private Pane notification;
-    @FXML private VBox gwBtn;
-    @FXML private VBox whBtn;
-    @FXML private VBox sfBtn;
-    @FXML private VBox dlBtn;
+    @FXML private HBox gwBtn;
+    @FXML private HBox whBtn;
+    @FXML private HBox sfBtn;
+    @FXML private HBox dlBtn;
     @FXML private Label gwLabel;
     @FXML private Label whLabel;
     @FXML private Label sfLabel;
@@ -51,7 +51,7 @@ public class QueueController {
         initializeCards(sfBtn);
         initializeCards(dlBtn);
     }
-    private void initializeCards(VBox btn) {
+    private void initializeCards(HBox btn) {
         FadeTransition fade = new FadeTransition(Duration.millis(1000), btn);
         fade.setFromValue(0);
         fade.setToValue(1);
