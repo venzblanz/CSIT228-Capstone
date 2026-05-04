@@ -3,9 +3,8 @@ package com.javafx.csit228capstone.screens.queue;
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.Form;
 import com.javafx.csit228capstone.utils.FormManager;
-import com.javafx.csit228capstone.utils.QueueFormDAO;
 import com.javafx.csit228capstone.utils.SceneNavigator;
-import javafx.collections.ObservableList;
+import com.javafx.csit228capstone.utils.AnimationHelper;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -25,6 +24,7 @@ public class QueueFormController {
     @FXML private Label             error_message;
     @FXML private HBox              error_container;
     @FXML private VBox              form;
+    @FXML private VBox              mainPane;
     @FXML private Pane              formColorPane;
 
     // data getters within the forms
@@ -43,10 +43,10 @@ public class QueueFormController {
     @FXML private RadioButton       pwdRadio;
     @FXML private RadioButton       seniorRadio;
     @FXML private RadioButton       pregnantRadio;
-    @FXML private MenuController menuController;
+    @FXML private MenuController    menuController;
 
-    private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
-    private final FormManager formManager = FormManager.getInstance();
+    private final SceneNavigator    sceneNavigator = SceneNavigator.getInstance();
+    private final FormManager       formManager = FormManager.getInstance();
 
     // Helpers
     UnaryOperator<TextFormatter.Change> filter = change -> {
@@ -56,10 +56,10 @@ public class QueueFormController {
         return null;
     };
 
-    private String formType;
-    RadioButton[] patientRadios;
-    RadioButton[] genderRadios;
-    Form loadedForm;
+    private String                  formType;
+    RadioButton[]                   patientRadios;
+    RadioButton[]                   genderRadios;
+    Form                            loadedForm;
 
     public void initializeData(String type){
         loadedForm = formManager.loadForm();
@@ -81,6 +81,7 @@ public class QueueFormController {
 
     @FXML
     public void initialize() {
+        AnimationHelper.fadeIn(mainPane);
         menuController.setActiveButton(menuController.getQueueBtn());
         // for the whole page except buttons
         initializePage();

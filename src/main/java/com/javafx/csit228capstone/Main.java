@@ -1,6 +1,7 @@
 package com.javafx.csit228capstone;
 import com.javafx.csit228capstone.model.User;
 import com.javafx.csit228capstone.utils.SessionManager;
+import javafx.scene.ImageCursor;
 import javafx.scene.text.Font;
 import javafx.stage.StageStyle;
 
@@ -47,7 +48,6 @@ public class Main extends Application {
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/medserveLogo.png")));
             stage.setScene(scene);
         }
-
         stage.setTitle("MedServe");
         stage.setMinHeight(700);
         stage.setMinWidth(1024);

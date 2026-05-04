@@ -3,6 +3,10 @@
 .main-pane{
     -fx-background-color: #EBF2F6;
 }
+.screen-label{
+    -fx-text-fill: #218AD5;
+    -fx-font-weight: bold;
+}
 .notification-icon{
     -fx-background-image: url("../images/notification_icon.png");
     -fx-background-size: cover;

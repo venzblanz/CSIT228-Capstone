@@ -7,6 +7,8 @@ import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -19,6 +21,8 @@ public class MenuController {
     @FXML private Button scheduleBtn;
     @FXML private Button accountBtn;
     @FXML private HBox logoutBtn;
+
+    private Button activeButton;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
     private final SessionManager sessionManager = SessionManager.getInstance();
@@ -37,7 +41,9 @@ public class MenuController {
                 root.prefHeightProperty().bind(newScene.heightProperty());
             }
         });
+        hoverAnimation();
         logoutBtnTransition();
+
         logoutBtn.setOnMouseClicked(event -> onLogout());
         queueBtn.setOnAction(e -> onQueue());
         dashboardBtn.setOnAction(e -> onDashboard());
@@ -72,12 +78,89 @@ public class MenuController {
         sceneNavigator.navigate("/com/javafx/csit228capstone/schedule/schedule_patient.fxml", scheduleBtn, "/styles/schedule-patient.css");
     }
     public void setActiveButton(Button active) {
+        activeButton = active;
+
         dashboardBtn.setStyle("");
         queueBtn.setStyle("");
         scheduleBtn.setStyle("");
         accountBtn.setStyle("");
 
+        dashboardBtn.setGraphicTextGap(10);
+        queueBtn.setGraphicTextGap(10);
+        scheduleBtn.setGraphicTextGap(10);
+        accountBtn.setGraphicTextGap(10);
+
+        // Reset all icons to black/default first
+        setButtonIcon(dashboardBtn, "/images/icon_menu.png");
+        setButtonIcon(queueBtn, "/images/queue.png");
+        setButtonIcon(scheduleBtn, "/images/calendar.png");
+        setButtonIcon(accountBtn, "/images/user.png");
+
+        // Active style
         active.setStyle("-fx-background-color: #218AD5; -fx-text-fill: white; -fx-font-family: \"Instrument Sans Bold\"; -fx-font-size: 15px;");
+
+        // Active white icon
+        if (active == dashboardBtn) {
+            setButtonIcon(dashboardBtn, "/images/icon_general.png");
+        } else if (active == queueBtn) {
+            setButtonIcon(queueBtn, "/images/queue_white.png");
+        } else if (active == scheduleBtn) {
+            setButtonIcon(scheduleBtn, "/images/calendar_white.png");
+        } else if (active == accountBtn) {
+            setButtonIcon(accountBtn, "/images/user_white.png");
+        }
+    }
+    private void hoverAnimation() {
+        dashboardBtn.setOnMouseEntered(event -> {
+            setButtonIcon(dashboardBtn, "/images/icon_general.png");
+        });
+
+        dashboardBtn.setOnMouseExited(event -> {
+            if (dashboardBtn == activeButton) {
+                setButtonIcon(dashboardBtn, "/images/icon_general.png");
+            } else {
+                setButtonIcon(dashboardBtn, "/images/icon_menu.png");
+            }
+        });
+
+
+        queueBtn.setOnMouseEntered(event -> {
+            setButtonIcon(queueBtn, "/images/queue_white.png");
+        });
+
+        queueBtn.setOnMouseExited(event -> {
+            if (queueBtn == activeButton) {
+                setButtonIcon(queueBtn, "/images/queue_white.png");
+            } else {
+                setButtonIcon(queueBtn, "/images/queue.png");
+            }
+        });
+
+
+        scheduleBtn.setOnMouseEntered(event -> {
+            setButtonIcon(scheduleBtn, "/images/calendar_white.png");
+        });
+
+        scheduleBtn.setOnMouseExited(event -> {
+            if (scheduleBtn == activeButton) {
+                setButtonIcon(scheduleBtn, "/images/calendar_white.png");
+            } else {
+                setButtonIcon(scheduleBtn, "/images/calendar.png");
+            }
+        });
+
+
+        accountBtn.setOnMouseEntered(event -> {
+            setButtonIcon(accountBtn, "/images/user_white.png");
+        });
+
+        accountBtn.setOnMouseExited(event -> {
+            if (accountBtn == activeButton) {
+                setButtonIcon(accountBtn, "/images/user_white.png");
+            } else {
+                setButtonIcon(accountBtn, "/images/user.png");
+            }
+        });
     }
     public void goToAccount() {
         sceneNavigator.navigate(
@@ -86,6 +169,17 @@ public class MenuController {
 
     }
 
+    private void setButtonIcon(Button button, String imagePath) {
+        ImageView icon = new ImageView(
+                new Image(getClass().getResource(imagePath).toExternalForm())
+        );
+
+        icon.setFitWidth(20);
+        icon.setFitHeight(20);
+        icon.setPreserveRatio(true);
+
+        button.setGraphic(icon);
+    }
     // TRANSITIONS
     private void logoutBtnTransition(){
         ScaleTransition grow = new ScaleTransition(new Duration(200), logoutBtn);

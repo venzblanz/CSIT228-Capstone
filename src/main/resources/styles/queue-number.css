@@ -8,6 +8,10 @@
 .notification-icon:hover {
     -fx-cursor: hand;
 }
+.screen-label{
+    -fx-text-fill: #218AD5;
+    -fx-font-weight: bold;
+}
 .card{
     -fx-background-color: white;
     -fx-background-radius: 10;

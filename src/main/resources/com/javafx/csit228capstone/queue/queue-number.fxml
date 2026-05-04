@@ -22,7 +22,7 @@
 
                 <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="71.0">
                     <children>
-                        <Label text="Queue">
+                        <Label styleClass="screen-label" text="Queue">
                             <font><Font size="24.0" /></font>
                         </Label>
                         <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />

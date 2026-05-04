@@ -2,7 +2,7 @@ package com.javafx.csit228capstone.screens.queue;
 
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.utils.SceneNavigator;
-import javafx.animation.FadeTransition;
+import com.javafx.csit228capstone.utils.AnimationHelper;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
@@ -10,12 +10,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 
 public class QueueController {
     @FXML private MenuController menuController;
     @FXML private Pane notification;
+    @FXML private HBox activeQueue;
+    @FXML private HBox activeQueueCard;
+    @FXML private VBox queueScreen;
     @FXML private HBox gwBtn;
     @FXML private HBox whBtn;
     @FXML private HBox sfBtn;
@@ -46,17 +50,13 @@ public class QueueController {
         notification.setOnMouseEntered(e -> ring.play());
     }
     private void generateLayout(){
+        AnimationHelper.fadeIn(queueScreen);
         initializeCards(gwBtn);
         initializeCards(whBtn);
         initializeCards(sfBtn);
         initializeCards(dlBtn);
     }
     private void initializeCards(HBox btn) {
-        FadeTransition fade = new FadeTransition(Duration.millis(1000), btn);
-        fade.setFromValue(0);
-        fade.setToValue(1);
-        fade.play();
-
         ScaleTransition scaleUp = new ScaleTransition(Duration.millis(150), btn);
         scaleUp.setToX(1.05); scaleUp.setToY(1.05);
         scaleUp.setInterpolator(Interpolator.EASE_OUT);
