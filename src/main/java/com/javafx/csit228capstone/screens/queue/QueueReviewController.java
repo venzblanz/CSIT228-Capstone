@@ -1,16 +1,18 @@
 package com.javafx.csit228capstone.screens.queue;
 
+import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.Form;
-import com.javafx.csit228capstone.utils.FormManager;
-import com.javafx.csit228capstone.utils.SceneNavigator;
+import com.javafx.csit228capstone.utils.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
+import javafx.stage.StageStyle;
+
+import java.util.Optional;
 
 public class QueueReviewController {
-    @FXML
-    private ScrollPane scrollPane;
+    @FXML private MenuController menuController;
+    @FXML private ScrollPane scrollPane;
     @FXML private Button editBtn;
     @FXML private Button nextBtn;
     @FXML private ImageView backIconBtn;
@@ -45,6 +47,7 @@ public class QueueReviewController {
 
 
     public void initializeData(String type){
+        menuController.setActiveButton(menuController.getQueueBtn());
         formType = type;
         if(type.equals("General Wellness")){
             backBtn.setText("Back to General Wellness Schedule");
@@ -86,7 +89,23 @@ public class QueueReviewController {
         backIconBtn.setOnMouseClicked(e -> onBack());
         backBtn.setOnMouseClicked(e -> onBack());
         editBtn.setOnAction(e -> onEdit());
-        nextBtn.setOnAction(e -> onNext());
+        nextBtn.setOnAction(e -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure all the information is correct?");
+            alert.initStyle(StageStyle.UNDECORATED);
+            alert.getDialogPane().getStylesheets().add(
+                    getClass().getResource("/styles/alert.css").toExternalForm()
+            );
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.isPresent() && result.get() == ButtonType.OK){
+                System.out.println("Queue will now be added to the line");
+                onNext();
+            }else{
+                System.out.println("Confirmation cancelled");
+            }
+        });
     }
     private void reloadForm(){
         if(loadedForm != null){

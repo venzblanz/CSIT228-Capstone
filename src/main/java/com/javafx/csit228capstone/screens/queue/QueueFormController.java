@@ -1,5 +1,6 @@
 package com.javafx.csit228capstone.screens.queue;
 
+import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.Form;
 import com.javafx.csit228capstone.utils.FormManager;
 import com.javafx.csit228capstone.utils.QueueFormDAO;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.util.function.UnaryOperator;
@@ -23,6 +25,7 @@ public class QueueFormController {
     @FXML private Label             error_message;
     @FXML private HBox              error_container;
     @FXML private VBox              form;
+    @FXML private Pane              formColorPane;
 
     // data getters within the forms
     @FXML private TextField         fname_field;
@@ -40,6 +43,7 @@ public class QueueFormController {
     @FXML private RadioButton       pwdRadio;
     @FXML private RadioButton       seniorRadio;
     @FXML private RadioButton       pregnantRadio;
+    @FXML private MenuController menuController;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
     private final FormManager formManager = FormManager.getInstance();
@@ -77,6 +81,7 @@ public class QueueFormController {
 
     @FXML
     public void initialize() {
+        menuController.setActiveButton(menuController.getQueueBtn());
         // for the whole page except buttons
         initializePage();
 
@@ -133,39 +138,45 @@ public class QueueFormController {
         }
     }
     private void whInit(){
+        formColorPane.setStyle("-fx-background-color: #FFBCD3;");
         // Combo
         purposeCombo.getItems().addAll(
-                "Consultation",
-                "Check-up",
-                "Vaccination",
-                "Follow-up",
-                "Medical Certificate"
+                "Prenatal Check-up",
+                "Postnatal Care",
+                "Menstrual Concerns",
+                "Breast Examination",
+                "Family Planning Consultation",
+                "Pap Smear / Screening"
         );
         if(loadedForm != null && loadedForm.getFormType().equals("Women's Health")){
             reloadForm();
         }
     }
     private void sfInit(){
+        formColorPane.setStyle("-fx-background-color: rgba(75, 245, 220);");
         // Combo
         purposeCombo.getItems().addAll(
-                "Consultation",
-                "Check-up",
-                "Vaccination",
-                "Follow-up",
-                "Medical Certificate"
+                "Cardiology Consultation",
+                "Dermatology Check",
+                "Orthopedic Consultation",
+                "Pediatrics Consultation",
+                "Neurology Consultation",
+                "ENT (Ear, Nose, Throat)"
         );
         if(loadedForm != null && loadedForm.getFormType().equals("Specialized Fields")){
             reloadForm();
         }
     }
     private void dlInit(){
+        formColorPane.setStyle("-fx-background-color: #543BE9;");
         // Combo
         purposeCombo.getItems().addAll(
-                "Consultation",
-                "Check-up",
-                "Vaccination",
-                "Follow-up",
-                "Medical Certificate"
+                "Blood Test",
+                "Urinalysis",
+                "X-ray",
+                "Ultrasound",
+                "ECG",
+                "Medical Examination Package"
         );
         if(loadedForm != null && loadedForm.getFormType().equals("Diagnostics and Laboratory")){
             reloadForm();
@@ -249,7 +260,8 @@ public class QueueFormController {
         sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue-schedule.fxml", cancelBtn, "/styles/queue-schedule.css", (QueueScheduleController queueScheduleController) -> queueScheduleController.initializeData(formType));
     }
     private void showError(String message){
-        form.setStyle("-fx-border-color: red;");
+        form.setStyle("-fx-border-color: red;" +
+                "-fx-border-radius: 10;");
         error_container.setVisible(true);
         error_message.setVisible(true);
         error_message.setText(message);
