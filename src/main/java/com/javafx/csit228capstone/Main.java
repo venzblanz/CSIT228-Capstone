@@ -1,6 +1,7 @@
 package com.javafx.csit228capstone;
 import com.javafx.csit228capstone.model.User;
 import com.javafx.csit228capstone.utils.SessionManager;
+import javafx.scene.text.Font;
 import javafx.stage.StageStyle;
 
 import javafx.application.Application;
@@ -23,6 +24,12 @@ public class Main extends Application {
             unadjustable no border no nothing just full screen
             well we can design our own top bar if we want to, sa last part nana HAHHAHAHAH
         */
+
+        // for FONT
+        Font.loadFont(getClass().getResourceAsStream("/fonts/InstrumentSans-Regular.ttf"), 12);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/InstrumentSans-Medium.ttf"), 12);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/InstrumentSans-SemiBold.ttf"), 12);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/InstrumentSans-Bold.ttf"), 12);
 
         User restoredUser = sessionManager.restoreSession();
         if(restoredUser != null){
