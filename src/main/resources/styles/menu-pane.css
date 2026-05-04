@@ -58,3 +58,12 @@
     -fx-background-size: cover;
     -fx-background-position: center;
 }
+
+.scroll-bar:vertical {
+    -fx-pref-width: 15;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #ccc;
+    -fx-background-radius: 5;
+}
