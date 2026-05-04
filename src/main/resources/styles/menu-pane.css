@@ -8,6 +8,7 @@
 }
 .medserve{
     -fx-text-fill: #218AD5;
+    -fx-font-family: "Instrument Sans SemiBold";
 }
 .profile-pane{
     -fx-background-color: #CEE4F4;
@@ -23,7 +24,7 @@
 }
 .profile-pane:hover .label{
     -fx-text-fill: white;
-    -fx-font-weight: bold;
+    -fx-font-family: "Instrument Sans Bold";
 }
 .profile-icon{
     -fx-background-image: url("../images/profile_icon.png");
@@ -40,13 +41,14 @@
 .mainmenu-button{
     -fx-background-radius: 10;
     -fx-background-color: rgba(0,0,0,0);
+    -fx-font-family: "Instrument Sans Medium";
+    -fx-font-size: 15px;
 }
 .mainmenu-button:hover {
     -fx-background-color: #6fa5d5;
     -fx-cursor: hand;
     -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
+    -fx-font-family: "Instrument Sans Bold";
 }
 .logout:hover{
     -fx-cursor: hand;

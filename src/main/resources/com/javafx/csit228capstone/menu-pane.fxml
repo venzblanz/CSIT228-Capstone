@@ -29,7 +29,7 @@
                     <children>
                         <Label text="Juan Dela Cruz">
                             <font>
-                                <Font name="System Bold" size="12.0" />
+                                <Font name="System" size="12.0" />
                             </font></Label>
                         <Label layoutX="10.0" layoutY="10.0" text="123-233-2345" />
                     </children>
@@ -110,7 +110,7 @@
                 </Pane>
                 <Label text="Log out">
                     <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="System" size="12.0" />
                     </font></Label>
             </children>
         </HBox>

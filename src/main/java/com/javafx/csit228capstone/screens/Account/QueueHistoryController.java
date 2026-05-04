@@ -4,11 +4,13 @@ import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.QueueHistory;
 import com.javafx.csit228capstone.model.User;
 import com.javafx.csit228capstone.utils.QueueHistoryDAO;
+import com.javafx.csit228capstone.utils.SceneNavigator;
 import com.javafx.csit228capstone.utils.SessionManager;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -38,14 +40,18 @@ public class QueueHistoryController {
     @FXML private DatePicker dateFromFilter;
     @FXML private DatePicker dateToFilter;
     @FXML private MenuController menuController;
+    @FXML private ImageView backIconBtn;
+    @FXML private Label             backBtn;
 
     private final QueueHistoryDAO historyDAO = new  QueueHistoryDAO();
+    private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
 
     private boolean updating;
 
     public void initialize() {
         menuController.setActiveButton(menuController.getAccountBtn());
         queueTable.setSelectionModel(null);
+        backBtn.setOnMouseClicked(e -> onBack());
 
         initializeDatePicker();
         initializeFilters();
@@ -87,7 +93,7 @@ public class QueueHistoryController {
 
         if (selectedStatuses.isEmpty() || selectedDepts.isEmpty()) {
             queueTable.getItems().clear();
-            queueTable.setPlaceholder(new Label("Select filters and click Load button to view records."));
+            queueTable.setPlaceholder(new Label("No records found."));
             return;
         }
 
@@ -124,6 +130,10 @@ public class QueueHistoryController {
                 .toList();
 
         queueTable.getItems().setAll(filteredList);
+    }
+
+    private void onBack(){
+        sceneNavigator.navigate("/com/javafx/csit228capstone/account/myaccount.fxml", backBtn, "/styles/account.css");
     }
 
     private void initializeDatePicker() {
