@@ -69,10 +69,12 @@
 .dashboard-recent-card1{
     -fx-background-color: white;
     -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
 }
 .dashboard-recent-card2{
     -fx-background-color: white;
     -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
 }
 .recent{
     -fx-text-fill: gray;
@@ -80,10 +82,12 @@
 .q-active-pane{
     -fx-background-color: white;
     -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
 }
 .q-utilities-pane{
     -fx-background-color: white;
     -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
 }
 .q-utilities-icon{
     -fx-background-image: url("../images/down-arrow.png");

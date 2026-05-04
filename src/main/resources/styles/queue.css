@@ -11,68 +11,156 @@
 .notification-icon:hover {
     -fx-cursor: hand;
 }
-.card-pane{
+.active-queue-card{
+    -fx-background-color: white;
     -fx-background-radius: 10;
-    -fx-background-color: #98C9ED;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 15, 0, 0, 6);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
 }
-.card-pane:hover{
-    -fx-background-color: #1F7FC4 ;
+
+.gw-card{
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
+}
+.gw-card:hover{
     -fx-cursor: hand;
-    -fx-translate-y: -4;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0, 0, 6);
+ }
+
+.gw-color-bar{
+    -fx-background-color: #218AD5;
+    -fx-background-radius: 16 0 0 16;
 }
-.wh-card:hover{
+.wh-color-bar{
     -fx-background-color: #FFBCD3;
-    -fx-cursor: hand;
-    -fx-translate-y: -4;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 15, 0, 0, 6);
+    -fx-background-radius: 16 0 0 16;
 }
-.sf-card:hover{
-    -fx-background-color: #91F9EA;
-    -fx-cursor: hand;
-    -fx-translate-y: -4;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 15, 0, 0, 6);
+.sf-color-bar{
+    -fx-background-color: rgba(75, 245, 220);
+    -fx-background-radius: 16 0 0 16;
 }
-.dl-card:hover{
+.dl-color-bar{
     -fx-background-color: #543BE9;
-    -fx-cursor: hand;
-    -fx-translate-y: -4;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 15, 0, 0, 6);
+    -fx-background-radius: 16 0 0 16;
 }
-.gw-card:hover .label{
-    -fx-text-fill: white;
+
+.gw-icon-circle{
+    -fx-background-color: rgba(33, 138, 213, 0.15);
+    -fx-background-radius: 100;
+    -fx-min-width: 70;
+    -fx-min-height: 70;
+    -fx-alignment: center;
 }
-.dl-card:hover .label{
-    -fx-text-fill: white;
+.wh-icon-circle{
+    -fx-background-color: rgba(255, 188, 211, 0.25);
+    -fx-background-radius: 100;
+    -fx-min-width: 70;
+    -fx-min-height: 70;
+    -fx-alignment: center;
+}
+.sf-icon-circle{
+    -fx-background-color: rgba(75, 245, 220, 0.25);
+    -fx-background-radius: 100;
+    -fx-min-width: 70;
+    -fx-min-height: 70;
+    -fx-alignment: center;
+}
+.dl-icon-circle{
+    -fx-background-color: rgba(84, 59, 233, 0.15);
+    -fx-background-radius: 100;
+    -fx-min-width: 70;
+    -fx-min-height: 70;
+    -fx-alignment: center;
 }
 
 .gw-icon{
-    -fx-background-image: url("../images/stethescope.png");
-    -fx-background-size: cover;
+    -fx-background-image: url("../images/stethoscope.png");
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
 .wh-icon{
     -fx-background-image: url("../images/femenine.png");
-    -fx-background-size: cover;
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
 .sf-icon{
     -fx-background-image: url("../images/doctor.png");
-    -fx-background-size: cover;
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
 .dl-icon{
     -fx-background-image: url("../images/science-lab-equipment.png");
-    -fx-background-size: cover;
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
-.arrow-icon{
-    -fx-background-image: url("../images/right-arrow.png");
-    -fx-background-size: cover;
-    -fx-background-position: center;
+
+.gw-label{
+    -fx-text-fill: #218ad5;
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
 }
-.active-queue-card{
+.wh-label{
+    -fx-text-fill: #FFBCD3;
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+}
+.sf-label{
+    -fx-text-fill: rgba(75, 245, 220);
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+}
+.dl-label{
+    -fx-text-fill: #543BE9;
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+}
+
+
+.gw-text{
+    -fx-font-size: 14;
+}
+.arrow-circle{
     -fx-background-color: white;
-    -fx-background-radius: 10;
+    -fx-background-radius: 100;
+    -fx-min-width: 45;
+    -fx-min-height: 45;
+    -fx-max-width: 45;
+    -fx-max-height: 45;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 3);
+}
+.arrow{
+    -fx-background-image: url("../images/right-arrow-blue.png");
+    -fx-background-size: 15 15;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.active-color-bar{
+    -fx-background-color: #218AD5;
+    -fx-background-radius: 16 0 0 16;
+}
+.active-icon-circle{
+    -fx-background-color: rgba(33, 138, 213, 0.15);
+    -fx-background-radius: 100;
+    -fx-min-width: 60;
+    -fx-min-height: 60;
+    -fx-alignment: center;
+}
+.active-icon{
+    -fx-background-image: url("../images/stethoscope.png");
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+.active{
+    -fx-text-fill: #218AD5;
+}
+.active-pos{
+    -fx-text-fill: #218AD5;
+    -fx-font-weight: bold;
 }

@@ -7,6 +7,10 @@ module com.javafx.csit228capstone {
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
     requires mysql.connector.j;
+    requires com.google.zxing;
+    requires java.desktop;
+    requires javafx.swing;
+    requires com.google.zxing.javase;
 
     opens com.javafx.csit228capstone to javafx.fxml;
     exports com.javafx.csit228capstone;

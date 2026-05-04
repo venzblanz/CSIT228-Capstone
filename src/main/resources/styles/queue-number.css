@@ -9,8 +9,13 @@
     -fx-cursor: hand;
 }
 .card{
-    -fx-background-color: #CEE4F4;
+    -fx-background-color: white;
     -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
+}
+.number-color-bar{
+    -fx-background-color: #218AD5;
+    -fx-background-radius: 16 0 0 16;
 }
 .message{
     -fx-font-weight: bold;
