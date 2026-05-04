@@ -80,7 +80,14 @@ public class QueueHistoryController {
             return;
         }
 
-        List<QueueHistory> userRecords = historyDAO.getRecordsByUserId(currentUser);
+        List<QueueHistory> userRecords;
+
+        if ("admin".equalsIgnoreCase(currentUser.getRole())) {
+            userRecords = historyDAO.getAllRecords();
+        } else {
+            userRecords = historyDAO.getRecordsByUserId(currentUser);
+        }
+
         if (userRecords == null) {
             userRecords = new ArrayList<>();
         }
