@@ -3,21 +3,13 @@ package com.javafx.csit228capstone.helper;
 import com.javafx.csit228capstone.utils.FormManager;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import com.javafx.csit228capstone.utils.SessionManager;
-import com.mysql.cj.Session;
 import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.io.IOException;
 
 public class MenuController {
     @FXML private VBox root;
@@ -49,15 +41,14 @@ public class MenuController {
         logoutBtn.setOnMouseClicked(event -> onLogout());
         queueBtn.setOnAction(e -> onQueue());
         dashboardBtn.setOnAction(e -> onDashboard());
+        scheduleBtn.setOnAction(e -> onSchedule());
         accountBtn.setOnAction(e -> onAccount());
     }
 
     private void onQueue() {
         goToQueue();
     }
-    private void onSchedule(){
-
-    }
+    private void onSchedule(){ goToSchedule(); }
     private void onAccount(){
         goToAccount();
     }
@@ -76,6 +67,9 @@ public class MenuController {
     }
     public void goToDashboard(){
         sceneNavigator.navigate("/com/javafx/csit228capstone/dashboard.fxml", queueBtn,"/styles/dashboard.css");
+    }
+    private void goToSchedule() {
+        sceneNavigator.navigate("/com/javafx/csit228capstone/schedule/schedule_patient.fxml", scheduleBtn, "/styles/schedule-patient.css");
     }
     public void setActiveButton(Button active) {
         dashboardBtn.setStyle("");
