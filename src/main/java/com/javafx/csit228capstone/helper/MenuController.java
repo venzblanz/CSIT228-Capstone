@@ -75,7 +75,7 @@ public class MenuController {
         sceneNavigator.navigate("/com/javafx/csit228capstone/dashboard.fxml", queueBtn,"/styles/dashboard.css");
     }
     private void goToSchedule() {
-        sceneNavigator.navigate("/com/javafx/csit228capstone/schedule/schedule_patient.fxml", scheduleBtn, "/styles/schedule-patient.css");
+        sceneNavigator.navigate("/com/javafx/csit228capstone/schedule/schedule-patient.fxml", scheduleBtn, "/styles/schedule-patient.css");
     }
     public void setActiveButton(Button active) {
         activeButton = active;
