@@ -1,4 +1,7 @@
 @import "menu-pane.css";
+.root{
+    -fx-font-family: "Instrument Sans";
+}
 
 .main-pane{
     -fx-background-color: #EBF2F6;
@@ -18,7 +21,8 @@
 }
 .screen-label{
     -fx-text-fill: #218AD5;
-    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+    -fx-font-weight: 700;
 }
 .gw-card,
 .wh-card,

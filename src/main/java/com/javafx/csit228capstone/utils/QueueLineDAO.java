@@ -97,13 +97,16 @@ public class QueueLineDAO {
     public static QueueTicket getQueueTicket(int queueId){
         String sql = """
                 SELECT
-                q.queue_id,
-                q.queue_number,
-                q.department,
-                q.created_at,
-                f.first_name,
-                f.middle_initial,
-                f.last_name
+                    q.queue_id,
+                    q.queue_number,
+                    q.department,
+                    q.created_at,
+                    q.status,
+                    q.staff_assigned,
+                    f.purpose,
+                    f.first_name,
+                    f.middle_initial,
+                    f.last_name
                 FROM queue_line q, queue_form f
                 WHERE q.form_id = f.form_id
                 AND q.queue_id = ?
@@ -190,7 +193,7 @@ public class QueueLineDAO {
         try (Connection c = DatabaseConfig.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
 
-            fetchQueueHistory(queueList, ps);
+             fetchQueueHistory(queueList, ps);
 
         } catch (Exception e) {
             System.err.println("[QueueLineDAO] Error getting the queue history " + e.getMessage());

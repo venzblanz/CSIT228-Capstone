@@ -1,3 +1,7 @@
+
+.root{
+    -fx-font-family: "Instrument Sans-Bold";
+}
 .menu-pane{
     -fx-background-color: #CEE4F4;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);

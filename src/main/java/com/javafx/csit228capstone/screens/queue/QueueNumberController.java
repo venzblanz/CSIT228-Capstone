@@ -28,7 +28,6 @@ public class QueueNumberController {
     @FXML private Label qNumberLabel;
     @FXML private Label qDateLabel;
     @FXML private ImageView qQrImage;
-    @FXML private Pane qColorPane;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
     private final FormManager formManager = FormManager.getInstance();
@@ -43,7 +42,8 @@ public class QueueNumberController {
         qType = type;
 
         Form f = formManager.loadForm();
-        int formId = QueueFormDAO.addForm(f.getFirstName(),
+        int formId = QueueFormDAO.addForm(
+                f.getFirstName(),
                 f.getMiddleName(),
                 f.getLastName(),
                 f.getAge(),
@@ -68,13 +68,10 @@ public class QueueNumberController {
             qTypeLabel.setText("General Wellness");
         }else if (type.equals("Women's Health")){
             qTypeLabel.setText("Women's Health");
-            qColorPane.setStyle("-fx-background-color: #FFBCD3;");
         }else if (type.equals("Specialized Fields")){
             qTypeLabel.setText("Specialized Fields");
-            qColorPane.setStyle("-fx-background-color: rgba(75, 245, 220);");
         }else{
             qTypeLabel.setText("Diagnostics and Laboratory");
-            qColorPane.setStyle("-fx-background-color: #543BE9;");
         }
     }
 
@@ -95,7 +92,7 @@ public class QueueNumberController {
     }
     private void setCard(){
         String qrText = "QUEUE_ID=" + qt.getQueueId();
-        Image image = QRCodeGenerator.generateQRCode(qrText,200,200);
+        Image image = QRCodeGenerator.generateQRCode(qrText,220,220);
 
         if(image != null){
             qQrImage.setImage(image);

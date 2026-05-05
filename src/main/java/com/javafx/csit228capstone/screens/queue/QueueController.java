@@ -30,6 +30,7 @@ public class QueueController {
     @FXML private Label dlLabel;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
+    private Boolean isActive = false;
 
     @FXML
     public void initialize() {

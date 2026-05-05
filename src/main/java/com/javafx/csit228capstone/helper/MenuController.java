@@ -74,7 +74,7 @@ public class MenuController {
         sceneNavigator.navigate("/com/javafx/csit228capstone/login.fxml", queueBtn,"/styles/login.css");
     }
     public void goToQueue() {
-        sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue.fxml", queueBtn,"/styles/queue.css");
+        sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue.fxml", queueBtn, "/styles/queue.css");
     }
     public void goToDashboard(){
         sceneNavigator.navigate("/com/javafx/csit228capstone/dashboard.fxml", queueBtn,"/styles/dashboard.css");

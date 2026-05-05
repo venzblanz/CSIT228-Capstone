@@ -1,4 +1,7 @@
 @import "menu-pane.css";
+.root{
+    -fx-font-family: "Instrument Sans";
+}
 
 /* -- Page -- */
 .main-pane{
@@ -6,7 +9,8 @@
 }
 .screen-label{
     -fx-text-fill: #218AD5;
-    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+    -fx-font-weight: 700;
 }
 .notification-icon{
     -fx-background-image: url("../images/notification_icon.png");

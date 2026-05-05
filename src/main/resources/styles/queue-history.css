@@ -1,4 +1,7 @@
 @import "menu-pane.css";
+.root{
+    -fx-font-family: "Instrument Sans";
+}
 
 .root {
     -fx-font-family: "Instrument Sans Medium";

@@ -1,68 +1,322 @@
 @import "menu-pane.css";
 
-.notification-icon{
+.root {
+    -fx-font-family: "Instrument Sans";
+}
+
+.main-pane {
+    -fx-background-color: #F0F4F8;
+}
+
+.screen-label {
+    -fx-text-fill: #218AD5;
+    -fx-font-size: 24px;
+    -fx-font-weight: 700;
+}
+
+.notification-icon {
     -fx-background-image: url("../images/notification_icon.png");
     -fx-background-size: cover;
     -fx-background-position: center;
-}
-.notification-icon:hover {
     -fx-cursor: hand;
 }
-.screen-label{
-    -fx-text-fill: #218AD5;
-    -fx-font-weight: bold;
-}
-.card{
+
+.ticket-wrapper {
     -fx-background-color: white;
-    -fx-background-radius: 10;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
-}
-.number-color-bar{
-    -fx-background-color: #218AD5;
-    -fx-background-radius: 16 0 0 16;
-}
-.message{
-    -fx-font-weight: bold;
-}
-.p-name{
-
-}
-.q-type{
-
-}
-.q-time{
-
-}
-.q-number{
-    -fx-text-fill: red;
-    -fx-font-weight: bold;
-}
-.q-date{
-
-}
-.save-image-button{
-    -fx-background-color: transparent;
-    -fx-border-color: #218AD5;
-    -fx-text-fill: #218AD5;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+    -fx-border-color: #DBEAFE;
     -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.12), 24, 0, 0, 6);
+}
+
+.ticket-top-bar {
+    -fx-background-color: #218AD5;
+    -fx-background-radius: 16 16 0 0;
+    -fx-padding: 14 24 14 24;
+    -fx-min-height: 52;
+}
+
+.check-icon {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: 700;
+    -fx-background-color: rgba(255,255,255,0.25);
+    -fx-background-radius: 50;
+    -fx-padding: 4 6 4 6;
+}
+
+.confirmed-title {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 800;
+    -fx-letter-spacing: 0.5;
+}
+
+.confirmed-divider {
+    -fx-text-fill: rgba(255,255,255,0.5);
+    -fx-font-size: 16px;
+}
+
+.confirmed-message {
+    -fx-text-fill: rgba(255,255,255,0.92);
+    -fx-font-size: 13px;
+    -fx-font-weight: 400;
+}
+
+.ticket-body {
+    -fx-padding: 32 0 32 0;
+}
+
+.ticket-left {
+    -fx-padding: 0 36 0 36;
+}
+
+.ticket-logo-text {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+}
+
+.tagline {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 12px;
+    -fx-font-weight: 400;
+    -fx-line-spacing: 2;
+}
+
+.ticket-heading {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 26px;
+    -fx-font-weight: 800;
+    -fx-letter-spacing: 0.5;
+}
+
+.patient-icon-frame {
+    -fx-background-color: #DBEAFE;
+    -fx-background-radius: 50;
+}
+
+.patient-icon {
+    -fx-background-image: url("../images/user_blue.png");
+    -fx-background-size: contain;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.p-name {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+}
+
+.field-label {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 13px;
+    -fx-font-weight: 400;
+}
+
+.field-value-blue {
+    -fx-text-fill: #218AD5;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+}
+
+.details-row {
+    -fx-padding: 8 0 8 0;
+}
+
+.small-icon-frame {
+    -fx-background-color: #EFF6FF;
+    -fx-background-radius: 50;
+}
+
+.department-icon {
+    -fx-background-image: url("../images/stethoscope_blue.png");
+    -fx-background-size: contain;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.time-icon {
+    -fx-background-image: url("../images/clock-blue.png");
+    -fx-background-size: contain;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.date-icon {
+    -fx-background-image: url("../images/calendar-blue.png");
+    -fx-background-size: contain;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.added-by-icon {
+    -fx-background-image: url("../images/id-card.png");
+    -fx-background-size: contain;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.detail-title {
+    -fx-text-fill: #94A3B8;
+    -fx-font-size: 10px;
+    -fx-font-weight: 600;
+    -fx-letter-spacing: 0.8;
+}
+
+.q-type {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+}
+
+.q-time {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+}
+
+.q-date {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+}
+
+.q-added-by {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+}
+
+.reminder-box {
+    -fx-background-color: #F0F7FF;
+    -fx-background-radius: 12;
+    -fx-border-color: #BFDBFE;
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-padding: 16 20 16 20;
+}
+
+.reminder-icon-frame {
+    -fx-background-color: #DBEAFE;
+    -fx-background-radius: 50;
+}
+
+.reminder-icon {
+    -fx-background-image: url("../images/notification_icon.png");
+    -fx-background-size: contain;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.reminder-title {
+    -fx-text-fill: #218AD5;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+    -fx-letter-spacing: 0.5;
+}
+
+.reminder-text {
+    -fx-text-fill: #475569;
+    -fx-font-size: 12px;
+    -fx-font-weight: 400;
+}
+
+.ticket-divider {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent #CBD5E1 transparent transparent;
+    -fx-border-width: 0 1.5 0 0;
+    -fx-border-style: none dashed none none;
+    -fx-pref-width: 2;
+    -fx-min-width: 2;
+    -fx-max-width: 2;
+}
+
+.ticket-right {
+    -fx-padding: 0 36 0 36;
+    -fx-min-width: 240;
+    -fx-pref-width: 280;
+}
+
+.queue-number-label {
+    -fx-text-fill: #94A3B8;
+    -fx-font-size: 11px;
+    -fx-font-weight: 600;
+    -fx-letter-spacing: 1;
+}
+
+.q-number {
+    -fx-text-fill: #DC2626;
+    -fx-font-size: 72px;
+    -fx-font-weight: 900;
+}
+
+.qr-image {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-color: #218ad5;
+    -fx-border-width: 2.5;
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.55), 12, 0, 0, 3);
+    -fx-padding: 5;
+}
+
+.present-box {
+    -fx-background-color: #EFF6FF;
+    -fx-background-radius: 10;
+    -fx-padding: 12 16 12 16;
+    -fx-min-width: 200;
+}
+
+.phone-icon {
+    -fx-background-image: url("../images/tickets.png");
+    -fx-background-size: contain;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-radius: 50;
+}
+
+.present-text {
+    -fx-text-fill: #1E3A5F;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-line-spacing: 2;
+}
+
+.thank-you {
+    -fx-text-fill: #218AD5;
+    -fx-font-size: 11px;
+    -fx-font-style: italic;
+    -fx-font-weight: 600;
+}
+
+.save-image-button {
+    -fx-background-color: white;
+    -fx-border-color: #218AD5;
+    -fx-border-width: 1.5;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
-}
-.save-image-button:hover{
-    -fx-border-color: #98C9ED;
-    -fx-background-color: #98C9ED;
-    -fx-text-fill: white;
+    -fx-text-fill: #218AD5;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
     -fx-cursor: hand;
-    -fx-background-radius: 8;
 }
-.done-button{
+
+.save-image-button:hover {
+    -fx-background-color: #EFF6FF;
+}
+
+.done-button {
     -fx-background-color: #218AD5;
-    -fx-text-fill: white;
     -fx-background-radius: 8;
-}
-.done-button:hover{
-    -fx-background-color: #98C9ED;
     -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
     -fx-cursor: hand;
-    -fx-background-radius: 8;
+}
+
+.done-button:hover {
+    -fx-background-color: #1A76BA;
 }
