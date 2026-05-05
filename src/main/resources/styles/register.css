@@ -39,3 +39,8 @@
     -fx-background-size: cover;
     -fx-background-position: center;
 }
+
+.text-input {
+    -fx-prompt-text-fill: #999999;
+    -fx-text-fill: black;
+}

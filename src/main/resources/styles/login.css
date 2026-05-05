@@ -53,6 +53,11 @@
         -fx-background-radius: 10;
         -fx-text-type: password;
     }
+
+    .text-input {
+        -fx-prompt-text-fill: #999999;
+        -fx-text-fill: black;
+    }
 /*-- Hyoerlink layout --*/
     .forgot-pass {
         -fx-underline: true;
