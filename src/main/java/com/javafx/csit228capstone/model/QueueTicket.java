@@ -23,6 +23,36 @@ public class QueueTicket {
         this.createdAt = createdAt;
     }
 
+    public void setQueueId(int queueId) {
+        this.queueId = queueId;
+    }
+
+    public void setQueueNumber(String queueNumber) {
+        this.queueNumber = queueNumber;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setMiddleInitial(String middleInitial) {
+        this.middleInitial = middleInitial;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public QueueTicket() {}
+
     public int getQueueId() {
         return queueId;
     }
