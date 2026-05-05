@@ -122,10 +122,10 @@ public class ScheduleStaffController implements Initializable {
     private HBox buildChip(Service service, String timeSlot, HBox chipsBox) {
         HBox chip = new HBox(4);
         chip.setAlignment(Pos.CENTER_LEFT);
-        chip.getStyleClass().addAll("chip", "chip-" + service.getServiceType());
+        chip.getStyleClass().addAll("chip", "chip-" + service.getChipColor());
 
         Circle dot = new Circle(3.5);
-        dot.getStyleClass().addAll("dot", "dot-" + service.getServiceType());
+        dot.getStyleClass().addAll("dot", "dot-" + service.getChipColor());
 
         Label nameLabel = new Label(service.getName());
         nameLabel.getStyleClass().add("chip-text");

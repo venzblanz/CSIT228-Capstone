@@ -1,6 +1,8 @@
 package com.javafx.csit228capstone.screens.schedule;
 
 import com.javafx.csit228capstone.model.Service;
+import com.javafx.csit228capstone.utils.DatabaseConfig;
+import com.javafx.csit228capstone.utils.ScheduleDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -36,6 +38,8 @@ public class SchedulePatientController implements Initializable {
     private LocalDate today;
 
     private final Map<String, List<Service>> slotServices = new LinkedHashMap<>();
+    private final ScheduleDAO scheduleDAO = new ScheduleDAO(DatabaseConfig.getConnection());
+
 
     private static final String CLOSING_TIME = "5:00 PM";
 
@@ -69,6 +73,7 @@ public class SchedulePatientController implements Initializable {
 
         renderCalendar();
         updateDateHeader();
+        loadServicesForDate(selectedDate);
         renderTimeSlots();
 
         prevMonthButton.setOnAction(e -> {
@@ -82,6 +87,18 @@ public class SchedulePatientController implements Initializable {
         });
 
         searchField.textProperty().addListener((obs, oldVal, newVal) -> handleSearch(newVal));
+    }
+
+    private void loadServicesForDate(LocalDate date) {
+        for (String slot : TIME_SLOTS) {
+            slotServices.put(slot, new ArrayList<>());
+        }
+        try {
+            Map<String, List<Service>> loaded = scheduleDAO.getScheduleForDate(date);
+            loaded.forEach((slot, services) -> slotServices.put(slot, services));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void renderTimeSlots() {
@@ -133,10 +150,10 @@ public class SchedulePatientController implements Initializable {
     private HBox buildChip(Service service) {
         HBox chip = new HBox(6);
         chip.setAlignment(Pos.CENTER_LEFT);
-        chip.getStyleClass().addAll("chip", "chip-" + service.getServiceType());
+        chip.getStyleClass().addAll("chip", "chip-" + service.getChipColor());
 
         Circle dot = new Circle(3.5);
-        dot.getStyleClass().addAll("dot", "dot-" + service.getServiceType());
+        dot.getStyleClass().addAll("dot", "dot-" + service.getChipColor());
 
         Label nameLabel = new Label(service.getName());
         nameLabel.getStyleClass().add("chip-text");

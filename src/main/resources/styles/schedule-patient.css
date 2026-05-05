@@ -159,13 +159,13 @@
 .chip-green  { -fx-background-color: #D5F1ED; -fx-border-color: #91F9EA; }
 .chip-green  .chip-text   { -fx-text-fill: #0A5C52; }
 .chip-green  .chip-remove { -fx-text-fill: #0A5C52; }
-.dot-teal   { -fx-fill: #1ABFAE; }
+.dot-green   { -fx-fill: #1ABFAE; }
 
 /* Diagnostics & Laboratory */
-.chip-purple { -fx-background-color: #735DD1; -fx-border-color: #543BE9; }
-.chip-purple .chip-text   { -fx-text-fill: #EDE9FF; }
-.chip-purple .chip-remove { -fx-text-fill: #EDE9FF; }
-.dot-amber  { -fx-fill: #C4B8FF; }
+.chip-purple { -fx-background-color: #e8e4f3; -fx-border-color: #bebcc8; }
+.chip-purple .chip-text   { -fx-text-fill: #2c2c78; }
+.chip-purple .chip-remove { -fx-text-fill: #2c2c78; }
+.dot-purple  { -fx-fill: #7e6fbf; }
 
 .chip-remove {
     -fx-background-color: transparent;
