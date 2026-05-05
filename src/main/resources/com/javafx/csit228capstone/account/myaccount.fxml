@@ -98,6 +98,8 @@
                                     <padding><Insets left="16.0" right="16.0" /></padding>
                                 </HBox>
                             </children>
+                                </HBox>
+                            </children>
                         </VBox>
 
                         <Label styleClass="section-title" text="Settings &amp; Privacy" textFill="#64748B">
