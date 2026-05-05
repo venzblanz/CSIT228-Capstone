@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2026 at 09:19 AM
+-- Generation Time: May 05, 2026 at 10:34 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -92,6 +92,69 @@ INSERT INTO `queue_line` (`queue_id`, `form_id`, `user_id`, `department`, `queue
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `schedules`
+--
+
+CREATE TABLE `schedules` (
+  `schedule_id` int(11) NOT NULL,
+  `service_id` int(11) NOT NULL,
+  `schedule_date` date NOT NULL,
+  `time_slot` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `schedules`
+--
+
+INSERT INTO `schedules` (`schedule_id`, `service_id`, `schedule_date`, `time_slot`) VALUES
+(1, 1, '2026-05-05', '8:00 AM'),
+(2, 1, '2026-05-05', '9:00 AM'),
+(3, 1, '2026-05-05', '10:00 AM'),
+(4, 1, '2026-05-05', '1:00 PM'),
+(5, 1, '2026-05-05', '2:00 PM'),
+(6, 2, '2026-05-05', '8:00 AM'),
+(7, 2, '2026-05-05', '11:00 AM'),
+(8, 2, '2026-05-05', '3:00 PM'),
+(9, 3, '2026-05-05', '9:00 AM'),
+(10, 3, '2026-05-05', '10:00 AM'),
+(11, 3, '2026-05-05', '2:00 PM'),
+(12, 4, '2026-05-05', '9:00 AM'),
+(13, 4, '2026-05-05', '11:00 AM'),
+(14, 4, '2026-05-05', '1:00 PM'),
+(15, 5, '2026-05-05', '10:00 AM'),
+(16, 5, '2026-05-05', '2:00 PM'),
+(17, 5, '2026-05-05', '3:00 PM'),
+(18, 6, '2026-05-05', '8:00 AM'),
+(19, 6, '2026-05-05', '1:00 PM'),
+(20, 6, '2026-05-05', '4:00 PM');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services`
+--
+
+CREATE TABLE `services` (
+  `service_id` int(11) NOT NULL,
+  `service_name` varchar(100) NOT NULL,
+  `service_type` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`service_id`, `service_name`, `service_type`) VALUES
+(1, 'Check-up', 'General Wellness'),
+(2, 'Vaccination', 'General Wellness'),
+(3, 'Postnatal Care', 'Women\'s Health'),
+(4, 'Pediatrics', 'Specialized Fields'),
+(5, 'Dental', 'Specialized Fields'),
+(6, 'X-Ray', 'Diagnostics & Laboratory');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -133,6 +196,19 @@ ALTER TABLE `queue_line`
   ADD KEY `fk1_user_id` (`user_id`);
 
 --
+-- Indexes for table `schedules`
+--
+ALTER TABLE `schedules`
+  ADD PRIMARY KEY (`schedule_id`),
+  ADD KEY `service_id` (`service_id`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`service_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -156,6 +232,18 @@ ALTER TABLE `queue_line`
   MODIFY `queue_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `schedules`
+--
+ALTER TABLE `schedules`
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -177,6 +265,12 @@ ALTER TABLE `queue_form`
 ALTER TABLE `queue_line`
   ADD CONSTRAINT `fk1_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
   ADD CONSTRAINT `fk_form_id` FOREIGN KEY (`form_id`) REFERENCES `queue_form` (`form_id`);
+
+--
+-- Constraints for table `schedules`
+--
+ALTER TABLE `schedules`
+  ADD CONSTRAINT `schedules_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `services` (`service_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
