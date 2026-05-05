@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,20 +33,21 @@ public class EditProfileController implements Initializable {
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
     @FXML private Button cancelBtn;
     @FXML private Button updateBtn;
+    @FXML private DatePicker birthdayDatePicker;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         menuController.setActiveButton(menuController.getAccountBtn());
 
-        ageField.textProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal.matches("\\d*") || newVal.length() > 3) {
-                ageField.setText(oldVal);
+        birthdayDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                int age = java.time.Period.between(newValue, java.time.LocalDate.now()).getYears();
+                ageField.setText(String.valueOf(age));
             }
         });
         cancelBtn.setOnAction(e -> onCancel());
         updateBtn.setOnAction(e -> onUpdate());
     }
-
 
     @FXML
     private void handleChangePicture() {

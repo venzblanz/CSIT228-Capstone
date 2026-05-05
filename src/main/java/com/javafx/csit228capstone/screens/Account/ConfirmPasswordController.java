@@ -40,7 +40,6 @@ public class ConfirmPasswordController implements Initializable {
 
     @FXML
     private void handleConfirm() {
-        // Navigate to the success screen
         sceneNavigator.navigate(
                 "/com/javafx/csit228capstone/account/profile_updated.fxml",
                 confirmBtn,

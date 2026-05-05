@@ -16,21 +16,15 @@ import java.util.ResourceBundle;
 
 public class AccountController implements Initializable {
 
-    // Profile labels
     @FXML private Label profileNameLabel;
     @FXML private Label profileIdLabel;
 
-    // Manage rows
     @FXML private HBox patientRecordsRow;
     @FXML private HBox queueHistoryRow;
     @FXML private HBox queueStatusRow;
-
-    // Settings & Privacy rows
-    @FXML private HBox notificationSettingsRow;
+   // @FXML private HBox notificationSettingsRow;
     @FXML private HBox securityRow;
     @FXML private Button editBtn;
-
-    // Others rows
     @FXML private HBox supportRow;
     @FXML private HBox termsRow;
     @FXML private HBox aboutRow;
@@ -45,6 +39,12 @@ public class AccountController implements Initializable {
         // profileIdLabel.setText(SessionManager.getUser().getPatientId());
 
         editBtn.setOnAction(e -> onEdit());
+//        patientRecordsRow.setOnMouseClicked(e -> onPatientRecords());
+//        queueStatusRow.setOnMouseClicked(e -> onQueueStatus());
+//        myAppointmentsRow.setOnMouseClicked(e -> onMyAppointments());
+        securityRow.setOnMouseClicked(e -> onSecurityPrivacy());
+        termsRow.setOnMouseClicked(e -> onTermsAndConditions());
+        aboutRow.setOnMouseClicked(e -> onAboutMedServe());
         queueHistoryRow.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
                 handleQueueHistory();
@@ -56,7 +56,21 @@ public class AccountController implements Initializable {
         handleEdit();
     }
 
+    private void onPatientRecords() {
+        handlePatientRecords();
+    }
 
+    private void onMyAppointments() {
+        handleMyAppointments();
+    }
+
+    private void onQueueStatus() {
+        handleCheckQueueStatus();
+    }
+
+    private void onSecurityPrivacy() {
+        handleSecurityPrivacy();
+    }
 
     private void handleQueueHistory() {
         sceneNavigator.navigate(
@@ -78,23 +92,33 @@ public class AccountController implements Initializable {
     }
 
     private void handleSecurityPrivacy() {
-
+        sceneNavigator.navigate(
+                "/com/javafx/csit228capstone/account/security_privacy.fxml", securityRow, "/styles/account.css"
+        );
     }
-
-    // ── Others ───────────────────────────────────────────────────────────────
 
     private void handleContactSupport() {
 
     }
 
     private void handleTermsAndConditions() {
-
+        sceneNavigator.navigate(
+                "/com/javafx/csit228capstone/account/terms_condition.fxml", termsRow, "/styles/account.css"
+        );
+    }
+    private void onTermsAndConditions() {
+        handleTermsAndConditions();
     }
 
     private void handleAboutMedServe() {
-
-
+        sceneNavigator.navigate(
+                "/com/javafx/csit228capstone/account/about_medserve.fxml", aboutRow, "/styles/account.css"
+        );
     }
+    private void onAboutMedServe() {
+        handleAboutMedServe();
+    }
+
 
     @FXML
     private void handleEdit() {
