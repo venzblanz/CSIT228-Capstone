@@ -138,12 +138,12 @@
     -fx-font-size: 18;
 }
 .wh-label{
-    -fx-text-fill: #FFBCD3;
+    -fx-text-fill: #DB2777;
     -fx-font-weight: bold;
     -fx-font-size: 18;
 }
 .sf-label{
-    -fx-text-fill: rgba(75, 245, 220);
+    -fx-text-fill: #0F766E;
     -fx-font-weight: bold;
     -fx-font-size: 18;
 }
@@ -221,7 +221,7 @@
     -fx-text-fill: #218AD5;
 }
 .wh{
-    -fx-text-fill: #FFBCD3;
+    -fx-text-fill: #DB2777;
 }
 .sf{
     -fx-text-fill: #0F766E;
@@ -236,7 +236,7 @@
     -fx-font-weight: bold;
 }
 .wh-pos{
-    -fx-text-fill: #FFBCD3;
+    -fx-text-fill: #DB2777;
     -fx-font-size: 16;
     -fx-font-weight: bold;
 }
@@ -249,6 +249,22 @@
     -fx-text-fill: #543BE9;
     -fx-font-size: 16;
     -fx-font-weight: bold;
+}
+.gw-card-separator .line {
+    -fx-border-color: #218AD5;
+    -fx-border-width: 0 0 0 1;
+}
+.wh-card-separator .line {
+    -fx-border-color: #DB2777;
+    -fx-border-width: 0 0 0 1;
+}
+.sf-card-separator .line {
+    -fx-border-color: #0F766E;
+    -fx-border-width: 0 0 0 1;
+}
+.dl-card-separator .line {
+    -fx-border-color: #543BE9;
+    -fx-border-width: 0 0 0 1;
 }
 .scroll-pane {
      -fx-background-color: #EBF2F6;

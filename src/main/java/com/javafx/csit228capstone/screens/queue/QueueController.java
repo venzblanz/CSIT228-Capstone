@@ -26,18 +26,12 @@ import java.util.List;
 public class QueueController {
     @FXML private MenuController menuController;
     @FXML private Pane notification;
-    @FXML private HBox activeQueue;
-    @FXML private HBox activeQueueCard;
     @FXML private VBox queueScreen;
     @FXML private VBox activeQueueContainer;
     @FXML private HBox gwBtn;
     @FXML private HBox whBtn;
     @FXML private HBox sfBtn;
     @FXML private HBox dlBtn;
-    @FXML private Label gwLabel;
-    @FXML private Label whLabel;
-    @FXML private Label sfLabel;
-    @FXML private Label dlLabel;
     @FXML private Label seeAllBtn;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
@@ -54,6 +48,7 @@ public class QueueController {
         seeAllBtn.setOnMouseClicked(e -> setIsActive());
         generateLayout();
         showActiveQueue(false);
+
         // for notification animation
         AnimationHelper.ringAnimation(notification);
     }
@@ -227,6 +222,9 @@ public class QueueController {
                 status.getStyleClass().add("gw");
                 position.getStyleClass().add("gw-pos");
                 image = new Image(getClass().getResource("/images/clock-blue.png").toExternalForm());
+                s1.getStyleClass().add("gw-card-separator");
+                s2.getStyleClass().add("gw-card-separator");
+                s3.getStyleClass().add("gw-card-separator");
                 break;
             case "Women's Health":
                 icon.getStyleClass().add("women-icon");
@@ -236,6 +234,9 @@ public class QueueController {
                 status.getStyleClass().add("wh");
                 position.getStyleClass().add("wh-pos");
                 image = new Image(getClass().getResource("/images/clock-pink.png").toExternalForm());
+                s1.getStyleClass().add("wh-card-separator");
+                s2.getStyleClass().add("wh-card-separator");
+                s3.getStyleClass().add("wh-card-separator");
                 break;
             case "Specialized Fields":
                 icon.getStyleClass().add("specialized-icon");
@@ -245,6 +246,9 @@ public class QueueController {
                 status.getStyleClass().add("sf");
                 position.getStyleClass().add("sf-pos");
                 image = new Image(getClass().getResource("/images/clock-green.png").toExternalForm());
+                s1.getStyleClass().add("sf-card-separator");
+                s2.getStyleClass().add("sf-card-separator");
+                s3.getStyleClass().add("sf-card-separator");
                 break;
             case "Diagnostics and Laboratory":
                 icon.getStyleClass().add("lab-icon");
@@ -254,6 +258,9 @@ public class QueueController {
                 status.getStyleClass().add("dl");
                 position.getStyleClass().add("dl-pos");
                 image = new Image(getClass().getResource("/images/clock-violet.png").toExternalForm());
+                s1.getStyleClass().add("dl-card-separator");
+                s2.getStyleClass().add("dl-card-separator");
+                s3.getStyleClass().add("dl-card-separator");
                 break;
         }
         clock.setImage(image);
