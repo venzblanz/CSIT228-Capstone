@@ -3,10 +3,7 @@ package com.javafx.csit228capstone.utils;
 import com.javafx.csit228capstone.model.QueueInsertValue;
 import com.javafx.csit228capstone.model.QueueTicket;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +46,7 @@ public class QueueLineDAO {
     }
     public static QueueInsertValue insertQueue(int formId, int userId, String department){
         String queueNumber = getQueueNumber(department);
-        String sql = "insert into queue_line (form_id, user_id, department, queue_number, status) values(?,?,?,?,?)";
+        String sql = "insert into queue_line (form_id, user_id, department, queue_number, status, staff_assigned) values(?,?,?,?,?,?)";
         try(Connection c = DatabaseConfig.getConnection();
             PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             ps.setInt(1, formId);
@@ -57,6 +54,7 @@ public class QueueLineDAO {
             ps.setString(3, department);
             ps.setString(4, queueNumber);
             ps.setString(5, "Waiting");
+            ps.setString(6, "");
 
             int newRow = ps.executeUpdate();
             if(newRow == 0){
@@ -107,7 +105,7 @@ public class QueueLineDAO {
                 f.middle_initial,
                 f.last_name
                 FROM queue_line q, queue_form f
-                WHERE q.form_id = f.form_id 
+                WHERE q.form_id = f.form_id
                 AND q.queue_id = ?
                 """;
         try(Connection c = DatabaseConfig.getConnection();
@@ -122,7 +120,10 @@ public class QueueLineDAO {
                             rs.getString("first_name"),
                             rs.getString("middle_initial"),
                             rs.getString("last_name"),
-                            rs.getTimestamp("created_at").toLocalDateTime()
+                            rs.getTimestamp("created_at").toLocalDateTime(),
+                            rs.getString("status"),
+                            rs.getString("purpose"),
+                            rs.getString("staff_assigned")
                     );
                 }
             }
@@ -138,6 +139,9 @@ public class QueueLineDAO {
                 q.queue_number,
                 q.department,
                 q.created_at,
+                q.status,
+                q.staff_assigned,
+                f.purpose,
                 f.first_name,
                 f.middle_initial,
                 f.last_name
@@ -154,26 +158,68 @@ public class QueueLineDAO {
 
             ps.setInt(1, userId);
 
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    QueueTicket ticket = new QueueTicket(
-                            rs.getInt("queue_id"),
-                            rs.getString("queue_number"),
-                            rs.getString("department"),
-                            rs.getString("first_name"),
-                            rs.getString("middle_initial"),
-                            rs.getString("last_name"),
-                            rs.getTimestamp("created_at").toLocalDateTime()
-                    );
-
-                    queueList.add(ticket);
-                }
-            }
+            fetchQueueHistory(queueList, ps);
 
         } catch (Exception e) {
             System.err.println("[QueueLineDAO] Error getting the queue history " + e.getMessage());
         }
 
         return queueList;
+    }
+
+    public static List<QueueTicket> getAllRecords() {
+        String sql = """
+            SELECT
+                q.queue_id,
+                q.queue_number,
+                q.department,
+                q.created_at,
+                q.status,
+                q.staff_assigned,
+                f.purpose,
+                f.first_name,
+                f.middle_initial,
+                f.last_name
+            FROM queue_line q, queue_form f
+            WHERE q.form_id = f.form_id
+            ORDER BY q.queue_id DESC
+            """;
+
+        List<QueueTicket> queueList = new ArrayList<>();
+
+        try (Connection c = DatabaseConfig.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            fetchQueueHistory(queueList, ps);
+
+        } catch (Exception e) {
+            System.err.println("[QueueLineDAO] Error getting the queue history " + e.getMessage());
+        }
+
+        return queueList;
+    }
+
+    private static void fetchQueueHistory(List<QueueTicket> queueList, PreparedStatement ps) {
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                QueueTicket ticket = new QueueTicket(
+                        rs.getInt("queue_id"),
+                        rs.getString("queue_number"),
+                        rs.getString("department"),
+                        rs.getString("first_name"),
+                        rs.getString("middle_initial"),
+                        rs.getString("last_name"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getString("status"),
+                        rs.getString("purpose"),
+                        rs.getString("staff_assigned")
+                );
+
+                queueList.add(ticket);
+            }
+        } catch(SQLException e) {
+            System.out.println("SQL ERROR: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

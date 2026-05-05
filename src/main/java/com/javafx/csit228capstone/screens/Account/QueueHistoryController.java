@@ -1,9 +1,9 @@
 package com.javafx.csit228capstone.screens.Account;
 
 import com.javafx.csit228capstone.helper.MenuController;
-import com.javafx.csit228capstone.model.QueueHistory;
+import com.javafx.csit228capstone.model.QueueTicket;
 import com.javafx.csit228capstone.model.User;
-import com.javafx.csit228capstone.utils.QueueHistoryDAO;
+import com.javafx.csit228capstone.utils.QueueLineDAO;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import com.javafx.csit228capstone.utils.SessionManager;
 import javafx.beans.value.ChangeListener;
@@ -13,18 +13,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class QueueHistoryController {
-    @FXML private TableView<QueueHistory> queueTable;
-    @FXML private TableColumn<QueueHistory, Integer> queueNumberColumn;
-    @FXML private TableColumn<QueueHistory, String> serviceColumn;
-    @FXML private TableColumn<QueueHistory, String> statusColumn;
-    @FXML private TableColumn<QueueHistory, String> dateColumn;
-    @FXML private TableColumn<QueueHistory, String> staffColumn;
-    @FXML private TableColumn<QueueHistory, String> departmentColumn;
+    @FXML private TableView<QueueTicket> queueTable;
+    @FXML private TableColumn<QueueTicket, Integer> queueNumberColumn;
+    @FXML private TableColumn<QueueTicket, String> serviceColumn;
+    @FXML private TableColumn<QueueTicket, String> statusColumn;
+    @FXML private TableColumn<QueueTicket, String> dateColumn;
+    @FXML private TableColumn<QueueTicket, String> staffColumn;
+    @FXML private TableColumn<QueueTicket, String> departmentColumn;
 
     @FXML private MenuButton departmentFilter;
     @FXML private MenuButton statusFilter;
@@ -43,7 +42,6 @@ public class QueueHistoryController {
     @FXML private ImageView backIconBtn;
     @FXML private Label             backBtn;
 
-    private final QueueHistoryDAO historyDAO = new  QueueHistoryDAO();
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
 
     private boolean updating;
@@ -81,7 +79,7 @@ public class QueueHistoryController {
         LocalDate toDate = dateToFilter.getValue();
 
         List<String> selectedStatuses = new ArrayList<>();
-        if (pendingStatus.isSelected()) selectedStatuses.add("Pending");
+        if (pendingStatus.isSelected()) selectedStatuses.add("Waiting");
         if (completedStatus.isSelected()) selectedStatuses.add("Completed");
         if (cancelledStatus.isSelected()) selectedStatuses.add("Cancelled");
 
@@ -89,7 +87,7 @@ public class QueueHistoryController {
         if (genWellnessDept.isSelected()) selectedDepts.add("General Wellness");
         if (womenHealthDept.isSelected()) selectedDepts.add("Women's Health");
         if (specialFieldsDept.isSelected()) selectedDepts.add("Specialized Fields");
-        if (diagnosticsLabDept.isSelected()) selectedDepts.add("Diagnostics & Laboratory");
+        if (diagnosticsLabDept.isSelected()) selectedDepts.add("Diagnostics and Laboratory");
 
         if (selectedStatuses.isEmpty() || selectedDepts.isEmpty()) {
             queueTable.getItems().clear();
@@ -104,24 +102,24 @@ public class QueueHistoryController {
             return;
         }
 
-        List<QueueHistory> userRecords;
+        List<QueueTicket> userRecords;
 
         if ("admin".equalsIgnoreCase(currentUser.getRole())) {
-            userRecords = historyDAO.getAllRecords();
+            userRecords = QueueLineDAO.getAllRecords();
         } else {
-            userRecords = historyDAO.getRecordsByUserId(currentUser);
+            userRecords = QueueLineDAO.getRecentQueue(currentUser.getUserID());
         }
 
         if (userRecords == null) {
             userRecords = new ArrayList<>();
         }
 
-        List<QueueHistory> filteredList = userRecords.stream()
+        List<QueueTicket> filteredList = userRecords.stream()
                 .filter(record -> selectedStatuses.contains(record.getStatus()))
                 .filter(record -> selectedDepts.contains(record.getDepartment()))
                 .filter(record -> {
                     if (fromDate == null && toDate == null) return true;
-                    LocalDate d = record.getDate();
+                    LocalDate d = record.getCreatedAt().toLocalDate();
                     if (d == null) return false;
                     boolean afterFrom = (fromDate == null || !d.isBefore(fromDate));
                     boolean beforeTo = (toDate == null || !d.isAfter(toDate));
@@ -288,12 +286,12 @@ public class QueueHistoryController {
         queueNumberColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.10));
         queueNumberColumn.setCellValueFactory(new PropertyValueFactory<>("queueNumber"));
 
-        serviceColumn.setCellValueFactory(new PropertyValueFactory<>("service"));
+        serviceColumn.setCellValueFactory(new PropertyValueFactory<>("purpose"));
 
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         dateColumn.setCellValueFactory(cellData -> {
-            LocalDate date = cellData.getValue().getDate();
+            LocalDate date = cellData.getValue().getCreatedAt().toLocalDate();
             return new javafx.beans.property.SimpleStringProperty(date != null ? date.toString() : "N/A");
         });
 

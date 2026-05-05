@@ -10,10 +10,13 @@ public class QueueTicket {
     private String middleInitial;
     private String lastName;
     private LocalDateTime createdAt;
+    private String status;
+    private String purpose;
+    private String staff;
 
     public QueueTicket(int queueId, String queueNumber, String department,
                        String firstName, String middleInitial, String lastName,
-                       LocalDateTime createdAt) {
+                       LocalDateTime createdAt, String status, String purpose, String staff) {
         this.queueId = queueId;
         this.queueNumber = queueNumber;
         this.department = department;
@@ -21,6 +24,9 @@ public class QueueTicket {
         this.middleInitial = middleInitial;
         this.lastName = lastName;
         this.createdAt = createdAt;
+        this.status = status;
+        this.purpose = purpose;
+        setStaff(staff);
     }
 
     public void setQueueId(int queueId) {
@@ -51,6 +57,27 @@ public class QueueTicket {
         this.createdAt = createdAt;
     }
 
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setStaff(String staff) {
+        if(!staff.isBlank()) this.staff = staff;
+        else staff = "Not yet assigned";
+    }
+
     public QueueTicket() {}
 
     public int getQueueId() {
@@ -75,5 +102,9 @@ public class QueueTicket {
         }
 
         return firstName + " " + middleInitial + ". " + lastName;
+    }
+
+    public String getStaff() {
+        return staff;
     }
 }

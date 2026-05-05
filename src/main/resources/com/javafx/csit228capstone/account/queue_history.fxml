@@ -76,7 +76,7 @@
                      <Label prefHeight="17.0" prefWidth="251.0" text="Status" />
                      <MenuButton fx:id="statusFilter" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" styleClass="filter-menu" text="Select Status" textFill="#218ad5">
                        <items>
-                           <CheckMenuItem fx:id="pendingStatus" mnemonicParsing="false" text="Pending" />
+                           <CheckMenuItem fx:id="pendingStatus" mnemonicParsing="false" text="Waiting" />
                            <CheckMenuItem fx:id="completedStatus" mnemonicParsing="false" text="Completed" />
                            <CheckMenuItem fx:id="cancelledStatus" mnemonicParsing="false" text="Cancelled" />
                            <CheckMenuItem fx:id="allStatus" mnemonicParsing="false" text="All" />
@@ -140,7 +140,7 @@
                     <TableColumn fx:id="dateColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="135.0" resizable="false" text="DATE" />
                     <TableColumn fx:id="queueNumberColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="73.0" resizable="false" text="QUEUE NO." />
                <TableColumn fx:id="departmentColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="178.0" resizable="false" text="DEPARTMENT" />
-                    <TableColumn fx:id="serviceColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="243.0" resizable="false" text="SERVICE" />
+                    <TableColumn fx:id="serviceColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="243.0" resizable="false" text="PURPOSE" />
                     <TableColumn fx:id="statusColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="137.0" resizable="false" text="STATUS" />
                     <TableColumn fx:id="staffColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="270.0" resizable="false" text="STAFF" />
                 </columns>
