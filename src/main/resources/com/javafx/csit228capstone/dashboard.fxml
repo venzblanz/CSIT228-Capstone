@@ -20,7 +20,7 @@
       <fx:include fx:id="menu" source="menu-pane.fxml" />
    </left>
    <center>
-      <ScrollPane fitToWidth="true" styleClass="dash-scroll" BorderPane.alignment="CENTER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" styleClass="dash-scroll" BorderPane.alignment="CENTER">
          <content>
             <VBox fx:id="dashboardScreen" minHeight="-Infinity" styleClass="main-pane">
                <children>
@@ -309,19 +309,19 @@
                            <children>
                               <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label text="Queued: General Care">
+                                    <Label fx:id="cardTitle1" text="Queued: General Care">
                                        <font>
                                           <Font name="System Bold" size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label styleClass="recent" text="Queue # G-025 - Position 6">
+                                    <Label fx:id="cardQ1" styleClass="recent" text="Queue # G-025 - Position 6">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </VBox>
-                              <Label alignment="CENTER_RIGHT" styleClass="recent" text="10:00 AM" textAlignment="RIGHT">
+                              <Label fx:id="cardTime1" alignment="CENTER_RIGHT" styleClass="recent" text="10:00 AM" textAlignment="RIGHT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -336,19 +336,19 @@
                            <children>
                               <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label text="Queued: General Care">
+                                    <Label fx:id="cardTitle2" text="Queued: General Care">
                                        <font>
                                           <Font name="System Bold" size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label styleClass="recent" text="Queue # G-025 - Position 6">
+                                    <Label fx:id="cardQ2" styleClass="recent" text="Queue # G-025 - Position 6">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </VBox>
-                              <Label alignment="CENTER_RIGHT" styleClass="recent" text="10:00 AM" textAlignment="RIGHT">
+                              <Label fx:id="cardTime2" alignment="CENTER_RIGHT" styleClass="recent" text="10:00 AM" textAlignment="RIGHT">
                                  <font>
                                     <Font size="16.0" />
                                  </font>

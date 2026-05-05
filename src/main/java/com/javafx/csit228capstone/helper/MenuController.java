@@ -7,6 +7,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -14,13 +15,14 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 public class MenuController {
-    @FXML private VBox root;
-    @FXML private HBox profileBtn;
-    @FXML private Button dashboardBtn;
-    @FXML private Button queueBtn;
-    @FXML private Button scheduleBtn;
-    @FXML private Button accountBtn;
-    @FXML private HBox logoutBtn;
+    @FXML private VBox      root;
+    @FXML private HBox      profileBtn;
+    @FXML private Button    dashboardBtn;
+    @FXML private Button    queueBtn;
+    @FXML private Button    scheduleBtn;
+    @FXML private Button    accountBtn;
+    @FXML private HBox      logoutBtn;
+    @FXML private Label     nameLabel;
 
     private Button activeButton;
 
@@ -28,10 +30,10 @@ public class MenuController {
     private final SessionManager sessionManager = SessionManager.getInstance();
     private final FormManager formManager = FormManager.getInstance();
 
-    public Button getQueueBtn() { return queueBtn; }
-    public Button getDashboardBtn() { return dashboardBtn; }
-    public Button getScheduleBtn() { return scheduleBtn; }
-    public Button getAccountBtn() { return accountBtn; }
+    public Button getQueueBtn()         { return queueBtn; }
+    public Button getDashboardBtn()     { return dashboardBtn; }
+    public Button getScheduleBtn()      { return scheduleBtn; }
+    public Button getAccountBtn()       { return accountBtn; }
 
 
     @FXML
@@ -41,6 +43,9 @@ public class MenuController {
                 root.prefHeightProperty().bind(newScene.heightProperty());
             }
         });
+
+        nameLabel.setText(sessionManager.getCurrentUser().getFullname());
+
         hoverAnimation();
         logoutBtnTransition();
 
@@ -90,16 +95,13 @@ public class MenuController {
         scheduleBtn.setGraphicTextGap(10);
         accountBtn.setGraphicTextGap(10);
 
-        // Reset all icons to black/default first
         setButtonIcon(dashboardBtn, "/images/icon_menu.png");
         setButtonIcon(queueBtn, "/images/queue.png");
         setButtonIcon(scheduleBtn, "/images/calendar.png");
         setButtonIcon(accountBtn, "/images/user.png");
 
-        // Active style
         active.setStyle("-fx-background-color: #218AD5; -fx-text-fill: white; -fx-font-family: \"Instrument Sans Bold\"; -fx-font-size: 15px;");
 
-        // Active white icon
         if (active == dashboardBtn) {
             setButtonIcon(dashboardBtn, "/images/icon_general.png");
         } else if (active == queueBtn) {
@@ -145,7 +147,7 @@ public class MenuController {
             if (scheduleBtn == activeButton) {
                 setButtonIcon(scheduleBtn, "/images/calendar_white.png");
             } else {
-                setButtonIcon(scheduleBtn, "/images/calendar.png");
+                setButtonIcon(scheduleBtn, "/images/calendar_black.png");
             }
         });
 
@@ -180,6 +182,7 @@ public class MenuController {
 
         button.setGraphic(icon);
     }
+
     // TRANSITIONS
     private void logoutBtnTransition(){
         ScaleTransition grow = new ScaleTransition(new Duration(200), logoutBtn);
