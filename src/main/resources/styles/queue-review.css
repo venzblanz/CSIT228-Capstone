@@ -121,31 +121,43 @@
 .back-to-queuetype:hover .back-to-queue{
     -fx-font-weight: bold;
 }
-.cancel-button{
-    -fx-background-color: transparent;
+
+
+.save-image-button {
+    -fx-background-color: white;
     -fx-border-color: #218AD5;
-    -fx-text-fill: #218AD5;
-    -fx-border-width: 1;
+    -fx-border-width: 1.5;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
+    -fx-text-fill: #218AD5;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-cursor: hand;
+}
+.cancel-button{
+    -fx-background-color: white;
+    -fx-border-color: #218AD5;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-text-fill: #218AD5;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-cursor: hand;
 }
 .cancel-button:hover{
-    -fx-border-color: #98C9ED;
-    -fx-background-color: #98C9ED;
-    -fx-text-fill: white;
-    -fx-cursor: hand;
-    -fx-background-radius: 8;
+    -fx-background-color: #EFF6FF;
 }
 .next-button{
     -fx-background-color: #218AD5;
-    -fx-text-fill: white;
     -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+    -fx-cursor: hand;
 }
 .next-button:hover{
-    -fx-background-color: #98C9ED;
-    -fx-text-fill: white;
-    -fx-cursor: hand;
-    -fx-background-radius: 8;
+    -fx-background-color: #1A76BA;
 }
 
 

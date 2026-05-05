@@ -27,6 +27,7 @@ public class QueueNumberController {
     @FXML private Label qTimeLabel;
     @FXML private Label qNumberLabel;
     @FXML private Label qDateLabel;
+    @FXML private Label patientIdLabel;
     @FXML private ImageView qQrImage;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
@@ -102,6 +103,7 @@ public class QueueNumberController {
         qTimeLabel.setText(formatTime(qt.getCreatedAt()));
         qNumberLabel.setText(qt.getQueueNumber());
         qDateLabel.setText(formatDate(qt.getCreatedAt()));
+        patientIdLabel.setText(PatientIdGenerator.getPatientId());
     }
 
     // Date and Time

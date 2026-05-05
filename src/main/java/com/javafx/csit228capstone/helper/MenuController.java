@@ -1,6 +1,7 @@
 package com.javafx.csit228capstone.helper;
 
 import com.javafx.csit228capstone.utils.FormManager;
+import com.javafx.csit228capstone.utils.PatientIdGenerator;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import com.javafx.csit228capstone.utils.SessionManager;
 import javafx.animation.Interpolator;
@@ -23,6 +24,7 @@ public class MenuController {
     @FXML private Button    accountBtn;
     @FXML private HBox      logoutBtn;
     @FXML private Label     nameLabel;
+    @FXML private Label     patientId;
 
     private Button activeButton;
 
@@ -45,6 +47,7 @@ public class MenuController {
         });
 
         nameLabel.setText(sessionManager.getCurrentUser().getFullname());
+        patientId.setText(PatientIdGenerator.getPatientId());
 
         hoverAnimation();
         logoutBtnTransition();

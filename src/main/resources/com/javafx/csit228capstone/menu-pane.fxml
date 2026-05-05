@@ -33,7 +33,7 @@
                             <font>
                                 <Font name="System Bold" size="16.0" />
                             </font></Label>
-                        <Label layoutX="10.0" layoutY="10.0" text="123-233-2345" />
+                        <Label fx:id="patientId" layoutX="10.0" layoutY="10.0" text="123-233-2345" />
                     </children>
                     <HBox.margin>
                         <Insets />

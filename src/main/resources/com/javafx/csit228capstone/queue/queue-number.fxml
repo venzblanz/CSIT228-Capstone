@@ -232,13 +232,13 @@
                 <!-- Buttons -->
                 <HBox alignment="CENTER_RIGHT" maxWidth="1000.0" spacing="16.0">
                     <children>
-                        <Button fx:id="saveBtn" mnemonicParsing="false" prefHeight="42.0" prefWidth="150.0" styleClass="save-image-button" text="Save Ticket" />
+                        <Button fx:id="saveBtn" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" styleClass="save-image-button" text="Save Ticket" />
 
-                        <Button fx:id="doneBtn" mnemonicParsing="false" prefHeight="42.0" prefWidth="150.0" styleClass="done-button" text="✓  Done" />
+                        <Button fx:id="doneBtn" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" styleClass="done-button" text="Done" />
                     </children>
 
                     <VBox.margin>
-                        <Insets top="24.0" />
+                        <Insets right="20.0" top="24.0" />
                     </VBox.margin>
                 </HBox>
 

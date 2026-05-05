@@ -5,6 +5,7 @@ import com.javafx.csit228capstone.model.QueueLine;
 import com.javafx.csit228capstone.model.QueueTicket;
 import com.javafx.csit228capstone.model.User;
 import com.javafx.csit228capstone.utils.AnimationHelper;
+import com.javafx.csit228capstone.utils.PatientIdGenerator;
 import com.javafx.csit228capstone.utils.QueueLineDAO;
 import com.javafx.csit228capstone.utils.SessionManager;
 import javafx.animation.RotateTransition;

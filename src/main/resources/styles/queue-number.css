@@ -132,7 +132,7 @@
 }
 
 .department-icon {
-    -fx-background-image: url("../images/stethoscope_blue.png");
+    -fx-background-image: url("../images/healthcare.png");
     -fx-background-size: contain;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
