@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.Hyperlink?>
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.RegisterController">
     <top>
         <HBox alignment="BOTTOM_LEFT" BorderPane.alignment="CENTER">
@@ -135,7 +136,13 @@
                                 <Insets left="10.0" />
                             </padding>
                         </HBox>
-                        <CheckBox fx:id="termsCheckbox" layoutX="119.0" layoutY="447.0" mnemonicParsing="false" text="I agree to the Terms of Service &amp; Privacy Policy" />
+                        <HBox layoutX="119.0" layoutY="447.0" alignment="CENTER_LEFT" spacing="5.0">
+                            <children>
+                                <CheckBox fx:id="termsCheckbox" mnemonicParsing="false" />
+                                <Label text="I agree to the " />
+                                <Hyperlink fx:id="termsLink" text="Terms of Service &amp; Privacy Policy" onAction="#onTermsClicked" styleClass="signup" />
+                            </children>
+                        </HBox>
                         <Button fx:id="registerBtn" layoutX="84.0" layoutY="486.0" mnemonicParsing="false" onAction="#onRegister" prefHeight="41.0" prefWidth="346.0" styleClass="login-register-button" text="Register" />
                         <Label fx:id="errorLabel" layoutX="84.0" layoutY="535.0" textFill="red" visible="false" wrapText="true" prefWidth="346.0" text="" />
                     </children>

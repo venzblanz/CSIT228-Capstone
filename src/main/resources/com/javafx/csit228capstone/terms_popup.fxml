@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.javafx.csit228capstone.screens.TermsPopupController"
+      prefWidth="600.0" prefHeight="500.0" spacing="15.0"
+      style="-fx-background-color: white; -fx-background-radius: 10;">
+    <padding>
+        <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
+    </padding>
+    <children>
+        <!-- Back button -->
+        <HBox fx:id="backBtn" onMouseClicked="#onBack" alignment="CENTER_LEFT" spacing="5.0"
+              style="-fx-cursor: hand;">
+            <children>
+                <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/arrow.png" />
+                    </image>
+                </ImageView>
+                <Label text="Go Back" style="-fx-text-fill: #3182CE; -fx-font-size: 13px;" />
+            </children>
+        </HBox>
+
+        <!-- Title -->
+        <Label text="Terms of Service &amp; Privacy Policy">
+            <font><Font size="22.0" /></font>
+        </Label>
+
+        <!-- Content -->
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                    style="-fx-background-color: #F1F5F9; -fx-background-radius: 8; -fx-border-color: #E2E8F0; -fx-border-radius: 8;">
+            <content>
+                <VBox spacing="20.0" style="-fx-background-color: #F1F5F9;">
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                    <children>
+                        <VBox spacing="8.0">
+                            <Label style="-fx-font-weight: bold; -fx-font-size: 15px;" text="1. Purpose of Service" />
+                            <Label style="-fx-text-fill: #475569;" wrapText="true"
+                                   text="MedServe streamlines public health services, addressing waiting times and missed updates." />
+                        </VBox>
+                        <VBox spacing="8.0">
+                            <Label style="-fx-font-weight: bold; -fx-font-size: 15px;" text="2. Real-Time Monitoring" />
+                            <Label style="-fx-text-fill: #475569;" wrapText="true"
+                                   text="Users can monitor queue positions in real-time. This system reduces on-site waiting and improves clinic flow." />
+                        </VBox>
+                        <VBox spacing="8.0">
+                            <Label style="-fx-font-weight: bold; -fx-font-size: 15px;" text="3. Account Security" />
+                            <Label style="-fx-text-fill: #475569;" wrapText="true"
+                                   text="You are responsible for managing your account securely, including keeping your password updated regularly." />
+                        </VBox>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</VBox>
