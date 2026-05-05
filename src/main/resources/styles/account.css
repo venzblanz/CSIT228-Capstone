@@ -100,7 +100,7 @@
     -fx-text-fill: #9AABB8;
 }
 
-/* ── Row separators ── */
+
 .row-separator {
     -fx-background-color: #EEF2F7;
 }
@@ -164,7 +164,7 @@
     -fx-background-color: #3182CE;
     -fx-background-radius: 8px;
     -fx-text-fill: white;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Instrument Sans Semibold";
     -fx-font-size: 14px;
     -fx-cursor: hand;
     -fx-transition: all 0.2s ease-in-out;
@@ -189,7 +189,7 @@
 }
 
 .check-box {
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: "Instrument Sans Medium";
     -fx-text-fill: #1E293B;
 }
 
@@ -209,7 +209,7 @@
 }
 
 .section-title {
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Instrument Sans Medium";
     -fx-font-size: 16px;
     -fx-text-fill: #64748B;
     -fx-padding: 0 0 5 0;
