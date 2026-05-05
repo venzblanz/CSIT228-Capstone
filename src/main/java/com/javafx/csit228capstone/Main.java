@@ -41,10 +41,10 @@ public class Main extends Application {
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/medserveLogo.png")));
             stage.setScene(scene);
         }else{
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/javafx/csit228capstone/login.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/javafx/csit228capstone/account/myaccount.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load(),  1280, 800);
-            scene.getStylesheets().add(getClass().getResource("/styles/login.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/styles/account.css").toExternalForm());
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/medserveLogo.png")));
             stage.setScene(scene);
         }

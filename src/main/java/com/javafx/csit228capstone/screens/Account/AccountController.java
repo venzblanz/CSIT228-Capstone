@@ -56,9 +56,8 @@ public class AccountController implements Initializable {
         handleEdit();
     }
 
-//    private void onPatientRecords() {
-//        handlePatientRecords();
-//    }
+    private void onPatientRecords() {
+    }
 
     private void onMyAppointments() {
         handleMyAppointments();

@@ -82,6 +82,12 @@ public class MenuController {
     private void goToSchedule() {
         sceneNavigator.navigate("/com/javafx/csit228capstone/schedule/schedule-patient.fxml", scheduleBtn, "/styles/schedule-patient.css");
     }
+    public void goToAccount() {
+        sceneNavigator.navigate(
+                "/com/javafx/csit228capstone/account/myaccount.fxml", accountBtn, "/styles/account.css"
+        );
+
+    }
     public void setActiveButton(Button active) {
         activeButton = active;
 
@@ -163,12 +169,6 @@ public class MenuController {
                 setButtonIcon(accountBtn, "/images/user.png");
             }
         });
-    }
-    public void goToAccount() {
-        sceneNavigator.navigate(
-                "/com/javafx/csit228capstone/account/myaccount.fxml", accountBtn, "/styles/account.css"
-        );
-
     }
 
     private void setButtonIcon(Button button, String imagePath) {

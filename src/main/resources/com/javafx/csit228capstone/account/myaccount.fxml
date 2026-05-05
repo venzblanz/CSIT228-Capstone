@@ -20,7 +20,7 @@
     <center>
         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-background: #F8FAFC;">
             <content>
-                <VBox styleClass="main-pane" BorderPane.alignment="CENTER">
+                <VBox styleClass="main-pane">
                     <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="71.0">
                             <children>
@@ -73,14 +73,15 @@
                                     <children>
                                         <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true"><image><Image url="@../../../../images/appointments.png" /></image></ImageView>
                                         <Label styleClass="menu-row-label" text="My Appointments" />
-
-                                <Separator styleClass="row-separator" />
-
-                                <HBox fx:id="queueHistoryRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon"><image><Image url="@../../../../images/arrow-acc.png" /></image></ImageView>
+                                    </children>
+                                    <padding><Insets left="16.0" right="16.0" /></padding>
+                                </HBox>
+                                <Separator />
+                                <HBox fx:id="queueHistoryRow" alignment="CENTER_LEFT" prefHeight="50.0" spacing="12.0" styleClass="menu-row">
                                     <children>
-                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
-                                            <image><Image url="@../../../../images/appointments.png" /></image>
-                                        </ImageView>
+                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true"><image><Image url="@../../../../images/appointments.png" /></image></ImageView>
                                         <Label styleClass="menu-row-label" text="View Queue History" />
                                         <Region HBox.hgrow="ALWAYS" />
                                         <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon"><image><Image url="@../../../../images/arrow-acc.png" /></image></ImageView>
@@ -98,10 +99,7 @@
                                     <padding><Insets left="16.0" right="16.0" /></padding>
                                 </HBox>
                             </children>
-                                </HBox>
-                            </children>
                         </VBox>
-
                         <Label styleClass="section-title" text="Settings &amp; Privacy" textFill="#64748B">
                             <VBox.margin><Insets bottom="8.0" top="22.0" /></VBox.margin>
                             <font><Font name="System Bold" size="14.0" /></font>
@@ -146,13 +144,12 @@
                                 </HBox>
                             </children>
                         </VBox>
-                        <VBox alignment="CENTER" maxWidth="1.7976931348623157E308">
+                        <VBox alignment="CENTER">
                             <children>
                                 <Button fx:id="deleteAccountBtn" mnemonicParsing="false" prefHeight="45.0" prefWidth="350.0" styleClass="delete-btn" text="Delete my account" />
                             </children>
                             <VBox.margin><Insets bottom="40.0" top="40.0" /></VBox.margin>
                         </VBox>
-
                     </children>
                     <padding>
                         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
