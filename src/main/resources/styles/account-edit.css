@@ -144,3 +144,74 @@
 .update-btn:pressed {
     -fx-background-color: #1A5F9C;
 }
+
+
+.date-picker {
+    -fx-background-color: transparent;
+}
+
+.date-picker > .arrow-button {
+    -fx-background-color: #3182CE;
+    -fx-background-radius: 0 8 8 0;
+}
+
+.date-picker > .arrow-button > .layout {
+    -fx-background-color: white;
+}
+
+.date-picker-popup > .month-year-pane {
+    -fx-background-color: #F8FAFC;
+}
+
+.date-picker-popup > .calendar-grid {
+    -fx-background-color: white;
+}
+
+.date-picker {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.date-picker > .text-field {
+    -fx-background-color: white;
+    -fx-background-radius: 8 0 0 8;
+    -fx-border-color: #E2E8F0;
+    -fx-border-width: 1 0 1 1;
+    -fx-border-radius: 8 0 0 8;
+    -fx-padding: 0 12;
+}
+
+.date-picker > .arrow-button {
+    -fx-background-color: #3182CE; /* Your MedServe Blue */
+    -fx-background-radius: 0 8 8 0; /* Rounded on right only */
+    -fx-padding: 0 10;
+}
+
+
+.date-picker > .arrow-button > .show-calendar-glyph {
+    -fx-background-color: white;
+    -fx-shape: "M7 11h2v2H7v-2zm14-5v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h1V2h2v2h8V2h2v2h1c1.1 0 2 .9 2 2zM5 8h14V6H5v2zm14 12V10H5v10h14zm-4-7h2v-2h-2v2zm-4 0h2v-2h-2v2z";
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
+
+.date-picker:focused > .text-field {
+    -fx-border-color: #3182CE;
+}
+
+.text-field, .password-field {
+    -fx-background-color: white;
+    -fx-border-color: #E2E8F0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 0 12px;
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: #1E293B;
+}
+
+.password-field:focused {
+    -fx-border-color: #3182CE; /* MedServe Blue */
+    -fx-border-width: 1.5px;
+}
