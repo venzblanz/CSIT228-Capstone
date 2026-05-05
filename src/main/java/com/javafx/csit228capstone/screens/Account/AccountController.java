@@ -1,25 +1,16 @@
 package com.javafx.csit228capstone.screens.Account;
 
 
-import com.javafx.csit228capstone.Main;
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
+import javafx.scene.input.MouseButton;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -29,7 +20,7 @@ public class AccountController implements Initializable {
     @FXML private Label profileIdLabel;
 
     @FXML private HBox patientRecordsRow;
-    @FXML private HBox myAppointmentsRow;
+    @FXML private HBox queueHistoryRow;
     @FXML private HBox queueStatusRow;
    // @FXML private HBox notificationSettingsRow;
     @FXML private HBox securityRow;
@@ -54,6 +45,11 @@ public class AccountController implements Initializable {
         securityRow.setOnMouseClicked(e -> onSecurityPrivacy());
         termsRow.setOnMouseClicked(e -> onTermsAndConditions());
         aboutRow.setOnMouseClicked(e -> onAboutMedServe());
+        queueHistoryRow.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                handleQueueHistory();
+            }
+        });
     }
 
     private void onEdit() {
@@ -76,8 +72,10 @@ public class AccountController implements Initializable {
         handleSecurityPrivacy();
     }
 
-    private void handlePatientRecords() {
-
+    private void handleQueueHistory() {
+        sceneNavigator.navigate(
+                "/com/javafx/csit228capstone/account/queue_history.fxml", editBtn, "/styles/queue-history.css"
+        );
     }
 
     private void handleMyAppointments() {

@@ -2,12 +2,16 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -16,206 +20,353 @@
       <fx:include fx:id="menu" source="menu-pane.fxml" />
    </left>
    <center>
-      <VBox styleClass="main-pane" BorderPane.alignment="CENTER">
-         <children>
-
-            <HBox alignment="CENTER" prefHeight="71.0">
+      <ScrollPane fitToWidth="true" styleClass="dash-scroll" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="dashboardScreen" minHeight="-Infinity" styleClass="main-pane">
                <children>
-                  <Label text="Dashboard">
-                     <font><Font size="24.0" /></font>
-                  </Label>
-                  <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                  <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="dashboard-notification" />
-               </children>
-            </HBox>
-
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0">
-               <children>
-                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="86.0" HBox.hgrow="NEVER">
+      
+                  <HBox alignment="CENTER" prefHeight="71.0">
                      <children>
-                        <Label styleClass="recent" text="Welcome back,">
-                           <font><Font size="18.0" /></font>
+                        <Label fx:id="screenLabel" styleClass="screen-label" text="Dashboard">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
                         </Label>
-                        <Label text="Juan Dela Cruz">
-                           <font><Font name="System Bold" size="28.0" /></font>
-                        </Label>
+                        <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                        <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="dashboard-notification" />
                      </children>
-                  </VBox>
-                  <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                  <VBox alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="86.0" HBox.hgrow="NEVER">
+                  </HBox>
+      
+                  <HBox alignment="CENTER_LEFT" prefHeight="49.0" prefWidth="377.0">
                      <children>
-                        <Label styleClass="recent" text="Today">
-                           <font><Font size="18.0" /></font>
-                        </Label>
-                        <Label alignment="CENTER_RIGHT" text="Saturday, April 11" textAlignment="RIGHT">
-                           <font><Font name="System Bold" size="18.0" /></font>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-
-            <Separator styleClass="q-utilities" />
-
-            <HBox prefHeight="100.0" spacing="10.0">
-               <children>
-                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" styleClass="q-utilities-pane" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Queue Position" />
-                        <Label layoutX="14.0" layoutY="34.0" styleClass="q-utilities" text="# 6">
-                           <font><Font name="System Bold" size="30.0" /></font>
-                        </Label>
-                        <Separator prefHeight="7.0" styleClass="q-utilities">
-                           <AnchorPane.bottomAnchor>14.0</AnchorPane.bottomAnchor>
-                           <AnchorPane.leftAnchor>14.0</AnchorPane.leftAnchor>
-                           <AnchorPane.rightAnchor>14.0</AnchorPane.rightAnchor>
-                        </Separator>
-                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="17.0" styleClass="q-utilities-icon">
-                           <AnchorPane.rightAnchor>14.0</AnchorPane.rightAnchor>
-                           <AnchorPane.topAnchor>14.0</AnchorPane.topAnchor>
-                        </Pane>
-                     </children>
-                     <HBox.margin><Insets right="5.0" /></HBox.margin>
-                  </AnchorPane>
-
-                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" styleClass="q-utilities-pane" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Scheduled" />
-                        <Label layoutX="14.0" layoutY="34.0" styleClass="q-utilities" text="5">
-                           <font><Font name="System Bold" size="30.0" /></font>
-                        </Label>
-                        <Separator prefHeight="6.0" styleClass="q-utilities">
-                           <AnchorPane.bottomAnchor>14.0</AnchorPane.bottomAnchor>
-                           <AnchorPane.leftAnchor>14.0</AnchorPane.leftAnchor>
-                           <AnchorPane.rightAnchor>14.0</AnchorPane.rightAnchor>
-                        </Separator>
-                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="16.0" styleClass="q-schedule-icon">
-                           <AnchorPane.rightAnchor>14.0</AnchorPane.rightAnchor>
-                           <AnchorPane.topAnchor>14.0</AnchorPane.topAnchor>
-                        </Pane>
-                     </children>
-                     <HBox.margin><Insets left="5.0" right="5.0" /></HBox.margin>
-                  </AnchorPane>
-
-                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" styleClass="q-utilities-pane" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Expected Waiting Time" />
-                        <Label layoutX="14.0" layoutY="34.0" styleClass="q-utilities" text="10 minutes">
-                           <font><Font name="System Bold" size="30.0" /></font>
-                        </Label>
-                        <Separator prefHeight="6.0" styleClass="q-utilities">
-                           <AnchorPane.bottomAnchor>14.0</AnchorPane.bottomAnchor>
-                           <AnchorPane.leftAnchor>14.0</AnchorPane.leftAnchor>
-                           <AnchorPane.rightAnchor>14.0</AnchorPane.rightAnchor>
-                        </Separator>
-                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="18.0" styleClass="q-time-icon">
-                           <AnchorPane.rightAnchor>14.0</AnchorPane.rightAnchor>
-                           <AnchorPane.topAnchor>14.0</AnchorPane.topAnchor>
-                        </Pane>
-                     </children>
-                     <HBox.margin><Insets left="5.0" /></HBox.margin>
-                  </AnchorPane>
-               </children>
-               <VBox.margin><Insets top="10.0" /></VBox.margin>
-            </HBox>
-
-            <HBox alignment="CENTER_LEFT" prefHeight="130.0" styleClass="q-active-pane">
-               <children>
-                  <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                     <children>
-                        <HBox alignment="CENTER_LEFT">
+                        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="86.0" HBox.hgrow="NEVER">
                            <children>
-                              <Label styleClass="active-dot" text="● ">
-                                 <font><Font size="18.0" /></font>
+                              <Label styleClass="recent" text="Welcome back,">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
                               </Label>
-                              <Label text="Active Queue">
-                                 <font><Font size="18.0" /></font>
+                              <Label fx:id="nameLabel" text="Juan Dela Cruz">
+                                 <font>
+                                    <Font name="System Bold" size="28.0" />
+                                 </font>
                               </Label>
                            </children>
+                        </VBox>
+                        <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                        <VBox alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="86.0" HBox.hgrow="NEVER">
+                           <children>
+                              <Label styleClass="recent" text="Today">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="dateLabel" alignment="CENTER_RIGHT" text="Saturday, April 11" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+      
+                  <Separator styleClass="q-utilities">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Separator>
+                  <GridPane hgap="20.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="110.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <VBox alignment="TOP_CENTER" styleClass="util-card">
+                           <children>
+                              <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="6.0" styleClass="blue-color-bar" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="pos-frame">
+                                       <children>
+                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0" styleClass="pos-icon" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="30.0" />
+                                       </HBox.margin>
+                                    </StackPane>
+                                    <VBox alignment="CENTER_LEFT">
+                                       <children>
+                                          <Label text="Queue Position">
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label styleClass="q-utilities" text="6">
+                                             <font>
+                                                <Font name="System Bold" size="29.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" styleClass="util-card" GridPane.columnIndex="1">
+                           <children>
+                              <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="6.0" styleClass="blue-color-bar" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="sched-frame">
+                                       <children>
+                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0" styleClass="sched-icon" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="30.0" />
+                                       </HBox.margin>
+                                    </StackPane>
+                                    <VBox alignment="CENTER_LEFT">
+                                       <children>
+                                          <Label text="Scheduled">
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label styleClass="q-utilities" text="5">
+                                             <font>
+                                                <Font name="System Bold" size="29.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" styleClass="util-card" GridPane.columnIndex="2">
+                           <children>
+                              <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="6.0" styleClass="blue-color-bar" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="clock-frame">
+                                       <children>
+                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0" styleClass="clock-icon" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="30.0" />
+                                       </HBox.margin>
+                                    </StackPane>
+                                    <VBox alignment="CENTER_LEFT">
+                                       <children>
+                                          <Label text="Expected Waiting Time">
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label styleClass="q-utilities" text="10 minutes">
+                                             <font>
+                                                <Font name="System Bold" size="29.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="20.0" />
+                     </VBox.margin>
+                     <opaqueInsets>
+                        <Insets bottom="10.0" />
+                     </opaqueInsets>
+                  </GridPane>
+      
+                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="150.0" styleClass="q-active-pane">
+                     <children>
+                        <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="6.0" styleClass="active-color-bar" />
+                        <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                           <children>
+                              <HBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label styleClass="active-dot" text="● ">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Active Queue">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <Label prefWidth="114.0" styleClass="q-active" text="G-025">
+                                 <font>
+                                    <Font name="System Bold" size="40.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Your queue number">
+                                 <VBox.margin>
+                                    <Insets left="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="28.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                        <VBox alignment="CENTER_RIGHT" HBox.hgrow="NEVER">
+                           <children>
+                              <Label text="General Care">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label styleClass="q-position" text="Position #6">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="10 minutes wait" />
+                              <Label styleClass="recent" text="Now serving G-026" />
+                           </children>
+                           <padding>
+                              <Insets right="28.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+      
+                  <HBox alignment="CENTER" prefHeight="55.0">
+                     <children>
+                        <Label text="Recent Activity">
+                           <font>
+                              <Font name="SansSerif Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+      
+                  <VBox>
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="80.0" styleClass="dashboard-recent-card1">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <children>
+                              <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Queued: General Care">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label styleClass="recent" text="Queue # G-025 - Position 6">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <Label alignment="CENTER_RIGHT" styleClass="recent" text="10:00 AM" textAlignment="RIGHT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
                         </HBox>
-                        <Label styleClass="q-active" text="G-025">
-                           <font><Font name="System Bold" size="48.0" /></font>
-                        </Label>
-                        <Label text="Your queue number" />
-                     </children>
-                     <padding><Insets left="28.0" /></padding>
-                  </VBox>
-                  <VBox alignment="CENTER_RIGHT" HBox.hgrow="NEVER">
-                     <children>
-                        <Label text="General Care">
-                           <font><Font size="18.0" /></font>
-                        </Label>
-                        <Label styleClass="q-position" text="Position #6">
-                           <font><Font name="System Bold" size="16.0" /></font>
-                        </Label>
-                        <Label text="10 minutes wait" />
-                        <Label styleClass="recent" text="Now serving G-026" />
-                     </children>
-                     <padding><Insets right="28.0" /></padding>
-                  </VBox>
-               </children>
-               <VBox.margin><Insets bottom="20.0" top="20.0" /></VBox.margin>
-            </HBox>
-
-            <HBox alignment="CENTER" prefHeight="55.0">
-               <children>
-                  <Label text="Recent Activity">
-                     <font><Font name="SansSerif Bold" size="18.0" /></font>
-                  </Label>
-                  <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                  <Label text="See All">
-                     <font><Font size="14.0" /></font>
-                  </Label>
-               </children>
-            </HBox>
-
-            <VBox>
-               <children>
-                  <HBox alignment="CENTER" prefHeight="80.0" styleClass="dashboard-recent-card1">
-                     <VBox.margin><Insets bottom="10.0" /></VBox.margin>
-                     <children>
-                        <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+      
+                        <HBox alignment="CENTER" prefHeight="80.0" styleClass="dashboard-recent-card2">
                            <children>
-                              <Label text="Queued: General Care">
-                                 <font><Font name="System Bold" size="16.0" /></font>
-                              </Label>
-                              <Label styleClass="recent" text="Queue # G-025 - Position 6">
-                                 <font><Font size="16.0" /></font>
+                              <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Queued: General Care">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label styleClass="recent" text="Queue # G-025 - Position 6">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <Label alignment="CENTER_RIGHT" styleClass="recent" text="10:00 AM" textAlignment="RIGHT">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
                               </Label>
                            </children>
-                        </VBox>
-                        <Label alignment="CENTER_RIGHT" styleClass="recent" text="10:00 AM" textAlignment="RIGHT">
-                           <font><Font size="16.0" /></font>
-                        </Label>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                        </HBox>
                      </children>
-                     <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
-                  </HBox>
-
-                  <HBox alignment="CENTER" prefHeight="80.0" styleClass="dashboard-recent-card2">
-                     <children>
-                        <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Label text="Queued: General Care">
-                                 <font><Font name="System Bold" size="16.0" /></font>
-                              </Label>
-                              <Label styleClass="recent" text="Queue # G-025 - Position 6">
-                                 <font><Font size="16.0" /></font>
-                              </Label>
-                           </children>
-                        </VBox>
-                        <Label alignment="CENTER_RIGHT" styleClass="recent" text="10:00 AM" textAlignment="RIGHT">
-                           <font><Font size="16.0" /></font>
-                        </Label>
-                     </children>
-                     <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
-                  </HBox>
+                  </VBox>
+      
                </children>
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
             </VBox>
-
-         </children>
-         <padding>
-            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-         </padding>
-      </VBox>
+         </content>
+      </ScrollPane>
    </center>
 </BorderPane>

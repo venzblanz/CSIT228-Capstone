@@ -3,24 +3,17 @@
 */
 
 @import "menu-pane.css";
-
-.menu-pane{
-    -fx-background-color: #CEE4F4;
-}
 .main-pane{
     -fx-background-color: #EBF2F6;
 }
-.profile-pane{
-    -fx-background-color: #CEE4F4;
-    -fx-background-radius: 10;
-}
-.dashboard-logo{
-    -fx-background-image: url("../images/medserveLogo.png");
-    -fx-background-size: cover;
-    -fx-background-position: center;
-}
-.dashboard-medserve{
+.screen-label{
     -fx-text-fill: #218AD5;
+    -fx-font-weight: bold;
+}
+.util-card{
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
 }
 .dashboard-notification{
     -fx-background-image: url("../images/notification_icon.png");
@@ -30,32 +23,9 @@
 .dashboard-notification:hover {
     -fx-cursor: hand;
 }
-.logout-icon{
-    -fx-background-image: url("../images/logout_icon.png");
-    -fx-background-size: cover;
-    -fx-background-position: center;
-}
-.profile-icon{
-    -fx-background-image: url("../images/profile_icon.png");
-    -fx-background-size: cover;
-    -fx-background-position: center;
-}
-.menu-button{
-    -fx-background-radius: 10;
-    -fx-background-color: rgba(0,0,0,0);
-}
-
 /*main pane*/
 .q-utilities{
-    -fx-text-fill: #77ACC5;
-}
-.q-utilities .line{
-    -fx-border-color: #77ACC5;
-    -fx-border-width: 0.5;
-}
-.separator .line {
-    -fx-border-color: #77ACC5;
-    -fx-border-width: 0.5;
+    -fx-text-fill: #218ad5;
 }
 .active-dot{
     -fx-text-fill: #5DAE52;
@@ -69,10 +39,12 @@
 .dashboard-recent-card1{
     -fx-background-color: white;
     -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
 }
 .dashboard-recent-card2{
     -fx-background-color: white;
     -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
 }
 .recent{
     -fx-text-fill: gray;
@@ -80,23 +52,78 @@
 .q-active-pane{
     -fx-background-color: white;
     -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
+}
+.active-color-bar{
+    -fx-background-color: #5DAE52;
+    -fx-background-radius: 16 0 0 16;
+}
+.blue-color-bar{
+    -fx-background-color: #218ad5;
+    -fx-background-radius: 16 16 0 0;
 }
 .q-utilities-pane{
     -fx-background-color: white;
     -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
 }
-.q-utilities-icon{
-    -fx-background-image: url("../images/down-arrow.png");
+.pos-frame{
+    -fx-background-color: rgba(33, 138, 213, 0.15);
+    -fx-background-radius: 10;
+    -fx-min-width: 55;
+    -fx-min-height: 55;
+    -fx-alignment: center;
+}
+.pos-icon{
+    -fx-background-image: url("../images/hashtag.png");
     -fx-background-size: cover;
     -fx-background-position: center;
 }
-.q-schedule-icon{
-    -fx-background-image: url("../images/calendar.png");
+.sched-frame{
+    -fx-background-color: rgba(33, 138, 213, 0.15);
+    -fx-background-radius: 10;
+    -fx-min-width: 55;
+    -fx-min-height: 55;
+    -fx-alignment: center;
+}
+.sched-icon{
+    -fx-background-image: url("../images/calendar-blue.png");
     -fx-background-size: cover;
     -fx-background-position: center;
 }
-.q-time-icon{
-    -fx-background-image: url("../images/clock.png");
+.clock-frame{
+    -fx-background-color: rgba(33, 138, 213, 0.15);
+    -fx-background-radius: 10;
+    -fx-min-width: 55;
+    -fx-min-height: 55;
+    -fx-alignment: center;
+}
+.clock-icon{
+    -fx-background-image: url("../images/clock-blue.png");
     -fx-background-size: cover;
     -fx-background-position: center;
+}
+.scroll-pane {
+     -fx-background-color: transparent;
+ }
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #9EC9E6;
+    -fx-background-radius: 10;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #6DAED6;
 }

@@ -6,6 +6,11 @@ module com.javafx.csit228capstone {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires mysql.connector.j;
+    requires com.google.zxing;
+    requires java.desktop;
+    requires javafx.swing;
+    requires com.google.zxing.javase;
 
     opens com.javafx.csit228capstone to javafx.fxml;
     exports com.javafx.csit228capstone;
@@ -15,10 +20,10 @@ module com.javafx.csit228capstone {
     opens com.javafx.csit228capstone.helper to javafx.fxml;
     exports com.javafx.csit228capstone.screens.queue;
     opens com.javafx.csit228capstone.screens.queue to javafx.fxml;
-    exports com.javafx.csit228capstone.screens.patient_records;
-    opens com.javafx.csit228capstone.screens.patient_records to javafx.fxml;
     exports com.javafx.csit228capstone.screens.Account;
     opens com.javafx.csit228capstone.screens.Account to javafx.fxml;
     exports com.javafx.csit228capstone.model;
     opens com.javafx.csit228capstone.model to javafx.fxml;
+    exports com.javafx.csit228capstone.screens.schedule;
+    opens com.javafx.csit228capstone.screens.schedule to javafx.fxml;
 }
