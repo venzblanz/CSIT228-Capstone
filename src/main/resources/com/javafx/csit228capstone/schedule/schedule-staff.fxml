@@ -8,9 +8,6 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.schedule.ScheduleStaffController">
-    <stylesheets>
-        <URL value="@../../../../styles/schedule-staff.css" />
-    </stylesheets>
     <left>
         <fx:include fx:id="menu" source="../menu-pane.fxml" />
     </left>

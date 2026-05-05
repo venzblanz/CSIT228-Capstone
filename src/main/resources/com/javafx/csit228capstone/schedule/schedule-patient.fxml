@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -8,9 +7,6 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.schedule.SchedulePatientController">
-    <stylesheets>
-        <URL value="@../../../../styles/schedule-patient.css" />
-    </stylesheets>
     <left>
         <fx:include fx:id="menu" source="../menu-pane.fxml" />
     </left>
@@ -18,18 +14,22 @@
         <VBox fillWidth="true" styleClass="main-pane" BorderPane.alignment="CENTER">
             <children>
 
-                <!-- Top bar: title + notification -->
-                <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="594.0">
+                <HBox alignment="CENTER" prefHeight="71.0">
                     <children>
-                        <Label text="Schedule">
-                            <font><Font size="24.0" /></font>
+                        <Label fx:id="screenLabel" styleClass="screen-label" text="Schedule">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin>
                         </Label>
-                        <Region maxWidth="1.7976931348623157E308" prefHeight="79.0" prefWidth="465.0" HBox.hgrow="ALWAYS" />
-                        <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="notification-icon" />
+                        <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                        <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="notification-icon">
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin></Pane>
                     </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
                 </HBox>
 
                 <!-- Section title -->

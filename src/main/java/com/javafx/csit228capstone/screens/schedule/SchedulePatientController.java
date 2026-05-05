@@ -29,8 +29,6 @@ public class SchedulePatientController implements Initializable {
     @FXML private TextField searchField;
     @FXML private Button prevMonthButton;
     @FXML private Button nextMonthButton;
-    @FXML private Button previousButton;
-    @FXML private Button confirmButton;
     @FXML private VBox timeSlotsContainer;
 
     private YearMonth currentYearMonth;
@@ -52,8 +50,15 @@ public class SchedulePatientController implements Initializable {
     private static final DateTimeFormatter DATE_HEADER_FORMATTER =
             DateTimeFormatter.ofPattern("EEEE, MMMM d");
 
+    @FXML
+    private com.javafx.csit228capstone.helper.MenuController menuController;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (menuController != null) {
+            menuController.setActiveButton(menuController.getScheduleBtn());
+        }
+
         today = LocalDate.now();
         selectedDate = today;
         currentYearMonth = YearMonth.from(today);
