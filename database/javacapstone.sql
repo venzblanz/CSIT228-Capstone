@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `queue_history` (
-  `id` int(11) NOT NULL,
+  `queue_id` int(11) NOT NULL,
   `queue_number` int(11) NOT NULL,
   `service` varchar(100) NOT NULL,
   `status` varchar(100) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE `queue_history` (
 -- Dumping data for table `queue_history`
 --
 
-INSERT INTO `queue_history` (`id`, `queue_number`, `service`, `status`, `queue_date`, `department`, `patient_id`, `staff_name`) VALUES
+INSERT INTO `queue_history` (`queue_id`, `queue_number`, `service`, `status`, `queue_date`, `department`, `patient_id`, `staff_name`) VALUES
 (1, 101, 'General Consultation', 'Completed', '2026-04-15', 'General Wellness', 1, 'Dr. Smith'),
 (2, 102, 'Blood Test', 'Pending', '2026-05-01', 'Diagnostics & Laboratory', 1, 'Nurse Joy'),
 (3, 102, 'Blood Test', 'Pending', '2026-05-01', 'Diagnostics & Laboratory', 1, 'Nurse Joy');

@@ -1,0 +1,309 @@
+@import "menu-pane.css";
+
+.menu-pane{
+    -fx-background-color: #CEE4F4;
+}
+.logo{
+    -fx-background-image: url("../images/medserveLogo.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.medserve{
+    -fx-text-fill: #218AD5;
+}
+.profile-pane{
+    -fx-background-color: #CEE4F4;
+    -fx-background-radius: 10;
+}
+.profile-pane:hover {
+    -fx-background-color: #218AD5;
+}
+.profile-pane:hover .profile-icon{
+    -fx-background-image: url("../images/user_white.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.profile-pane:hover .label{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.profile-icon{
+    -fx-background-image: url("../images/profile_icon.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.separator .line{
+    -fx-border-color: #77ACC5;
+    -fx-border-width: 0.5;
+}
+.mainmenu-label{
+    -fx-text-fill: gray;
+}
+.mainmenu-button{
+    -fx-background-radius: 10;
+    -fx-background-color: rgba(0,0,0,0);
+}
+.mainmenu-button:hover {
+    -fx-background-color: #6fa5d5;
+    -fx-cursor: hand;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+.logout:hover{
+    -fx-cursor: hand;
+}
+.logout-icon{
+    -fx-background-image: url("../images/logout_icon.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+@import "menu-pane.css";
+
+.main-pane{
+    -fx-background-color: #EBF2F6;
+}
+.notification-icon{
+    -fx-background-image: url("../images/notification_icon.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.notification-icon:hover {
+    -fx-cursor: hand;
+}
+.search-bar{
+    -fx-background-color: transparent;
+    -fx-border-color: #218AD5;
+    -fx-border-width: 2;
+    -fx-text-fill: #218AD5;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+.search-field{
+    -fx-background-color: transparent;
+}
+.search-button{
+    -fx-background-color: #218AD5;
+}
+
+/* -- Services -- */
+.schedule-date-header{
+    -fx-font-weight: bold;
+}
+.schedule-panel{
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+}
+.slot-card-active{
+    -fx-background-color: #98C9ED;
+    -fx-background-radius: 10;
+}
+.slot-name-acive{
+    -fx-font-weight: bold;
+}
+.slot-location-active{
+
+}
+.slot-card{
+    -fx-background-color: #CEE4F4;
+    -fx-background-radius: 10;
+}
+.slot-name{
+
+}
+.slot-location{
+
+}
+.scroll-pane:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* -- Calendar -- */
+.calendar-nav{
+    -fx-background-color: white;
+    -fx-background-radius: 3;
+}
+.day-panel{
+    -fx-background-color: white;
+}
+.cal-days-panel{
+    -fx-background-color: white;
+    -fx-background-radius: 3;
+}
+.cal-arrow-button{
+    -fx-background-color: transparent;
+}
+.cal-day-label{
+    -fx-background-color: transparent;
+}
+
+.previous-button{
+    -fx-background-color: #CEE4F4;
+    -fx-text-fill: #218AD5;
+    -fx-background-radius: 8;
+}
+.previous-button:hover{
+    -fx-background-color: #98C9ED;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
+}
+.confirm-button{
+    -fx-background-color: #218AD5;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+}
+.confirm-button:hover{
+    -fx-background-color: #98C9ED;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
+}
+.cal-cell {
+    -fx-background-color: #f5f5f5;
+    -fx-background-radius: 5;
+}
+
+.cal-cell:hover {
+    -fx-border-color: #218AD5;
+    -fx-background-color: #EBF2F6;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.cal-cell-selected {
+    -fx-background-color: #218AD5;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+}
+
+.cal-cell-today {
+    -fx-border-color: #218AD5;
+    -fx-background-color: white;
+    -fx-border-radius: 5;
+}
+
+.time-row {
+    -fx-border-color: transparent transparent #e5e7eb transparent;
+    -fx-border-width: 0 0 0.5 0;
+}
+
+.time-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #6b7280;
+}
+
+.chip {
+    -fx-padding: 5 14 5 14;
+    -fx-background-radius: 999;
+    -fx-border-radius: 999;
+    -fx-border-width: 1;
+}
+
+.chip-text {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+/* General Wellness */
+.chip-blue  { -fx-background-color: #D9EAF7; -fx-border-color: #C2DBEF; }
+.chip-blue  .chip-text   { -fx-text-fill: #1A4A6B; }
+.chip-blue  .chip-remove { -fx-text-fill: #1A4A6B; }
+.dot-blue   { -fx-fill: #4A90C4; }
+
+/* Women's Health */
+.chip-pink  { -fx-background-color: #F7DDE6; -fx-border-color: #FFBCD3; }
+.chip-pink  .chip-text   { -fx-text-fill: #7A2040; }
+.chip-pink  .chip-remove { -fx-text-fill: #7A2040; }
+.dot-pink   { -fx-fill: #E05A8A; }
+
+/* Specialized Fields */
+.chip-green  { -fx-background-color: #D5F1ED; -fx-border-color: #91F9EA; }
+.chip-green  .chip-text   { -fx-text-fill: #0A5C52; }
+.chip-green  .chip-remove { -fx-text-fill: #0A5C52; }
+.dot-teal   { -fx-fill: #1ABFAE; }
+
+/* Diagnostics & Laboratory */
+.chip-purple { -fx-background-color: #735DD1; -fx-border-color: #543BE9; }
+.chip-purple .chip-text   { -fx-text-fill: #EDE9FF; }
+.chip-purple .chip-remove { -fx-text-fill: #EDE9FF; }
+.dot-amber  { -fx-fill: #C4B8FF; }
+
+.chip-remove {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0 0 0 2;
+    -fx-font-size: 11px;
+    -fx-cursor: hand;
+    -fx-min-width: 14px;
+    -fx-max-width: 14px;
+    -fx-min-height: 14px;
+    -fx-max-height: 14px;
+}
+
+.chip-remove:hover { -fx-opacity: 0.6; }
+
+.add-button {
+    -fx-background-color: #D5F1ED;
+    -fx-border-color: #91F9EA;
+    -fx-border-radius: 999;
+    -fx-background-radius: 999;
+    -fx-border-width: 1;
+    -fx-text-fill: #0A5C52;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 4 12 4 12;
+    -fx-cursor: hand;
+}
+
+.add-button:hover { -fx-background-color: #91F9EA; }
+
+.closed-label {
+    -fx-text-fill: #9ca3af;
+    -fx-font-size: 13px;
+    -fx-font-style: italic;
+}
+
+.lbl-category {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 6 14 6 14;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+}
+
+.lbl-general-wellness {
+    -fx-background-color: #D9EAF7;
+    -fx-border-color: #C2DBEF;
+    -fx-text-fill: #1A4A6B;
+}
+
+.lbl-womens-health {
+    -fx-background-color: #F7DDE6;
+    -fx-border-color: #FFBCD3;
+    -fx-text-fill: #7A2040;
+}
+
+.lbl-specialized {
+    -fx-background-color: #D5F1ED;
+    -fx-border-color: #91F9EA;
+    -fx-text-fill: #0A5C52;
+}
+
+.lbl-diagnostics {
+    -fx-background-color: #e8e4f3;
+    -fx-border-color: #bebcc8;
+    -fx-text-fill: #2c2c78;
+}

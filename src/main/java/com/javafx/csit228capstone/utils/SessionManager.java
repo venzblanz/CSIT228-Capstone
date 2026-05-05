@@ -32,7 +32,10 @@ public class SessionManager {
 
     public User restoreSession(){
         File f = new File(SESSION_FILE);
-        if(!f.exists()) return null;
+        if(!f.exists()) {
+            clearSession();
+            return null;
+        }
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f))){
             User restoredUser = (User) ois.readObject();
             currentUser = restoredUser;
@@ -50,5 +53,8 @@ public class SessionManager {
         if(f.exists() && f.delete()){
             System.out.println("Session deleted, user logged out");
         }
+    }
+    public int getUserId(){
+        return currentUser != null ? currentUser.getUserID() : -1;
     }
 }

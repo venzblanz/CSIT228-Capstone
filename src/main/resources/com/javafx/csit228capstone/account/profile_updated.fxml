@@ -20,22 +20,24 @@
             <children>
                 <HBox alignment="CENTER_LEFT" styleClass="top-bar">
                     <children>
-                        <Label styleClass="page-title" text="My Account" />
+                        <Label style="-fx-font-family: 'Segoe UI'; -fx-font-size: 24px; -fx-font-weight: normal; -fx-text-fill: #1E293B;"
+                               text="My Account" />
+
                         <Region HBox.hgrow="ALWAYS" />
+
                         <Button fx:id="notifBtn" mnemonicParsing="false" styleClass="notif-btn">
                             <graphic>
-                                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
-                                    <image><Image url="@../../../../images/notification_icon.png" /></image>
+
+                                <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../../images/notification_icon.png" />
+                                    </image>
                                 </ImageView>
                             </graphic>
                         </Button>
                     </children>
                     <VBox.margin><Insets top="30.0" /></VBox.margin>
                 </HBox>
-
-                <Separator styleClass="top-separator">
-                    <VBox.margin><Insets top="10.0" /></VBox.margin>
-                </Separator>
 
                 <VBox alignment="CENTER" VBox.vgrow="ALWAYS">
                     <children>

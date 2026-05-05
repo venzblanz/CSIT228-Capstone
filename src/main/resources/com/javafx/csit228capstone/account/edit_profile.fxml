@@ -1,61 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="800.0" prefWidth="1280.0"
-            stylesheets="@../../../../styles/account-edit.css,@../../../../styles/menu-pane.css"
-            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.javafx.csit228capstone.screens.Account.EditProfileController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../../../../styles/account-edit.css,@../../../../styles/menu-pane.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.Account.EditProfileController">
 
     <left>
         <fx:include fx:id="menu" source="../menu-pane.fxml" />
     </left>
 
     <center>
-        <!-- The ScrollPane wraps the main content VBox -->
-        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: #F8FAFC;">
+
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-background: #F8FAFC;">
             <content>
-                <VBox styleClass="main-content">
+                <VBox style="-fx-background-color: #F8FAFC;" VBox.vgrow="ALWAYS">
                     <children>
-                        <!-- TOP BAR -->
+
                         <HBox alignment="CENTER_LEFT" styleClass="top-bar">
                             <children>
-                                <Label styleClass="page-title" text="My Account" />
-                                <Region HBox.hgrow="ALWAYS" />
+                                <Label style="-fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 24px; -fx-text-fill: #1E293B;" text="Edit Profile" />
+                                <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                                 <Button fx:id="notifBtn" mnemonicParsing="false" styleClass="notif-btn">
                                     <graphic>
-                                        <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                        <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
                                             <image><Image url="@../../../../images/notification_icon.png" /></image>
                                         </ImageView>
                                     </graphic>
                                 </Button>
                             </children>
-                            <VBox.margin><Insets top="30.0" /></VBox.margin>
+                            <VBox.margin><Insets bottom="20.0" top="30.0" /></VBox.margin>
                         </HBox>
 
-                        <Separator styleClass="top-separator">
-                            <VBox.margin><Insets top="10.0" /></VBox.margin>
-                        </Separator>
-
-                        <!-- AVATAR SECTION -->
-                        <VBox alignment="CENTER" spacing="8.0">
+                        <VBox alignment="CENTER" spacing="10.0">
                             <children>
                                 <ImageView fx:id="profileImageView" fitHeight="110.0" fitWidth="110.0" preserveRatio="true">
                                     <image><Image url="@../../../../images/profile_icon.png" /></image>
                                 </ImageView>
                                 <Button fx:id="changePictureBtn" mnemonicParsing="false" onAction="#handleChangePicture" styleClass="change-picture-btn" text="Change Picture" />
                             </children>
-                            <VBox.margin><Insets bottom="10.0" top="24.0" /></VBox.margin>
+                            <VBox.margin><Insets bottom="20.0" top="10.0" /></VBox.margin>
                         </VBox>
-
-                        <!-- FORM FIELDS -->
-                        <VBox spacing="14.0">
+                        <VBox spacing="14.0" VBox.vgrow="ALWAYS">
                             <children>
                                 <VBox spacing="6.0">
                                     <children>
@@ -66,22 +64,25 @@
 
                                 <HBox spacing="12.0">
                                     <children>
+                                        <!-- Birthday stretches to fill the remaining gap -->
                                         <VBox spacing="6.0" HBox.hgrow="ALWAYS">
                                             <children>
                                                 <Label styleClass="field-label" text="Birthday" />
-                                                <TextField fx:id="birthdayField" prefHeight="40.0" promptText="MM/DD/YYYY" styleClass="field-input" />
+                                                <DatePicker fx:id="birthdayDatePicker" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="MM/DD/YYYY" styleClass="field-input" />
                                             </children>
                                         </VBox>
+
                                         <VBox maxWidth="90.0" minWidth="90.0" spacing="6.0">
                                             <children>
                                                 <Label styleClass="field-label" text="Age" />
-                                                <TextField fx:id="ageField" prefHeight="40.0" promptText="Age" styleClass="field-input" />
+                                                <TextField fx:id="ageField" editable="false" prefHeight="40.0" promptText="Age" styleClass="field-input" />
                                             </children>
                                         </VBox>
+
                                         <VBox maxWidth="160.0" minWidth="160.0" spacing="6.0">
                                             <children>
                                                 <Label styleClass="field-label" text="Gender" />
-                                                <ComboBox fx:id="genderComboBox" maxWidth="Infinity" prefHeight="40.0" promptText="Select" styleClass="field-combo">
+                                                <ComboBox fx:id="genderComboBox" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Select" styleClass="field-combo">
                                                     <items>
                                                         <FXCollections fx:factory="observableArrayList">
                                                             <String fx:value="Male" />
@@ -116,20 +117,16 @@
                                 </VBox>
                             </children>
                         </VBox>
-
-                        <Region VBox.vgrow="ALWAYS" />
-
-                        <!-- BOTTOM BUTTONS -->
                         <HBox alignment="CENTER" spacing="16.0">
                             <children>
                                 <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#handleCancel" prefHeight="40.0" prefWidth="200.0" styleClass="cancel-btn" text="Cancel" />
                                 <Button fx:id="updateBtn" mnemonicParsing="false" onAction="#handleUpdate" prefHeight="40.0" prefWidth="200.0" styleClass="update-btn" text="Update" />
                             </children>
-                            <VBox.margin><Insets bottom="24.0" top="30.0" /></VBox.margin>
+                            <VBox.margin><Insets bottom="40.0" top="40.0" /></VBox.margin>
                         </HBox>
                     </children>
                     <padding>
-                        <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
+                        <Insets left="40.0" right="40.0" />
                     </padding>
                 </VBox>
             </content>

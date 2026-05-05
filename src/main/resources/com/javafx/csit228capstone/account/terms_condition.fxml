@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="800.0" prefWidth="1280.0"
+            stylesheets="@../../../../styles/account.css,@../../../../styles/menu-pane.css"
+            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.javafx.csit228capstone.screens.Account.TermsController">
+
+    <left>
+        <fx:include fx:id="menu" source="../menu-pane.fxml" />
+    </left>
+
+    <center>
+        <VBox styleClass="main-content">
+            <children>
+                <VBox alignment="CENTER_LEFT" spacing="5.0">
+                    <children>
+                        <HBox fx:id="backBtnRow" onMouseClicked="#handleBack" alignment="CENTER_LEFT" spacing="5.0" style="-fx-cursor: hand;">
+                            <children>
+                                <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true">
+                                    <image><Image url="@../../../../images/arrow_blue.png" /></image>
+                                </ImageView>
+                                <Label style="-fx-text-fill: #3182CE; -fx-font-size: 13px;" text="Back to Account" />
+                            </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT">
+                            <children>
+                                <Label style="-fx-font-family: 'Segoe UI'; -fx-font-size: 26px; -fx-font-weight: normal; -fx-text-fill: #1E293B;"
+                                       text="Terms and Conditions" />
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Button fx:id="notifBtn" mnemonicParsing="false" styleClass="notif-btn">
+                                    <graphic>
+                                        <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
+                                            <image><Image url="@../../../../images/notification_icon.png" /></image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                    <VBox.margin><Insets bottom="10.0" top="20.0" /></VBox.margin>
+                </VBox>
+                <VBox styleClass="section-card" VBox.vgrow="ALWAYS" spacing="20.0">
+                    <children>
+                        <Label text="Please review the MedServe Terms and Conditions for your account."
+                               style="-fx-text-fill: #64748B; -fx-font-size: 14px;" />
+
+                        <ScrollPane fitToWidth="true" style="-fx-background-color: #F1F5F9; -fx-background-radius: 8; -fx-border-color: #E2E8F0; -fx-border-radius: 8;" VBox.vgrow="ALWAYS">
+                            <content>
+                                <VBox spacing="20.0" style="-fx-background-color: #F1F5F9;">
+                                    <children>
+                                        <VBox spacing="8.0">
+                                            <Label style="-fx-font-weight: bold; -fx-font-size: 15px;" text="1. Purpose of Service" />
+                                            <Label style="-fx-text-fill: #475569; -fx-line-spacing: 4;" wrapText="true"
+                                                   text="MedServe streamlines public health services, addressing waiting times and missed updates." />
+                                        </VBox>
+                                        <VBox spacing="8.0">
+                                            <Label style="-fx-font-weight: bold; -fx-font-size: 15px;" text="2. Real-Time Monitoring" />
+                                            <Label style="-fx-text-fill: #475569; -fx-line-spacing: 4;" wrapText="true"
+                                                   text="Users can monitor queue positions in real-time. This system reduces on-site waiting and improves clinic flow." />
+                                        </VBox>
+                                        <VBox spacing="8.0">
+                                            <Label style="-fx-font-weight: bold; -fx-font-size: 15px;" text="3. Account Security" />
+                                            <Label style="-fx-text-fill: #475569; -fx-line-spacing: 4;" wrapText="true"
+                                                   text="You are responsible for managing your account securely, including keeping your password updated regularly." />
+                                        </VBox>
+                                    </children>
+                                    <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                                </VBox>
+                            </content>
+                        </ScrollPane>
+
+                        <!-- ── AGREEMENT SECTION ── -->
+                        <VBox spacing="20.0" alignment="CENTER_LEFT" style="-fx-border-color: #E2E8F0; -fx-border-width: 1 0 0 0; -fx-padding: 20 0 0 0;">
+                            <children>
+                                <CheckBox fx:id="agreeCheckBox" mnemonicParsing="false"
+                                          text="I acknowledge that I have reviewed the Terms and Conditions"
+                                          styleClass="check-box" />
+
+                                <HBox alignment="CENTER_RIGHT">
+                                    <children>
+                                        <Button fx:id="confirmBtn" mnemonicParsing="false" onAction="#handleBack"
+                                                prefHeight="45.0" prefWidth="220.0"
+                                                styleClass="update-btn" text="Confirm and Close" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+
+                    </children>
+                    <padding><Insets bottom="30.0" left="30.0" right="30.0" top="30.0" /></padding>
+                </VBox>
+
+            </children>
+            <padding><Insets bottom="20.0" left="40.0" right="40.0" /></padding>
+        </VBox>
+    </center>
+</BorderPane>

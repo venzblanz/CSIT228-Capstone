@@ -1,249 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../../../../styles/account.css,@../../../../styles/menu-pane.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.Account.AccountController">
-
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../../../../styles/account.css,@../../../../styles/menu-pane.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.Account.AccountController">
     <left>
         <fx:include fx:id="menu" source="../menu-pane.fxml" />
     </left>
-
     <center>
-        <!-- The ScrollPane wraps the main content VBox -->
-        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: #F8FAFC;">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-background: #F8FAFC;">
             <content>
-                <VBox styleClass="main-content">
+                <VBox styleClass="main-pane" BorderPane.alignment="CENTER">
                     <children>
-
-                        <HBox alignment="CENTER_LEFT" styleClass="top-bar">
+                        <HBox alignment="CENTER_LEFT" prefHeight="71.0">
                             <children>
-                                <Label styleClass="page-title" text="MY ACCOUNT" />
-                                <Region HBox.hgrow="ALWAYS" />
+                                <Label text="My Account" textFill="#1E293B">
+                                    <font><Font name="System Bold" size="24.0" /></font>
+                                </Label>
+                                <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                                 <Button fx:id="notifBtn" mnemonicParsing="false" styleClass="notif-btn">
                                     <graphic>
-                                        <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true">
+                                        <ImageView fitHeight="24.0" fitWidth="24.0" preserveRatio="true">
                                             <image><Image url="@../../../../images/notification_icon.png" /></image>
                                         </ImageView>
                                     </graphic>
                                 </Button>
                             </children>
-                            <VBox.margin><Insets top="30.0" /></VBox.margin>
                         </HBox>
-
-                        <Separator styleClass="top-separator">
-                            <VBox.margin><Insets top="10.0" /></VBox.margin>
-                        </Separator>
-
-
                         <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="profile-card">
                             <children>
                                 <ImageView fitHeight="60.0" fitWidth="60.0" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../../../../images/profile_icon.png" />
-                                    </image>
+                                    <image><Image url="@../../../../images/profile_icon.png" /></image>
                                 </ImageView>
-
                                 <VBox spacing="4.0" HBox.hgrow="ALWAYS">
                                     <children>
                                         <Label fx:id="profileNameLabel" styleClass="profile-name" text="Juan dela Cruz" />
                                         <Label fx:id="profileIdLabel" styleClass="profile-id" text="123-134-1342" />
                                     </children>
                                 </VBox>
-
-                                <Button fx:id="editBtn" contentDisplay="LEFT" graphicTextGap="6.0" mnemonicParsing="false" styleClass="edit-btn" text="Edit">
-                                    <graphic>
-                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true">
-                                            <image><Image url="@../../../../images/edit.png" /></image>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
+                                <Button fx:id="editBtn" mnemonicParsing="false" styleClass="edit-btn" text="Edit" />
                             </children>
                             <padding><Insets bottom="16.0" left="20.0" right="20.0" top="16.0" /></padding>
                             <VBox.margin><Insets top="20.0" /></VBox.margin>
                         </HBox>
-
-                        <Label styleClass="section-title" text="Manage">
+                        <Label styleClass="section-title" text="Manage" textFill="#64748B">
                             <VBox.margin><Insets bottom="8.0" top="22.0" /></VBox.margin>
+                            <font><Font name="System Bold" size="14.0" /></font>
                         </Label>
-
                         <VBox styleClass="section-card">
                             <children>
-                                <HBox fx:id="patientRecordsRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
+                                <HBox fx:id="patientRecordsRow" alignment="CENTER_LEFT" prefHeight="50.0" spacing="12.0" styleClass="menu-row">
                                     <children>
-                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
-                                            <image><Image url="@../../../../images/patient-record.png" /></image>
-                                        </ImageView>
+                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true"><image><Image url="@../../../../images/patient-record.png" /></image></ImageView>
                                         <Label styleClass="menu-row-label" text="Patient Records" />
                                         <Region HBox.hgrow="ALWAYS" />
-                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
-                                            <image>
-                                                <Image url="@../../../../images/arrow-acc.png" />
-                                            </image>
-                                        </ImageView>
+                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon"><image><Image url="@../../../../images/arrow-acc.png" /></image></ImageView>
                                     </children>
                                     <padding><Insets left="16.0" right="16.0" /></padding>
                                 </HBox>
+                                <Separator />
+                                <HBox fx:id="myAppointmentsRow" alignment="CENTER_LEFT" prefHeight="50.0" spacing="12.0" styleClass="menu-row">
+                                    <children>
+                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true"><image><Image url="@../../../../images/appointments.png" /></image></ImageView>
+                                        <Label styleClass="menu-row-label" text="My Appointments" />
 
                                 <Separator styleClass="row-separator" />
 
-                                <HBox fx:id="myAppointmentsRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
+                                <HBox fx:id="queueHistoryRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
                                     <children>
                                         <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
                                             <image><Image url="@../../../../images/appointments.png" /></image>
                                         </ImageView>
-                                        <Label styleClass="menu-row-label" text="My Appointments" />
+                                        <Label styleClass="menu-row-label" text="View Queue History" />
                                         <Region HBox.hgrow="ALWAYS" />
-                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
-                                            <image>
-                                                <Image url="@../../../../images/arrow-acc.png" />
-                                            </image>
-                                        </ImageView>
+                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon"><image><Image url="@../../../../images/arrow-acc.png" /></image></ImageView>
                                     </children>
                                     <padding><Insets left="16.0" right="16.0" /></padding>
                                 </HBox>
-
-                                <Separator styleClass="row-separator" />
-
-                                <HBox fx:id="queueStatusRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
+                                <Separator />
+                                <HBox fx:id="queueStatusRow" alignment="CENTER_LEFT" prefHeight="50.0" spacing="12.0" styleClass="menu-row">
                                     <children>
-                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
-                                            <image><Image url="@../../../../images/queue-status.png" /></image>
-                                        </ImageView>
+                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true"><image><Image url="@../../../../images/queue-status.png" /></image></ImageView>
                                         <Label styleClass="menu-row-label" text="Check Queue Status" />
                                         <Region HBox.hgrow="ALWAYS" />
-                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
-                                            <image>
-                                                <Image url="@../../../../images/arrow-acc.png" />
-                                            </image>
-                                        </ImageView>
+                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon"><image><Image url="@../../../../images/arrow-acc.png" /></image></ImageView>
                                     </children>
                                     <padding><Insets left="16.0" right="16.0" /></padding>
                                 </HBox>
                             </children>
+                                </HBox>
+                            </children>
                         </VBox>
 
-                        <Label styleClass="section-title" text="Settings &amp; Privacy">
+                        <Label styleClass="section-title" text="Settings &amp; Privacy" textFill="#64748B">
                             <VBox.margin><Insets bottom="8.0" top="22.0" /></VBox.margin>
+                            <font><Font name="System Bold" size="14.0" /></font>
                         </Label>
-
                         <VBox styleClass="section-card">
                             <children>
-                                <HBox fx:id="notificationSettingsRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
+                                <HBox fx:id="securityRow" alignment="CENTER_LEFT" prefHeight="50.0" spacing="12.0" styleClass="menu-row">
                                     <children>
-                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
-                                            <image><Image url="@../../../../images/notifications.png" /></image>
-                                        </ImageView>
-                                        <Label styleClass="menu-row-label" text="Notification Settings" />
-                                        <Region HBox.hgrow="ALWAYS" />
-                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
-                                            <image>
-                                                <Image url="@../../../../images/arrow-acc.png" />
-                                            </image>
-                                        </ImageView>
-                                    </children>
-                                    <padding><Insets left="16.0" right="16.0" /></padding>
-                                </HBox>
-
-                                <Separator styleClass="row-separator" />
-
-                                <HBox fx:id="securityRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
-                                    <children>
-                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
-                                            <image><Image url="@../../../../images/Security.png" /></image>
-                                        </ImageView>
+                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true"><image><Image url="@../../../../images/Security.png" /></image></ImageView>
                                         <Label styleClass="menu-row-label" text="Security &amp; Privacy" />
                                         <Region HBox.hgrow="ALWAYS" />
-                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
-                                            <image>
-                                                <Image url="@../../../../images/arrow-acc.png" />
-                                            </image>
-                                        </ImageView>
+                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon"><image><Image url="@../../../../images/arrow-acc.png" /></image></ImageView>
                                     </children>
                                     <padding><Insets left="16.0" right="16.0" /></padding>
                                 </HBox>
                             </children>
                         </VBox>
-
-
-                        <Label styleClass="section-title" text="Others">
+                        <Label styleClass="section-title" text="Others" textFill="#64748B">
                             <VBox.margin><Insets bottom="8.0" top="22.0" /></VBox.margin>
+                            <font><Font name="System Bold" size="14.0" /></font>
                         </Label>
-
                         <VBox styleClass="section-card">
                             <children>
-                                <HBox fx:id="supportRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
+                                <HBox fx:id="termsRow" alignment="CENTER_LEFT" prefHeight="50.0" spacing="12.0" styleClass="menu-row">
                                     <children>
-                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
-                                            <image><Image url="@../../../../images/support.png" /></image>
-                                        </ImageView>
-                                        <Label styleClass="menu-row-label" text="Contact MedServe Support" />
-                                        <Region HBox.hgrow="ALWAYS" />
-                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
-                                            <image>
-                                                <Image url="@../../../../images/arrow-acc.png" />
-                                            </image>
-                                        </ImageView>
-                                    </children>
-                                    <padding><Insets left="16.0" right="16.0" /></padding>
-                                </HBox>
-
-                                <Separator styleClass="row-separator" />
-
-                                <HBox fx:id="termsRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
-                                    <children>
-                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
-                                            <image><Image url="@../../../../images/terms.png" /></image>
-                                        </ImageView>
+                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true"><image><Image url="@../../../../images/terms.png" /></image></ImageView>
                                         <Label styleClass="menu-row-label" text="Terms and Condition" />
                                         <Region HBox.hgrow="ALWAYS" />
-                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
-                                            <image>
-                                                <Image url="@../../../../images/arrow-acc.png" />
-                                            </image>
-                                        </ImageView>
+                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon"><image><Image url="@../../../../images/arrow-acc.png" /></image></ImageView>
                                     </children>
                                     <padding><Insets left="16.0" right="16.0" /></padding>
                                 </HBox>
-
-                                <Separator styleClass="row-separator" />
-
-                                <HBox fx:id="aboutRow" alignment="CENTER_LEFT" prefHeight="48.0" spacing="12.0" styleClass="menu-row">
+                                <Separator />
+                                <HBox fx:id="aboutRow" alignment="CENTER_LEFT" prefHeight="50.0" spacing="12.0" styleClass="menu-row">
                                     <children>
-                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../../images/about.png" />
-                                            </image>
-                                        </ImageView>
-
+                                        <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true"><image><Image url="@../../../../images/about.png" /></image></ImageView>
                                         <Label styleClass="menu-row-label" text="About MedServe" />
-
                                         <Region HBox.hgrow="ALWAYS" />
-
-                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon">
-                                            <image>
-                                                <Image url="@../../../../images/arrow-acc.png" />
-                                            </image>
-                                        </ImageView>
+                                        <ImageView fitHeight="14.0" fitWidth="14.0" preserveRatio="true" styleClass="arrow-icon"><image><Image url="@../../../../images/arrow-acc.png" /></image></ImageView>
                                     </children>
                                     <padding><Insets left="16.0" right="16.0" /></padding>
                                 </HBox>
                             </children>
                         </VBox>
-
-                        <Region VBox.vgrow="ALWAYS" />
-                        <VBox alignment="CENTER" spacing="12.0" styleClass="bottom-actions">
+                        <VBox alignment="CENTER" maxWidth="1.7976931348623157E308">
                             <children>
-                                <Button fx:id="deleteAccountBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="320.0" styleClass="delete-btn" text="Delete my account" />
+                                <Button fx:id="deleteAccountBtn" mnemonicParsing="false" prefHeight="45.0" prefWidth="350.0" styleClass="delete-btn" text="Delete my account" />
                             </children>
-                            <VBox.margin><Insets bottom="24.0" top="30.0" /></VBox.margin>
+                            <VBox.margin><Insets bottom="40.0" top="40.0" /></VBox.margin>
                         </VBox>
 
                     </children>
                     <padding>
-                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                     </padding>
                 </VBox>
             </content>
