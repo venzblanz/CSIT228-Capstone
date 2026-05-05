@@ -162,7 +162,6 @@ public class QueueLineDAO {
             ps.setInt(1, userId);
 
             fetchQueueHistory(queueList, ps);
-
         } catch (Exception e) {
             System.err.println("[QueueLineDAO] Error getting the queue history " + e.getMessage());
         }
@@ -199,6 +198,35 @@ public class QueueLineDAO {
             System.err.println("[QueueLineDAO] Error getting the queue history " + e.getMessage());
         }
 
+        return queueList;
+    }
+    public static List<QueueTicket> getActiveQueue(int userId) {
+        String sql = """
+            SELECT
+                q.queue_id,
+                q.queue_number,
+                q.department,
+                q.created_at,
+                q.status,
+                q.staff_assigned,
+                f.purpose,
+                f.first_name,
+                f.middle_initial,
+                f.last_name
+            FROM queue_line q, queue_form f
+            WHERE q.form_id = f.form_id
+            AND q.user_id = ?
+            AND q.status IN ('Waiting', 'Serving')
+            ORDER BY q.queue_id DESC
+            """;
+        List<QueueTicket> queueList = new ArrayList<>();
+        try (Connection c = DatabaseConfig.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+             ps.setInt(1, userId);
+             fetchQueueHistory(queueList, ps);
+        } catch (Exception e) {
+            System.err.println("[QueueLineDAO] Error getting the active queue " + e.getMessage());
+        }
         return queueList;
     }
 
