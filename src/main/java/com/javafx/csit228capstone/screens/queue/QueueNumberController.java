@@ -103,7 +103,7 @@ public class QueueNumberController {
         qTimeLabel.setText(formatTime(qt.getCreatedAt()));
         qNumberLabel.setText(qt.getQueueNumber());
         qDateLabel.setText(formatDate(qt.getCreatedAt()));
-        patientIdLabel.setText(PatientIdGenerator.getPatientId());
+        patientIdLabel.setText(PatientIdGenerator.getPatientId(SessionManager.getInstance().getUserId()));
     }
 
     // Date and Time
