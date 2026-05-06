@@ -138,12 +138,12 @@
     -fx-font-size: 18;
 }
 .wh-label{
-    -fx-text-fill: #FFBCD3;
+    -fx-text-fill: #DB2777;
     -fx-font-weight: bold;
     -fx-font-size: 18;
 }
 .sf-label{
-    -fx-text-fill: rgba(75, 245, 220);
+    -fx-text-fill: #0F766E;
     -fx-font-weight: bold;
     -fx-font-size: 18;
 }
@@ -185,33 +185,104 @@
     -fx-min-height: 60;
     -fx-alignment: center;
 }
-.active-icon{
+.general-icon {
     -fx-background-image: url("../images/stethoscope.png");
     -fx-background-size: 30 30;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
-.active{
+
+.women-icon {
+    -fx-background-image: url("../images/femenine.png");
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.specialized-icon {
+    -fx-background-image: url("../images/doctor.png");
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+.lab-icon {
+    -fx-background-image: url("../images/science-lab-equipment.png");
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+.see-all{
+    -fx-cursor: hand;
     -fx-text-fill: #218AD5;
 }
-.active-pos{
+
+.gw{
     -fx-text-fill: #218AD5;
+}
+.wh{
+    -fx-text-fill: #DB2777;
+}
+.sf{
+    -fx-text-fill: #0F766E;
+}
+.dl{
+    -fx-text-fill: #543BE9;
+}
+
+.gw-pos{
+    -fx-text-fill: #218AD5;
+    -fx-font-size: 16;
     -fx-font-weight: bold;
 }
+.wh-pos{
+    -fx-text-fill: #DB2777;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+}
+.sf-pos{
+    -fx-text-fill: #0F766E;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+}
+.dl-pos{
+    -fx-text-fill: #543BE9;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+}
+.gw-card-separator .line {
+    -fx-border-color: #218AD5;
+    -fx-border-width: 0 0 0 1;
+}
+.wh-card-separator .line {
+    -fx-border-color: #DB2777;
+    -fx-border-width: 0 0 0 1;
+}
+.sf-card-separator .line {
+    -fx-border-color: #0F766E;
+    -fx-border-width: 0 0 0 1;
+}
+.dl-card-separator .line {
+    -fx-border-color: #543BE9;
+    -fx-border-width: 0 0 0 1;
+}
 .scroll-pane {
-     -fx-background-color: transparent;
+     -fx-background-color: #EBF2F6;
  }
 
-.scroll-pane .viewport {
-    -fx-background-color: transparent;
+.scroll-pane >.viewport {
+    -fx-background-color: #EBF2F6;
 }
-
 .scroll-pane .scroll-bar:vertical {
     -fx-background-color: transparent;
 }
-
+.scroll-pane .scroll-bar:vertical,
+.scroll-pane .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
 .scroll-pane .scroll-bar:vertical .track {
-    -fx-background-color: transparent;
+    -fx-background-color: #EBF2F6;
 }
 
 .scroll-pane .scroll-bar:vertical .thumb {

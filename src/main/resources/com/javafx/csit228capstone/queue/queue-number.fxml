@@ -38,7 +38,7 @@
                 <Region VBox.vgrow="ALWAYS" />
 
                       <!-- Ticket Wrapper -->
-                <VBox maxWidth="1000.0" styleClass="ticket-wrapper">
+                <VBox fx:id="ticketCard" maxWidth="1000.0" styleClass="ticket-wrapper">
 
                           <children>
 

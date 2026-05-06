@@ -47,7 +47,7 @@ public class MenuController {
         });
 
         nameLabel.setText(sessionManager.getCurrentUser().getFullname());
-        patientId.setText(PatientIdGenerator.getPatientId());
+        patientId.setText(PatientIdGenerator.getPatientId(sessionManager.getUserId()));
 
         hoverAnimation();
         logoutBtnTransition();
