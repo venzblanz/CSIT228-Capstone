@@ -99,6 +99,7 @@ public class QueueController {
         queueList = QueueLineDAO.getActiveQueue(SessionManager.getInstance().getUserId());
         int index = 0;
         if (queueList == null || queueList.isEmpty()) {
+            seeAllBtn.setVisible(false);
             Label emptyLabel = new Label("No recent activity yet.");
             emptyLabel.getStyleClass().add("recent");
             activeQueueContainer.getChildren().add(emptyLabel);

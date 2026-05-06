@@ -8,42 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QueueLineDAO {
-    private static String getPrefix(String department){
-        if (department == null || department.isBlank()) {
-            return "Q";
-        }
-        return switch (department) {
-            case "General Wellness" -> "G";
-            case "Women's Health" -> "W";
-            case "Specialized Fields" -> "S";
-            case "Diagnostics and Laboratory" -> "D";
-            default -> "Q";
-        };
-    }
-    private static String getQueueNumber(String department){
-        String prefix = getPrefix(department);
-        String sql = """
-            SELECT COUNT(*) + 1 AS next_number
-            FROM queue_line
-            WHERE department = ?
-            AND DATE(created_at) = CURDATE()
-            """;
-
-
-        try(Connection c = DatabaseConfig.getConnection();
-            PreparedStatement ps = c.prepareStatement(sql)){
-            ps.setString(1, department);
-            try(ResultSet rs = ps.executeQuery()){
-                if(rs.next()){
-                    int nextNumber = rs.getInt("next_number");
-                    return prefix + "-" + String.format("%02d", nextNumber);
-                }
-            }
-        }catch(Exception e){
-            System.err.println("[QueueLineDAO] Error getting the queue number " + e.getMessage());
-        }
-        return prefix + "-01";
-    }
     public static QueueInsertValue insertQueue(int formId, int userId, String department){
         String queueNumber = getQueueNumber(department);
         String sql = "insert into queue_line (form_id, user_id, department, queue_number, status, staff_assigned) values(?,?,?,?,?,?)";
@@ -55,7 +19,6 @@ public class QueueLineDAO {
             ps.setString(4, queueNumber);
             ps.setString(5, "Waiting");
             ps.setString(6, "");
-
             int newRow = ps.executeUpdate();
             if(newRow == 0){
                 System.err.println("[QueueLineDAO] No queue was inserted.");
@@ -168,7 +131,6 @@ public class QueueLineDAO {
 
         return queueList;
     }
-
     public static List<QueueTicket> getAllRecords() {
         String sql = """
             SELECT
@@ -229,7 +191,94 @@ public class QueueLineDAO {
         }
         return queueList;
     }
+    public static QueueTicket getFirstActiveQueue(int userId) {
+        String sql = """
+            SELECT
+            q.queue_id,
+            q.queue_number,
+            q.department,
+            q.created_at,
+            q.status,
+            q.staff_assigned,
+            f.purpose,
+            f.first_name,
+            f.middle_initial,
+            f.last_name
+            FROM queue_line q, queue_form f
+            WHERE q.form_id = f.form_id
+            AND q.user_id = ?
+            AND q.status IN ('Waiting', 'Serving')
+            ORDER BY q.queue_id ASC
+        """;
+        try(Connection c = DatabaseConfig.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql)){
+            ps.setInt(1, userId);
+            try(ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    return new QueueTicket(
+                            rs.getInt("queue_id"),
+                            rs.getString("queue_number"),
+                            rs.getString("department"),
+                            rs.getString("first_name"),
+                            rs.getString("middle_initial"),
+                            rs.getString("last_name"),
+                            rs.getTimestamp("created_at").toLocalDateTime(),
+                            rs.getString("status"),
+                            rs.getString("purpose"),
+                            rs.getString("staff_assigned")
+                    );
+                }
+            }
+        }catch(Exception e){
+            System.err.println("[QueueLineDAO] Error getting the oldest active queue " + e.getMessage());
+        }
+        return null;
+    }
+    public static QueueTicket getFirstLineQueue(String department){
+        String sql = """
+            SELECT
+            q.queue_id,
+            q.queue_number,
+            q.department,
+            q.created_at,
+            q.status,
+            q.staff_assigned,
+            f.purpose,
+            f.first_name,
+            f.middle_initial,
+            f.last_name
+            FROM queue_line q, queue_form f
+            WHERE q.form_id = f.form_id
+            AND q.department = ?
+            AND q.status IN ('Waiting', 'Serving')
+            ORDER BY q.queue_id ASC
+        """;
+        try(Connection c = DatabaseConfig.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql)){
+            ps.setString(1, department);
+            try(ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    return new QueueTicket(
+                            rs.getInt("queue_id"),
+                            rs.getString("queue_number"),
+                            rs.getString("department"),
+                            rs.getString("first_name"),
+                            rs.getString("middle_initial"),
+                            rs.getString("last_name"),
+                            rs.getTimestamp("created_at").toLocalDateTime(),
+                            rs.getString("status"),
+                            rs.getString("purpose"),
+                            rs.getString("staff_assigned")
+                    );
+                }
+            }
+        }catch(Exception e){
+            System.err.println("[QueueLineDAO] Error getting the oldest active queue " + e.getMessage());
+        }
+        return null;
+    }
 
+    // ------------- Helper --------------------------------------------------------------------------------------------
     private static void fetchQueueHistory(List<QueueTicket> queueList, PreparedStatement ps) {
         try (ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
@@ -252,5 +301,39 @@ public class QueueLineDAO {
             System.out.println("SQL ERROR: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+    private static String getPrefix(String department){
+        if (department == null || department.isBlank()) {
+            return "Q";
+        }
+        return switch (department) {
+            case "General Wellness" -> "G";
+            case "Women's Health" -> "W";
+            case "Specialized Fields" -> "S";
+            case "Diagnostics and Laboratory" -> "D";
+            default -> "Q";
+        };
+    }
+    private static String getQueueNumber(String department){
+        String prefix = getPrefix(department);
+        String sql = """
+            SELECT COUNT(*) + 1 AS next_number
+            FROM queue_line
+            WHERE department = ?
+            AND DATE(created_at) = CURDATE()
+            """;
+        try(Connection c = DatabaseConfig.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql)){
+            ps.setString(1, department);
+            try(ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    int nextNumber = rs.getInt("next_number");
+                    return prefix + "-" + String.format("%02d", nextNumber);
+                }
+            }
+        }catch(Exception e){
+            System.err.println("[QueueLineDAO] Error getting the queue number " + e.getMessage());
+        }
+        return prefix + "-01";
     }
 }

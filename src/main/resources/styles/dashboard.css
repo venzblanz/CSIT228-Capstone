@@ -112,7 +112,17 @@
     -fx-background-radius: 12;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
 }
-
+.join-button{
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-font-family: "Instrument Sans Medium";
+    -fx-background-radius: 10;
+    -fx-background-color: #218ad5;
+    -fx-cursor:hand;
+}
+.join-button:hover{
+    -fx-background-color: #6fa5d5;
+}
 .recent-card-title {
     -fx-font-size: 16px;
     -fx-font-weight: bold;

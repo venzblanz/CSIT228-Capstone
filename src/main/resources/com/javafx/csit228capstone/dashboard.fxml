@@ -112,7 +112,7 @@
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label styleClass="q-utilities" text="6">
+                                          <Label fx:id="positionLabel" styleClass="q-utilities" text="6">
                                              <font>
                                                 <Font name="System Bold" size="29.0" />
                                              </font>
@@ -155,7 +155,7 @@
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label styleClass="q-utilities" text="5">
+                                          <Label fx:id="scheduleLabel" styleClass="q-utilities" text="5">
                                              <font>
                                                 <Font name="System Bold" size="29.0" />
                                              </font>
@@ -198,7 +198,7 @@
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label styleClass="q-utilities" text="10 minutes">
+                                          <Label fx:id="timeLabel" styleClass="q-utilities" text="10 minutes">
                                              <font>
                                                 <Font name="System Bold" size="29.0" />
                                              </font>
@@ -227,7 +227,7 @@
                      </opaqueInsets>
                   </GridPane>
       
-                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="150.0" styleClass="q-active-pane">
+                  <HBox fx:id="activeCard" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="150.0" styleClass="q-active-pane">
                      <children>
                         <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="6.0" styleClass="active-color-bar" />
                         <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
@@ -298,7 +298,7 @@
                   </Label>
                   <VBox fx:id="recentQueueContainer" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                      <VBox.margin>
-                        <Insets left="10.0" />
+                        <Insets />
                      </VBox.margin></VBox>
       
                </children>

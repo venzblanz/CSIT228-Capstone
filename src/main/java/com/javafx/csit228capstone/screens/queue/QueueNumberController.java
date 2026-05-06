@@ -6,17 +6,26 @@ import com.javafx.csit228capstone.model.QueueInsertValue;
 import com.javafx.csit228capstone.model.QueueTicket;
 import com.javafx.csit228capstone.utils.*;
 import com.mysql.cj.Session;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Optional;
 
 public class QueueNumberController {
     @FXML private MenuController menuController;
@@ -29,6 +38,8 @@ public class QueueNumberController {
     @FXML private Label qDateLabel;
     @FXML private Label patientIdLabel;
     @FXML private ImageView qQrImage;
+    @FXML private VBox ticketCard;
+
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
     private final FormManager formManager = FormManager.getInstance();
@@ -86,7 +97,16 @@ public class QueueNumberController {
         alert.setTitle("Confirmation");
         alert.setHeaderText(null);
         alert.setContentText("Are you sure you want to save?");
-        alert.showAndWait();
+        alert.getDialogPane().getStylesheets().add(
+                getClass().getResource("/styles/alert.css").toExternalForm()
+        );
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK){
+            System.out.println("Saving image");
+            saveTicket();
+        }else{
+            System.out.println("Image not saved");
+        }
     }
     private void onDone(){
         sceneNavigator.navigate("/com/javafx/csit228capstone/dashboard.fxml", doneBtn, "/styles/dashboard.css");
@@ -104,6 +124,30 @@ public class QueueNumberController {
         qNumberLabel.setText(qt.getQueueNumber());
         qDateLabel.setText(formatDate(qt.getCreatedAt()));
         patientIdLabel.setText(PatientIdGenerator.getPatientId(SessionManager.getInstance().getUserId()));
+    }
+
+    // Save Ticket as Image
+    private void saveTicket(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Ticket");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("PNG Image", "*.png")
+        );
+
+        fileChooser.setInitialFileName("Ticket-" + PatientIdGenerator.getPatientId(SessionManager.getInstance().getUserId()) + qNumberLabel.getText() + ".png");
+
+        File f = fileChooser.showSaveDialog(saveBtn.getScene().getWindow());
+        if(f == null) return;
+
+        try{
+            SnapshotParameters sp = new SnapshotParameters();
+            WritableImage image = ticketCard.snapshot(sp, null);
+
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", f);
+
+        }catch (IOException e){
+            System.err.println("Error Saving ticket " + e.getMessage());
+        }
     }
 
     // Date and Time
