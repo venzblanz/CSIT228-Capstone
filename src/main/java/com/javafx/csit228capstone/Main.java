@@ -34,9 +34,12 @@ public class Main extends Application {
 
         User restoredUser = sessionManager.restoreSession();
         if(restoredUser != null){
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/javafx/csit228capstone/dashboard.fxml"));
+            String fxml = restoredUser.getRole().equals("admin")
+                    ? "/com/javafx/csit228capstone/admin/admin_dashboard.fxml"
+                    : "/com/javafx/csit228capstone/dashboard.fxml";
 
-            Scene scene = new Scene(fxmlLoader.load(),  1280, 800);
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml));
+            Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
             scene.getStylesheets().add(getClass().getResource("/styles/dashboard.css").toExternalForm());
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/medserveLogo.png")));
             stage.setScene(scene);
