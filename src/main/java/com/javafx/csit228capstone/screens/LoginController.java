@@ -74,7 +74,7 @@ public class LoginController {
         try {
             if (user.getRole().equals("admin")) {
                 sceneNavigator.navigate(
-                        "/com/javafx/csit228capstone/admin_dashboard.fxml",
+                        "/com/javafx/csit228capstone/admin/admin_dashboard.fxml",
                         loginBtn,
                         "/styles/dashboard.css"
                 );
