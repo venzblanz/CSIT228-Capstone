@@ -38,6 +38,8 @@ public class SchedulePatientController implements Initializable {
     private LocalDate today;
 
     private final Map<String, List<Service>> slotServices = new LinkedHashMap<>();
+    @FXML
+    private com.javafx.csit228capstone.helper.MenuController menuController;
     private final ScheduleDAO scheduleDAO = new ScheduleDAO(DatabaseConfig.getConnection());
 
 
@@ -54,8 +56,7 @@ public class SchedulePatientController implements Initializable {
     private static final DateTimeFormatter DATE_HEADER_FORMATTER =
             DateTimeFormatter.ofPattern("EEEE, MMMM d");
 
-    @FXML
-    private com.javafx.csit228capstone.helper.MenuController menuController;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -247,7 +248,7 @@ public class SchedulePatientController implements Initializable {
             selectedDate = date;
             renderCalendar();
             updateDateHeader();
-            // database for the selected date
+            loadServicesForDate(selectedDate);
             renderTimeSlots();
         });
 

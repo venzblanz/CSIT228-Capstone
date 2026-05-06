@@ -2,7 +2,6 @@ package com.javafx.csit228capstone.utils;
 
 import com.javafx.csit228capstone.model.Service;
 import java.sql.*;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -32,15 +31,17 @@ public class ScheduleDAO {
 
     public Map<String, List<Service>> getScheduleForDate(LocalDate date) throws SQLException {
         Map<String, List<Service>> slotMap = new LinkedHashMap<>();
+        int dayOfWeek = date.getDayOfWeek().getValue(); // 1=Mon ... 7=Sun
+
         String sql = """
-            SELECT sc.time_slot, s.service_id, s.service_name, s.service_type
-            FROM schedules sc
-            JOIN services s ON sc.service_id = s.service_id
-            WHERE sc.schedule_date = ?
-            ORDER BY sc.time_slot
-        """;
+        SELECT sc.time_slot, s.service_id, s.service_name, s.service_type
+        FROM schedules sc
+        JOIN services s ON sc.service_id = s.service_id
+        WHERE sc.day_of_week = ?
+        ORDER BY sc.time_slot
+    """;
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setDate(1, Date.valueOf(date));
+            ps.setInt(1, dayOfWeek);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     String slot = rs.getString("time_slot");
@@ -55,21 +56,21 @@ public class ScheduleDAO {
         return slotMap;
     }
 
-    public void addServiceToSlot(LocalDate date, String timeSlot, int serviceId) throws SQLException {
-        String sql = "INSERT INTO schedules (service_id, schedule_date, time_slot) VALUES (?, ?, ?)";
+    public void addServiceToSlot(int dayOfWeek, String timeSlot, int serviceId) throws SQLException {
+        String sql = "INSERT INTO schedules (service_id, day_of_week, time_slot) VALUES (?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, serviceId);
-            ps.setDate(2, Date.valueOf(date));
+            ps.setInt(2, dayOfWeek);
             ps.setString(3, timeSlot);
             ps.executeUpdate();
         }
     }
 
-    public void removeServiceFromSlot(LocalDate date, String timeSlot, int serviceId) throws SQLException {
-        String sql = "DELETE FROM schedules WHERE service_id = ? AND schedule_date = ? AND time_slot = ?";
+    public void removeServiceFromSlot(int dayOfWeek, String timeSlot, int serviceId) throws SQLException {
+        String sql = "DELETE FROM schedules WHERE service_id = ? AND day_of_week = ? AND time_slot = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, serviceId);
-            ps.setDate(2, Date.valueOf(date));
+            ps.setInt(2, dayOfWeek);
             ps.setString(3, timeSlot);
             ps.executeUpdate();
         }
@@ -88,7 +89,8 @@ public class ScheduleDAO {
                 newId = keys.getInt(1);
             }
         }
-        addServiceToSlot(date, timeSlot, newId);
+        int dayOfWeek = date.getDayOfWeek().getValue();
+        addServiceToSlot(dayOfWeek, timeSlot, newId);
         return new Service(newId, name, serviceType);
     }
 }
