@@ -16,7 +16,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 
-public class Main extends Application {
+public class
+Main extends Application {
     private final SessionManager sessionManager = SessionManager.getInstance();
     @Override
     public void start(Stage stage) throws IOException {

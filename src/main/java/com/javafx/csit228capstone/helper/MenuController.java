@@ -1,9 +1,7 @@
 package com.javafx.csit228capstone.helper;
 
-import com.javafx.csit228capstone.utils.FormManager;
-import com.javafx.csit228capstone.utils.PatientIdGenerator;
-import com.javafx.csit228capstone.utils.SceneNavigator;
-import com.javafx.csit228capstone.utils.SessionManager;
+import com.javafx.csit228capstone.model.User;
+import com.javafx.csit228capstone.utils.*;
 import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
@@ -13,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 public class MenuController {
@@ -25,6 +24,7 @@ public class MenuController {
     @FXML private HBox      logoutBtn;
     @FXML private Label     nameLabel;
     @FXML private Label     patientId;
+    @FXML private ImageView profileImageView;
 
     private Button activeButton;
 
@@ -46,8 +46,32 @@ public class MenuController {
             }
         });
 
-        nameLabel.setText(sessionManager.getCurrentUser().getFullname());
-        patientId.setText(PatientIdGenerator.getPatientId(sessionManager.getUserId()));
+
+
+            User currentUser = sessionManager.getCurrentUser();
+            User latestData = UserDAO.getLatestUpdate(sessionManager.getUserId());
+
+            // 1. Set the Name
+            nameLabel.setText(latestData != null ? latestData.getFullname() : currentUser.getFullname());
+
+            // 2. Load the Image
+            if (latestData != null) {
+                ImageUtils.loadUpdateImage(sessionManager.getUserId(), profileImageView);
+            } else {
+                ImageUtils.loadProfileImage(sessionManager.getUserId(), profileImageView);
+            }
+
+            // 3. FORCE ROUNDING (This prevents the 'D-shape' at the new size)
+            ImageUtils.makeRounded(profileImageView);
+
+            patientId.setText(PatientIdGenerator.getPatientId(sessionManager.getUserId()));
+
+        double size = 45.0;
+        profileImageView.setFitWidth(size);
+        profileImageView.setFitHeight(size);
+
+        Circle clip = new Circle(size / 2, size / 2, size / 2);
+        profileImageView.setClip(clip);
 
         hoverAnimation();
         logoutBtnTransition();

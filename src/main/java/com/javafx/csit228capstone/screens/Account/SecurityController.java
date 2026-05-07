@@ -1,12 +1,15 @@
 package com.javafx.csit228capstone.screens.Account;
 
 import com.javafx.csit228capstone.helper.MenuController;
+import com.javafx.csit228capstone.utils.AnimationHelper;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -17,9 +20,11 @@ public class SecurityController implements Initializable {
     @FXML private HBox clearCacheRow;
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
     @FXML private Button backBtn;
+    @FXML private Pane notification;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        AnimationHelper.ringAnimation(notification);
             menuController.setActiveButton(menuController.getAccountBtn());
             changePasswordRow.setOnMouseClicked(e -> onChangePassword());
             backBtn.setOnAction(e-> onBack());
