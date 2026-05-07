@@ -1,6 +1,8 @@
 package com.javafx.csit228capstone.screens.schedule;
 
 import com.javafx.csit228capstone.model.Service;
+import com.javafx.csit228capstone.utils.DatabaseConfig;
+import com.javafx.csit228capstone.utils.ScheduleDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -20,7 +22,7 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class ScheduleStaffController implements Initializable {
+public class ScheduleAdminController implements Initializable {
 
     @FXML private Label scheduleLabel;
     @FXML private Label selectedDateLabel;
@@ -31,11 +33,14 @@ public class ScheduleStaffController implements Initializable {
     @FXML private Button nextMonthButton;
     @FXML private VBox timeSlotsContainer;
 
+    @FXML private com.javafx.csit228capstone.screens.admin.AdminMenuController menuController;
+
     private YearMonth currentYearMonth;
     private LocalDate selectedDate;
     private LocalDate today;
 
     private final Map<String, List<Service>> slotServices = new LinkedHashMap<>();
+    private final ScheduleDAO scheduleDAO = new ScheduleDAO(DatabaseConfig.getConnection());
 
     private static final String CLOSING_TIME = "5:00 PM";
 
@@ -52,6 +57,10 @@ public class ScheduleStaffController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (menuController != null) {
+            menuController.setActiveButton(menuController.getScheduleBtn());
+        }
+
         today = LocalDate.now();
         selectedDate = today;
         currentYearMonth = YearMonth.from(today);
@@ -62,6 +71,7 @@ public class ScheduleStaffController implements Initializable {
 
         renderCalendar();
         updateDateHeader();
+        loadServicesForDate(selectedDate);
         renderTimeSlots();
 
         prevMonthButton.setOnAction(e -> {
@@ -76,6 +86,22 @@ public class ScheduleStaffController implements Initializable {
 
         searchField.textProperty().addListener((obs, oldVal, newVal) -> handleSearch(newVal));
     }
+
+    // ─── Load from DB ─────────────────────────────────────────────────────────
+
+    private void loadServicesForDate(LocalDate date) {
+        for (String slot : TIME_SLOTS) {
+            slotServices.put(slot, new ArrayList<>());
+        }
+        try {
+            Map<String, List<Service>> loaded = scheduleDAO.getScheduleForDate(date);
+            loaded.forEach((slot, services) -> slotServices.put(slot, services));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // ─── Time Slot Rendering ──────────────────────────────────────────────────
 
     private void renderTimeSlots() {
         timeSlotsContainer.getChildren().clear();
@@ -152,6 +178,8 @@ public class ScheduleStaffController implements Initializable {
         dialog.show(timeSlotsContainer.getScene().getWindow());
     }
 
+    // ─── Search ───────────────────────────────────────────────────────────────
+
     private void handleSearch(String query) {
         if (query == null || query.isBlank()) {
             timeSlotsContainer.getChildren().forEach(node -> {
@@ -183,6 +211,8 @@ public class ScheduleStaffController implements Initializable {
             }
         });
     }
+
+    // ─── Calendar ─────────────────────────────────────────────────────────────
 
     private void renderCalendar() {
         calendarGrid.getChildren().clear();
@@ -223,15 +253,15 @@ public class ScheduleStaffController implements Initializable {
         btn.setMaxWidth(Double.MAX_VALUE);
         btn.setAlignment(Pos.CENTER);
 
-        if (date.equals(selectedDate))     btn.getStyleClass().add("cal-cell-selected");
-        else if (date.equals(today))       btn.getStyleClass().add("cal-cell-today");
-        else                               btn.getStyleClass().add("cal-cell");
+        if (date.equals(selectedDate))  btn.getStyleClass().add("cal-cell-selected");
+        else if (date.equals(today))    btn.getStyleClass().add("cal-cell-today");
+        else                            btn.getStyleClass().add("cal-cell");
 
         btn.setOnAction(e -> {
             selectedDate = date;
             renderCalendar();
             updateDateHeader();
-            // TODO: reload services from DB for the selected date
+            loadServicesForDate(selectedDate);
             renderTimeSlots();
         });
 

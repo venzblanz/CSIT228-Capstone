@@ -1,17 +1,24 @@
 @import "menu-pane.css";
 
-.main-pane{
-    -fx-background-color: #EBF2F6;
+.root {
+    -fx-font-family: "Instrument Sans";
 }
-.notification-icon{
+
+.main-pane { -fx-background-color: #EBF2F6; }
+
+.screen-label {
+    -fx-text-fill: #218AD5;
+    -fx-font-weight: bold;
+}
+
+.notification-icon {
     -fx-background-image: url("../images/notification_icon.png");
     -fx-background-size: cover;
     -fx-background-position: center;
 }
-.notification-icon:hover {
-    -fx-cursor: hand;
-}
-.search-bar{
+.notification-icon:hover { -fx-cursor: hand; }
+
+.search-bar {
     -fx-background-color: transparent;
     -fx-border-color: #218AD5;
     -fx-border-width: 2;
@@ -19,30 +26,13 @@
     -fx-border-radius: 10;
     -fx-background-radius: 10;
 }
-.search-field{
-    -fx-background-color: transparent;
-}
-.search-button{
-    -fx-background-color: #218AD5;
-}
+.search-field { -fx-background-color: transparent; }
+.search-button { -fx-background-color: #218AD5; }
 
 /* Services */
-.schedule-date-header{
-    -fx-font-weight: bold;
-}
-.schedule-panel{
+.schedule-date-header { -fx-font-weight: bold; }
+.schedule-panel {
     -fx-background-color: white;
-    -fx-background-radius: 10;
-}
-.slot-card-active{
-    -fx-background-color: #98C9ED;
-    -fx-background-radius: 10;
-}
-.slot-name-active{
-    -fx-font-weight: bold;
-}
-.slot-card{
-    -fx-background-color: #CEE4F4;
     -fx-background-radius: 10;
 }
 .scroll-pane:focused {
@@ -53,54 +43,31 @@
     -fx-background-color: transparent;
     -fx-padding: 0;
 }
-.scroll-pane > .viewport {
-    -fx-background-color: transparent;
+.scroll-pane > .viewport { -fx-background-color: transparent; }
+.scroll-pane .scroll-bar:vertical { -fx-background-color: transparent; }
+.scroll-pane .scroll-bar:vertical .track { -fx-background-color: transparent; }
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #9EC9E6;
+    -fx-background-radius: 10;
 }
+.scroll-pane .scroll-bar:vertical .thumb:hover { -fx-background-color: #6DAED6; }
 
 /* Calendar */
-.calendar-panel{
+.calendar-panel {
     -fx-background-color: white;
     -fx-background-radius: 10;
 }
-.calendar-nav{
+.calendar-nav {
     -fx-background-color: white;
     -fx-background-radius: 3;
 }
-.day-panel{
-    -fx-background-color: white;
-}
-.cal-days-panel{
+.day-panel { -fx-background-color: white; }
+.cal-days-panel {
     -fx-background-color: white;
     -fx-background-radius: 3;
 }
-.cal-arrow-button{
-    -fx-background-color: transparent;
-}
-.cal-day-label{
-    -fx-background-color: transparent;
-}
-.previous-button{
-    -fx-background-color: #CEE4F4;
-    -fx-text-fill: #218AD5;
-    -fx-background-radius: 8;
-}
-.previous-button:hover{
-    -fx-background-color: #98C9ED;
-    -fx-text-fill: white;
-    -fx-cursor: hand;
-    -fx-background-radius: 8;
-}
-.confirm-button{
-    -fx-background-color: #218AD5;
-    -fx-text-fill: white;
-    -fx-background-radius: 8;
-}
-.confirm-button:hover{
-    -fx-background-color: #98C9ED;
-    -fx-text-fill: white;
-    -fx-cursor: hand;
-    -fx-background-radius: 8;
-}
+.cal-arrow-button { -fx-background-color: transparent; }
+.cal-day-label { -fx-background-color: transparent; }
 .cal-cell {
     -fx-background-color: #f5f5f5;
     -fx-background-radius: 5;
@@ -123,6 +90,7 @@
     -fx-border-radius: 5;
 }
 
+/* Time slots */
 .time-row {
     -fx-border-color: transparent transparent #e5e7eb transparent;
     -fx-border-width: 0 0 0.5 0;
@@ -132,6 +100,7 @@
     -fx-text-fill: #6b7280;
 }
 
+/* Chips */
 .chip {
     -fx-padding: 5 14 5 14;
     -fx-background-radius: 999;
@@ -142,30 +111,25 @@
     -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
-
-/* General Wellness */
 .chip-blue  { -fx-background-color: #D9EAF7; -fx-border-color: #C2DBEF; }
 .chip-blue  .chip-text   { -fx-text-fill: #1A4A6B; }
 .chip-blue  .chip-remove { -fx-text-fill: #1A4A6B; }
 .dot-blue   { -fx-fill: #4A90C4; }
 
-/* Women's Health */
 .chip-pink  { -fx-background-color: #F7DDE6; -fx-border-color: #FFBCD3; }
 .chip-pink  .chip-text   { -fx-text-fill: #7A2040; }
 .chip-pink  .chip-remove { -fx-text-fill: #7A2040; }
 .dot-pink   { -fx-fill: #E05A8A; }
 
-/* Specialized Fields */
 .chip-green { -fx-background-color: #D5F1ED; -fx-border-color: #91F9EA; }
 .chip-green .chip-text   { -fx-text-fill: #0A5C52; }
 .chip-green .chip-remove { -fx-text-fill: #0A5C52; }
 .dot-green  { -fx-fill: #1ABFAE; }
 
-/* Diagnostics & Laboratory */
-.chip-purple { -fx-background-color: #735DD1; -fx-border-color: #543BE9; }
-.chip-purple .chip-text   { -fx-text-fill: #EDE9FF; }
-.chip-purple .chip-remove { -fx-text-fill: #EDE9FF; }
-.dot-purple  { -fx-fill: #C4B8FF; }
+.chip-purple { -fx-background-color: #e8e4f3; -fx-border-color: #bebcc8; }
+.chip-purple .chip-text   { -fx-text-fill: #2c2c78; }
+.chip-purple .chip-remove { -fx-text-fill: #2c2c78; }
+.dot-purple  { -fx-fill: #7e6fbf; }
 
 .chip-remove {
     -fx-background-color: transparent;
@@ -200,6 +164,7 @@
     -fx-font-style: italic;
 }
 
+/* Category labels */
 .lbl-category {
     -fx-font-size: 13px;
     -fx-font-weight: bold;
@@ -208,36 +173,14 @@
     -fx-border-radius: 8;
     -fx-border-width: 1;
 }
-.lbl-general-wellness {
-    -fx-background-color: #D9EAF7;
-    -fx-border-color: #C2DBEF;
-    -fx-text-fill: #1A4A6B;
-}
-.lbl-womens-health {
-    -fx-background-color: #F7DDE6;
-    -fx-border-color: #FFBCD3;
-    -fx-text-fill: #7A2040;
-}
-.lbl-specialized {
-    -fx-background-color: #D5F1ED;
-    -fx-border-color: #91F9EA;
-    -fx-text-fill: #0A5C52;
-}
-.lbl-diagnostics {
-    -fx-background-color: #e8e4f3;
-    -fx-border-color: #bebcc8;
-    -fx-text-fill: #2c2c78;
-}
+.lbl-general-wellness { -fx-background-color: #D9EAF7; -fx-border-color: #C2DBEF; -fx-text-fill: #1A4A6B; }
+.lbl-womens-health    { -fx-background-color: #F7DDE6; -fx-border-color: #FFBCD3; -fx-text-fill: #7A2040; }
+.lbl-specialized      { -fx-background-color: #D5F1ED; -fx-border-color: #91F9EA; -fx-text-fill: #0A5C52; }
+.lbl-diagnostics      { -fx-background-color: #e8e4f3; -fx-border-color: #bebcc8; -fx-text-fill: #2c2c78; }
 
-.dialog-title {
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #1a1a1a;
-}
-.dialog-subtitle {
-    -fx-font-size: 12px;
-    -fx-text-fill: #6b7280;
-}
+/* Dialog */
+.dialog-title { -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1a1a1a; }
+.dialog-subtitle { -fx-font-size: 12px; -fx-text-fill: #6b7280; }
 .dialog-search {
     -fx-background-color: #f5f5f5;
     -fx-border-color: #e5e7eb;
@@ -247,70 +190,20 @@
     -fx-padding: 8 12 8 12;
     -fx-font-size: 13px;
 }
-.dialog-scroll {
-    -fx-background-color: transparent;
-    -fx-border-color: #e5e7eb;
-    -fx-border-width: 1;
-    -fx-border-radius: 8;
-    -fx-background-radius: 8;
-}
-.dialog-scroll > .viewport {
-    -fx-background-color: transparent;
-}
+.dialog-scroll { -fx-background-color: transparent; -fx-border-color: #e5e7eb; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; }
+.dialog-scroll > .viewport { -fx-background-color: transparent; }
 
-.other-service-row {
-    -fx-background-color: #f9f9f9;
-    -fx-border-color: #e5e7eb;
-    -fx-border-width: 1;
-    -fx-border-radius: 8;
-    -fx-background-radius: 8;
-}
-.other-service-row:hover {
-    -fx-background-color: #f0f0f0;
-    -fx-cursor: hand;
-}
-.other-service-icon {
-    -fx-font-size: 18px;
-    -fx-text-fill: #6b7280;
-    -fx-background-color: #e5e7eb;
-    -fx-background-radius: 999;
-    -fx-padding: 4 8 4 8;
-}
-.other-service-title {
-    -fx-font-size: 13px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #1a1a1a;
-}
-.other-service-hint {
-    -fx-font-size: 11px;
-    -fx-text-fill: #9ca3af;
-}
-.other-service-arrow {
-    -fx-font-size: 18px;
-    -fx-text-fill: #9ca3af;
-}
+.other-service-row { -fx-background-color: #f9f9f9; -fx-border-color: #e5e7eb; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; }
+.other-service-row:hover { -fx-background-color: #f0f0f0; -fx-cursor: hand; }
+.other-service-icon { -fx-font-size: 18px; -fx-text-fill: #6b7280; -fx-background-color: #e5e7eb; -fx-background-radius: 999; -fx-padding: 4 8 4 8; }
+.other-service-title { -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1a1a1a; }
+.other-service-hint { -fx-font-size: 11px; -fx-text-fill: #9ca3af; }
+.other-service-arrow { -fx-font-size: 18px; -fx-text-fill: #9ca3af; }
 
-.dialog-cancel-btn {
-    -fx-background-color: #f0f0f0;
-    -fx-text-fill: #374151;
-    -fx-background-radius: 8;
-    -fx-font-size: 13px;
-    -fx-cursor: hand;
-}
-.dialog-cancel-btn:hover {
-    -fx-background-color: #e5e7eb;
-}
-.dialog-add-btn {
-    -fx-background-color: #4A90C4;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-background-radius: 8;
-    -fx-font-size: 13px;
-    -fx-cursor: hand;
-}
-.dialog-add-btn:hover {
-    -fx-background-color: #1A4A6B;
-}
+.dialog-cancel-btn { -fx-background-color: #f0f0f0; -fx-text-fill: #374151; -fx-background-radius: 8; -fx-font-size: 13px; -fx-cursor: hand; }
+.dialog-cancel-btn:hover { -fx-background-color: #e5e7eb; }
+.dialog-add-btn { -fx-background-color: #4A90C4; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-font-size: 13px; -fx-cursor: hand; }
+.dialog-add-btn:hover { -fx-background-color: #1A4A6B; }
 
 .category-radio-blue   { -fx-text-fill: #1A4A6B; }
 .category-radio-pink   { -fx-text-fill: #7A2040; }
