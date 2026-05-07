@@ -29,7 +29,7 @@ public class AddServiceDialog {
         root.setPadding(new Insets(20));
         root.setPrefWidth(380);
         root.getStylesheets().add(
-                getClass().getResource("/styles/schedule-staff.css").toExternalForm()
+                getClass().getResource("/styles/schedule-admin.css").toExternalForm()
         );
 
         Label title = new Label("Add Service");
@@ -130,7 +130,7 @@ public class AddServiceDialog {
         root.setPadding(new Insets(20));
         root.setPrefWidth(360);
         root.getStylesheets().add(
-                getClass().getResource("/styles/schedule-staff.css").toExternalForm()
+                getClass().getResource("/styles/schedule-admin.css").toExternalForm()
         );
 
         Label title = new Label("Other Service");
