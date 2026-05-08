@@ -16,53 +16,82 @@ public class UserDAO {
      */
 
     // authentication
-    public static User authenticate(String username, String password){
-        String sql = "select * from users where email = ?";
-        try(Connection c = DatabaseConfig.getConnection();
-            PreparedStatement ps = c.prepareStatement(sql)){
-            ps.setString(1, username);
+    public static User authenticate(String email, String password) {
+        String sql = "SELECT u.user_id, u.email, u.password, u.role, " +
+                "uu.full_name, uu.mobile_number " +
+                "FROM users u " +
+                "LEFT JOIN users_update uu ON u.user_id = uu.user_id " +
+                "WHERE u.email = ? " +
+                "ORDER BY uu.created_at DESC LIMIT 1";
+        try (Connection c = DatabaseConfig.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String storedPass = rs.getString("password"); // ← add this line
+                    if (!storedPass.equals(password)) return null; // ← check password
 
-            try(ResultSet rs = ps.executeQuery()){
-                if(rs.next()){
-                    String storedPass = rs.getString("password");
-                    if(storedPass.equals(password)){
-                        return new User(
-                                rs.getInt("user_id"),
-                                rs.getString("full_name"),
-                                rs.getString("mobile_number"),
-                                rs.getString("email"),
-                                storedPass,
-                                rs.getString("role")
-                        );
+                    String fullName = rs.getString("full_name");
+                    if (fullName == null || fullName.isEmpty()) {
+                        fullName = rs.getString("role").equals("admin") ? "Admin" : "Patient";
                     }
+
+                    return new User(
+                            rs.getInt("user_id"),
+                            fullName,
+                            rs.getString("mobile_number") != null ? rs.getString("mobile_number") : "",
+                            rs.getString("email"),
+                            storedPass,
+                            rs.getString("role")
+                    );
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println("[UserDAO] Error authenticating user: " + e.getMessage());
         }
         return null;
     }
 
-    // register
-    public static int register(String fullname, String mobilenumber, String email, String password){
-        if(emailExists(email)) return -2;
-        String sql = "insert into users (full_name, mobile_number, email, password) values (?, ?, ?, ?)";
-        try(Connection c = DatabaseConfig.getConnection();
-            PreparedStatement ps = c.prepareStatement(sql)){
-            ps.setString(1, fullname);
-            ps.setString(2, mobilenumber);
-            ps.setString(3, email);
-            ps.setString(4, password);
-            int rows = ps.executeUpdate();
-            if (rows > 0) return 1;
-            try(ResultSet rs = ps.getResultSet()){
-                if(rs.next()){
-                    return rs.getInt("user_id");
-                }
-            }
+    // register — insert into users first, then users_update
+    public static int register(String fullname, String mobilenumber, String email, String password) {
+        if (emailExists(email)) return -2;
 
-        }catch (Exception e){
+        Connection c = null;
+        try {
+            c = DatabaseConfig.getConnection();
+            c.setAutoCommit(false); // transaction
+
+            // Insert into users
+            String sql1 = "INSERT INTO users (email, password) VALUES (?, ?)";
+            PreparedStatement ps1 = c.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
+            ps1.setString(1, email);
+            ps1.setString(2, password);
+            ps1.executeUpdate();
+
+            // Get the generated user_id
+            ResultSet keys = ps1.getGeneratedKeys();
+            if (!keys.next()) {
+                c.rollback();
+                return -1;
+            }
+            int newUserId = keys.getInt(1);
+
+            // Insert into users_update
+            String sql2 = "INSERT INTO users_update (user_id, full_name, mobile_number) VALUES (?, ?, ?)";
+            PreparedStatement ps2 = c.prepareStatement(sql2);
+            ps2.setInt(1, newUserId);
+            ps2.setString(2, fullname);
+            ps2.setString(3, mobilenumber);
+            ps2.executeUpdate();
+
+            c.commit();
+            return 1;
+
+        } catch (Exception e) {
+            try { if (c != null) c.rollback(); } catch (Exception ex) { ex.printStackTrace(); }
             System.err.println("[UserDAO] Error registering user: " + e.getMessage());
+        } finally {
+            try { if (c != null) c.setAutoCommit(true); } catch (Exception ex) { ex.printStackTrace(); }
         }
         return -1;
     }
