@@ -46,31 +46,23 @@ public class AccountController implements Initializable {
         User currentUser = SessionManager.getInstance().getCurrentUser();
 
         if (currentUser != null) {
-            // 2. Fetch the latest profile data (Name and Picture) from users_update
             User latestData = UserDAO.getLatestUpdate(currentUser.getUserID());
 
             if (latestData != null) {
-                // Use the updated name
                 profileNameLabel.setText(latestData.getFullname());
-                // Use the updated picture
                 ImageUtils.loadUpdateImage(currentUser.getUserID(), profileImageView);
             } else {
-                // Fallback to original registration data
                 profileNameLabel.setText(currentUser.getFullname());
                 ImageUtils.loadProfileImage(currentUser.getUserID(), profileImageView);
             }
 
-            // 3. Set the ID (using your PatientIdGenerator)
             profileIdLabel.setText(PatientIdGenerator.getPatientId(currentUser.getUserID()));
 
-            // 4. Ensure the image is rounded on this screen too
             ImageUtils.makeRounded(profileImageView);
         }
         double heroSize = 100.0;
         profileImageView.setFitWidth(heroSize);
         profileImageView.setFitHeight(heroSize);
-
-        // Apply the circle clip centered on the 100x100 box
         Circle clip = new Circle(heroSize / 2, heroSize / 2, heroSize / 2);
         profileImageView.setClip(clip);
 

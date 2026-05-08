@@ -277,6 +277,11 @@
 .date-picker-popup .day-cell:hover {
     -fx-background-color: #F1F5F9 !important;
 }
+.error-field {
+    -fx-border-color: #ff4d4d;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
 
 .date-picker-popup .selected {
     -fx-background-color: #218AD5 !important;

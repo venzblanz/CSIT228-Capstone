@@ -112,17 +112,12 @@ public class EditProfileController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(profileImageView.getScene().getWindow());
 
         if (selectedFile != null) {
-            // 1. Create the new image
             Image newImage = new Image(selectedFile.toURI().toString());
 
-            // 2. Set it to the view
             profileImageView.setImage(newImage);
 
-            // 3. IMPORTANT: Re-apply the rounding logic
-            // This forces the "D-shape" fix to run on the new image dimensions
             ImageUtils.makeRounded(profileImageView);
 
-            // 4. Save to SessionManager so it can be uploaded in handleUpdate
             SessionManager.getInstance().setPendingImageFile(selectedFile);
         }
     }
@@ -144,8 +139,6 @@ public class EditProfileController implements Initializable {
     @FXML
     private void handleUpdate() {
         User currentUser = SessionManager.getInstance().getCurrentUser();
-
-        // Create a temporary User object with the NEW information
         User pendingUpdate = new User();
         pendingUpdate.setUserID(currentUser.getUserID());
         pendingUpdate.setFullname(fullNameField.getText());
@@ -159,10 +152,8 @@ public class EditProfileController implements Initializable {
             pendingUpdate.setGender(genderComboBox.getValue());
         }
 
-        // Save this to SessionManager so the ConfirmPasswordController can find it
-        SessionManager.getInstance().setPendingUpdate(pendingUpdate);
+      SessionManager.getInstance().setPendingUpdate(pendingUpdate);
 
-        // Note: The image should be saved to SessionManager inside handleChangePicture()
 
         sceneNavigator.navigate(
                 "/com/javafx/csit228capstone/account/confirmpassword.fxml",

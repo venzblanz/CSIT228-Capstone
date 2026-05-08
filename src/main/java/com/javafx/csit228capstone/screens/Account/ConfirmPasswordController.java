@@ -22,6 +22,7 @@ public class ConfirmPasswordController implements Initializable {
 
     @FXML private MenuController menuController;
     @FXML private PasswordField passwordField;
+    @FXML private PasswordField confirmPasswordField;
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
     @FXML private Button backBtn;
     @FXML private Button confirmBtn;
@@ -32,9 +33,8 @@ public class ConfirmPasswordController implements Initializable {
             menuController.setActiveButton(menuController.getAccountBtn());
             backBtn.setOnAction(e -> onHandleBack());
             confirmBtn.setOnAction(e -> onHandleConfirm());
-        passwordField.textProperty().addListener((obs, oldText, newText) -> {
-            passwordField.getStyleClass().remove("error-field");
-        });
+
+
     }
     private void onHandleBack() {
         handleBack();
@@ -50,7 +50,6 @@ public class ConfirmPasswordController implements Initializable {
         );
     }
     private void showSuccessAndNavigate() {
-        // Navigate to a "Success" popup or directly back to the profile
         SceneNavigator.getInstance().navigate(
                 "/com/javafx/csit228capstone/account/profile_updated.fxml",
                 passwordField,
@@ -67,15 +66,24 @@ public class ConfirmPasswordController implements Initializable {
     @FXML
     private void handleConfirm() {
         String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText(); // Make sure this FX:ID matches your FXML
 
-        // 1. Reset the style at the start of the check
         passwordField.getStyleClass().remove("error-field");
+        confirmPasswordField.getStyleClass().remove("error-field");
+
+
+        if (!password.equals(confirmPassword)) {
+            passwordField.getStyleClass().add("error-field");
+            confirmPasswordField.getStyleClass().add("error-field");
+            confirmPasswordField.textProperty().addListener((obs, oldText, newText) -> {
+                confirmPasswordField.getStyleClass().remove("error-field");
+            });
+
+            return;
+        }
 
         User currentUser = SessionManager.getInstance().getCurrentUser();
-
-        // 2. Perform the verification
         if (UserDAO.verifyPassword(currentUser.getUserID(), password)) {
-
             User pending = SessionManager.getInstance().getPendingUpdate();
             File imageFile = SessionManager.getInstance().getPendingImageFile();
 
@@ -95,9 +103,10 @@ public class ConfirmPasswordController implements Initializable {
                 showError("Database Error: Could not save update.");
             }
         } else {
-
             passwordField.getStyleClass().add("error-field");
-
+            passwordField.textProperty().addListener((obs, oldText, newText) -> {
+                passwordField.getStyleClass().remove("error-field");
+            });
         }
     }
 }

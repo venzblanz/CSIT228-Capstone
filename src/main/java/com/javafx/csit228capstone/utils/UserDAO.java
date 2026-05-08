@@ -2,6 +2,7 @@ package com.javafx.csit228capstone.utils;
 
 import com.javafx.csit228capstone.model.User;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
@@ -83,7 +84,7 @@ public class UserDAO {
 
 
     public static User getLatestUpdate(int userId) {
-        String sql = "SELECT * FROM users_update WHERE user_id = ? ORDER BY created_at DESC LIMIT 1";
+        String sql = "SELECT * FROM patients WHERE user_id = ? ORDER BY created_at DESC LIMIT 1";
         try (Connection c = DatabaseConfig.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
 
@@ -108,7 +109,7 @@ public class UserDAO {
 
 
     public static InputStream getUpdateProfilePicture(int userId) {
-        String sql = "SELECT profile_picture FROM users_update WHERE user_id = ? ORDER BY created_at DESC LIMIT 1";
+        String sql = "SELECT profile_picture FROM patients WHERE user_id = ? ORDER BY created_at DESC LIMIT 1";
         try (Connection c = DatabaseConfig.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setInt(1, userId);
@@ -136,43 +137,84 @@ public class UserDAO {
 //    }
 
     public static InputStream getUserProfilePicture(int userId) {
-        return null; // Stop the database from even trying to look for it in 'users'
+        return null;
     }
 
     public static boolean insertProfileUpdate(int userId, String fullName, String mobileNumber, String birthday, String gender, String address, java.io.File imageFile) {
-        String sql = "INSERT INTO users_update (user_id, full_name, mobile_number, birthday, gender, address, profile_picture) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (Connection c = DatabaseConfig.getConnection()) {
+             String updateSql = "UPDATE patients SET full_name = ?, mobile_number = ?, birthday = ?, gender = ?, address = ?, profile_picture = ? WHERE user_id = ?";
 
-        try (java.sql.Connection c = DatabaseConfig.getConnection();
-             java.sql.PreparedStatement ps = c.prepareStatement(sql)) {
+            try (PreparedStatement ps = c.prepareStatement(updateSql)) {
+                ps.setString(1, fullName);
+                ps.setString(2, mobileNumber);
 
-            ps.setInt(1, userId);
-            ps.setString(2, fullName);
-            ps.setString(3, mobileNumber);
-            ps.setString(4, birthday);
-            ps.setString(5, gender);
-            ps.setString(6, address);
-
-            if (imageFile != null) {
-                java.io.FileInputStream fis = new java.io.FileInputStream(imageFile);
-                ps.setBinaryStream(7, fis, (int) imageFile.length());
-            } else {
-                java.io.InputStream existingImage = getUpdateProfilePicture(userId);
-                if (existingImage == null) {
-                    existingImage = getUserProfilePicture(userId);
+                if (birthday == null || birthday.equals("Not Set") || birthday.isEmpty()) {
+                    ps.setNull(3, java.sql.Types.DATE);
+                } else {
+                    ps.setString(3, birthday);
                 }
-                ps.setBinaryStream(7, existingImage);
+
+                ps.setString(4, gender);
+                ps.setString(5, address);
+                handleImageStream(ps, 6, imageFile, userId);
+                ps.setInt(7, userId);
+
+                int rows = ps.executeUpdate();
+
+                if (rows == 0) {
+                    String insertSql = "INSERT INTO patients (user_id, full_name, mobile_number, birthday, gender, address, profile_picture) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    try (PreparedStatement psInsert = c.prepareStatement(insertSql)) {
+                        psInsert.setInt(1, userId);
+                        psInsert.setString(2, fullName);
+                        psInsert.setString(3, mobileNumber);
+
+                        if (birthday == null || birthday.equals("Not Set") || birthday.isEmpty()) {
+                            psInsert.setNull(4, java.sql.Types.DATE);
+                        } else {
+                            psInsert.setString(4, birthday);
+                        }
+
+                        psInsert.setString(5, gender);
+                        psInsert.setString(6, address);
+                        handleImageStream(psInsert, 7, imageFile, userId);
+
+                        return psInsert.executeUpdate() > 0;
+                    }
+                }
+                return true;
             }
-
-            int rowsAffected = ps.executeUpdate();
-            return rowsAffected > 0;
-
         } catch (Exception e) {
-            System.err.println("[UserDAO] Error inserting profile update: " + e.getMessage());
+            System.err.println("[UserDAO] Upsert failed: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
     }
 
+    private static void handleImageStream(PreparedStatement ps, int index, File imageFile, int userId) throws Exception {
+        if (imageFile != null && imageFile.exists()) {
+            FileInputStream fis = new FileInputStream(imageFile);
+            ps.setBinaryStream(index, fis, (int) imageFile.length());
+        } else {
+            InputStream existing = getUpdateProfilePicture(userId);
+            if (existing != null) {
+                ps.setBinaryStream(index, existing);
+            } else {
+                ps.setNull(index, java.sql.Types.BLOB);
+            }
+        }
+    }
+    public static boolean updatePassword(int userId, String newPassword) {
+        String sql = "UPDATE users SET password = ? WHERE user_id = ?";
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, newPassword);
+            pstmt.setInt(2, userId);
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     public static boolean verifyPassword(int userId, String password) {
         String sql = "SELECT password FROM users WHERE user_id = ? AND password = ?";
         try (Connection c = DatabaseConfig.getConnection();
@@ -180,7 +222,7 @@ public class UserDAO {
             ps.setInt(1, userId);
             ps.setString(2, password);
             try (ResultSet rs = ps.executeQuery()) {
-                return rs.next(); // Returns true if a match is found
+                return rs.next();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -188,20 +230,5 @@ public class UserDAO {
         }
     }
 
-    public boolean updatePassword(int userId, String newPassword) {
-        String sql = "UPDATE users SET password = ? WHERE user_id = ?";
 
-        try (Connection conn = DatabaseConfig.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, newPassword);
-            pstmt.setInt(2, userId);
-
-            return pstmt.executeUpdate() > 0;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 }

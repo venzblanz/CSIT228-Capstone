@@ -32,7 +32,7 @@ public class ChangePasswordController implements Initializable {
 
             menuController.setActiveButton(menuController.getAccountBtn());
             cancelBtn.setOnAction(e -> onBack());
-            saveBtn.setOnAction(e -> onSave());
+            saveBtn.setOnAction(e -> handleSave());
 
     }
 
@@ -47,28 +47,29 @@ public class ChangePasswordController implements Initializable {
 
     private UserDAO userDAO = new UserDAO();
 
-    // Update your onSave to call the logic first
-    private void onSave() {
-        handleSave();
-    }
-
     @FXML
     private void handleSave() {
         String newPwd = newPasswordField.getText();
         String confirmPwd = confirmNewPasswordField.getText();
+
+        newPasswordField.getStyleClass().remove("error-field");
+        confirmNewPasswordField.getStyleClass().remove("error-field");
+
+
         if (newPwd.isEmpty() || newPwd.length() < 6) {
-            System.out.println("Password must be at least 6 characters!");
+            newPasswordField.getStyleClass().add("error-field");
             return;
         }
 
         if (!newPwd.equals(confirmPwd)) {
-            System.out.println("Passwords do not match!");
+            newPasswordField.getStyleClass().add("error-field");
+            confirmNewPasswordField.getStyleClass().add("error-field");
             return;
         }
 
         int currentUserId = SessionManager.getInstance().getUserId();
 
-        boolean isUpdated = userDAO.updatePassword(currentUserId, newPwd);
+        boolean isUpdated = UserDAO.updatePassword(currentUserId, newPwd);
 
         if (isUpdated) {
             sceneNavigator.navigate(
@@ -77,7 +78,7 @@ public class ChangePasswordController implements Initializable {
                     "/styles/dashboard.css"
             );
         } else {
-            System.out.println("Update failed in database.");
+            System.err.println("Database Update Failed.");
         }
     }
 

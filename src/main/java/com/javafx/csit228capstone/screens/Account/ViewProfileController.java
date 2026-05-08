@@ -109,7 +109,7 @@ public class ViewProfileController implements Initializable {
     private void handleBack() {
         SceneNavigator.getInstance().navigate(
                 "/com/javafx/csit228capstone/account/myaccount.fxml",
-                nameLabel, // or any node from your ViewProfile screen
+                nameLabel,
                 "/styles/account.css"
         );
     }
