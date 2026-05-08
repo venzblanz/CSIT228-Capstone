@@ -22,7 +22,15 @@ public class AdminMenuController {
     @FXML private Button manageScheduleBtn;
     @FXML private HBox logoutBtn;
 
+    private Button activeButton;
+
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
+
+    public Button getDashboardBtn()      { return dashboardBtn; }
+    public Button getLiveQueueBtn()      { return liveQueueBtn; }
+    public Button getManageQueueBtn()    { return manageQueueBtn; }
+    public Button getManageUsersBtn()    { return manageUsersBtn; }
+    public Button getScheduleBtn()       { return manageScheduleBtn; }
 
     @FXML
     private void initialize() {
@@ -34,10 +42,8 @@ public class AdminMenuController {
             }
         });
 
-        // Logout hover animation
         logoutBtnTransition();
 
-        // Navigation
         dashboardBtn.setOnAction(e -> sceneNavigator.navigate(
                 "/com/javafx/csit228capstone/admin/admin_dashboard.fxml",
                 dashboardBtn, "/styles/dashboard.css"));
@@ -55,8 +61,8 @@ public class AdminMenuController {
                 manageUsersBtn, "/styles/dashboard.css"));
 
         manageScheduleBtn.setOnAction(e -> sceneNavigator.navigate(
-                "/com/javafx/csit228capstone/admin/admin_manage_schedule.fxml",
-                manageScheduleBtn, "/styles/dashboard.css"));
+                "/com/javafx/csit228capstone/schedule/schedule-admin.fxml",
+                manageScheduleBtn, "/styles/schedule-admin.css"));
 
         logoutBtn.setOnMouseClicked(e -> {
             SessionManager.getInstance().clearSession();
@@ -64,6 +70,18 @@ public class AdminMenuController {
                     "/com/javafx/csit228capstone/login.fxml",
                     logoutBtn, "/styles/login.css");
         });
+    }
+
+    public void setActiveButton(Button active) {
+        activeButton = active;
+
+        dashboardBtn.setStyle("");
+        liveQueueBtn.setStyle("");
+        manageQueueBtn.setStyle("");
+        manageUsersBtn.setStyle("");
+        manageScheduleBtn.setStyle("");
+
+        active.setStyle("-fx-background-color: #218AD5; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;");
     }
 
     private void logoutBtnTransition() {

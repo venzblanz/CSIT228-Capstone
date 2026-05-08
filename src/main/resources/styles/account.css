@@ -16,6 +16,36 @@
     -fx-text-fill: #1A1A2E;
 }
 
+
+.main-pane {
+    -fx-background-color: #F8FAFC;
+}
+
+.label {
+    -fx-font-family: "Instrument Sans";
+}
+
+.scroll-pane, .scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.section-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);
+}
+.scroll-pane, .scroll-pane > .viewport {
+    -fx-background-color: #F8FAFC;
+}
+
+
+.section-title {
+    -fx-font-family: "Instrument Sans";
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: #64748B;
+}
+
 .notif-btn {
     -fx-background-color: transparent;
     -fx-cursor: hand;
@@ -217,4 +247,46 @@
 .section-card HBox:hover {
     -fx-background-color: #F1F5F9;
     -fx-background-radius: 5px;
+}
+
+/* Fix the background to match your other working screens */
+.main-pane {
+    -fx-background-color: #EBF2F6;
+}
+
+/* Force the scroll area to also use the same color */
+.scroll-pane, .scroll-pane > .viewport {
+    -fx-background-color: #EBF2F6;
+}
+
+/* Fix the Section Cards (Profile Card, Manage, etc.) */
+.section-card, .profile-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 3);
+}
+
+/* Ensure the titles use Instrument Sans and the correct Blue from your CSS */
+.screen-label {
+    -fx-text-fill: #218AD5;
+    -fx-font-family: "Instrument Sans";
+    -fx-font-size: 24px;
+    -fx-font-weight: 700;
+}
+
+/* Fix the Notification Icon (Uses the class from your CSS) */
+.notification-icon {
+    -fx-background-image: url("../images/notification_icon.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-cursor: hand;
+}
+
+.delete-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #D82F2F;
+    -fx-border-color: #D82F2F;
+    -fx-border-radius: 8;
+    -fx-font-family: "Instrument Sans";
+    -fx-cursor: hand;
 }

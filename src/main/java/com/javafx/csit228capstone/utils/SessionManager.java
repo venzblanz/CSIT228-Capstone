@@ -61,4 +61,13 @@ public class SessionManager {
     public void setCurrentUser(User user) {
         this.currentUser = user;
     }
+
+    private User pendingUpdate;
+    private java.io.File pendingImageFile;
+
+    public void setPendingUpdate(User user) { this.pendingUpdate = user; }
+    public User getPendingUpdate() { return pendingUpdate; }
+
+    public void setPendingImageFile(java.io.File file) { this.pendingImageFile = file; }
+    public java.io.File getPendingImageFile() { return pendingImageFile; }
 }

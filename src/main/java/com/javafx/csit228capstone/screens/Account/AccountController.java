@@ -2,13 +2,17 @@ package com.javafx.csit228capstone.screens.Account;
 
 
 import com.javafx.csit228capstone.helper.MenuController;
-import com.javafx.csit228capstone.utils.SceneNavigator;
+import com.javafx.csit228capstone.model.User;
+import com.javafx.csit228capstone.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,7 +23,7 @@ public class AccountController implements Initializable {
     @FXML private Label profileNameLabel;
     @FXML private Label profileIdLabel;
 
-    @FXML private HBox patientRecordsRow;
+    @FXML private HBox viewProfileRow;
     @FXML private HBox queueHistoryRow;
     @FXML private HBox queueStatusRow;
    // @FXML private HBox notificationSettingsRow;
@@ -28,15 +32,47 @@ public class AccountController implements Initializable {
     @FXML private HBox supportRow;
     @FXML private HBox termsRow;
     @FXML private HBox aboutRow;
+    @FXML private ImageView profileImageView;
     @FXML private MenuController menuController;
+    @FXML private Pane notification;
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         menuController.setActiveButton(menuController.getAccountBtn());
-        // profileNameLabel.setText(SessionManager.getUser().getFullName());
-        // profileIdLabel.setText(SessionManager.getUser().getPatientId());
+        AnimationHelper.ringAnimation(notification);
+
+        User currentUser = SessionManager.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            // 2. Fetch the latest profile data (Name and Picture) from users_update
+            User latestData = UserDAO.getLatestUpdate(currentUser.getUserID());
+
+            if (latestData != null) {
+                // Use the updated name
+                profileNameLabel.setText(latestData.getFullname());
+                // Use the updated picture
+                ImageUtils.loadUpdateImage(currentUser.getUserID(), profileImageView);
+            } else {
+                // Fallback to original registration data
+                profileNameLabel.setText(currentUser.getFullname());
+                ImageUtils.loadProfileImage(currentUser.getUserID(), profileImageView);
+            }
+
+            // 3. Set the ID (using your PatientIdGenerator)
+            profileIdLabel.setText(PatientIdGenerator.getPatientId(currentUser.getUserID()));
+
+            // 4. Ensure the image is rounded on this screen too
+            ImageUtils.makeRounded(profileImageView);
+        }
+        double heroSize = 100.0;
+        profileImageView.setFitWidth(heroSize);
+        profileImageView.setFitHeight(heroSize);
+
+        // Apply the circle clip centered on the 100x100 box
+        Circle clip = new Circle(heroSize / 2, heroSize / 2, heroSize / 2);
+        profileImageView.setClip(clip);
 
         editBtn.setOnAction(e -> onEdit());
 //        patientRecordsRow.setOnMouseClicked(e -> onPatientRecords());
@@ -50,6 +86,12 @@ public class AccountController implements Initializable {
                 handleQueueHistory();
             }
         });
+
+        viewProfileRow.setOnMouseClicked(e -> sceneNavigator.navigate(
+                "/com/javafx/csit228capstone/account/view_profile.fxml",
+                viewProfileRow,
+                "/styles/account.css"
+        ));
     }
 
     private void onEdit() {
@@ -86,18 +128,11 @@ public class AccountController implements Initializable {
     }
 
 
-    private void handleNotificationSettings() {
-
-    }
 
     private void handleSecurityPrivacy() {
         sceneNavigator.navigate(
                 "/com/javafx/csit228capstone/account/security_privacy.fxml", securityRow, "/styles/account.css"
         );
-    }
-
-    private void handleContactSupport() {
-
     }
 
     private void handleTermsAndConditions() {
@@ -132,8 +167,4 @@ public class AccountController implements Initializable {
 
     }
 
-    @FXML
-    private void handleLogout() {
-
-    }
 }

@@ -183,8 +183,8 @@
 }
 
 .date-picker > .arrow-button {
-    -fx-background-color: #3182CE; /* Your MedServe Blue */
-    -fx-background-radius: 0 8 8 0; /* Rounded on right only */
+    -fx-background-color: #3182CE;
+    -fx-background-radius: 0 8 8 0;
     -fx-padding: 0 10;
 }
 
@@ -212,6 +212,96 @@
 }
 
 .password-field:focused {
-    -fx-border-color: #3182CE; /* MedServe Blue */
+    -fx-border-color: #3182CE;
     -fx-border-width: 1.5px;
+}
+
+/* FORCE the Month and Year text to be visible */
+.date-picker-popup .label {
+    -fx-text-fill: #1E293B !important;
+    -fx-opacity: 1.0 !important;
+    -fx-font-family: 'Instrument Sans' !important;
+    -fx-font-weight: bold !important;
+}
+
+/* Fix the Month/Year combo box or labels specifically */
+.date-picker-popup .month-year-pane .label {
+    -fx-text-fill: #1E293B !important;
+}
+
+/* Ensure the left/right arrows are visible blue */
+.date-picker-popup .left-arrow,
+.date-picker-popup .right-arrow {
+    -fx-background-color: #218AD5 !important;
+}
+
+/* Fix the background of the header area where month/year sit */
+.date-picker-popup .calendar-header {
+    -fx-background-color: #F8FAFC !important; /* Light gray to separate it from the days */
+    -fx-opacity: 1.0 !important;
+}
+
+/* In case they are using small buttons for navigation */
+.date-picker-popup .spinner .button {
+    -fx-background-color: transparent !important;
+}
+/* FORCE DatePicker Popup to be solid and visible */
+.date-picker-popup {
+    -fx-background-color: white !important;
+    -fx-border-color: #CBD5E1 !important;
+    -fx-border-width: 1px !important;
+}
+
+/* Force the internal containers to be solid white */
+.date-picker-popup > .month-year-pane,
+.date-picker-popup > .calendar-grid,
+.date-picker-popup > .calendar-header {
+    -fx-background-color: white !important;
+}
+
+/* Fix the day cells */
+.date-picker-popup .day-cell {
+    -fx-background-color: white !important;
+    -fx-text-fill: #1E293B !important;
+    -fx-font-family: 'Instrument Sans' !important;
+}
+
+/* Fix the day names (Sun, Mon, Tue...) */
+.date-picker-popup .day-name-cell {
+    -fx-text-fill: #64748B !important;
+    -fx-font-family: 'Instrument Sans' !important;
+    -fx-font-weight: bold !important;
+}
+
+/* Fix hover and selection */
+.date-picker-popup .day-cell:hover {
+    -fx-background-color: #F1F5F9 !important;
+}
+
+.date-picker-popup .selected {
+    -fx-background-color: #218AD5 !important;
+    -fx-text-fill: white !important;
+}
+
+.date-picker-popup > * {
+    -fx-background-color: white !important;
+}
+
+.update-btn:disabled {
+    -fx-opacity: 0.5;
+    -fx-cursor: default;
+    -fx-background-color: #94A3B8; /* A muted gray color */
+}
+
+
+.error-field {
+    -fx-border-color: #EF4444 !important;
+    -fx-border-width: 2px !important;
+    -fx-border-radius: 8px !important;
+}
+
+.error-field:focused {
+    -fx-border-color: #EF4444 !important;
+    -fx-faint-focus-color: rgba(239, 68, 68, 0.1) !important;
+    -fx-focus-color: #EF4444 !important;
 }
