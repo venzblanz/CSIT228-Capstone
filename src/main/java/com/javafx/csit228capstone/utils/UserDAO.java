@@ -20,7 +20,7 @@ public class UserDAO {
         String sql = "SELECT u.user_id, u.email, u.password, u.role, " +
                 "uu.full_name, uu.mobile_number " +
                 "FROM users u " +
-                "LEFT JOIN users_update uu ON u.user_id = uu.user_id " +
+                "LEFT JOIN patients uu ON u.user_id = uu.user_id " +
                 "WHERE u.email = ? " +
                 "ORDER BY uu.created_at DESC LIMIT 1";
         try (Connection c = DatabaseConfig.getConnection();
@@ -77,7 +77,7 @@ public class UserDAO {
             int newUserId = keys.getInt(1);
 
             // Insert into users_update
-            String sql2 = "INSERT INTO users_update (user_id, full_name, mobile_number) VALUES (?, ?, ?)";
+            String sql2 = "INSERT INTO patients (user_id, full_name, mobile_number) VALUES (?, ?, ?)";
             PreparedStatement ps2 = c.prepareStatement(sql2);
             ps2.setInt(1, newUserId);
             ps2.setString(2, fullname);
