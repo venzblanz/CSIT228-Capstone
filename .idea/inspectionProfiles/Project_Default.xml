@@ -6,8 +6,28 @@
       <option name="myIgnoreVendorSpecificProperties" value="false" />
       <option name="myCustomPropertiesList">
         <value>
-          <list size="1">
+          <list size="21">
             <item index="0" class="java.lang.String" itemvalue="-fx-background-color" />
+            <item index="1" class="java.lang.String" itemvalue="-fx-effect" />
+            <item index="2" class="java.lang.String" itemvalue="-fx-background-image" />
+            <item index="3" class="java.lang.String" itemvalue="-fx-background-position" />
+            <item index="4" class="java.lang.String" itemvalue="-fx-background-size" />
+            <item index="5" class="java.lang.String" itemvalue="-fx-text-fill" />
+            <item index="6" class="java.lang.String" itemvalue="-fx-font-family" />
+            <item index="7" class="java.lang.String" itemvalue="-fx-background-radius" />
+            <item index="8" class="java.lang.String" itemvalue="-fx-border-color" />
+            <item index="9" class="java.lang.String" itemvalue="-fx-border-width" />
+            <item index="10" class="java.lang.String" itemvalue="-fx-font-size" />
+            <item index="11" class="java.lang.String" itemvalue="-fx-cursor" />
+            <item index="12" class="java.lang.String" itemvalue="-fx-pref-width" />
+            <item index="13" class="java.lang.String" itemvalue="-fx-border-radius" />
+            <item index="14" class="java.lang.String" itemvalue="-fx-padding" />
+            <item index="15" class="java.lang.String" itemvalue="-fx-font-weight" />
+            <item index="16" class="java.lang.String" itemvalue="-fx-min-width" />
+            <item index="17" class="java.lang.String" itemvalue="-fx-alignment" />
+            <item index="18" class="java.lang.String" itemvalue="-fx-min-height" />
+            <item index="19" class="java.lang.String" itemvalue="-fx-opacity" />
+            <item index="20" class="java.lang.String" itemvalue="-fx-pref-height" />
           </list>
         </value>
       </option>

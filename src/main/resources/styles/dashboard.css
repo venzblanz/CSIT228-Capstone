@@ -53,6 +53,9 @@
 .recent{
     -fx-text-fill: gray;
 }
+.name-title{
+    -fx-text-fill: gray;
+}
 .q-active-pane{
     -fx-background-color: white;
     -fx-background-radius: 10;

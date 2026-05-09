@@ -143,8 +143,8 @@ public class DashboardController {
 
             // ------- Children for the card
             // VBox for Active Queue Components
-            Label dot = new Label("●");
-            dot.setStyle("-fx-font-size: 18px;");
+            Label dot = new Label("● ");
+            dot.setStyle("-fx-font-size: 10px;");
             dot.getStyleClass().add("active-dot");
             Label activeLabel = new Label("Active Queue");
             activeLabel.setStyle("-fx-font-size: 18px;");

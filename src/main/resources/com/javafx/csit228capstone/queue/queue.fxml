@@ -244,7 +244,7 @@
       
                   </children>
                   <padding>
-                      <Insets bottom="30.0" left="35.0" right="30.0" top="30.0" />
+                      <Insets bottom="30.0" left="35.0" right="20.0" top="30.0" />
                   </padding>
               </VBox>
          </content>

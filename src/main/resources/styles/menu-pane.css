@@ -15,11 +15,19 @@
     -fx-text-fill: #218AD5;
     -fx-font-family: "Instrument Sans SemiBold";
 }
-.profile-pane{
-    -fx-background-color: #CEE4F4;
-    -fx-background-radius: 10;
+/* PROFILE */
+.profile-pane {
+    -fx-background-color: rgba(255, 255, 255, 0.35);
+    -fx-background-radius: 15;
+
+    -fx-border-color: rgba(255, 255, 255, 0.65);
+    -fx-border-radius: 15;
+    -fx-border-width: 1;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0.2, 0, 10);
 }
-.profile-icon{
+
+.profile-icon {
     -fx-background-image: url("../images/profile_icon.png");
     -fx-background-size: cover;
     -fx-background-position: center;
