@@ -110,7 +110,7 @@ public class QueueController {
                 index++;
             }
         }else{
-            activeQueueContainer.getChildren().add(createCard(queueList.getFirst()));
+            activeQueueContainer.getChildren().add(createCard(queueList.get(0)));
         }
     }
     private HBox createCard(QueueTicket queueTicket) {
