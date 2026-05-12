@@ -3,6 +3,7 @@ package com.javafx.csit228capstone.screens.Account;
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.QueueTicket;
 import com.javafx.csit228capstone.model.User;
+import com.javafx.csit228capstone.utils.AnimationHelper;
 import com.javafx.csit228capstone.utils.QueueLineDAO;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import com.javafx.csit228capstone.utils.SessionManager;
@@ -11,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,12 +44,14 @@ public class QueueHistoryController {
     @FXML private MenuController menuController;
     @FXML private ImageView backIconBtn;
     @FXML private Label             backBtn;
+    @FXML private VBox historyScreen;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
 
     private boolean updating;
 
     public void initialize() {
+        AnimationHelper.fadeIn(historyScreen);
         menuController.setActiveButton(menuController.getAccountBtn());
         queueTable.setSelectionModel(null);
         backBtn.setOnMouseClicked(e -> onBack());
