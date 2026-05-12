@@ -123,6 +123,48 @@ public class QueueFormController {
                 maleRadio,
                 femaleRadio
         };
+
+        age_field.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null || newValue.isEmpty()) {
+                seniorRadio.setDisable(false);
+                return;
+            }
+
+            try {
+                int age = Integer.parseInt(newValue);
+
+                if (age < 60) {
+                    seniorRadio.setDisable(true);
+
+                    if (seniorRadio.isSelected()) {
+                        patientTypeRadio.selectToggle(null);
+                    }
+                } else {
+                    seniorRadio.setDisable(false);
+                }
+
+            } catch (NumberFormatException e) {
+                seniorRadio.setDisable(true);
+            }
+        });
+        genderRadio.selectedToggleProperty().addListener((observable, oldToggle, newToggle) -> {
+            if (newToggle == null) {
+                pregnantRadio.setDisable(false);
+                return;
+            }
+
+            String selectedGender = newToggle.getUserData().toString();
+
+            if (selectedGender.equals("Male")) {
+                pregnantRadio.setDisable(true);
+
+                if (pregnantRadio.isSelected()) {
+                    patientTypeRadio.selectToggle(null);
+                }
+            } else {
+                pregnantRadio.setDisable(false);
+            }
+        });
     }
 
     private void gwInit(){
@@ -243,17 +285,36 @@ public class QueueFormController {
         ){
             showError("Complete all fields");
             return;
+        }else if(!fname.matches("^[A-Za-zÑñ]+(?:[ .'’-][A-Za-zÑñ]+)*$")){
+            showError("Please enter a valid first name");
+            return;
+        }else if(!lname.matches("^[A-Za-zÑñ]+(?:[ .'’-][A-Za-zÑñ]+)*$")){
+            showError("Please enter a valid last name");
+            return;
+        }else if(!mi.matches("^[A-Za-zÑñ]?$")){
+            showError("Please enter only one (1) character for the middle initial");
+            return;
+        }else if (!contact.matches("^[0-9]{11}$")) {
+            showError("Please enter a valid 10-digit mobile number (e.g. 09123456789).");
+            return;
         }
 
         int age;
-        try{
+        try {
             age = Integer.parseInt(ageText);
-            if(age <= 0 || age > 130){
+
+            if (age <= 0 || age > 130) {
                 showError("Invalid age");
                 return;
             }
-        }catch (NumberFormatException e){
+
+        } catch (NumberFormatException e) {
             showError("Age must be a valid number");
+            return;
+        }
+
+        if (ptype.equals("Senior Citizen") && age < 60) {
+            showError("Senior Citizen patient type is only allowed for ages 60 and above");
             return;
         }
 

@@ -53,8 +53,8 @@ public class AdminMenuController {
                 liveQueueBtn, "/styles/dashboard.css"));
 
         manageQueueBtn.setOnAction(e -> sceneNavigator.navigate(
-                "/com/javafx/csit228capstone/admin/admin_manage_queue.fxml",
-                manageQueueBtn, "/styles/dashboard.css"));
+                "/com/javafx/csit228capstone/admin/admin-manage-queue.fxml",
+                manageQueueBtn, "/styles/admin-manage-queue.css"));
 
         manageUsersBtn.setOnAction(e -> sceneNavigator.navigate(
                 "/com/javafx/csit228capstone/admin/admin_manage_users.fxml",

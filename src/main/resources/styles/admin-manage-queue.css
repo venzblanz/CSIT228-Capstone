@@ -1,0 +1,158 @@
+@import "menu-pane.css";
+.root{
+    -fx-font-family: "Instrument Sans";
+}
+.main-pane{
+    -fx-background-color: #EBF2F6;
+}
+.screen-label{
+    -fx-text-fill: #218AD5;
+    -fx-font-size: 24px;
+    -fx-font-weight: 700;
+}
+.util-card{
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
+}
+.dashboard-notification{
+    -fx-background-image: url("../images/notification_icon.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.dashboard-notification:hover {
+    -fx-cursor: hand;
+}
+/*main pane*/
+.q-utilities{
+    -fx-text-fill: #218ad5;
+}
+.active-dot{
+    -fx-text-fill: #5DAE52;
+}
+.q-active{
+    -fx-text-fill: #D82F2F;
+}
+.q-position{
+    -fx-text-fill: #D82F2F;
+}
+.dashboard-recent-card1{
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
+}
+.dashboard-recent-card2{
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
+}
+.recent{
+    -fx-text-fill: gray;
+}
+.name-title{
+    -fx-text-fill: gray;
+}
+.q-active-pane{
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
+}
+.active-color-bar{
+    -fx-background-color: #5DAE52;
+    -fx-background-radius: 16 0 0 16;
+}
+.blue-color-bar{
+    -fx-background-color: #218ad5;
+    -fx-background-radius: 16 16 0 0;
+}
+.q-utilities-pane{
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
+}
+.pos-frame{
+    -fx-background-color: rgba(33, 138, 213, 0.15);
+    -fx-background-radius: 10;
+    -fx-min-width: 55;
+    -fx-min-height: 55;
+    -fx-alignment: center;
+}
+.pos-icon{
+    -fx-background-image: url("../images/hashtag.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.sched-frame{
+    -fx-background-color: rgba(33, 138, 213, 0.15);
+    -fx-background-radius: 10;
+    -fx-min-width: 55;
+    -fx-min-height: 55;
+    -fx-alignment: center;
+}
+.sched-icon{
+    -fx-background-image: url("../images/calendar-blue.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.clock-frame{
+    -fx-background-color: rgba(33, 138, 213, 0.15);
+    -fx-background-radius: 10;
+    -fx-min-width: 55;
+    -fx-min-height: 55;
+    -fx-alignment: center;
+}
+.clock-icon{
+    -fx-background-image: url("../images/clock-blue.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+.dashboard-recent-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 10, 0, 0, 3);
+}
+.join-button{
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-font-family: "Instrument Sans Medium";
+    -fx-background-radius: 10;
+    -fx-background-color: #218ad5;
+    -fx-cursor:hand;
+}
+.join-button:hover{
+    -fx-background-color: #6fa5d5;
+}
+.recent-card-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E293B;
+}
+.scroll-pane {
+    -fx-background-color: #EBF2F6;
+}
+
+.scroll-pane >.viewport {
+    -fx-background-color: #EBF2F6;
+}
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+.scroll-pane .scroll-bar:vertical,
+.scroll-pane .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: #EBF2F6;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #9EC9E6;
+    -fx-background-radius: 10;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #6DAED6;
+}
