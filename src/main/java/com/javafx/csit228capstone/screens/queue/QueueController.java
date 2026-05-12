@@ -7,7 +7,6 @@ import com.javafx.csit228capstone.utils.SceneNavigator;
 import com.javafx.csit228capstone.utils.AnimationHelper;
 import com.javafx.csit228capstone.utils.SessionManager;
 import javafx.animation.Interpolator;
-import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -36,7 +35,6 @@ public class QueueController {
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
     private Boolean isActive = false;
-    private List<QueueTicket> queueList;
 
     @FXML
     public void initialize() {
@@ -96,9 +94,9 @@ public class QueueController {
     }
     private void showActiveQueue(Boolean isActive){
         activeQueueContainer.getChildren().clear();
-        queueList = QueueLineDAO.getActiveQueue(SessionManager.getInstance().getUserId());
+        List<QueueTicket> queueList = QueueLineDAO.getActiveQueue(SessionManager.getInstance().getUserId());
         int index = 0;
-        if (queueList == null || queueList.isEmpty()) {
+        if (queueList.isEmpty()) {
             seeAllBtn.setVisible(false);
             Label emptyLabel = new Label("No recent activity yet.");
             emptyLabel.getStyleClass().add("recent");
@@ -112,7 +110,7 @@ public class QueueController {
                 index++;
             }
         }else{
-            activeQueueContainer.getChildren().add(createCard(queueList.get(0)));
+            activeQueueContainer.getChildren().add(createCard(queueList.getFirst()));
         }
     }
     private HBox createCard(QueueTicket queueTicket) {

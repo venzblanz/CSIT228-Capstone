@@ -15,12 +15,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.DashboardController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="page" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.DashboardController">
    <left>
       <fx:include fx:id="menu" source="menu-pane.fxml" />
    </left>
    <center>
-      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" styleClass="dash-scroll" BorderPane.alignment="CENTER">
+      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" styleClass="dash-scroll" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
          <content>
             <VBox fx:id="dashboardScreen" minHeight="-Infinity" styleClass="main-pane">
                <children>
@@ -41,7 +41,7 @@
                      <children>
                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="86.0" HBox.hgrow="NEVER">
                            <children>
-                              <Label styleClass="recent" text="Welcome back,">
+                              <Label styleClass="name-title" text="Welcome back,">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -56,7 +56,7 @@
                         <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                         <VBox alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="86.0" HBox.hgrow="NEVER">
                            <children>
-                              <Label styleClass="recent" text="Today">
+                              <Label styleClass="name-title" text="Today">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -296,14 +296,14 @@
                         <Insets bottom="10.0" right="20.0" top="20.0" />
                      </padding>
                   </Label>
-                  <VBox fx:id="recentQueueContainer" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                  <VBox fx:id="recentQueueContainer" prefWidth="100.0" spacing="10.0">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin></VBox>
       
                </children>
                <padding>
-                  <Insets bottom="30.0" left="35.0" right="30.0" top="30.0" />
+                  <Insets bottom="30.0" left="35.0" right="20.0" top="30.0" />
                </padding>
             </VBox>
          </content>
