@@ -1,8 +1,6 @@
 @import "menu-pane.css";
 
-.root {
-    -fx-font-family: "Instrument Sans";
-}
+.root { -fx-font-family: "Instrument Sans"; }
 
 .main-pane { -fx-background-color: #EBF2F6; }
 
@@ -18,23 +16,32 @@
 }
 .notification-icon:hover { -fx-cursor: hand; }
 
+/* Search */
 .search-bar {
     -fx-background-color: transparent;
     -fx-border-color: #218AD5;
     -fx-border-width: 2;
-    -fx-text-fill: #218AD5;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
 }
 .search-field { -fx-background-color: transparent; }
 .search-button { -fx-background-color: #218AD5; }
 
-/* Services */
-.schedule-date-header { -fx-font-weight: bold; }
+/* Panels */
 .schedule-panel {
     -fx-background-color: white;
     -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 3);
 }
+.calendar-panel {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 3);
+}
+
+/* ScrollPane */
 .scroll-pane:focused {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
@@ -52,29 +59,20 @@
 }
 .scroll-pane .scroll-bar:vertical .thumb:hover { -fx-background-color: #6DAED6; }
 
-/* Calendar */
-.calendar-panel {
-    -fx-background-color: white;
-    -fx-background-radius: 10;
-}
-.calendar-nav {
-    -fx-background-color: white;
-    -fx-background-radius: 3;
-}
-.day-panel { -fx-background-color: white; }
-.cal-days-panel {
-    -fx-background-color: white;
-    -fx-background-radius: 3;
-}
+/* Calendar internals */
+.calendar-nav,
+.day-panel,
+.cal-days-panel { -fx-background-color: white; }
 .cal-arrow-button { -fx-background-color: transparent; }
 .cal-day-label { -fx-background-color: transparent; }
+
 .cal-cell {
     -fx-background-color: #f5f5f5;
     -fx-background-radius: 5;
 }
 .cal-cell:hover {
-    -fx-border-color: #218AD5;
     -fx-background-color: #EBF2F6;
+    -fx-border-color: #218AD5;
     -fx-border-width: 2;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
@@ -85,12 +83,17 @@
     -fx-background-radius: 5;
 }
 .cal-cell-today {
-    -fx-border-color: #218AD5;
     -fx-background-color: white;
+    -fx-border-color: #218AD5;
     -fx-border-radius: 5;
+}
+.cal-cell-inactive {
+    -fx-background-color: transparent;
+    -fx-text-fill: #d1d5db;
 }
 
 /* Time slots */
+.schedule-date-header { -fx-font-weight: bold; }
 .time-row {
     -fx-border-color: transparent transparent #e5e7eb transparent;
     -fx-border-width: 0 0 0.5 0;
@@ -98,6 +101,11 @@
 .time-label {
     -fx-font-size: 13px;
     -fx-text-fill: #6b7280;
+}
+.closed-label {
+    -fx-text-fill: #9ca3af;
+    -fx-font-size: 13px;
+    -fx-font-style: italic;
 }
 
 /* Chips */
@@ -111,44 +119,20 @@
     -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
-.chip-blue  { -fx-background-color: #D9EAF7; -fx-border-color: #C2DBEF; }
-.chip-blue  .chip-text   { -fx-text-fill: #1A4A6B; }
-.chip-blue  .chip-remove { -fx-text-fill: #1A4A6B; }
-.dot-blue   { -fx-fill: #4A90C4; }
-
-.chip-pink  { -fx-background-color: #F7DDE6; -fx-border-color: #FFBCD3; }
-.chip-pink  .chip-text   { -fx-text-fill: #7A2040; }
-.chip-pink  .chip-remove { -fx-text-fill: #7A2040; }
-.dot-pink   { -fx-fill: #E05A8A; }
-
-.chip-green { -fx-background-color: #D5F1ED; -fx-border-color: #91F9EA; }
-.chip-green .chip-text   { -fx-text-fill: #0A5C52; }
-.chip-green .chip-remove { -fx-text-fill: #0A5C52; }
-.dot-green  { -fx-fill: #1ABFAE; }
-
+.chip-blue   { -fx-background-color: #D9EAF7; -fx-border-color: #C2DBEF; }
+.chip-pink   { -fx-background-color: #F7DDE6; -fx-border-color: #FFBCD3; }
+.chip-green  { -fx-background-color: #D5F1ED; -fx-border-color: #91F9EA; }
 .chip-purple { -fx-background-color: #e8e4f3; -fx-border-color: #bebcc8; }
-.chip-purple .chip-text   { -fx-text-fill: #2c2c78; }
-.chip-purple .chip-remove { -fx-text-fill: #2c2c78; }
-.dot-purple  { -fx-fill: #7e6fbf; }
 
-.chip-remove {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-padding: 0 0 0 2;
-    -fx-font-size: 11px;
-    -fx-cursor: hand;
-    -fx-min-width: 14px;
-    -fx-max-width: 14px;
-    -fx-min-height: 14px;
-    -fx-max-height: 14px;
-}
-.chip-remove:hover { -fx-opacity: 0.6; }
+.chip-blue   .chip-text { -fx-text-fill: #1A4A6B; }
+.chip-pink   .chip-text { -fx-text-fill: #7A2040; }
+.chip-green  .chip-text { -fx-text-fill: #0A5C52; }
+.chip-purple .chip-text { -fx-text-fill: #2c2c78; }
 
-.closed-label {
-    -fx-text-fill: #9ca3af;
-    -fx-font-size: 13px;
-    -fx-font-style: italic;
-}
+.dot-blue   { -fx-fill: #4A90C4; }
+.dot-pink   { -fx-fill: #E05A8A; }
+.dot-green  { -fx-fill: #1ABFAE; }
+.dot-purple { -fx-fill: #7e6fbf; }
 
 /* Category labels */
 .lbl-category {
@@ -158,6 +142,7 @@
     -fx-background-radius: 8;
     -fx-border-radius: 8;
     -fx-border-width: 1;
+    -fx-cursor: hand;
 }
 .lbl-general-wellness { -fx-background-color: #D9EAF7; -fx-border-color: #C2DBEF; -fx-text-fill: #1A4A6B; }
 .lbl-womens-health    { -fx-background-color: #F7DDE6; -fx-border-color: #FFBCD3; -fx-text-fill: #7A2040; }

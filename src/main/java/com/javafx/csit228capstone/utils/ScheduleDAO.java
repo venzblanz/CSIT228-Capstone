@@ -2,6 +2,7 @@ package com.javafx.csit228capstone.utils;
 
 import com.javafx.csit228capstone.model.Service;
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -22,7 +23,8 @@ public class ScheduleDAO {
                 list.add(new Service(
                         rs.getInt("service_id"),
                         rs.getString("service_name"),
-                        rs.getString("service_type")
+                        rs.getString("service_type"),
+                        true
                 ));
             }
         }
@@ -31,24 +33,27 @@ public class ScheduleDAO {
 
     public Map<String, List<Service>> getScheduleForDate(LocalDate date) throws SQLException {
         Map<String, List<Service>> slotMap = new LinkedHashMap<>();
-        int dayOfWeek = date.getDayOfWeek().getValue(); // 1=Mon ... 7=Sun
+        int dayOfWeek = date.getDayOfWeek().getValue();
 
         String sql = """
-        SELECT sc.time_slot, s.service_id, s.service_name, s.service_type
-        FROM schedules sc
-        JOIN services s ON sc.service_id = s.service_id
-        WHERE sc.day_of_week = ?
-        ORDER BY sc.time_slot
-    """;
+            SELECT sc.time_slot, s.service_id, s.service_name, s.service_type, (sc.day_of_week IS NOT NULL) AS is_recurring
+            FROM schedules sc
+            JOIN services s ON sc.service_id = s.service_id
+            WHERE sc.day_of_week = ? OR sc.specific_date = ?
+            ORDER BY sc.time_slot
+        """;
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, dayOfWeek);
+            ps.setDate(2, Date.valueOf(date));
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     String slot = rs.getString("time_slot");
+                    boolean recurring = rs.getBoolean("is_recurring");
                     slotMap.computeIfAbsent(slot, k -> new ArrayList<>()).add(new Service(
                             rs.getInt("service_id"),
                             rs.getString("service_name"),
-                            rs.getString("service_type")
+                            rs.getString("service_type"),
+                            recurring
                     ));
                 }
             }
@@ -56,8 +61,9 @@ public class ScheduleDAO {
         return slotMap;
     }
 
-    public void addServiceToSlot(int dayOfWeek, String timeSlot, int serviceId) throws SQLException {
-        String sql = "INSERT INTO schedules (service_id, day_of_week, time_slot) VALUES (?, ?, ?)";
+    // For recurring (existing services added weekly)
+    public void addRecurringServiceToSlot(int dayOfWeek, String timeSlot, int serviceId) throws SQLException {
+        String sql = "INSERT INTO schedules (service_id, day_of_week, specific_date, time_slot) VALUES (?, ?, NULL, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, serviceId);
             ps.setInt(2, dayOfWeek);
@@ -66,18 +72,35 @@ public class ScheduleDAO {
         }
     }
 
-    public void removeServiceFromSlot(int dayOfWeek, String timeSlot, int serviceId) throws SQLException {
-        String sql = "DELETE FROM schedules WHERE service_id = ? AND day_of_week = ? AND time_slot = ?";
+    // For one-time only
+    public void addOneTimeServiceToSlot(LocalDate date, String timeSlot, int serviceId) throws SQLException {
+        String sql = "INSERT INTO schedules (service_id, day_of_week, specific_date, time_slot) VALUES (?, NULL, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, serviceId);
-            ps.setInt(2, dayOfWeek);
+            ps.setDate(2, Date.valueOf(date));
             ps.setString(3, timeSlot);
             ps.executeUpdate();
         }
     }
 
+    // Remove — handle both cases
+    public void removeServiceFromSlot(LocalDate date, String timeSlot, int serviceId, boolean recurring) throws SQLException {
+        String sql = recurring
+                ? "DELETE FROM schedules WHERE service_id = ? AND day_of_week = ? AND time_slot = ?"
+                : "DELETE FROM schedules WHERE service_id = ? AND specific_date = ? AND time_slot = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, serviceId);
+            if (recurring) ps.setInt(2, date.getDayOfWeek().getValue());
+            else           ps.setDate(2, Date.valueOf(date));
+            ps.setString(3, timeSlot);
+            ps.executeUpdate();
+        }
+    }
+
+    // Custom service — caller decides recurring or not
     public Service addCustomService(String name, String serviceType,
-                                    LocalDate date, String timeSlot) throws SQLException {
+                                    LocalDate date, String timeSlot,
+                                    boolean recurring) throws SQLException {
         String insertService = "INSERT INTO services (service_name, service_type) VALUES (?, ?)";
         int newId;
         try (PreparedStatement ps = connection.prepareStatement(insertService, Statement.RETURN_GENERATED_KEYS)) {
@@ -89,8 +112,8 @@ public class ScheduleDAO {
                 newId = keys.getInt(1);
             }
         }
-        int dayOfWeek = date.getDayOfWeek().getValue();
-        addServiceToSlot(dayOfWeek, timeSlot, newId);
-        return new Service(newId, name, serviceType);
+        if (recurring) addRecurringServiceToSlot(date.getDayOfWeek().getValue(), timeSlot, newId);
+        else           addOneTimeServiceToSlot(date, timeSlot, newId);
+        return new Service(newId, name, serviceType, recurring);
     }
 }

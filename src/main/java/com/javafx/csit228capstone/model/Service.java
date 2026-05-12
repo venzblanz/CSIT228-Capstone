@@ -4,22 +4,38 @@ public class Service {
     private int serviceId;
     private String name;
     private String serviceType;
+    private boolean recurring; // NEW
 
-    public Service(int serviceId, String name, String serviceType) {
+    public Service(int serviceId, String name, String serviceType, boolean recurring) {
         this.serviceId = serviceId;
         this.name = name;
         this.serviceType = serviceType;
+        this.recurring = recurring;
     }
 
     public Service(String name, String serviceType) {
-        this.serviceId = -1;
-        this.name = name;
-        this.serviceType = serviceType;
+        this(-1, name, serviceType, true);
     }
 
-    public int getServiceId()      { return serviceId; }
-    public String getName()        { return name; }
-    public String getServiceType() { return serviceType; }
+    public Service(String name, String serviceType, boolean recurring) {
+        this(-1, name, serviceType, recurring);
+    }
+
+    public int getServiceId() {
+        return serviceId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public boolean isRecurring() {
+        return recurring;
+    }
 
     public String getChipColor() {
         return switch (serviceType) {
