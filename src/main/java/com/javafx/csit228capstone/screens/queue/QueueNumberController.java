@@ -74,6 +74,14 @@ public class QueueNumberController {
         qiv = QueueLineDAO.insertQueue(formId, SessionManager.getInstance().getUserId(), qType);
         assert qiv != null;
         qt = QueueLineDAO.getQueueTicket(qiv.getQueueId());
+
+        NotificationDAO.insert(
+                SessionManager.getInstance().getUserId(),
+                "Successfully Joined",
+                "You joined the " + qType + " queue. Your number is " + qt.getQueueNumber() + ".",
+                "JOINED"
+        );
+
         formManager.clearForm();
 
         setCard();

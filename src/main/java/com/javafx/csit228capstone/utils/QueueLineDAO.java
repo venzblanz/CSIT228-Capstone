@@ -336,4 +336,16 @@ public class QueueLineDAO {
         }
         return prefix + "-01";
     }
+
+    public static void cancelQueue(String queueNumber) {
+        String sql = "UPDATE queue_line SET status = 'Cancelled' WHERE queue_number = ? AND DATE(created_at) = CURDATE()";
+        try (Connection c = DatabaseConfig.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, queueNumber);
+            ps.executeUpdate();
+            System.out.println("[QueueLineDAO] Cancelled queue " + queueNumber);
+        } catch (Exception e) {
+            System.err.println("[QueueLineDAO] Error cancelling queue " + e.getMessage());
+        }
+    }
 }
