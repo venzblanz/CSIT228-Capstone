@@ -27,4 +27,5 @@ module com.javafx.csit228capstone {
     opens com.javafx.csit228capstone.model to javafx.fxml;
     exports com.javafx.csit228capstone.screens.schedule;
     opens com.javafx.csit228capstone.screens.schedule to javafx.fxml;
+    exports com.javafx.csit228capstone.screens.admin;
 }
