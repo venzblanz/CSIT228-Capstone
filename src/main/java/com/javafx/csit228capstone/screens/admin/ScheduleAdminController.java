@@ -1,6 +1,7 @@
-package com.javafx.csit228capstone.screens.schedule;
+package com.javafx.csit228capstone.screens.admin;
 
 import com.javafx.csit228capstone.model.Service;
+import com.javafx.csit228capstone.screens.schedule.AddServiceDialog;
 import com.javafx.csit228capstone.utils.DatabaseConfig;
 import com.javafx.csit228capstone.utils.ScheduleDAO;
 import javafx.fxml.FXML;
