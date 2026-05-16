@@ -2,6 +2,7 @@ package com.javafx.csit228capstone.screens.queue;
 
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.Form;
+import com.javafx.csit228capstone.screens.NotificationPanelController;
 import com.javafx.csit228capstone.utils.FormManager;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import com.javafx.csit228capstone.utils.AnimationHelper;
@@ -10,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.util.function.UnaryOperator;
@@ -44,6 +46,9 @@ public class QueueFormController {
     @FXML private RadioButton       seniorRadio;
     @FXML private RadioButton       pregnantRadio;
     @FXML private MenuController    menuController;
+    @FXML private StackPane formRoot;
+    private NotificationPanelController notifPanelCtrl;
+    @FXML private Pane notification;
 
     private final SceneNavigator    sceneNavigator = SceneNavigator.getInstance();
     private final FormManager       formManager = FormManager.getInstance();
@@ -81,10 +86,13 @@ public class QueueFormController {
 
     @FXML
     public void initialize() {
+        notifPanelCtrl = new  NotificationPanelController(formRoot);
         AnimationHelper.fadeIn(mainPane);
         menuController.setActiveButton(menuController.getQueueBtn());
         // for the whole page except buttons
         initializePage();
+        AnimationHelper.ringAnimation(notification);
+        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
 
         // for the buttons only
         backIconBtn.setOnMouseClicked(e -> onBack());

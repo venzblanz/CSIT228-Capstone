@@ -2,6 +2,7 @@ package com.javafx.csit228capstone.screens.queue;
 
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.QueueTicket;
+import com.javafx.csit228capstone.screens.NotificationPanelController;
 import com.javafx.csit228capstone.utils.QueueLineDAO;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import com.javafx.csit228capstone.utils.AnimationHelper;
@@ -32,13 +33,15 @@ public class QueueController {
     @FXML private HBox sfBtn;
     @FXML private HBox dlBtn;
     @FXML private Label seeAllBtn;
-
+    @FXML private StackPane queueRoot;
+    private NotificationPanelController notifPanelCtrl;
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
     private Boolean isActive = false;
 
     @FXML
     public void initialize() {
         menuController.setActiveButton(menuController.getQueueBtn());
+            notifPanelCtrl = new  NotificationPanelController(queueRoot);
         gwBtn.setOnMouseClicked(e -> onForm("General Wellness"));
         whBtn.setOnMouseClicked(e -> onForm("Women's Health"));
         sfBtn.setOnMouseClicked(e -> onForm("Specialized Fields"));
@@ -49,6 +52,7 @@ public class QueueController {
 
         // for notification animation
         AnimationHelper.ringAnimation(notification);
+        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
     }
 
     // -------------- Navigators -----------------------------------------------

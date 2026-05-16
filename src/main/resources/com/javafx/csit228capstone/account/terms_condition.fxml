@@ -1,109 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="800.0" prefWidth="1280.0"
-            styleClass="main-pane"
-            stylesheets="@../../../../styles/account.css,@../../../../styles/menu-pane.css,@../../../../styles/dashboard.css"
-            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.javafx.csit228capstone.screens.Account.TermsController">
 
-    <left>
-        <fx:include fx:id="menu" source="../menu-pane.fxml" />
-    </left>
-
-    <center>
-        <VBox styleClass="main-pane" BorderPane.alignment="CENTER">
-            <children>
-                <VBox alignment="CENTER_LEFT" spacing="5.0">
-                    <children>
-                        <HBox fx:id="backBtnRow" onMouseClicked="#handleBack" alignment="CENTER_LEFT" spacing="5.0" style="-fx-cursor: hand;">
-                            <children>
-                                <ImageView fitHeight="12.0" fitWidth="12.0" preserveRatio="true">
-                                    <image><Image url="@../../../../images/arrow_blue.png" /></image>
-                                </ImageView>
-                                <Label style="-fx-text-fill: #218AD5; -fx-font-family: 'Instrument Sans'; -fx-font-weight: 600; -fx-font-size: 13px;" text="Back to Account" />
-                            </children>
-                        </HBox>
-
-                        <HBox alignment="CENTER_LEFT">
-                            <children>
-                                <Label style="-fx-text-fill: #218AD5; -fx-font-family: 'Instrument Sans'; -fx-font-weight: 700; -fx-font-size: 24px;"
-                                       text="Terms and Conditions" />
-                                <Region HBox.hgrow="ALWAYS" />
-                                <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="dashboard-notification" />
-                            </children>
-                        </HBox>
-                    </children>
-                    <VBox.margin><Insets bottom="15.0" top="50.0" /></VBox.margin>
-                </VBox>
-
-                <VBox styleClass="dashboard-recent-card" VBox.vgrow="ALWAYS" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 12;">
-                    <children>
-                        <Label text="Please review the MedServe Terms and Conditions for your account."
-                               style="-fx-font-family: 'Instrument Sans'; -fx-text-fill: #64748B; -fx-font-size: 14px; -fx-font-weight: 500;" />
-
-                        <ScrollPane fitToWidth="true" style="-fx-background-color: #F8FAFC; -fx-background: #F8FAFC; -fx-viewport-fill: #F8FAFC; -fx-background-radius: 8; -fx-border-color: #E2E8F0; -fx-border-radius: 8;" VBox.vgrow="ALWAYS">
-                            <content>
-                                <VBox spacing="25.0" style="-fx-background-color: #F8FAFC;">
-                                    <children>
-                                        <VBox spacing="8.0">
-                                            <Label style="-fx-font-family: 'Instrument Sans'; -fx-font-weight: 700; -fx-font-size: 15px; -fx-text-fill: #1E293B;" text="1. Purpose of Service" />
-                                            <Label style="-fx-font-family: 'Instrument Sans'; -fx-text-fill: #475569; -fx-line-spacing: 4; -fx-font-size: 14px;" wrapText="true"
-                                                   text="MedServe streamlines public health services, addressing waiting times and missed updates by providing a digital queue management platform." />
-                                        </VBox>
-                                        <VBox spacing="8.0">
-                                            <Label style="-fx-font-family: 'Instrument Sans'; -fx-font-weight: 700; -fx-font-size: 15px; -fx-text-fill: #1E293B;" text="2. Real-Time Monitoring" />
-                                            <Label style="-fx-font-family: 'Instrument Sans'; -fx-text-fill: #475569; -fx-line-spacing: 4; -fx-font-size: 14px;" wrapText="true"
-                                                   text="Users can monitor queue positions in real-time. This system reduces on-site waiting and improves clinic flow for both patients and healthcare providers." />
-                                        </VBox>
-                                        <VBox spacing="8.0">
-                                            <Label style="-fx-font-family: 'Instrument Sans'; -fx-font-weight: 700; -fx-font-size: 15px; -fx-text-fill: #1E293B;" text="3. Account Security" />
-                                            <Label style="-fx-font-family: 'Instrument Sans'; -fx-text-fill: #475569; -fx-line-spacing: 4; -fx-font-size: 14px;" wrapText="true"
-                                                   text="You are responsible for managing your account securely, including keeping your password updated regularly and ensuring your personal data is accurate." />
-                                        </VBox>
-                                    </children>
-                                    <padding><Insets bottom="25.0" left="25.0" right="25.0" top="25.0" /></padding>
-                                </VBox>
-                            </content>
-                        </ScrollPane>
-
-                        <VBox spacing="20.0" alignment="CENTER_LEFT" style="-fx-border-color: #E2E8F0; -fx-border-width: 1 0 0 0; -fx-padding: 20 0 0 0;">
-                            <children>
-                                <CheckBox fx:id="agreeCheckBox" mnemonicParsing="false"
-                                          text="I acknowledge that I have reviewed the Terms and Conditions"
-                                          style="-fx-font-family: 'Instrument Sans'; -fx-font-size: 14px; -fx-font-weight: 600; -fx-text-fill: #1E293B;" />
-
-                                <HBox alignment="CENTER_RIGHT">
-                                    <children>
-                                        <Button fx:id="confirmBtn" mnemonicParsing="false" onAction="#handleBack"
-                                                prefHeight="45.0" prefWidth="240.0"
-                                                styleClass="join-button" text="Confirm and Close"
-                                                style="-fx-font-family: 'Instrument Sans'; -fx-font-weight: 600;" />
-                                    </children>
-                                </HBox>
-                            </children>
-                        </VBox>
-
-                    </children>
-                    <padding><Insets bottom="30.0" left="30.0" right="30.0" top="30.0" /></padding>
-                </VBox>
-
-            </children>
-            <padding><Insets bottom="30.0" left="40.0" right="40.0" /></padding>
-        </VBox>
-    </center>
-</BorderPane>
+<StackPane fx:id="termsRoot" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.Account.TermsController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="main-pane" stylesheets="@../../../../styles/account.css,@../../../../styles/menu-pane.css,@../../../../styles/dashboard.css">
+      
+          <left>
+              <fx:include fx:id="menu" source="../menu-pane.fxml" />
+          </left>
+      
+          <center>
+              <VBox styleClass="main-pane" BorderPane.alignment="CENTER">
+                  <children>
+                      <VBox alignment="CENTER_LEFT" spacing="5.0">
+                          <children>
+                              <HBox fx:id="backBtnRow" alignment="CENTER_LEFT" onMouseClicked="#handleBack" spacing="5.0" style="-fx-cursor: hand;">
+                                  <children>
+                                      <ImageView fitHeight="12.0" fitWidth="12.0" preserveRatio="true">
+                                          <image>
+                                    <Image url="@../../../../images/arrow_blue.png" />
+                                 </image>
+                                      </ImageView>
+                                      <Label style="-fx-text-fill: #218AD5; -fx-font-family: 'Instrument Sans'; -fx-font-weight: 600; -fx-font-size: 13px;" text="Back to Account" />
+                                  </children>
+                              </HBox>
+      
+                              <HBox alignment="CENTER_LEFT">
+                                  <children>
+                                      <Label style="-fx-text-fill: #218AD5; -fx-font-family: 'Instrument Sans'; -fx-font-weight: 700; -fx-font-size: 24px;" text="Terms and Conditions" />
+                                      <Region HBox.hgrow="ALWAYS" />
+                                      <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="dashboard-notification" />
+                                  </children>
+                              </HBox>
+                          </children>
+                          <VBox.margin>
+                        <Insets bottom="15.0" top="50.0" />
+                     </VBox.margin>
+                      </VBox>
+      
+                      <VBox spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 12;" styleClass="dashboard-recent-card" VBox.vgrow="ALWAYS">
+                          <children>
+                              <Label style="-fx-font-family: 'Instrument Sans'; -fx-text-fill: #64748B; -fx-font-size: 14px; -fx-font-weight: 500;" text="Please review the MedServe Terms and Conditions for your account." />
+      
+                              <ScrollPane fitToWidth="true" style="-fx-background-color: #F8FAFC; -fx-background: #F8FAFC; -fx-viewport-fill: #F8FAFC; -fx-background-radius: 8; -fx-border-color: #E2E8F0; -fx-border-radius: 8;" VBox.vgrow="ALWAYS">
+                                  <content>
+                                      <VBox spacing="25.0" style="-fx-background-color: #F8FAFC;">
+                                          <children>
+                                              <VBox spacing="8.0">
+                                                  <Label style="-fx-font-family: 'Instrument Sans'; -fx-font-weight: 700; -fx-font-size: 15px; -fx-text-fill: #1E293B;" text="1. Purpose of Service" />
+                                                  <Label style="-fx-font-family: 'Instrument Sans'; -fx-text-fill: #475569; -fx-line-spacing: 4; -fx-font-size: 14px;" text="MedServe streamlines public health services, addressing waiting times and missed updates by providing a digital queue management platform." wrapText="true" />
+                                              </VBox>
+                                              <VBox spacing="8.0">
+                                                  <Label style="-fx-font-family: 'Instrument Sans'; -fx-font-weight: 700; -fx-font-size: 15px; -fx-text-fill: #1E293B;" text="2. Real-Time Monitoring" />
+                                                  <Label style="-fx-font-family: 'Instrument Sans'; -fx-text-fill: #475569; -fx-line-spacing: 4; -fx-font-size: 14px;" text="Users can monitor queue positions in real-time. This system reduces on-site waiting and improves clinic flow for both patients and healthcare providers." wrapText="true" />
+                                              </VBox>
+                                              <VBox spacing="8.0">
+                                                  <Label style="-fx-font-family: 'Instrument Sans'; -fx-font-weight: 700; -fx-font-size: 15px; -fx-text-fill: #1E293B;" text="3. Account Security" />
+                                                  <Label style="-fx-font-family: 'Instrument Sans'; -fx-text-fill: #475569; -fx-line-spacing: 4; -fx-font-size: 14px;" text="You are responsible for managing your account securely, including keeping your password updated regularly and ensuring your personal data is accurate." wrapText="true" />
+                                              </VBox>
+                                          </children>
+                                          <padding>
+                                    <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                 </padding>
+                                      </VBox>
+                                  </content>
+                              </ScrollPane>
+      
+                              <VBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-border-color: #E2E8F0; -fx-border-width: 1 0 0 0; -fx-padding: 20 0 0 0;">
+                                  <children>
+                                      <CheckBox fx:id="agreeCheckBox" mnemonicParsing="false" style="-fx-font-family: 'Instrument Sans'; -fx-font-size: 14px; -fx-font-weight: 600; -fx-text-fill: #1E293B;" text="I acknowledge that I have reviewed the Terms and Conditions" />
+      
+                                      <HBox alignment="CENTER_RIGHT">
+                                          <children>
+                                              <Button fx:id="confirmBtn" mnemonicParsing="false" onAction="#handleBack" prefHeight="45.0" prefWidth="240.0" style="-fx-font-family: 'Instrument Sans'; -fx-font-weight: 600;" styleClass="join-button" text="Confirm and Close" />
+                                          </children>
+                                      </HBox>
+                                  </children>
+                              </VBox>
+      
+                          </children>
+                          <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                     </padding>
+                      </VBox>
+      
+                  </children>
+                  <padding>
+                  <Insets bottom="30.0" left="40.0" right="40.0" />
+               </padding>
+              </VBox>
+          </center>
+      </BorderPane>
+   </children>
+</StackPane>

@@ -70,32 +70,8 @@ public class DashboardController {
 
         notification.setOnMouseEntered(e -> ring.play());
         notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
+
         setUpRecent(queueList);
-    }
-
-    private void loadNotificationPanel() {
-        notifPanelCtrl = new NotificationPanelController(dashboardRoot);
-    }
-
-    // if canceled
-    public void onQueueCancelled(String department) {
-        NotificationDAO.insert(
-                sessionManager.getUserId(),
-                "Queue Cancelled",
-                "Your queue for " + department + " has been canceled.",
-                "CANCELLED"
-        );
-        if (notifPanelCtrl != null) notifPanelCtrl.refresh();
-    }
-
-    public void onAlmostYourTurn(String department, int positionsLeft) {
-        NotificationDAO.insert(
-                sessionManager.getUserId(),
-                "Almost Your Turn!",
-                "Only " + positionsLeft + " person(s) ahead of you in " + department + ".",
-                "ALMOST_TURN"
-        );
-        if (notifPanelCtrl != null) notifPanelCtrl.refresh();
     }
 
     // ----------- For Dashboard Cards ---------------------------------------------------------------------------------

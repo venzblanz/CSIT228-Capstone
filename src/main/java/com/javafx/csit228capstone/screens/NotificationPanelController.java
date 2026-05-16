@@ -39,16 +39,17 @@ public class NotificationPanelController {
     private static final Duration ANIM        = Duration.millis(280);
     private static final double   PANEL_WIDTH = 440;
 
-    // ── Constructor ───────────────────────────────────────────────────────────
     public NotificationPanelController(StackPane rootStack) {
         this.rootStack = rootStack;
         buildOverlay();
         buildPanel();
+        rootStack.getStylesheets().add(
+                getClass().getResource("/styles/notification-panel.css").toExternalForm()
+        );
         rootStack.getChildren().addAll(overlay, panel);
         refresh();
     }
 
-    // ── Overlay ───────────────────────────────────────────────────────────────
     private void buildOverlay() {
         overlay = new Pane();
         overlay.setStyle("-fx-background-color: rgba(0,0,0,0.30);");
@@ -60,7 +61,6 @@ public class NotificationPanelController {
         StackPane.setAlignment(overlay, Pos.TOP_LEFT);
     }
 
-    // ── Panel ─────────────────────────────────────────────────────────────────
     private void buildPanel() {
         panel = new AnchorPane();
         panel.getStyleClass().add("notif-panel");
@@ -71,8 +71,7 @@ public class NotificationPanelController {
         panel.prefHeightProperty().bind(rootStack.heightProperty());
         StackPane.setAlignment(panel, Pos.TOP_RIGHT);
 
-        // ── Header ────────────────────────────────────────────────────────────
-        FontIcon bellIcon = makeFontIcon(FontAwesomeSolid.BELL, 17, "#64748B");
+        FontIcon bellIcon = makeFontIcon(FontAwesomeSolid.BELL, 18, "white");
 
         Label title = new Label("Notifications");
         title.getStyleClass().add("notif-header-title");
@@ -85,13 +84,13 @@ public class NotificationPanelController {
         titleRow.setAlignment(Pos.CENTER_LEFT);
 
         markAllBtn = new Button("Mark all read");
-        markAllBtn.setGraphic(makeFontIcon(FontAwesomeSolid.CHECK_DOUBLE, 12, "#64748B"));
-        markAllBtn.getStyleClass().add("notif-action-btn");
+        markAllBtn.setGraphic(makeFontIcon(FontAwesomeSolid.CHECK_DOUBLE, 12, "white"));
+        markAllBtn.getStyleClass().add("notif-action-btn-ghost");
         markAllBtn.setOnAction(e -> markAllRead());
 
         deleteAllBtn = new Button("Clear all");
-        deleteAllBtn.setGraphic(makeFontIcon(FontAwesomeSolid.TRASH, 12, "#64748B"));
-        deleteAllBtn.getStyleClass().addAll("notif-action-btn", "notif-delete-btn");
+        deleteAllBtn.setGraphic(makeFontIcon(FontAwesomeSolid.TRASH, 12, "white"));
+        deleteAllBtn.getStyleClass().add("notif-action-btn-ghost");
         deleteAllBtn.setOnAction(e -> deleteAll());
 
         markAllBtn.setMinWidth(Region.USE_PREF_SIZE);
@@ -134,7 +133,6 @@ public class NotificationPanelController {
         panel.getChildren().add(content);
     }
 
-    // ── Filter row ────────────────────────────────────────────────────────────
     private HBox buildFilterRow() {
         ToggleGroup group = new ToggleGroup();
 
@@ -175,7 +173,6 @@ public class NotificationPanelController {
         return row;
     }
 
-    // ── Open / Close ──────────────────────────────────────────────────────────
     public void openPanel() {
         if (isOpen) return;
         isOpen = true;
@@ -203,7 +200,6 @@ public class NotificationPanelController {
         tt.play();
     }
 
-    // ── Actions ───────────────────────────────────────────────────────────────
     private void markAllRead() {
         NotificationDAO.markAllRead(userId);
         refresh();
@@ -214,7 +210,6 @@ public class NotificationPanelController {
         refresh();
     }
 
-    // ── Refresh ───────────────────────────────────────────────────────────────
     public void refresh() {
         List<Notification> all = NotificationDAO.getAll(userId);
 
@@ -251,7 +246,6 @@ public class NotificationPanelController {
         };
     }
 
-    // ── Empty state ───────────────────────────────────────────────────────────
     private VBox buildEmptyState() {
         FontIcon icon = makeFontIcon(FontAwesomeSolid.BELL, 32, "#CBD5E1");
 
@@ -277,9 +271,7 @@ public class NotificationPanelController {
         return box;
     }
 
-    // ── Card ──────────────────────────────────────────────────────────────────
     private HBox buildCard(Notification n) {
-        // ── Left accent bar ───────────────────────────────────────────────────
         Region bar = new Region();
         bar.setMinWidth(5);
         bar.setPrefWidth(5);
@@ -289,7 +281,6 @@ public class NotificationPanelController {
                         "-fx-background-radius: 4 0 0 4;"
         );
 
-        // ── Icon badge — FIX: use typeIconColor() not typeBgColor() ───────────
         FontIcon iconNode = makeFontIcon(typeIcon(n.getType()), 15, typeIconColor(n.getType()));
 
         StackPane iconBadge = new StackPane(iconNode);
@@ -300,19 +291,16 @@ public class NotificationPanelController {
                         "-fx-background-radius: 8;"
         );
 
-        // ── Title ─────────────────────────────────────────────────────────────
         Label titleLabel = new Label(n.getTitle());
         titleLabel.getStyleClass().add(n.isRead() ? "notif-card-title-read" : "notif-card-title-unread");
         titleLabel.setMaxWidth(Double.MAX_VALUE);
         titleLabel.setEllipsisString("…");
 
-        // ── Message ───────────────────────────────────────────────────────────
         Label msgLabel = new Label(n.getMessage());
         msgLabel.setWrapText(true);
         msgLabel.setMaxWidth(Double.MAX_VALUE);
         msgLabel.getStyleClass().add("notif-card-msg");
 
-        // ── Meta row: unread dot + timestamp ──────────────────────────────────
         HBox meta = new HBox(6);
         meta.setAlignment(Pos.CENTER_LEFT);
 
@@ -332,8 +320,7 @@ public class NotificationPanelController {
         text.setAlignment(Pos.CENTER_LEFT);
         HBox.setHgrow(text, Priority.ALWAYS);
 
-        // ── Delete button — visible only on hover ─────────────────────────────
-        Button del = new Button("", makeFontIcon(FontAwesomeSolid.TIMES, 13, "#94A3B8"));
+        Button del = new Button("x");
         del.getStyleClass().add("notif-delete-x");
         del.setOpacity(0);
         del.setOnAction(e -> {
@@ -341,13 +328,11 @@ public class NotificationPanelController {
             refresh();
         });
 
-        // ── Card body ─────────────────────────────────────────────────────────
         HBox body = new HBox(12, iconBadge, text, del);
         body.setAlignment(Pos.CENTER_LEFT);
         body.setPadding(new Insets(11, 10, 11, 12));
         HBox.setHgrow(text, Priority.ALWAYS);
 
-        // ── Assemble card ─────────────────────────────────────────────────────
         HBox card = new HBox(bar, body);
         card.setFillHeight(true);
         card.getStyleClass().add(n.isRead() ? "notif-card-read" : "notif-card-unread");
@@ -366,7 +351,6 @@ public class NotificationPanelController {
         return card;
     }
 
-    // ── Helpers ───────────────────────────────────────────────────────────────
 
     private FontIcon makeFontIcon(FontAwesomeSolid icon, int size, String hexColor) {
         FontIcon fi = new FontIcon(icon);
@@ -386,7 +370,6 @@ public class NotificationPanelController {
         return createdAt.format(DateTimeFormatter.ofPattern("MMM d, h:mm a"));
     }
 
-    /** Accent bar color */
     private String typeColor(String type) {
         return switch (type) {
             case "JOINED"      -> "#5DAE52";
@@ -396,7 +379,6 @@ public class NotificationPanelController {
         };
     }
 
-    /** Icon badge background */
     private String typeBgColor(String type) {
         return switch (type) {
             case "JOINED"      -> "#EAFAF0";
@@ -406,7 +388,6 @@ public class NotificationPanelController {
         };
     }
 
-    /** Icon foreground color — must contrast against typeBgColor */
     private String typeIconColor(String type) {
         return switch (type) {
             case "JOINED"      -> "#5DAE52";
@@ -416,7 +397,6 @@ public class NotificationPanelController {
         };
     }
 
-    /** FontAwesome glyph per notification type */
     private FontAwesomeSolid typeIcon(String type) {
         return switch (type) {
             case "JOINED"      -> FontAwesomeSolid.USER_CHECK;

@@ -2,10 +2,13 @@ package com.javafx.csit228capstone.screens.queue;
 
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.Form;
+import com.javafx.csit228capstone.screens.NotificationPanelController;
 import com.javafx.csit228capstone.utils.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.StageStyle;
 
@@ -36,6 +39,9 @@ public class QueueReviewController {
     @FXML private RadioButton       pwdRadio;
     @FXML private RadioButton       seniorRadio;
     @FXML private RadioButton       pregnantRadio;
+    @FXML private StackPane reviewRoot;
+    private NotificationPanelController notifPanelCtrl;
+    @FXML private Pane notification;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
     private final FormManager formManager = FormManager.getInstance();
@@ -68,7 +74,10 @@ public class QueueReviewController {
 
     @FXML
     public void initialize() {
+        notifPanelCtrl = new  NotificationPanelController(reviewRoot);
         AnimationHelper.fadeIn(reviewScreen);
+        AnimationHelper.ringAnimation(notification);
+        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
         // Radio
         maleRadio.setUserData("Male");
         femaleRadio.setUserData("Female");

@@ -1,6 +1,7 @@
 package com.javafx.csit228capstone.screens.Account;
 
 import com.javafx.csit228capstone.helper.MenuController;
+import com.javafx.csit228capstone.screens.NotificationPanelController;
 import com.javafx.csit228capstone.utils.AnimationHelper;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import com.javafx.csit228capstone.utils.SessionManager;
@@ -11,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,11 +26,15 @@ public class ChangePasswordController implements Initializable {
     @FXML private Button saveBtn;
     @FXML private Button cancelBtn;
     @FXML private Pane notification;
+    @FXML private StackPane changeRoot;
+    private NotificationPanelController notifPanelCtrl;
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        notifPanelCtrl = new  NotificationPanelController(changeRoot);
         AnimationHelper.ringAnimation(notification);
+        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
 
             menuController.setActiveButton(menuController.getAccountBtn());
             cancelBtn.setOnAction(e -> onBack());

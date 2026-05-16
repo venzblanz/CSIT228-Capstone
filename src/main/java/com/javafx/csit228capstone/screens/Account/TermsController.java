@@ -1,6 +1,7 @@
 package com.javafx.csit228capstone.screens.Account;
 
 import com.javafx.csit228capstone.helper.MenuController;
+import com.javafx.csit228capstone.screens.NotificationPanelController;
 import com.javafx.csit228capstone.utils.AnimationHelper;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,10 +25,14 @@ public class TermsController implements Initializable {
     @FXML private CheckBox agreeCheckBox;
     @FXML private Button confirmBtn;
     @FXML private Pane notification;
+    @FXML private StackPane termsRoot;
+    private NotificationPanelController notifPanelCtrl;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        notifPanelCtrl = new  NotificationPanelController(termsRoot);
         AnimationHelper.ringAnimation(notification);
+        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
         if (menuController != null) {
             menuController.setActiveButton(menuController.getAccountBtn());
         }

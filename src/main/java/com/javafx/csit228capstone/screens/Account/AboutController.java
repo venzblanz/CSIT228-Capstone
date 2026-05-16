@@ -1,12 +1,14 @@
 package com.javafx.csit228capstone.screens.Account;
 
 import com.javafx.csit228capstone.helper.MenuController;
+import com.javafx.csit228capstone.screens.NotificationPanelController;
 import com.javafx.csit228capstone.utils.AnimationHelper;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,10 +18,14 @@ public class AboutController implements Initializable {
     @FXML private MenuController menuController;
     @FXML private HBox backBtnRow;
     @FXML private Pane notification;
+    @FXML private StackPane aboutRoot;
+    private NotificationPanelController notifPanelCtrl;
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         AnimationHelper.ringAnimation(notification);
+        notifPanelCtrl = new  NotificationPanelController(aboutRoot);
+        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
         if (menuController != null) {
             menuController.setActiveButton(menuController.getAccountBtn());
         }
