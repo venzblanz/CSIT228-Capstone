@@ -1,7 +1,5 @@
 .dialog-pane {
     -fx-background-color: white;
-    -fx-border-color: #1F7FC4;
-    -fx-border-width: 2;
 }
 
 .dialog-pane .content.label {

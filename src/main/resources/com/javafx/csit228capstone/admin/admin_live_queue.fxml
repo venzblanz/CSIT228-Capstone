@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+
+<BorderPane minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="800.0" prefWidth="1280.0"
+            maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+            stylesheets="@../../../../styles/dashboard.css,@../../../../styles/live_queue.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.javafx.csit228capstone.screens.admin.AdminLiveQueueController">
+
+    <left>
+        <fx:include fx:id="menu" source="admin_menu_pane.fxml" />
+    </left>
+
+    <center>
+        <VBox fx:id="mainContent" styleClass="main-pane" spacing="0">
+            <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="10.0"
+                  style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+                <padding><Insets left="30.0" right="30.0" /></padding>
+                <children>
+                    <Label text="Live Queue" styleClass="screen-label" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Label fx:id="refreshLabel" text="🔄 Auto-refreshing..."
+                           style="-fx-text-fill: #64748B; -fx-font-size: 12px;" />
+                    <Button fx:id="fullscreenBtn" text="⛶ Fullscreen"
+                            styleClass="login-register-button"
+                            prefHeight="35.0" prefWidth="120.0"
+                            onAction="#toggleFullscreen" />
+                </children>
+            </HBox>
+
+            <HBox fx:id="tabBar" alignment="CENTER_LEFT" prefHeight="50.0" spacing="5.0"
+                  style="-fx-background-color: white; -fx-border-color: #E2E8F0; -fx-border-width: 0 0 2 0;">
+                <padding><Insets left="30.0" right="30.0" /></padding>
+                <children>
+                    <Button fx:id="tabAll" text="All" styleClass="queue-tab-active" onAction="#onTabAll" />
+                    <Button fx:id="tabDiag" text="Diagnostics &amp; Lab" styleClass="queue-tab" onAction="#onTabDiag" />
+                    <Button fx:id="tabWomens" text="Women's Health" styleClass="queue-tab" onAction="#onTabWomens" />
+                    <Button fx:id="tabGeneral" text="General Wellness" styleClass="queue-tab" onAction="#onTabGeneral" />
+                    <Button fx:id="tabSpecialized" text="Specialized Fields" styleClass="queue-tab" onAction="#onTabSpecialized" />
+                </children>
+            </HBox>
+
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="scroll-pane">
+                <content>
+                    <VBox fx:id="queueContent" spacing="20.0">
+                        <padding><Insets bottom="30.0" left="30.0" right="30.0" top="30.0" /></padding>
+                        <children>
+
+                            <VBox fx:id="nowServingCard" styleClass="now-serving-card" alignment="CENTER" spacing="10.0">
+                                <padding><Insets bottom="30.0" left="30.0" right="30.0" top="30.0" /></padding>
+                                <children>
+                                    <Label text="NOW SERVING" styleClass="now-serving-label" />
+                                    <Label fx:id="nowServingNumber" text="---" styleClass="now-serving-number" />
+                                    <Label fx:id="nowServingDept" text="---" styleClass="now-serving-dept" />
+                                    <Label fx:id="nowServingStaff" text="---" styleClass="now-serving-staff" />
+                                </children>
+                            </VBox>
+
+                            <Label text="WAITING" styleClass="section-header" />
+                            <HBox fx:id="waitingCards" spacing="15.0" />
+
+                            <Label text="COMPLETED / CANCELLED" styleClass="section-header" />
+                            <HBox fx:id="doneCards" spacing="15.0" />
+
+                            <Label fx:id="emptyLabel" text="No queue entries found."
+                                   style="-fx-text-fill: #64748B; -fx-font-size: 18px;" visible="false" />
+                        </children>
+                    </VBox>
+                </content>
+            </ScrollPane>
+        </VBox>
+    </center>
+</BorderPane>

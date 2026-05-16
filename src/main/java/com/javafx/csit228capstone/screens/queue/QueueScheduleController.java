@@ -1,6 +1,7 @@
 package com.javafx.csit228capstone.screens.queue;
 
 import com.javafx.csit228capstone.helper.MenuController;
+import com.javafx.csit228capstone.utils.AnimationHelper;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,6 +30,7 @@ public class QueueScheduleController implements Initializable{
     @FXML private Button previousButton;
     @FXML private Button confirmButton;
     @FXML private VBox timeSlotsContainer;
+    @FXML private VBox schedScreen;
 
     private YearMonth currentYearMonth;
     private LocalDate selectedDate;
@@ -57,6 +59,7 @@ public class QueueScheduleController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        AnimationHelper.fadeIn(schedScreen);
         today = LocalDate.now();
         selectedDate = today;
         currentYearMonth = YearMonth.from(today);

@@ -6,6 +6,7 @@ import com.javafx.csit228capstone.model.QueueInsertValue;
 import com.javafx.csit228capstone.model.QueueTicket;
 import com.javafx.csit228capstone.utils.*;
 import com.mysql.cj.Session;
+import javafx.animation.Animation;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -39,6 +40,7 @@ public class QueueNumberController {
     @FXML private Label patientIdLabel;
     @FXML private ImageView qQrImage;
     @FXML private VBox ticketCard;
+    @FXML private VBox ticketScreen;
 
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
@@ -89,6 +91,7 @@ public class QueueNumberController {
 
     @FXML
     public void initialize() {
+        AnimationHelper.fadeIn(ticketScreen);
         saveBtn.setOnAction(e -> onSave());
         doneBtn.setOnAction(e -> onDone());
     }

@@ -77,9 +77,10 @@ public class AdminDashboardController {
     private void loadRecentQueue() {
         try (Connection c = DatabaseConfig.getConnection();
              PreparedStatement ps = c.prepareStatement(
-                     "SELECT ql.queue_number, u.full_name, ql.department, ql.status, ql.created_at " +
+                     "SELECT ql.queue_number, p.full_name, ql.department, ql.status, ql.created_at " +
                              "FROM queue_line ql " +
                              "JOIN users u ON ql.user_id = u.user_id " +
+                             "JOIN patients p ON u.user_id = p.user_id " +
                              "ORDER BY ql.created_at DESC LIMIT 10")) {
 
             ResultSet rs = ps.executeQuery();

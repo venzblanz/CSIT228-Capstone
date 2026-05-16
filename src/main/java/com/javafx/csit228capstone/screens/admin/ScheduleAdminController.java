@@ -171,11 +171,19 @@ public class ScheduleAdminController implements Initializable {
 
     private void showAddServiceDialog(String timeSlot, HBox chipsBox, Button addBtn) {
         AddServiceDialog dialog = new AddServiceDialog(timeSlot, selectedDateLabel.getText(), service -> {
+            try {
+                if (service.isRecurring())
+                    scheduleDAO.addRecurringServiceToSlot(selectedDate.getDayOfWeek().getValue(), timeSlot, service.getServiceId());
+                else
+                    scheduleDAO.addOneTimeServiceToSlot(selectedDate, timeSlot, service.getServiceId());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             slotServices.get(timeSlot).add(service);
             HBox chip = buildChip(service, timeSlot, chipsBox);
             int addIndex = chipsBox.getChildren().indexOf(addBtn);
             chipsBox.getChildren().add(addIndex, chip);
-        });
+        }, scheduleDAO);
         dialog.show(timeSlotsContainer.getScene().getWindow());
     }
 

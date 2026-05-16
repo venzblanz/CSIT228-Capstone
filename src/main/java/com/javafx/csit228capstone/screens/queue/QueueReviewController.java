@@ -6,6 +6,7 @@ import com.javafx.csit228capstone.utils.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.StageStyle;
 
 import java.util.Optional;
@@ -17,6 +18,7 @@ public class QueueReviewController {
     @FXML private Button nextBtn;
     @FXML private ImageView backIconBtn;
     @FXML private Label backBtn;
+    @FXML private VBox reviewScreen;
 
     // Form
     @FXML private TextField         fnameField;
@@ -66,6 +68,7 @@ public class QueueReviewController {
 
     @FXML
     public void initialize() {
+        AnimationHelper.fadeIn(reviewScreen);
         // Radio
         maleRadio.setUserData("Male");
         femaleRadio.setUserData("Female");
@@ -94,7 +97,6 @@ public class QueueReviewController {
             alert.setTitle("Confirmation");
             alert.setHeaderText(null);
             alert.setContentText("Are you sure all the information is correct?");
-            alert.initStyle(StageStyle.UNDECORATED);
             alert.getDialogPane().getStylesheets().add(
                     getClass().getResource("/styles/alert.css").toExternalForm()
             );

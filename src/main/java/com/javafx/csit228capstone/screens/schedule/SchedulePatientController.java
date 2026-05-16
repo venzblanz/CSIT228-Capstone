@@ -33,15 +33,17 @@ public class SchedulePatientController implements Initializable {
     @FXML private Button nextMonthButton;
     @FXML private VBox timeSlotsContainer;
 
+    @FXML private com.javafx.csit228capstone.helper.MenuController menuController;
+
     private YearMonth currentYearMonth;
     private LocalDate selectedDate;
     private LocalDate today;
 
-    private final Map<String, List<Service>> slotServices = new LinkedHashMap<>();
-    @FXML
-    private com.javafx.csit228capstone.helper.MenuController menuController;
-    private final ScheduleDAO scheduleDAO = new ScheduleDAO(DatabaseConfig.getConnection());
+    // track active category filter (null = show all)
+    private String activeCategory = null;
 
+    private final Map<String, List<Service>> slotServices = new LinkedHashMap<>();
+    private final ScheduleDAO scheduleDAO = new ScheduleDAO(DatabaseConfig.getConnection());
 
     private static final String CLOSING_TIME = "5:00 PM";
 
@@ -55,8 +57,6 @@ public class SchedulePatientController implements Initializable {
             DateTimeFormatter.ofPattern("MMMM yyyy");
     private static final DateTimeFormatter DATE_HEADER_FORMATTER =
             DateTimeFormatter.ofPattern("EEEE, MMMM d");
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -90,6 +90,8 @@ public class SchedulePatientController implements Initializable {
         searchField.textProperty().addListener((obs, oldVal, newVal) -> handleSearch(newVal));
     }
 
+    // ─── Load from DB ─────────────────────────────────────────────────────────
+
     private void loadServicesForDate(LocalDate date) {
         for (String slot : TIME_SLOTS) {
             slotServices.put(slot, new ArrayList<>());
@@ -102,12 +104,12 @@ public class SchedulePatientController implements Initializable {
         }
     }
 
+    // ─── Time Slot Rendering ──────────────────────────────────────────────────
+
     private void renderTimeSlots() {
         timeSlotsContainer.getChildren().clear();
-
         for (String timeSlot : TIME_SLOTS) {
-            HBox row = buildTimeRow(timeSlot);
-            timeSlotsContainer.getChildren().add(row);
+            timeSlotsContainer.getChildren().add(buildTimeRow(timeSlot));
         }
     }
 
@@ -132,12 +134,19 @@ public class SchedulePatientController implements Initializable {
             HBox.setHgrow(chipsBox, Priority.ALWAYS);
 
             List<Service> services = slotServices.get(timeSlot);
-            if (services.isEmpty()) {
+
+            // apply category filter
+            List<Service> filtered = (activeCategory == null) ? services :
+                    services.stream()
+                    .filter(s -> s.getServiceType().equals(activeCategory))
+                    .toList();
+
+            if (filtered.isEmpty()) {
                 Label emptyLabel = new Label("—");
                 emptyLabel.getStyleClass().add("closed-label");
                 chipsBox.getChildren().add(emptyLabel);
             } else {
-                for (Service service : services) {
+                for (Service service : filtered) {
                     chipsBox.getChildren().add(buildChip(service));
                 }
             }
@@ -162,6 +171,22 @@ public class SchedulePatientController implements Initializable {
         chip.getChildren().addAll(dot, nameLabel);
         return chip;
     }
+
+    // ─── Category Filter ──────────────────────────────────────────────────────
+
+    private void setActiveCategory(String category) {
+        // toggle off if same category clicked again
+        activeCategory = category.equals(activeCategory) ? null : category;
+        scheduleLabel.setText(activeCategory != null ? activeCategory : "Schedule");
+        renderTimeSlots();
+    }
+
+    @FXML private void onClickBtnGeneralWellness()   { setActiveCategory("General Wellness"); }
+    @FXML private void onClickBtnWomenHealth()        { setActiveCategory("Women's Health"); }
+    @FXML private void onClickBtnSpecializedFields()  { setActiveCategory("Specialized Fields"); }
+    @FXML private void onClickBtnDiagnosticsLab()     { setActiveCategory("Diagnostics & Laboratory"); }
+
+    // ─── Search ───────────────────────────────────────────────────────────────
 
     private void handleSearch(String query) {
         if (query == null || query.isBlank()) {
@@ -195,6 +220,8 @@ public class SchedulePatientController implements Initializable {
         });
     }
 
+    // ─── Calendar ─────────────────────────────────────────────────────────────
+
     private void renderCalendar() {
         calendarGrid.getChildren().clear();
         monthYearLabel.setText(currentYearMonth.format(MONTH_YEAR_FORMATTER));
@@ -206,8 +233,7 @@ public class SchedulePatientController implements Initializable {
         int prevMonthDays = prevMonth.lengthOfMonth();
         for (int i = 0; i < firstDayOfWeek; i++) {
             int day = prevMonthDays - firstDayOfWeek + i + 1;
-            Label lbl = createDayLabel(String.valueOf(day), "cal-cell-inactive");
-            calendarGrid.add(lbl, i, 0);
+            calendarGrid.add(createDayLabel(String.valueOf(day), "cal-cell-inactive"), i, 0);
         }
 
         int col = firstDayOfWeek;
@@ -224,8 +250,7 @@ public class SchedulePatientController implements Initializable {
 
         int nextDay = 1;
         while (col != 0) {
-            Label lbl = createDayLabel(String.valueOf(nextDay++), "cal-cell-inactive");
-            calendarGrid.add(lbl, col, row);
+            calendarGrid.add(createDayLabel(String.valueOf(nextDay++), "cal-cell-inactive"), col, row);
             col++;
             if (col == 7) col = 0;
         }
@@ -236,21 +261,25 @@ public class SchedulePatientController implements Initializable {
         btn.setMaxWidth(Double.MAX_VALUE);
         btn.setAlignment(Pos.CENTER);
 
-        if (date.equals(selectedDate)) {
-            btn.getStyleClass().add("cal-cell-selected");
-        } else if (date.equals(today)) {
-            btn.getStyleClass().add("cal-cell-today");
-        } else {
-            btn.getStyleClass().add("cal-cell");
-        }
+        boolean isPast = date.isBefore(today);
 
-        btn.setOnAction(e -> {
-            selectedDate = date;
-            renderCalendar();
-            updateDateHeader();
-            loadServicesForDate(selectedDate);
-            renderTimeSlots();
-        });
+        if (date.equals(selectedDate))      btn.getStyleClass().add("cal-cell-selected");
+        else if (date.equals(today))        btn.getStyleClass().add("cal-cell-today");
+        else if (isPast)                    btn.getStyleClass().add("cal-cell-inactive");
+        else                                btn.getStyleClass().add("cal-cell");
+
+        // patients can only select today or future dates
+        if (!isPast) {
+            btn.setOnAction(e -> {
+                selectedDate = date;
+                renderCalendar();
+                updateDateHeader();
+                loadServicesForDate(selectedDate);
+                renderTimeSlots();
+            });
+        } else {
+            btn.setDisable(true);
+        }
 
         return btn;
     }
@@ -266,11 +295,6 @@ public class SchedulePatientController implements Initializable {
     private void updateDateHeader() {
         selectedDateLabel.setText(selectedDate.format(DATE_HEADER_FORMATTER));
     }
-
-    @FXML private void onClickBtnGeneralWellness()     { scheduleLabel.setText("General Wellness"); }
-    @FXML private void onClickBtnWomenHealth()     { scheduleLabel.setText("Women's Health"); }
-    @FXML private void onClickBtnSpecializedFields() { scheduleLabel.setText("Specialized Fields"); }
-    @FXML private void onClickBtnDiagnosticsLab()  { scheduleLabel.setText("Diagnostics & Laboratory"); }
 
     public LocalDate getSelectedDate() { return selectedDate; }
 }

@@ -16,7 +16,6 @@ public class DatabaseConfig {
 
         try{
             c = DriverManager.getConnection(URL,USER,PASS);
-            System.out.println("Connected to the database successfully");
         }catch (SQLException e){
             e.printStackTrace();
         }

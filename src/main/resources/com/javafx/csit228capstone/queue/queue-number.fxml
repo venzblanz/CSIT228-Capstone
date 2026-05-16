@@ -20,7 +20,7 @@
     </left>
 
     <center>
-        <VBox fillWidth="true" styleClass="main-pane" BorderPane.alignment="CENTER">
+        <VBox fx:id="ticketScreen" fillWidth="true" styleClass="main-pane" BorderPane.alignment="CENTER">
 
             <children>
 
@@ -31,8 +31,14 @@
 
                         <Region HBox.hgrow="ALWAYS" />
 
-                        <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="notification-icon" />
+                        <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="notification-icon">
+                     <HBox.margin>
+                        <Insets top="1.0" />
+                     </HBox.margin></Pane>
                     </children>
+               <VBox.margin>
+                  <Insets right="3.0" />
+               </VBox.margin>
                 </HBox>
 
                 <Region VBox.vgrow="ALWAYS" />

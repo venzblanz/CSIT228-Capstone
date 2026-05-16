@@ -23,7 +23,7 @@
         <fx:include fx:id="menu" source="../menu-pane.fxml" />
     </left>
     <center>
-        <VBox fillWidth="true" styleClass="main-pane" BorderPane.alignment="CENTER">
+        <VBox fx:id="schedScreen" fillWidth="true" styleClass="main-pane" BorderPane.alignment="CENTER">
             <children>
 
                 <!-- Top bar: title + notification -->
@@ -33,8 +33,14 @@
                             <font><Font size="24.0" /></font>
                         </Label>
                         <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                        <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="notification-icon" />
+                        <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="notification-icon">
+                     <HBox.margin>
+                        <Insets top="1.0" />
+                     </HBox.margin></Pane>
                     </children>
+               <VBox.margin>
+                  <Insets right="3.0" />
+               </VBox.margin>
                 </HBox>
 
                 <!-- Section title -->
@@ -46,7 +52,10 @@
                 <!-- Search bar -->
                 <HBox alignment="CENTER" prefHeight="37.0" prefWidth="485.0" spacing="0.0" styleClass="search-bar">
                     <children>
-                        <TextField fx:id="searchField" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="453.0" promptText="" styleClass="search-field" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="searchField" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="453.0" promptText="" styleClass="search-field" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="14.0" />
+                     </HBox.margin></TextField>
                         <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="36.0" prefWidth="35.0" styleClass="search-button">
                             <graphic>
                                 <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
@@ -66,7 +75,7 @@
                      </HBox.margin>
                         </Button>
                     </children>
-                    <VBox.margin><Insets bottom="12.0" /></VBox.margin>
+                    <VBox.margin><Insets bottom="12.0" left="10.0" /></VBox.margin>
                 </HBox>
 
                 <!-- Main content: schedule list + calendar -->
@@ -333,6 +342,9 @@
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
+                     <HBox.margin>
+                        <Insets left="13.0" />
+                     </HBox.margin>
                         </VBox>
 
                         <!-- Calendar panel -->
@@ -416,6 +428,9 @@
                                 </HBox>
 
                             </children>
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
                         </VBox>
 
                     </children>
