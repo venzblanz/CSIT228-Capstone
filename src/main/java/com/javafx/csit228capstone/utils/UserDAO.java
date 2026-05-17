@@ -17,8 +17,9 @@ public class UserDAO {
 
     // authentication
     public static User authenticate(String email, String password) {
+        // UPDATED SQL: Added uu.status to the select fields to check the user's account state
         String sql = "SELECT u.user_id, u.email, u.password, u.role, " +
-                "uu.full_name, uu.mobile_number " +
+                "uu.full_name, uu.mobile_number, uu.status " +
                 "FROM users u " +
                 "LEFT JOIN patients uu ON u.user_id = uu.user_id " +
                 "WHERE u.email = ? " +
@@ -28,8 +29,17 @@ public class UserDAO {
             ps.setString(1, email);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    String storedPass = rs.getString("password"); // ← add this line
-                    if (!storedPass.equals(password)) return null; // ← check password
+                    String storedPass = rs.getString("password");
+                    if (!storedPass.equals(password)) return null;
+
+
+                    String status = rs.getString("status");
+                    String role = rs.getString("role");
+
+                    if (!"admin".equalsIgnoreCase(role) && status != null && !"active".equalsIgnoreCase(status.trim())) {
+                        System.out.println("[UserDAO Login Guard] Denied: User account is " + status);
+                        return null;
+                    }
 
                     String fullName = rs.getString("full_name");
                     if (fullName == null || fullName.isEmpty()) {
@@ -77,7 +87,7 @@ public class UserDAO {
             int newUserId = keys.getInt(1);
 
             // Insert into users_update
-            String sql2 = "INSERT INTO patients (user_id, full_name, mobile_number) VALUES (?, ?, ?)";
+            String sql2 = "INSERT INTO patients (user_id, full_name, mobile_number, status) VALUES (?, ?, ?, ?)";
             PreparedStatement ps2 = c.prepareStatement(sql2);
             ps2.setInt(1, newUserId);
             ps2.setString(2, fullname);
