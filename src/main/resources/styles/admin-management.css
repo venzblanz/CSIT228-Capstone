@@ -1,0 +1,104 @@
+/* --- Core Styles & Variable Colors --- */
+.root {
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* --- Section Dashboard Cards --- */
+.section-card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.04), 12px, 0, 0, 4px);
+}
+
+/* --- Form Fields & Inputs --- */
+.text-field {
+    -fx-background-color: #F1F5F9;
+    -fx-background-radius: 8px;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 8px;
+    -fx-text-fill: #1E293B;
+    -fx-font-size: 14px;
+}
+.text-field:focused {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #0284C7;
+}
+
+/* --- Inline Combo Box Structural Theme Fixes --- */
+.combo-box {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CBD5E1;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-text-fill: #1E293B !important;
+}
+.combo-box:focused {
+    -fx-border-color: #0284C7;
+}
+.combo-box .cell {
+    -fx-text-fill: #1E293B !important;
+}
+.combo-box .list-cell {
+    -fx-text-fill: #1E293B !important;
+    -fx-background-color: #FFFFFF;
+}
+.combo-box .list-cell:hover {
+    -fx-background-color: #F1F5F9;
+}
+
+/* --- Clean Actions Utility Button --- */
+.btn-clear {
+    -fx-background-color: #64748B;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 18px;
+    -fx-cursor: hand;
+}
+.btn-clear:hover {
+    -fx-background-color: #475569;
+}
+
+/* --- Fine-Tuned Table View Responsive Structural Alignments --- */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-base: transparent;
+}
+
+/* Header Sections Alignment and Colors */
+.table-view .column-header {
+    -fx-background-color: #0284C7;
+    -fx-size: 45px;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+/* Clean Row Layout Adjustments */
+.table-row-cell {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #F1F5F9;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 6px 0;
+}
+
+/* Selection Override Highlight Filter */
+.table-view .table-row-cell:selected {
+    -fx-background-color: #E2E8F0 !important;
+}
+
+/* CELL TEXT LEVEL ALIGNMENTS */
+.table-cell {
+    -fx-font-size: 14px;
+    -fx-text-fill: #334155 !important;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 15px 0 15px;
+}
+
+
+#colId, #colStatus, #colAction {
+    -fx-alignment: CENTER;
+}

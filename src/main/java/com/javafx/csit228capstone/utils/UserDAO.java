@@ -82,6 +82,8 @@ public class UserDAO {
             ps2.setInt(1, newUserId);
             ps2.setString(2, fullname);
             ps2.setString(3, mobilenumber);
+            ps2.setString(4, "active");
+
             ps2.executeUpdate();
 
             c.commit();
@@ -120,13 +122,14 @@ public class UserDAO {
             ps.setInt(1, userId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    User user = new User(); // This will not be red if User() {} exists in User.java
+                    User user = new User();
                     user.setUserID(rs.getInt("user_id"));
                     user.setFullname(rs.getString("full_name"));
                     user.setMobilenumber(rs.getString("mobile_number"));
                     user.setBirthday(rs.getString("birthday"));
                     user.setGender(rs.getString("gender"));
                     user.setAddress(rs.getString("address"));
+                    user.setStatus(rs.getString("status"));
                     return user;
                 }
             }
@@ -254,6 +257,22 @@ public class UserDAO {
                 return rs.next();
             }
         } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean updatePatientStatusByPatientId(int patientId, String newStatus) {
+        String sql = "UPDATE patients SET status = ? WHERE patient_id = ?";
+        try (Connection c = DatabaseConfig.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setString(1, newStatus.toLowerCase().trim());
+            ps.setInt(2, patientId);
+
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("[UserDAO] Error updating status by patient_id: " + e.getMessage());
             e.printStackTrace();
             return false;
         }

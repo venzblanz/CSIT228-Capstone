@@ -42,6 +42,19 @@ public class EditProfileController implements Initializable {
         menuController.setActiveButton(menuController.getAccountBtn());
         AnimationHelper.ringAnimation(notification);
 
+        // ====== UI RESTRECTIONS: GRAY OUT FUTURE DATES ======
+        birthdayDatePicker.setDayCellFactory(param -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                // If the calendar grid date element is after today, completely lock it up
+                if (date != null && date.isAfter(LocalDate.now())) {
+                    setDisable(true);
+                    setStyle("-fx-background-color: #E2E8F0; -fx-text-fill: #94A3B8;"); // Minimal modern gray look
+                }
+            }
+        });
+
         User currentUser = SessionManager.getInstance().getCurrentUser();
         User latestData = UserDAO.getLatestUpdate(currentUser.getUserID());
 
@@ -72,8 +85,13 @@ public class EditProfileController implements Initializable {
 
         birthdayDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                int age = java.time.Period.between(newValue, java.time.LocalDate.now()).getYears();
-                ageField.setText(String.valueOf(age));
+                // Prevent showing weird negative age counts if a manual string gets bypassed
+                if (newValue.isAfter(LocalDate.now())) {
+                    ageField.setText("0");
+                } else {
+                    int age = java.time.Period.between(newValue, java.time.LocalDate.now()).getYears();
+                    ageField.setText(String.valueOf(age));
+                }
             }
         });
 
@@ -121,10 +139,11 @@ public class EditProfileController implements Initializable {
             SessionManager.getInstance().setPendingImageFile(selectedFile);
         }
     }
-    private void onCancel() {
-       handleCancel();
 
+    private void onCancel() {
+        handleCancel();
     }
+
     private void onUpdate(){
         handleUpdate();
     }
@@ -138,6 +157,17 @@ public class EditProfileController implements Initializable {
 
     @FXML
     private void handleUpdate() {
+        // ====== LOGIC VERIFICATION: BACKEND STOP FOR FUTURE DATES ======
+        LocalDate chosenDate = birthdayDatePicker.getValue();
+        if (chosenDate != null && chosenDate.isAfter(LocalDate.now())) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Invalid Birth Date");
+            alert.setHeaderText("Date Field Entry Error");
+            alert.setContentText("You cannot select a birthday that has not happened yet! Please choose a valid date.");
+            alert.showAndWait();
+            return; // Hard cancel out of the update stream immediately
+        }
+
         User currentUser = SessionManager.getInstance().getCurrentUser();
         User pendingUpdate = new User();
         pendingUpdate.setUserID(currentUser.getUserID());
@@ -152,8 +182,7 @@ public class EditProfileController implements Initializable {
             pendingUpdate.setGender(genderComboBox.getValue());
         }
 
-      SessionManager.getInstance().setPendingUpdate(pendingUpdate);
-
+        SessionManager.getInstance().setPendingUpdate(pendingUpdate);
 
         sceneNavigator.navigate(
                 "/com/javafx/csit228capstone/account/confirmpassword.fxml",

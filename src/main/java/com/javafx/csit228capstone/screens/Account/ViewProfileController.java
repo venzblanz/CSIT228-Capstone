@@ -33,29 +33,64 @@ public class ViewProfileController implements Initializable {
     @FXML private Pane notification;
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
 
+    // A flag to keep track of whether an admin is viewing a specific patient row
+    private boolean isPatientViewMode = false;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         AnimationHelper.ringAnimation(notification);
-        User currentUser = SessionManager.getInstance().getCurrentUser();
 
-        if (currentUser != null) {
-            User pendingData = UserDAO.getLatestUpdate(currentUser.getUserID());
+        // Fixes the active button state highlight on your sidebar menu layout wrapper
+        if (menuController != null && menuController.getAccountBtn() != null) {
+            menuController.setActiveButton(menuController.getAccountBtn());
+        }
 
-            if (pendingData != null) {
-                displayUser(pendingData);
-                emailLabel.setText(currentUser.getEmail());
+        // ONLY auto-load the current user session details if an admin didn't inject data externally
+        if (!isPatientViewMode) {
+            User currentUser = SessionManager.getInstance().getCurrentUser();
 
-                ImageUtils.loadUpdateImage(currentUser.getUserID(), profileImageView);
-            } else {
-                displayUser(currentUser);
-                ImageUtils.loadProfileImage(currentUser.getUserID(), profileImageView);
+            if (currentUser != null) {
+                User pendingData = UserDAO.getLatestUpdate(currentUser.getUserID());
+
+                if (pendingData != null) {
+                    displayUser(pendingData);
+                    emailLabel.setText(currentUser.getEmail());
+                    ImageUtils.loadUpdateImage(currentUser.getUserID(), profileImageView);
+                } else {
+                    displayUser(currentUser);
+                    emailLabel.setText(currentUser.getEmail());
+                    ImageUtils.loadProfileImage(currentUser.getUserID(), profileImageView);
+                }
             }
         }
+
         editProfileBtn.setOnAction(e -> SceneNavigator.getInstance().navigate(
                 "/com/javafx/csit228capstone/account/edit_profile.fxml",
                 editProfileBtn,
                 "/styles/account-edit.css"
         ));
+    }
+
+    // ====== ADDED METHOD 1: Receives the admin's selected row user payload data cleanly ======
+    public void setPatientView(User user) {
+        if (user != null) {
+            this.isPatientViewMode = true; // Flips the safety toggle flag
+
+            displayUser(user);
+
+            // Map email properties cleanly out of the user domain record instance payload
+            if (emailLabel != null) {
+                emailLabel.setText(user.getEmail() != null ? user.getEmail() : "N/A");
+            }
+
+            // Load their current update picture profile layout bounds dynamically
+            ImageUtils.loadProfileImage(user.getUserID(), profileImageView);
+        }
+    }
+
+    // ====== ADDED METHOD 2: Gives Admin Controller secure getter exposure link hooks ======
+    public Button getEditProfileBtn() {
+        return editProfileBtn; // Maps exactly onto your @FXML field variable reference name element!
     }
 
     private void displayUser(User user) {
@@ -82,6 +117,7 @@ public class ViewProfileController implements Initializable {
         String formattedId = PatientIdGenerator.getPatientId(user.getUserID());
         profileIdHeader.setText("Patient ID: " + formattedId);
     }
+
     private void loadProfileData() {
         User currentUser = SessionManager.getInstance().getCurrentUser();
         if (currentUser == null) return;
@@ -96,7 +132,6 @@ public class ViewProfileController implements Initializable {
         }
     }
 
-
     @FXML
     private void handleEditProfile() {
         sceneNavigator.navigate(
@@ -105,6 +140,7 @@ public class ViewProfileController implements Initializable {
                 "/styles/account-edit.css"
         );
     }
+
     @FXML
     private void handleBack() {
         SceneNavigator.getInstance().navigate(
