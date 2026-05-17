@@ -1,249 +1,253 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<StackPane fx:id="queueRoot" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.queue.QueueController">
-   <children>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-          <left>
-              <fx:include fx:id="menu" source="../menu-pane.fxml" />
-          </left>
-          <center>
-            <ScrollPane fitToWidth="true" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
-               <content>
-                    <VBox fx:id="queueScreen" fillWidth="true" maxWidth="1.7976931348623157E308" styleClass="main-pane">
-                        <children>
-            
-                            <HBox alignment="CENTER" prefHeight="71.0">
-                                <children>
-                                    <Label fx:id="screenLabel" styleClass="screen-label" text="Queue">
-                                        <font>
-                                    <Font size="24.0" />
-                                 </font>
-                                    </Label>
-                                    <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                                    <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="notification-icon" />
-                                </children>
-                            </HBox>
-            
-                            <VBox fx:id="headerMessage" alignment="CENTER_LEFT">
-                                <children>
-                                    <Label text="What can we help you with?">
-                                        <font>
-                                    <Font name="System Bold" size="28.0" />
-                                 </font>
-                                    </Label>
-                                    <Label styleClass="recent" text="Choose a department to get started">
-                                        <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                    </Label>
-                                </children>
-                                <VBox.margin>
-                              <Insets bottom="10.0" top="10.0" />
-                           </VBox.margin>
-                            </VBox>
-                        <GridPane hgap="20.0" maxHeight="350.0" minHeight="340.0" vgap="20.0" VBox.vgrow="ALWAYS">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.queue.QueueController">
+    <left>
+        <fx:include fx:id="menu" source="../menu-pane.fxml" />
+    </left>
+    <center>
+      <ScrollPane fitToWidth="true" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+         <content>
+              <VBox fx:id="queueScreen" fillWidth="true" maxWidth="1.7976931348623157E308" styleClass="main-pane">
+                  <children>
+      
+                      <HBox alignment="CENTER" prefHeight="71.0">
+                          <children>
+                              <Label fx:id="screenLabel" styleClass="screen-label" text="Queue">
+                                  <font>
+                              <Font size="24.0" />
+                           </font>
+                              </Label>
+                              <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                              <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="notification-icon" />
+                          </children>
+                      </HBox>
+      
+                      <VBox fx:id="headerMessage" alignment="CENTER_LEFT">
+                          <children>
+                              <Label text="What can we help you with?">
+                                  <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                              </Label>
+                              <Label styleClass="recent" text="Choose a department to get started">
+                                  <font>
+                              <Font size="18.0" />
+                           </font>
+                              </Label>
+                          </children>
+                          <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                      </VBox>
+                  <GridPane hgap="20.0" maxHeight="350.0" minHeight="340.0" vgap="20.0" VBox.vgrow="ALWAYS">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <HBox fx:id="gwBtn" alignment="CENTER_LEFT" maxHeight="170.0" minHeight="170.0" styleClass="gw-card">
                            <children>
-                              <HBox fx:id="gwBtn" alignment="CENTER_LEFT" maxHeight="170.0" minHeight="170.0" styleClass="gw-card">
+                                          <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="6.0" styleClass="gw-color-bar">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Pane>
+                              <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="gw-icon-circle">
                                  <children>
-                                                <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="6.0" styleClass="gw-color-bar">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Pane>
-                                    <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="gw-icon-circle">
-                                       <children>
-                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="gw-icon" />
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="20.0" />
-                                       </HBox.margin>
-                                    </StackPane>
-                                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <Label styleClass="gw-label" text="General Wellness" />
-                                          <Label layoutX="10.0" layoutY="10.0" styleClass="gw-text" text="Primary care and general consultations. Including Checkups, Vaccinations, Basic Treatment, Vital Signs Check, and Health Counseling" wrapText="true" />
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                       </HBox.margin>
-                                    </VBox>
-                                    <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow-circle">
-                                       <children>
-                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow" />
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets right="20.0" />
-                                       </HBox.margin>
-                                    </StackPane>
+                                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="gw-icon" />
                                  </children>
-                              </HBox>
-                              <HBox fx:id="whBtn" alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="170.0" minHeight="170.0" styleClass="wh-card" GridPane.columnIndex="1">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </StackPane>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="6.0" styleClass="wh-color-bar">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Pane>
-                                    <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="wh-icon-circle">
-                                       <children>
-                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="wh-icon" />
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="20.0" />
-                                       </HBox.margin>
-                                    </StackPane>
-                                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <Label styleClass="wh-label" text="Women's Health" />
-                                          <Label layoutX="10.0" layoutY="10.0" styleClass="gw-text" text="Care tailored for women's wellness. Prenatal Checkups, Postnatal, Breast, and Menstrual concerns and more" wrapText="true" />
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                       </HBox.margin>
-                                    </VBox>
-                                    <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow-circle">
-                                       <children>
-                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow" />
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets right="20.0" />
-                                       </HBox.margin>
-                                    </StackPane>
+                                    <Label styleClass="gw-label" text="General Wellness" />
+                                    <Label layoutX="10.0" layoutY="10.0" styleClass="gw-text" text="Primary care and general consultations. Including Checkups, Vaccinations, Basic Treatment, Vital Signs Check, and Health Counseling" wrapText="true" />
                                  </children>
-                              </HBox>
-                              <HBox fx:id="dlBtn" alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="170.0" minHeight="170.0" styleClass="dl-card" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <HBox.margin>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow-circle">
                                  <children>
-                                    <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="6.0" styleClass="dl-color-bar">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Pane>
-                                    <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="dl-icon-circle">
-                                       <children>
-                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="dl-icon" />
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="20.0" />
-                                       </HBox.margin>
-                                    </StackPane>
-                                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <Label styleClass="dl-label" text="Diagnostics and Laboratory" />
-                                          <Label layoutX="10.0" layoutY="10.0" styleClass="gw-text" text="Advanced testing and diagnostics. That includes Blood tests, urinalysis and x-ray" wrapText="true" />
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                       </HBox.margin>
-                                    </VBox>
-                                    <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow-circle">
-                                       <children>
-                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow" />
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets right="20.0" />
-                                       </HBox.margin>
-                                    </StackPane>
+                                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow" />
                                  </children>
-                              </HBox>
-                              <HBox fx:id="sfBtn" alignment="CENTER_LEFT" layoutX="10.0" layoutY="190.0" maxHeight="170.0" minHeight="170.0" styleClass="sf-card" GridPane.rowIndex="1">
-                                 <children>
-                                    <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="6.0" styleClass="sf-color-bar">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Pane>
-                                    <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="sf-icon-circle">
-                                       <children>
-                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="sf-icon" />
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="20.0" />
-                                       </HBox.margin>
-                                    </StackPane>
-                                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <Label styleClass="sf-label" text="Specialized Field" />
-                                          <Label layoutX="10.0" layoutY="10.0" styleClass="gw-text" text="Expert care for specific conditions. Like Cardiology, Dermatology, Orthopedics, Pediatrics and many more" wrapText="true" />
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                       </HBox.margin>
-                                    </VBox>
-                                    <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow-circle">
-                                       <children>
-                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow" />
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets right="20.0" />
-                                       </HBox.margin>
-                                    </StackPane>
-                                 </children>
-                              </HBox>
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </StackPane>
                            </children>
-                           <VBox.margin>
-                              <Insets bottom="20.0" top="20.0" />
-                           </VBox.margin>
-                        </GridPane>
-            
-                            <HBox fillHeight="true" maxWidth="1.7976931348623157E308" spacing="10.0">
-                                <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                                <children>
-            
-                                    <VBox maxWidth="1.7976931348623157E308" minWidth="0" prefWidth="0" spacing="10.0" HBox.hgrow="ALWAYS" />
-            
-                                    <VBox maxWidth="1.7976931348623157E308" minWidth="0" prefWidth="0" spacing="10.0" HBox.hgrow="ALWAYS" />
-            
-                                </children>
-                            </HBox>
-            
-                            <HBox fx:id="activeQueue" alignment="CENTER" prefHeight="55.0">
-                                <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                                <children>
-                                    <Label text="Active Queue">
-                                        <font>
-                                    <Font name="SansSerif Bold" size="18.0" />
-                                 </font>
-                                    </Label>
-                                    <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                                    <Label fx:id="seeAllBtn" styleClass="see-all" text="See All">
-                                        <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                    </Label>
-                                </children>
-                            </HBox>
-                        <VBox fx:id="activeQueueContainer" alignment="CENTER" spacing="10.0">
-                           <VBox.margin>
-                              <Insets bottom="10.0" top="10.0" />
-                           </VBox.margin>
-                        </VBox>
-            
-                        </children>
-                        <padding>
-                            <Insets bottom="30.0" left="35.0" right="20.0" top="30.0" />
-                        </padding>
-                    </VBox>
-               </content>
-            </ScrollPane>
-          </center>
-      </BorderPane>
-   </children>
-</StackPane>
+                        </HBox>
+                        <HBox fx:id="whBtn" alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="170.0" minHeight="170.0" styleClass="wh-card" GridPane.columnIndex="1">
+                           <children>
+                              <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="6.0" styleClass="wh-color-bar">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Pane>
+                              <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="wh-icon-circle">
+                                 <children>
+                                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="wh-icon" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </StackPane>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label styleClass="wh-label" text="Women's Health" />
+                                    <Label layoutX="10.0" layoutY="10.0" styleClass="gw-text" text="Care tailored for women's wellness. Prenatal Checkups, Postnatal, Breast, and Menstrual concerns and more" wrapText="true" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow-circle">
+                                 <children>
+                                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="dlBtn" alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="170.0" minHeight="170.0" styleClass="dl-card" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="6.0" styleClass="dl-color-bar">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Pane>
+                              <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="dl-icon-circle">
+                                 <children>
+                                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="dl-icon" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </StackPane>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label styleClass="dl-label" text="Diagnostics and Laboratory" />
+                                    <Label layoutX="10.0" layoutY="10.0" styleClass="gw-text" text="Advanced testing and diagnostics. That includes Blood tests, urinalysis and x-ray" wrapText="true" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow-circle">
+                                 <children>
+                                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="sfBtn" alignment="CENTER_LEFT" layoutX="10.0" layoutY="190.0" maxHeight="170.0" minHeight="170.0" styleClass="sf-card" GridPane.rowIndex="1">
+                           <children>
+                              <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="6.0" styleClass="sf-color-bar">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Pane>
+                              <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="sf-icon-circle">
+                                 <children>
+                                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="70.0" styleClass="sf-icon" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </StackPane>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label styleClass="sf-label" text="Specialized Field" />
+                                    <Label layoutX="10.0" layoutY="10.0" styleClass="gw-text" text="Expert care for specific conditions. Like Cardiology, Dermatology, Orthopedics, Pediatrics and many more" wrapText="true" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow-circle">
+                                 <children>
+                                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="45.0" styleClass="arrow" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="20.0" />
+                     </VBox.margin>
+                  </GridPane>
+      
+                      <HBox fillHeight="true" maxWidth="1.7976931348623157E308" spacing="10.0">
+                          <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                          <children>
+      
+                              <VBox maxWidth="1.7976931348623157E308" minWidth="0" prefWidth="0" spacing="10.0" HBox.hgrow="ALWAYS" />
+      
+                              <VBox maxWidth="1.7976931348623157E308" minWidth="0" prefWidth="0" spacing="10.0" HBox.hgrow="ALWAYS" />
+      
+                          </children>
+                      </HBox>
+      
+                      <HBox fx:id="activeQueue" alignment="CENTER" prefHeight="55.0">
+                          <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                          <children>
+                              <Label text="Active Queue">
+                                  <font>
+                              <Font name="SansSerif Bold" size="18.0" />
+                           </font>
+                              </Label>
+                              <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                              <Label fx:id="seeAllBtn" styleClass="see-all" text="See All">
+                                  <font>
+                              <Font size="14.0" />
+                           </font>
+                              </Label>
+                          </children>
+                      </HBox>
+                  <VBox fx:id="activeQueueContainer" alignment="CENTER" spacing="10.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </VBox>
+      
+                  </children>
+                  <padding>
+                      <Insets bottom="30.0" left="35.0" right="20.0" top="30.0" />
+                  </padding>
+              </VBox>
+         </content>
+      </ScrollPane>
+    </center>
+</BorderPane>

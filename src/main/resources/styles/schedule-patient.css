@@ -144,7 +144,35 @@
     -fx-border-width: 1;
     -fx-cursor: hand;
 }
+
 .lbl-general-wellness { -fx-background-color: #D9EAF7; -fx-border-color: #C2DBEF; -fx-text-fill: #1A4A6B; }
 .lbl-womens-health    { -fx-background-color: #F7DDE6; -fx-border-color: #FFBCD3; -fx-text-fill: #7A2040; }
 .lbl-specialized      { -fx-background-color: #D5F1ED; -fx-border-color: #91F9EA; -fx-text-fill: #0A5C52; }
 .lbl-diagnostics      { -fx-background-color: #e8e4f3; -fx-border-color: #bebcc8; -fx-text-fill: #2c2c78; }
+
+/* Buttons */
+.previous-button{
+    -fx-background-color: white;
+    -fx-border-color: #218AD5;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-text-fill: #218AD5;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-cursor: hand;
+}
+.previous-button:hover{
+    -fx-background-color: #EFF6FF;
+}
+.confirm-button{
+    -fx-background-color: #218AD5;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+    -fx-cursor: hand;
+}
+.confirm-button:hover{
+    -fx-background-color: #1A76BA;
+}
