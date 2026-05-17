@@ -4,15 +4,15 @@
 
 @import "menu-pane.css";
 .root{
-    -fx-font-family: "Instrument Sans Medium";
+    -fx-font-family: "Instrument Sans";
 }
 .main-pane{
     -fx-background-color: #EBF2F6;
 }
-.screen-label{
+.screen-labels{
     -fx-text-fill: #218AD5;
     -fx-font-size: 24px;
-    -fx-font-weight: 700;
+    -fx-font-weight: bold;
 }
 .util-card{
     -fx-background-color: white;

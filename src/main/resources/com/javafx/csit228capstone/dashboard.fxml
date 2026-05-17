@@ -27,7 +27,7 @@
       
                   <HBox alignment="CENTER" prefHeight="71.0">
                      <children>
-                        <Label fx:id="screenLabel" styleClass="screen-label" text="Dashboard">
+                        <Label fx:id="screenLabel" styleClass="screen-labels" text="Dashboard">
                            <font>
                               <Font size="24.0" />
                            </font>

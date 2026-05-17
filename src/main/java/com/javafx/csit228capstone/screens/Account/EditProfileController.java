@@ -2,7 +2,6 @@ package com.javafx.csit228capstone.screens.Account;
 
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.User;
-import com.javafx.csit228capstone.screens.NotificationPanelController;
 import com.javafx.csit228capstone.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +12,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -38,15 +36,11 @@ public class EditProfileController implements Initializable {
     @FXML private DatePicker birthdayDatePicker;
     @FXML private ComboBox<String> genderComboBox;
     @FXML private Pane notification;
-    private NotificationPanelController notifPanelCtrl;
-    @FXML private StackPane editRoot;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        notifPanelCtrl = new  NotificationPanelController(editRoot);
         menuController.setActiveButton(menuController.getAccountBtn());
         AnimationHelper.ringAnimation(notification);
-        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
 
         User currentUser = SessionManager.getInstance().getCurrentUser();
         User latestData = UserDAO.getLatestUpdate(currentUser.getUserID());

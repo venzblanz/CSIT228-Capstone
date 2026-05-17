@@ -36,6 +36,8 @@ public class TempQueueScheduleController implements Initializable {
     @FXML private VBox timeSlotsContainer;
     @FXML private Button previousButton;
     @FXML private Button confirmButton;
+    @FXML private Label error_message;
+    @FXML private HBox error_container;
 
     @FXML private com.javafx.csit228capstone.helper.MenuController menuController;
 
@@ -45,6 +47,11 @@ public class TempQueueScheduleController implements Initializable {
     private String schedType;
     private QueueInsertValue qiv;
     private QueueTicket qt;
+    private LocalDate pickedDate;
+    private String pickedService;
+    private String pickedTime;
+    private HBox selectedChip;
+
     // track active category filter (null = show all)
     private String activeCategory = null;
 
@@ -81,6 +88,8 @@ public class TempQueueScheduleController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        error_message.setVisible(false);
+        error_container.setVisible(false);
         if (menuController != null) {
             menuController.setActiveButton(menuController.getScheduleBtn());
         }
@@ -174,7 +183,16 @@ public class TempQueueScheduleController implements Initializable {
                     HBox chip = buildChip(service);
                     chip.setOnMouseClicked(e -> {
                         e.consume();
+                        if (selectedChip != null) {
+                            selectedChip.setStyle("");
+                        }
+                        selectedChip = chip;
+                        selectedChip.setStyle("-fx-background-color: #f0f0f0;");
                         setQueueSchedule(service, timeSlot);
+                        clearError();
+                    });
+                    chip.setOnMouseEntered(e -> {
+                        chip.setCursor(javafx.scene.Cursor.HAND);
                     });
                     chipsBox.getChildren().add(chip);
                 }
@@ -321,38 +339,12 @@ public class TempQueueScheduleController implements Initializable {
         lbl.getStyleClass().add(styleClass);
         return lbl;
     }
-    private void setQueueSchedule(Service service, String pickedTime){
-        LocalDate pickedDate = selectedDate;
-        String pickedService = service.getName();
-        Form f = formManager.loadForm();
-        int formId = QueueFormDAO.addForm(
-                f.getFirstName(),
-                f.getMiddleName(),
-                f.getLastName(),
-                f.getBirthDate(),
-                f.getAge(),
-                f.getGender(),
-                f.getCivilStatus(),
-                f.getSymptoms(),
-                f.getPatientType(),
-                f.getAddress(),
-                f.getNationality(),
-                f.getReligion(),
-                f.getContactNumber(),
-                f.getEmailAddress(),
-                f.getEmergencyPerson(),
-                f.getEmergencyRelation(),
-                f.getEmergencyNumber(),
-                f.getFormType());
-        if (formId == -1) {
-            System.err.println("Form was not saved. Queue will not be created.");
-            return;
-        }
-        qiv = QueueLineDAO.insertQueue(formId, SessionManager.getInstance().getUserId(), schedType);
-        assert qiv != null;
-        qt = QueueLineDAO.getQueueTicket(qiv.getQueueId());
-        formManager.clearForm();
-        QueueFormDAO.addSchedule(formId, pickedTime, pickedDate, pickedService);
+    private void setQueueSchedule(Service service, String time){
+        pickedTime = time;
+        pickedDate = selectedDate;
+        pickedService = service.getName();
+
+        ScheduleSelectionManager.getInstance().saveSchedule(pickedDate, pickedTime, pickedService);
     }
 
     private void updateDateHeader() {
@@ -364,9 +356,24 @@ public class TempQueueScheduleController implements Initializable {
     }
 
     private void handleConfirm() {
-        if (selectedDate == null) { return; }
+        if (selectedDate == null || pickedService == null || pickedTime == null) {
+            showError("Please select a service!");
+            return;
+        }
         sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue-review.fxml", confirmButton, "/styles/queue-review.css", (QueueReviewController queueReviewController) -> queueReviewController.initializeData(schedType));
+    }
+    private void showError(String message){
+        error_message.setVisible(true);
+        error_container.setVisible(true);
+        error_message.setText(message);
+        error_message.setStyle("-fx-text-fill: red;");
+    }
+    private void clearError(){
+        error_container.setVisible(false);
+        error_message.setVisible(false);
     }
 
     public LocalDate getSelectedDate() { return selectedDate; }
+    public String getSelectedTime() { return pickedTime; }
+    public String getSelectedService() { return pickedService; }
 }

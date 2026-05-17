@@ -38,6 +38,7 @@ public class QueueNumberController {
     @FXML private Label qNumberLabel;
     @FXML private Label qDateLabel;
     @FXML private Label patientIdLabel;
+    @FXML private Label serviceType;
     @FXML private ImageView qQrImage;
     @FXML private VBox ticketCard;
     @FXML private VBox ticketScreen;
@@ -45,6 +46,7 @@ public class QueueNumberController {
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
     private final FormManager formManager = FormManager.getInstance();
+    private final ScheduleSelectionManager scheduleSelectionManager = ScheduleSelectionManager.getInstance();
 
     private final Form loadedForm = formManager.loadForm();
     private String qType;
@@ -54,6 +56,38 @@ public class QueueNumberController {
     public void initializeData(String type){
         menuController.setActiveButton(menuController.getQueueBtn());
         qType = type;
+        Form f = formManager.loadForm();
+        int formId = QueueFormDAO.addForm(
+                f.getFirstName(),
+                f.getMiddleName(),
+                f.getLastName(),
+                f.getBirthDate(),
+                f.getAge(),
+                f.getGender(),
+                f.getCivilStatus(),
+                f.getSymptoms(),
+                f.getPatientType(),
+                f.getAddress(),
+                f.getNationality(),
+                f.getReligion(),
+                f.getContactNumber(),
+                f.getEmailAddress(),
+                f.getEmergencyPerson(),
+                f.getEmergencyRelation(),
+                f.getEmergencyNumber(),
+                f.getFormType(),
+                scheduleSelectionManager.getPickedTime(),
+                scheduleSelectionManager.getPickedDate(),
+                scheduleSelectionManager.getPickedService());
+        if (formId == -1) {
+            System.err.println("Form was not saved. Queue will not be created.");
+            return;
+        }
+        qiv = QueueLineDAO.insertQueue(formId, SessionManager.getInstance().getUserId(), qType);
+        assert qiv != null;
+        qt = QueueLineDAO.getQueueTicket(qiv.getQueueId());
+        formManager.clearForm();
+
         setCard();
 
         if(type.equals("General Wellness")){
@@ -101,9 +135,10 @@ public class QueueNumberController {
         }
 
         qNameLabel.setText(qt.getFullName());
-        qTimeLabel.setText(formatTime(qt.getCreatedAt()));
+        qTimeLabel.setText(scheduleSelectionManager.getPickedTime());
         qNumberLabel.setText(qt.getQueueNumber());
-        qDateLabel.setText(formatDate(qt.getCreatedAt()));
+        qDateLabel.setText(formatDate(scheduleSelectionManager.getPickedDate()));
+        serviceType.setText(scheduleSelectionManager.getPickedService());
         patientIdLabel.setText(PatientIdGenerator.getPatientId(SessionManager.getInstance().getUserId()));
     }
 
@@ -132,7 +167,7 @@ public class QueueNumberController {
     }
 
     // Date and Time
-    private String formatDate(LocalDateTime dateTime){
+    private String formatDate(LocalDate dateTime){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
         return dateTime.format(formatter);
     }

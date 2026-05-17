@@ -2,7 +2,6 @@ package com.javafx.csit228capstone.screens.Account;
 
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.User;
-import com.javafx.csit228capstone.screens.NotificationPanelController;
 import com.javafx.csit228capstone.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -33,15 +31,11 @@ public class ViewProfileController implements Initializable {
     @FXML private Label profileNameHeader;
     @FXML private Label profileIdHeader;
     @FXML private Pane notification;
-    @FXML private StackPane viewRoot;
-    private NotificationPanelController notifPanelCtrl;
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        notifPanelCtrl = new  NotificationPanelController(viewRoot);
         AnimationHelper.ringAnimation(notification);
-        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
         User currentUser = SessionManager.getInstance().getCurrentUser();
 
         if (currentUser != null) {

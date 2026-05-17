@@ -9,6 +9,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.StageStyle;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class QueueReviewController {
@@ -48,16 +51,21 @@ public class QueueReviewController {
     @FXML private ComboBox<String>  relationCombo;
     @FXML private TextField         emergencyContactField;
     @FXML private TextField         symptoms_field;
+    @FXML private TextField         selectedDateField;
+    @FXML private TextField         selectedTimeField;
+    @FXML private TextField         selectedServiceField;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
     private final FormManager formManager = FormManager.getInstance();
-
+    private final ScheduleSelectionManager scheduleSelectionManager = ScheduleSelectionManager.getInstance();
 
     private final Form loadedForm = formManager.loadForm();
-    RadioButton[] patientRadios;
-    RadioButton[] civilStatusRadios;
-    RadioButton[] genderRadios;
-
+    private LocalDate pickedDate = scheduleSelectionManager.getPickedDate();
+    private String pickedTime = scheduleSelectionManager.getPickedTime();
+    private String pickedService = scheduleSelectionManager.getPickedService();
+    private RadioButton[] patientRadios;
+    private RadioButton[] civilStatusRadios;
+    private RadioButton[] genderRadios;
     private String formType;
 
 
@@ -89,6 +97,10 @@ public class QueueReviewController {
         pregnantRadio.setUserData("Pregnant");
         pwdRadio.setUserData("Person with Disability");
         seniorRadio.setUserData("Senior Citizen");
+        singleRadio.setUserData("Single");
+        widowedRadio.setUserData("Widowed");
+        marriedRadio.setUserData("Married");
+        separatedRadio.setUserData("Separated");
 
         // initialize the Radio Arrays
         patientRadios = new RadioButton[]{
@@ -166,8 +178,17 @@ public class QueueReviewController {
             relationCombo.getSelectionModel().select(loadedForm.getEmergencyRelation());
             emergencyContactField.setText(loadedForm.getEmergencyNumber());
             symptoms_field.setText(loadedForm.getSymptoms());
+            selectedDateField.setText(formatDate(pickedDate));
+            selectedServiceField.setText(pickedService);
+            selectedTimeField.setText(pickedTime);
         }
     }
+
+    private String formatDate(LocalDate dateTime){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
+        return dateTime.format(formatter);
+    }
+
     private void onBack(){
         sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue-schedule.fxml", backBtn, "/styles/queue-schedule.css", (QueueScheduleController queueScheduleController) -> queueScheduleController.initializeData(formType));
     }

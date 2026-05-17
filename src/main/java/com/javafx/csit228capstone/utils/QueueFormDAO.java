@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 
 public class QueueFormDAO {
-    public static int addForm(String firstName, String middleName, String lastName, LocalDate birthDate, int age, String gender, String civilStatus, String symptoms, String patientType, String address, String nationality, String religion, String contactNumber, String emailAddress, String emergencyPerson, String emergencyRelation, String emergencyNumber, String formType)
+    public static int addForm(String firstName, String middleName, String lastName, LocalDate birthDate, int age, String gender, String civilStatus, String symptoms, String patientType, String address, String nationality, String religion, String contactNumber, String emailAddress, String emergencyPerson, String emergencyRelation, String emergencyNumber, String formType, String time, LocalDate date, String service)
     {
         String sql = "insert into queue_form (" +
                 "user_id, " +
@@ -29,8 +29,11 @@ public class QueueFormDAO {
                 "emergency_person_relation," +
                 "emergency_person_number," +
                 "form_type, " +
-                "additional_notes) " +
-                "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "additional_notes, " +
+                "picked_time, " +
+                "picked_date, " +
+                "picked_service) " +
+                "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try(Connection c = DatabaseConfig.getConnection();
             PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
@@ -54,6 +57,9 @@ public class QueueFormDAO {
             ps.setString(17, emergencyNumber);
             ps.setString(18, formType);
             ps.setString(19, symptoms);
+            ps.setString(20, time);
+            ps.setDate(21, java.sql.Date.valueOf(date));
+            ps.setString(22, service);
             int rows = ps.executeUpdate();
             if(rows == 0) {
                 return -1;

@@ -3,8 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.Region?>
@@ -22,9 +22,7 @@
 
     <center>
         <VBox fx:id="mainContent" styleClass="main-pane" spacing="0">
-
-            <!-- Top header bar — fixed height -->
-            <HBox alignment="CENTER_LEFT" prefHeight="60.0" maxHeight="60.0" spacing="10.0"
+            <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="10.0"
                   style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);">
                 <padding><Insets left="30.0" right="30.0" /></padding>
                 <children>
@@ -39,8 +37,7 @@
                 </children>
             </HBox>
 
-            <!-- Tab bar — fixed height -->
-            <HBox fx:id="tabBar" alignment="CENTER_LEFT" prefHeight="50.0" maxHeight="50.0" spacing="5.0"
+            <HBox fx:id="tabBar" alignment="CENTER_LEFT" prefHeight="50.0" spacing="5.0"
                   style="-fx-background-color: white; -fx-border-color: #E2E8F0; -fx-border-width: 0 0 2 0;">
                 <padding><Insets left="30.0" right="30.0" /></padding>
                 <children>
@@ -52,35 +49,34 @@
                 </children>
             </HBox>
 
-            <!-- Main queue content — no ScrollPane, fills remaining space -->
-            <VBox fx:id="queueContent" spacing="12.0" VBox.vgrow="ALWAYS">
-                <padding><Insets bottom="20.0" left="30.0" right="30.0" top="20.0" /></padding>
-                <children>
-
-                    <!-- Now Serving card — fixed height so it never shifts -->
-                    <VBox fx:id="nowServingCard" styleClass="now-serving-card"
-                          alignment="CENTER" spacing="8.0"
-                          prefHeight="200.0" maxHeight="200.0">
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="scroll-pane">
+                <content>
+                    <VBox fx:id="queueContent" spacing="20.0">
+                        <padding><Insets bottom="30.0" left="30.0" right="30.0" top="30.0" /></padding>
                         <children>
-                            <Label text="NOW SERVING" styleClass="now-serving-label" />
-                            <Label fx:id="nowServingNumber" text="---" styleClass="now-serving-number" />
-                            <Label fx:id="nowServingDept" text="---" styleClass="now-serving-dept" />
-                            <Label fx:id="nowServingStaff" text="---" styleClass="now-serving-staff" />
+
+                            <VBox fx:id="nowServingCard" styleClass="now-serving-card" alignment="CENTER" spacing="10.0">
+                                <padding><Insets bottom="30.0" left="30.0" right="30.0" top="30.0" /></padding>
+                                <children>
+                                    <Label text="NOW SERVING" styleClass="now-serving-label" />
+                                    <Label fx:id="nowServingNumber" text="---" styleClass="now-serving-number" />
+                                    <Label fx:id="nowServingDept" text="---" styleClass="now-serving-dept" />
+                                    <Label fx:id="nowServingStaff" text="---" styleClass="now-serving-staff" />
+                                </children>
+                            </VBox>
+
+                            <Label text="WAITING" styleClass="section-header" />
+                            <HBox fx:id="waitingCards" spacing="15.0" />
+
+                            <Label text="COMPLETED / CANCELLED" styleClass="section-header" />
+                            <HBox fx:id="doneCards" spacing="15.0" />
+
+                            <Label fx:id="emptyLabel" text="No queue entries found."
+                                   style="-fx-text-fill: #64748B; -fx-font-size: 18px;" visible="false" />
                         </children>
                     </VBox>
-
-                    <Label text="WAITING" styleClass="section-header" />
-                    <FlowPane fx:id="waitingCards" hgap="15.0" vgap="15.0" />
-
-                    <Label text="COMPLETED / CANCELLED" styleClass="section-header" />
-                    <FlowPane fx:id="doneCards" hgap="15.0" vgap="15.0" />
-
-                    <Label fx:id="emptyLabel" text="No queue entries found."
-                           style="-fx-text-fill: #64748B; -fx-font-size: 18px;" visible="false" />
-
-                </children>
-            </VBox>
-
+                </content>
+            </ScrollPane>
         </VBox>
     </center>
 </BorderPane>

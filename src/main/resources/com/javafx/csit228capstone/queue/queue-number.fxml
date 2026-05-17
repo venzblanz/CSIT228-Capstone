@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.queue.QueueNumberController">
 
@@ -200,7 +201,10 @@
                                             <VBox alignment="CENTER" spacing="22.0" styleClass="ticket-right">
             
                                                                   <children>
-                                                    <Label styleClass="queue-number-label" text="YOUR QUEUE NUMBER" />
+                                                    <Label fx:id="serviceType" styleClass="queue-number-label" text="YOUR QUEUE NUMBER">
+                                             <font>
+                                                <Font name="System Bold" size="18.0" />
+                                             </font></Label>
             
                                                                       <Label fx:id="qNumberLabel" styleClass="q-number" text="G-01" />
             
