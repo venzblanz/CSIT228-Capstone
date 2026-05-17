@@ -61,8 +61,8 @@ public class AdminMenuController {
                 manageUsersBtn, "/styles/dashboard.css"));
 
         manageScheduleBtn.setOnAction(e -> sceneNavigator.navigate(
-                "/com/javafx/csit228capstone/schedule/schedule-admin.fxml",
-                manageScheduleBtn, "/styles/schedule-admin.css"));
+                "/com/javafx/csit228capstone/admin/admin-manage-schedule.fxml",
+                manageScheduleBtn, "/styles/schedule.css"));
 
         logoutBtn.setOnMouseClicked(e -> {
             SessionManager.getInstance().clearSession();

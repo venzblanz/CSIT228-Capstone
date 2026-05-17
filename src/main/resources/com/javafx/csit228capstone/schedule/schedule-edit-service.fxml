@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.javafx.csit228capstone.screens.schedule.ScheduleEditServiceController" styleClass="dialog-root" spacing="14" prefWidth="400">
+
+    <stylesheets>
+        <String fx:value="/styles/schedule.css"/>
+    </stylesheets>
+
+    <padding>
+        <Insets top="24" right="24" bottom="24" left="24"/>
+    </padding>
+
+    <Label text="Edit Slot" styleClass="dialog-title"/>
+    <Label fx:id="dialogSubtitle" styleClass="dialog-subtitle" text=""/>
+
+    <VBox spacing="4">
+        <Label text="Service" styleClass="dialog-subtitle"/>
+        <Label fx:id="serviceNameLabel" styleClass="edit-slot-service-name"/>
+    </VBox>
+
+    <VBox spacing="4">
+        <Label text="Assigned Doctor" styleClass="dialog-subtitle"/>
+        <TextField fx:id="doctorField" promptText="e.g. Dr. Maria Santos  (leave blank if none)" styleClass="dialog-search" maxWidth="Infinity"/>
+    </VBox>
+
+    <Label fx:id="noDoctorHint" text="⚠  No doctor assigned — patients will see 'No doctor assigned yet'." styleClass="no-doctor-hint" wrapText="true"/>
+
+    <Label fx:id="scopeNote" styleClass="dialog-subtitle" wrapText="true" text=""/>
+
+    <HBox spacing="8" alignment="CENTER_RIGHT">
+        <Button text="Cancel" styleClass="dialog-cancel-btn" onAction="#onCancel" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+        <Button fx:id="saveBtn" text="Save" styleClass="dialog-add-btn" onAction="#onSave" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+</VBox>

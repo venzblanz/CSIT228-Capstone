@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.javafx.csit228capstone.screens.schedule.ScheduleCustomServiceController" styleClass="dialog-root" spacing="14" prefWidth="380">
+
+    <stylesheets>
+        <String fx:value="/styles/schedule.css"/>
+    </stylesheets>
+
+    <padding>
+        <Insets top="24" right="24" bottom="24" left="24"/>
+    </padding>
+
+    <Label text="Other Service" styleClass="dialog-title"/>
+
+    <TextField fx:id="nameField" promptText="Service name" styleClass="dialog-search" maxWidth="Infinity"/>
+
+    <Label text="Category" styleClass="dialog-subtitle"/>
+
+    <VBox spacing="10">
+        <RadioButton fx:id="rbGeneral" text="General Wellness" styleClass="category-radio-blue" onAction="#onCategorySelected"/>
+        <RadioButton fx:id="rbWomens" text="Women's Health" styleClass="category-radio-pink" onAction="#onCategorySelected"/>
+        <RadioButton fx:id="rbSpecial" text="Specialized Fields" styleClass="category-radio-green" onAction="#onCategorySelected"/>
+        <RadioButton fx:id="rbDiag" text="Diagnostics &amp; Laboratory" styleClass="category-radio-purple" onAction="#onCategorySelected"/>
+    </VBox>
+
+    <CheckBox fx:id="recurringCheck" styleClass="dialog-recurring-check" selected="true"/>
+
+    <HBox spacing="8" alignment="CENTER_RIGHT">
+        <Button text="Cancel" styleClass="dialog-cancel-btn" onAction="#onCancel" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+        <Button fx:id="addBtn" text="Add Service" styleClass="dialog-add-btn" onAction="#onAdd" maxWidth="Infinity" HBox.hgrow="ALWAYS" disable="true"/>
+    </HBox>
+
+</VBox>
