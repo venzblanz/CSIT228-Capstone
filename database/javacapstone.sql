@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2026 at 07:05 AM
+-- Generation Time: May 17, 2026 at 01:23 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -124,84 +124,84 @@ CREATE TABLE `schedules` (
   `service_id` int(11) NOT NULL,
   `day_of_week` tinyint(4) DEFAULT NULL,
   `specific_date` date DEFAULT NULL,
-  `time_slot` varchar(20) NOT NULL
+  `time_slot` varchar(20) NOT NULL,
+  `doctor_name` varchar(150) DEFAULT NULL COMMENT 'Doctor assigned to this specific slot. NULL = no doctor assigned yet.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `schedules`
 --
 
-INSERT INTO `schedules` (`schedule_id`, `service_id`, `day_of_week`, `specific_date`, `time_slot`) VALUES
-(1, 1, 1, NULL, '8:00 AM'),
-(2, 1, 1, NULL, '9:00 AM'),
-(3, 1, 1, NULL, '10:00 AM'),
-(4, 1, 1, NULL, '1:00 PM'),
-(5, 1, 1, NULL, '2:00 PM'),
-(6, 1, 2, NULL, '8:00 AM'),
-(7, 1, 2, NULL, '9:00 AM'),
-(8, 1, 2, NULL, '10:00 AM'),
-(9, 1, 2, NULL, '1:00 PM'),
-(10, 1, 2, NULL, '2:00 PM'),
-(11, 1, 3, NULL, '8:00 AM'),
-(12, 1, 3, NULL, '9:00 AM'),
-(13, 1, 3, NULL, '10:00 AM'),
-(14, 1, 3, NULL, '1:00 PM'),
-(15, 1, 3, NULL, '2:00 PM'),
-(16, 1, 4, NULL, '8:00 AM'),
-(17, 1, 4, NULL, '9:00 AM'),
-(18, 1, 4, NULL, '10:00 AM'),
-(19, 1, 4, NULL, '1:00 PM'),
-(20, 1, 4, NULL, '2:00 PM'),
-(21, 1, 5, NULL, '8:00 AM'),
-(22, 1, 5, NULL, '9:00 AM'),
-(23, 1, 5, NULL, '10:00 AM'),
-(24, 1, 5, NULL, '1:00 PM'),
-(25, 1, 5, NULL, '2:00 PM'),
-(26, 2, 1, NULL, '8:00 AM'),
-(27, 2, 1, NULL, '11:00 AM'),
-(28, 2, 1, NULL, '3:00 PM'),
-(29, 2, 3, NULL, '8:00 AM'),
-(30, 2, 3, NULL, '11:00 AM'),
-(31, 2, 3, NULL, '3:00 PM'),
-(32, 2, 5, NULL, '8:00 AM'),
-(33, 2, 5, NULL, '11:00 AM'),
-(34, 2, 5, NULL, '3:00 PM'),
-(35, 3, 2, NULL, '9:00 AM'),
-(36, 3, 2, NULL, '10:00 AM'),
-(37, 3, 2, NULL, '2:00 PM'),
-(38, 3, 4, NULL, '9:00 AM'),
-(39, 3, 4, NULL, '10:00 AM'),
-(40, 3, 4, NULL, '2:00 PM'),
-(41, 4, 1, NULL, '9:00 AM'),
-(42, 4, 1, NULL, '11:00 AM'),
-(43, 4, 1, NULL, '1:00 PM'),
-(44, 4, 3, NULL, '9:00 AM'),
-(45, 4, 3, NULL, '11:00 AM'),
-(46, 4, 3, NULL, '1:00 PM'),
-(47, 4, 5, NULL, '9:00 AM'),
-(48, 4, 5, NULL, '11:00 AM'),
-(49, 4, 5, NULL, '1:00 PM'),
-(50, 5, 2, NULL, '10:00 AM'),
-(51, 5, 2, NULL, '2:00 PM'),
-(52, 5, 2, NULL, '3:00 PM'),
-(53, 5, 4, NULL, '10:00 AM'),
-(54, 5, 4, NULL, '2:00 PM'),
-(55, 5, 4, NULL, '3:00 PM'),
-(56, 6, 1, NULL, '8:00 AM'),
-(57, 6, 1, NULL, '1:00 PM'),
-(58, 6, 1, NULL, '4:00 PM'),
-(59, 6, 2, NULL, '8:00 AM'),
-(60, 6, 2, NULL, '1:00 PM'),
-(61, 6, 2, NULL, '4:00 PM'),
-(62, 6, 3, NULL, '8:00 AM'),
-(63, 6, 3, NULL, '1:00 PM'),
-(64, 6, 3, NULL, '4:00 PM'),
-(65, 6, 4, NULL, '8:00 AM'),
-(66, 6, 4, NULL, '1:00 PM'),
-(67, 6, 4, NULL, '4:00 PM'),
-(68, 6, 5, NULL, '8:00 AM'),
-(69, 6, 5, NULL, '1:00 PM'),
-(70, 6, 5, NULL, '4:00 PM');
+INSERT INTO `schedules` (`schedule_id`, `service_id`, `day_of_week`, `specific_date`, `time_slot`, `doctor_name`) VALUES
+(1, 1, 1, NULL, '8:00 AM', 'Dr. Maria Santos'),
+(2, 1, 1, NULL, '9:00 AM', 'Dr. Maria Santos'),
+(3, 1, 1, NULL, '10:00 AM', 'Dr. Maria Santos'),
+(4, 1, 1, NULL, '1:00 PM', 'Dr. Maria Santos'),
+(5, 1, 1, NULL, '2:00 PM', 'Dr. Maria Santos'),
+(6, 1, 2, NULL, '8:00 AM', 'Dr. Maria Santos'),
+(7, 1, 2, NULL, '9:00 AM', 'Dr. Maria Santos'),
+(8, 1, 2, NULL, '10:00 AM', 'Dr. Maria Santos'),
+(9, 1, 2, NULL, '1:00 PM', 'Dr. Maria Santos'),
+(10, 1, 2, NULL, '2:00 PM', 'Dr. Maria Santos'),
+(11, 1, 3, NULL, '8:00 AM', 'Dr. Maria Santos'),
+(12, 1, 3, NULL, '9:00 AM', 'Dr. Maria Santos'),
+(13, 1, 3, NULL, '10:00 AM', 'Dr. Maria Santos'),
+(14, 1, 3, NULL, '1:00 PM', 'Dr. Maria Santos'),
+(15, 1, 3, NULL, '2:00 PM', 'Dr. Maria Santos'),
+(16, 1, 4, NULL, '8:00 AM', 'Dr. Ramon Dela Cruz'),
+(17, 1, 4, NULL, '9:00 AM', 'Dr. Ramon Dela Cruz'),
+(18, 1, 4, NULL, '10:00 AM', 'Dr. Ramon Dela Cruz'),
+(19, 1, 4, NULL, '1:00 PM', 'Dr. Ramon Dela Cruz'),
+(20, 1, 4, NULL, '2:00 PM', 'Dr. Ramon Dela Cruz'),
+(21, 1, 5, NULL, '8:00 AM', 'Dr. Ramon Dela Cruz'),
+(22, 1, 5, NULL, '9:00 AM', 'Dr. Ramon Dela Cruz'),
+(23, 1, 5, NULL, '10:00 AM', 'Dr. Ramon Dela Cruz'),
+(24, 1, 5, NULL, '1:00 PM', 'Dr. Ramon Dela Cruz'),
+(25, 1, 5, NULL, '2:00 PM', 'Dr. Ramon Dela Cruz'),
+(27, 2, 1, NULL, '11:00 AM', 'Dr. Ramon Dela Cruz'),
+(28, 2, 1, NULL, '3:00 PM', 'Dr. Ramon Dela Cruz'),
+(29, 2, 3, NULL, '8:00 AM', 'Dr. Ramon Dela Cruz'),
+(30, 2, 3, NULL, '11:00 AM', 'Dr. Ramon Dela Cruz'),
+(31, 2, 3, NULL, '3:00 PM', 'Dr. Ramon Dela Cruz'),
+(32, 2, 5, NULL, '8:00 AM', 'Dr. Ramon Dela Cruz'),
+(33, 2, 5, NULL, '11:00 AM', 'Dr. Ramon Dela Cruz'),
+(34, 2, 5, NULL, '3:00 PM', 'Dr. Ramon Dela Cruz'),
+(35, 3, 2, NULL, '9:00 AM', 'Dr. Ana Reyes'),
+(36, 3, 2, NULL, '10:00 AM', 'Dr. Ana Reyes'),
+(37, 3, 2, NULL, '2:00 PM', 'Dr. Ana Reyes'),
+(38, 3, 4, NULL, '9:00 AM', 'Dr. Ana Reyes'),
+(39, 3, 4, NULL, '10:00 AM', 'Dr. Ana Reyes'),
+(40, 3, 4, NULL, '2:00 PM', 'Dr. Ana Reyes'),
+(41, 4, 1, NULL, '9:00 AM', 'Dr. Jose Lim'),
+(42, 4, 1, NULL, '11:00 AM', 'Dr. Jose Lim'),
+(43, 4, 1, NULL, '1:00 PM', 'Dr. Jose Lim'),
+(44, 4, 3, NULL, '9:00 AM', 'Dr. Jose Lim'),
+(45, 4, 3, NULL, '11:00 AM', 'Dr. Jose Lim'),
+(46, 4, 3, NULL, '1:00 PM', 'Dr. Jose Lim'),
+(47, 4, 5, NULL, '9:00 AM', 'Dr. Jose Lim'),
+(48, 4, 5, NULL, '11:00 AM', 'Dr. Jose Lim'),
+(49, 4, 5, NULL, '1:00 PM', 'Dr. Jose Lim'),
+(50, 5, 2, NULL, '10:00 AM', 'Dr. Carla Mendoza'),
+(51, 5, 2, NULL, '2:00 PM', 'Dr. Carla Mendoza'),
+(52, 5, 2, NULL, '3:00 PM', 'Dr. Carla Mendoza'),
+(53, 5, 4, NULL, '10:00 AM', 'Dr. Carla Mendoza'),
+(54, 5, 4, NULL, '2:00 PM', 'Dr. Carla Mendoza'),
+(55, 5, 4, NULL, '3:00 PM', 'Dr. Carla Mendoza'),
+(56, 6, 1, NULL, '8:00 AM', NULL),
+(57, 6, 1, NULL, '1:00 PM', NULL),
+(58, 6, 1, NULL, '4:00 PM', NULL),
+(59, 6, 2, NULL, '8:00 AM', NULL),
+(60, 6, 2, NULL, '1:00 PM', NULL),
+(61, 6, 2, NULL, '4:00 PM', NULL),
+(62, 6, 3, NULL, '8:00 AM', NULL),
+(63, 6, 3, NULL, '1:00 PM', NULL),
+(64, 6, 3, NULL, '4:00 PM', NULL),
+(65, 6, 4, NULL, '8:00 AM', NULL),
+(66, 6, 4, NULL, '1:00 PM', NULL),
+(67, 6, 4, NULL, '4:00 PM', NULL),
+(68, 6, 5, NULL, '8:00 AM', NULL),
+(69, 6, 5, NULL, '1:00 PM', NULL),
+(70, 6, 5, NULL, '4:00 PM', NULL);
 
 -- --------------------------------------------------------
 
@@ -323,7 +323,7 @@ ALTER TABLE `queue_line`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `services`
