@@ -36,11 +36,23 @@ public class QueueLineDAO {
         return null;
     }
     public static void updateQueue(String queueNumber, boolean isDone){
-        String status = isDone ? "Done" : "Waiting";
+        String status = isDone ? "Done" : "Cancelled";
         String sql = "update queue_line SET status = ? where queue_number = ? AND DATE(created_at) = CURDATE()";
         try(Connection c = DatabaseConfig.getConnection();
             PreparedStatement ps = c.prepareStatement(sql)){
             ps.setString(1, status);
+            ps.setString(2, queueNumber);
+            ps.executeUpdate();
+            System.out.println("[QueueLineDAO] Updated queue " + queueNumber);
+        }catch(Exception e){
+            System.err.println("[QueueLineDAO] Error updating the queue " + e.getMessage());
+        }
+    }
+    public static void servingQueue(String queueNumber){
+        String sql = "update queue_line SET status = ? where queue_number = ? AND DATE(created_at) = CURDATE()";
+        try(Connection c = DatabaseConfig.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql)){
+            ps.setString(1, "Serving");
             ps.setString(2, queueNumber);
             ps.executeUpdate();
             System.out.println("[QueueLineDAO] Updated queue " + queueNumber);
@@ -56,6 +68,39 @@ public class QueueLineDAO {
         }catch(Exception e){
             System.err.println("[QueueLineDAO] Error displaying the queue " + e.getMessage());
         }
+    }
+    public static int getPosition(String department, String queueNumber) {
+        String sql = """
+            SELECT position
+            FROM (
+                SELECT 
+                    queue_number,
+                    ROW_NUMBER() OVER (ORDER BY created_at ASC) AS position
+                FROM queue_line
+                WHERE department = ?
+                AND DATE(created_at) = CURDATE()
+                AND status IN ('Serving', 'Waiting')
+            ) ranked
+            WHERE queue_number = ?
+            """;
+
+        try (Connection c = DatabaseConfig.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setString(1, department);
+            ps.setString(2, queueNumber);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("position");
+                }
+            }
+
+        } catch (Exception e) {
+            System.err.println("[QueueLineDAO] Error getting queue position: " + e.getMessage());
+        }
+
+        return 0;
     }
     public static QueueTicket getQueueTicket(int queueId){
         String sql = """
@@ -203,7 +248,9 @@ public class QueueLineDAO {
             f.picked_service,
             f.first_name,
             f.middle_initial,
-            f.last_name
+            f.last_name,
+            f.picked_time,
+            f.picked_date
             FROM queue_line q, queue_form f
             WHERE q.form_id = f.form_id
             AND q.user_id = ?
@@ -224,6 +271,8 @@ public class QueueLineDAO {
                             rs.getString("last_name"),
                             rs.getTimestamp("created_at").toLocalDateTime(),
                             rs.getString("status"),
+                            rs.getString("picked_time"),
+                            rs.getDate("picked_date").toLocalDate(),
                             rs.getString("picked_service"),
                             rs.getString("staff_assigned")
                     );

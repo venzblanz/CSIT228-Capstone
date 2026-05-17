@@ -66,7 +66,7 @@ public class AdminLiveQueueController {
         // 1. Now serving — most recent Serving or last Completed
         String servingSql = "SELECT ql.queue_number, ql.department, ql.staff_assigned " +
                 "FROM queue_line ql " +
-                "WHERE ql.status = 'Completed'" + whereClause +
+                "WHERE ql.status = 'Serving'" + whereClause +
                 " ORDER BY ql.created_at DESC LIMIT 1";
 
         try (Connection c = DatabaseConfig.getConnection();
@@ -119,7 +119,7 @@ public class AdminLiveQueueController {
 
         // 3. Completed/Cancelled
         String doneSql = "SELECT queue_number, department, status FROM queue_line " +
-                "WHERE status IN ('Completed', 'Cancelled')" +
+                "WHERE status IN ('Done', 'Cancelled')" +
                 (currentDept.equals("All") ? "" : " AND department = ?") +
                 " ORDER BY created_at DESC LIMIT 10";
 

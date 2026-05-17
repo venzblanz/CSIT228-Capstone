@@ -2,10 +2,7 @@ package com.javafx.csit228capstone.screens.queue;
 
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.QueueTicket;
-import com.javafx.csit228capstone.utils.QueueLineDAO;
-import com.javafx.csit228capstone.utils.SceneNavigator;
-import com.javafx.csit228capstone.utils.AnimationHelper;
-import com.javafx.csit228capstone.utils.SessionManager;
+import com.javafx.csit228capstone.utils.*;
 import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
@@ -51,7 +48,7 @@ public class QueueController {
         AnimationHelper.ringAnimation(notification);
     }
 
-    // -------------- Navigators -----------------------------------------------
+    // -------------- Navigators ---------------------------------------------------------------------------------------
     private void onForm(String type){ goToForm(type); }
     private void goToForm(String type){
         sceneNavigator.navigate(
@@ -63,7 +60,7 @@ public class QueueController {
     }
 
 
-    // ------------ Initializers -----------------------------------------------
+    // ------------ Initializers ---------------------------------------------------------------------------------------
     private void initializeCards(HBox btn) {
         ScaleTransition scaleUp = new ScaleTransition(Duration.millis(150), btn);
         scaleUp.setToX(1.05); scaleUp.setToY(1.05);
@@ -98,7 +95,7 @@ public class QueueController {
         int index = 0;
         if (queueList.isEmpty()) {
             seeAllBtn.setVisible(false);
-            Label emptyLabel = new Label("No recent activity yet.");
+            Label emptyLabel = new Label("No active queue.");
             emptyLabel.getStyleClass().add("recent");
             activeQueueContainer.getChildren().add(emptyLabel);
             return;
@@ -163,7 +160,22 @@ public class QueueController {
         clock.setPreserveRatio(true);
         HBox.setMargin(clock, new Insets(5, 5, 5, 5));
 
-        Label time = new Label("25 - 30 mins");
+        int positionValue = QueueLineDAO.getPosition(
+                queueTicket.getDepartment(),
+                queueTicket.getQueueNumber()
+        );
+
+        Label time = new Label();
+
+        if (queueTicket.getStatus().equals("Serving")) {
+            time.setText("Serving now");
+        } else {
+            QueueTimeHelper.startCountdownFromNow(
+                    time,
+                    positionValue,
+                    true
+            );
+        }
 
         HBox timeContainer = new HBox();
         timeContainer.setPrefHeight(19);
@@ -201,7 +213,13 @@ public class QueueController {
 
         // Vbox for Position
         Label positionLabel = new Label("Position");
-        Label position = new Label("#" + queueTicket.getQueueId());
+        Label position;
+
+        if (queueTicket.getStatus().equals("Serving")) {
+            position = new Label("Now");
+        } else {
+            position = new Label("#" + positionValue);
+        }
         VBox.setMargin(position, new Insets(3, 8, 3, 8));
 
         VBox positionContainer = new VBox();

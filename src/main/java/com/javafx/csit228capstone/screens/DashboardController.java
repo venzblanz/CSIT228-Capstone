@@ -5,8 +5,11 @@ import com.javafx.csit228capstone.model.QueueTicket;
 import com.javafx.csit228capstone.model.User;
 import com.javafx.csit228capstone.utils.AnimationHelper;
 import com.javafx.csit228capstone.utils.QueueLineDAO;
+import com.javafx.csit228capstone.utils.QueueTimeHelper;
 import com.javafx.csit228capstone.utils.SessionManager;
+import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -132,9 +135,20 @@ public class DashboardController {
             HBox.setHgrow(description, Priority.ALWAYS);
             activeCard.getChildren().addAll(colorBar, imageView, description);
         }else{
-            positionLabel.setText(activeQueue.getQueueId() + "");
-            scheduleLabel.setText("5"); // TODO connecting this to user's actual sched after mahuman na ug himo ang sched
-            timeLabel.setText("10 minutes"); // TODO will make timer algo for this
+            int position = QueueLineDAO.getPosition(
+                    activeQueue.getDepartment(),
+                    activeQueue.getQueueNumber()
+            );
+
+            positionLabel.setText(position + "");
+            scheduleLabel.setText(activeQueue.getTime());
+
+            QueueTimeHelper.startCountdown(
+                    timeLabel,
+                    activeQueue.getCreatedAt(),
+                    position,
+                    false
+            );
 
             activeCard.setPrefHeight(150);
             activeCard.setMinHeight(Region.USE_PREF_SIZE);
@@ -165,10 +179,26 @@ public class DashboardController {
             // VBox for Additional Queue Info
             Label department = new Label(activeQueue.getDepartment());
             department.setStyle("-fx-font-size: 18px;");
-            Label pos = new Label("Position #" + activeQueue.getQueueId());
+            Label pos;
+            if (activeQueue.getStatus().equals("Serving")) {
+                pos = new Label("Now");
+            } else {
+                pos = new Label("#" + position);
+            }
             pos.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
             pos.getStyleClass().add("q-position");
-            Label wait = new Label("10 minutes wait"); // TODO same for the time here
+            Label wait = new Label();
+
+            if (activeQueue.getStatus().equals("Serving")) {
+                wait.setText("Serving now");
+            } else {
+                QueueTimeHelper.startCountdown(
+                        wait,
+                        activeQueue.getCreatedAt(),
+                        position,
+                        true
+                );
+            }
             Label nowServing = new Label("Now serving " + Objects.requireNonNull(QueueLineDAO.getFirstLineQueue(activeQueue.getDepartment())).getQueueNumber());
             nowServing.getStyleClass().add("recent");
             VBox infoContainer = new VBox();
