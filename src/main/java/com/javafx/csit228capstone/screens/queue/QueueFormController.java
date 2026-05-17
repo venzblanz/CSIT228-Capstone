@@ -2,7 +2,6 @@ package com.javafx.csit228capstone.screens.queue;
 
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.Form;
-import com.javafx.csit228capstone.screens.NotificationPanelController;
 import com.javafx.csit228capstone.utils.FormManager;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import com.javafx.csit228capstone.utils.AnimationHelper;
@@ -11,9 +10,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.function.UnaryOperator;
 
 public class QueueFormController {
@@ -33,22 +33,31 @@ public class QueueFormController {
     @FXML private TextField         fname_field;
     @FXML private TextField         mi_field;
     @FXML private TextField         lname_field;
+    @FXML private DatePicker        birthDatePicker;
     @FXML private TextField         age_field;
-    @FXML private TextField         symptoms_field;
-    @FXML private TextField         contact_field;
     @FXML private ToggleGroup       genderRadio;
+    @FXML private ToggleGroup       civilStatusRadio;
     @FXML private ToggleGroup       patientTypeRadio;
     @FXML private RadioButton       maleRadio;
     @FXML private RadioButton       femaleRadio;
-    @FXML private ComboBox<String>  purposeCombo;
     @FXML private RadioButton       regularRadio;
     @FXML private RadioButton       pwdRadio;
     @FXML private RadioButton       seniorRadio;
     @FXML private RadioButton       pregnantRadio;
+    @FXML private RadioButton       singleRadio;
+    @FXML private RadioButton       marriedRadio;
+    @FXML private RadioButton       widowedRadio;
+    @FXML private RadioButton       separatedRadio;
+    @FXML private TextField         addressField;
+    @FXML private ComboBox<String>  nationalityCombo;
+    @FXML private ComboBox<String>  religionCombo;
+    @FXML private TextField         contact_field;
+    @FXML private TextField         emailAddressField;
+    @FXML private TextField         contactPersonField;
+    @FXML private ComboBox<String>  relationCombo;
+    @FXML private TextField         emergencyContactField;
+    @FXML private TextField         symptoms_field;
     @FXML private MenuController    menuController;
-    @FXML private StackPane formRoot;
-    private NotificationPanelController notifPanelCtrl;
-    @FXML private Pane notification;
 
     private final SceneNavigator    sceneNavigator = SceneNavigator.getInstance();
     private final FormManager       formManager = FormManager.getInstance();
@@ -63,6 +72,7 @@ public class QueueFormController {
 
     private String                  formType;
     RadioButton[]                   patientRadios;
+    RadioButton[]                   civilStatusRadios;
     RadioButton[]                   genderRadios;
     Form                            loadedForm;
 
@@ -86,13 +96,11 @@ public class QueueFormController {
 
     @FXML
     public void initialize() {
-        notifPanelCtrl = new  NotificationPanelController(formRoot);
         AnimationHelper.fadeIn(mainPane);
         menuController.setActiveButton(menuController.getQueueBtn());
+        birthDatePicker.setEditable(false);
         // for the whole page except buttons
         initializePage();
-        AnimationHelper.ringAnimation(notification);
-        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
 
         // for the buttons only
         backIconBtn.setOnMouseClicked(e -> onBack());
@@ -115,9 +123,74 @@ public class QueueFormController {
         pregnantRadio.setUserData("Pregnant");
         pwdRadio.setUserData("Person with Disability");
         seniorRadio.setUserData("Senior Citizen");
+        singleRadio.setUserData("Single");
+        widowedRadio.setUserData("Widowed");
+        marriedRadio.setUserData("Married");
+        separatedRadio.setUserData("Separated");
 
         // Combo
-        purposeCombo.setPromptText("Select Purpose...");
+        nationalityCombo.setPromptText("Select Nationality...");
+        nationalityCombo.getItems().addAll(
+                "Filipino",
+                        "American",
+                        "Chinese",
+                        "Japanese",
+                        "Korean",
+                        "Indian",
+                        "Indonesian",
+                        "Malaysian",
+                        "Singaporean",
+                        "Thai",
+                        "Vietnamese",
+                        "British",
+                        "Canadian",
+                        "Australian",
+                        "German",
+                        "French",
+                        "Spanish",
+                        "Italian",
+                        "Other"
+        );
+        religionCombo.setPromptText("Select Religion...");
+        religionCombo.getItems().addAll(
+                "Roman Catholic",
+                        "Iglesia ni Cristo",
+                        "Born Again Christian",
+                        "Protestant",
+                        "Evangelical Christian",
+                        "Seventh-day Adventist",
+                        "Jehovah's Witness",
+                        "Islam",
+                        "Buddhism",
+                        "Hinduism",
+                        "Judaism",
+                        "Sikhism",
+                        "Taoism",
+                        "No Religion",
+                        "Other",
+                        "Prefer not to say"
+        );
+        relationCombo.setPromptText("Select Relation...");
+        relationCombo.getItems().addAll(
+                "Father",
+                        "Mother",
+                        "Brother",
+                        "Sister",
+                        "Spouse",
+                        "Son",
+                        "Daughter",
+                        "Grandfather",
+                        "Grandmother",
+                        "Uncle",
+                        "Aunt",
+                        "Cousin",
+                        "Guardian",
+                        "Relative",
+                        "Friend",
+                        "Neighbor",
+                        "Caregiver",
+                        "Other"
+        );
         form.setOnMouseClicked(e -> clearError());
 
         // initialize the Radio Arrays
@@ -127,11 +200,24 @@ public class QueueFormController {
                 pwdRadio,
                 seniorRadio
         };
+        civilStatusRadios = new RadioButton[]{
+                singleRadio,
+                marriedRadio,
+                widowedRadio,
+                separatedRadio
+        };
         genderRadios = new RadioButton[] {
                 maleRadio,
                 femaleRadio
         };
-
+        birthDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue == null){
+                age_field.setText("0");
+                return;
+            }
+            int age = Period.between(newValue, LocalDate.now()).getYears();
+            age_field.setText(String.valueOf(age));
+        });
         age_field.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == null || newValue.isEmpty()) {
                 seniorRadio.setDisable(false);
@@ -176,59 +262,24 @@ public class QueueFormController {
     }
 
     private void gwInit(){
-        // Combo
-        purposeCombo.getItems().addAll(
-                "Consultation",
-                "Check-up",
-                "Vaccination",
-                "Follow-up",
-                "Medical Certificate"
-        );
         if(loadedForm != null && loadedForm.getFormType().equals("General Wellness")){
             reloadForm();
         }
     }
     private void whInit(){
         formColorPane.setStyle("-fx-background-color: #FFBCD3;");
-        // Combo
-        purposeCombo.getItems().addAll(
-                "Prenatal Check-up",
-                "Postnatal Care",
-                "Menstrual Concerns",
-                "Breast Examination",
-                "Family Planning Consultation",
-                "Pap Smear / Screening"
-        );
         if(loadedForm != null && loadedForm.getFormType().equals("Women's Health")){
             reloadForm();
         }
     }
     private void sfInit(){
         formColorPane.setStyle("-fx-background-color: rgba(75, 245, 220);");
-        // Combo
-        purposeCombo.getItems().addAll(
-                "Cardiology Consultation",
-                "Dermatology Check",
-                "Orthopedic Consultation",
-                "Pediatrics Consultation",
-                "Neurology Consultation",
-                "ENT (Ear, Nose, Throat)"
-        );
         if(loadedForm != null && loadedForm.getFormType().equals("Specialized Fields")){
             reloadForm();
         }
     }
     private void dlInit(){
         formColorPane.setStyle("-fx-background-color: #543BE9;");
-        // Combo
-        purposeCombo.getItems().addAll(
-                "Blood Test",
-                "Urinalysis",
-                "X-ray",
-                "Ultrasound",
-                "ECG",
-                "Medical Examination Package"
-        );
         if(loadedForm != null && loadedForm.getFormType().equals("Diagnostics and Laboratory")){
             reloadForm();
         }
@@ -237,9 +288,12 @@ public class QueueFormController {
         if(loadedForm != null){
             String type = loadedForm.getPatientType();
             String gender = loadedForm.getGender();
+            String civilStatus = loadedForm.getCivilStatus();
+
             fname_field.setText(loadedForm.getFirstName());
             mi_field.setText(loadedForm.getMiddleName());
             lname_field.setText(loadedForm.getLastName());
+            birthDatePicker.setValue(loadedForm.getBirthDate());
             age_field.setText(String.valueOf(loadedForm.getAge()));
             for(RadioButton rb : genderRadios){
                 if(rb.getUserData().equals(gender)){
@@ -247,15 +301,27 @@ public class QueueFormController {
                     break;
                 }
             }
-            purposeCombo.getSelectionModel().select(loadedForm.getPurpose());
-            symptoms_field.setText(loadedForm.getSymptoms());
+            for(RadioButton rb : civilStatusRadios){
+                if(rb.getUserData().equals(civilStatus)){
+                    civilStatusRadio.selectToggle(rb);
+                    break;
+                }
+            }
             for(RadioButton rb : patientRadios){
                 if(rb.getUserData().equals(type)){
                     patientTypeRadio.selectToggle(rb);
                     break;
                 }
             }
+            addressField.setText(loadedForm.getAddress());
+            nationalityCombo.getSelectionModel().select(loadedForm.getNationality());
+            religionCombo.getSelectionModel().select(loadedForm.getReligion());
             contact_field.setText(loadedForm.getContactNumber());
+            emailAddressField.setText(loadedForm.getEmailAddress());
+            contactPersonField.setText(loadedForm.getEmergencyPerson());
+            relationCombo.getSelectionModel().select(loadedForm.getEmergencyRelation());
+            emergencyContactField.setText(loadedForm.getEmergencyNumber());
+            symptoms_field.setText(loadedForm.getSymptoms());
         }
     }
     private void onBack(){
@@ -265,31 +331,42 @@ public class QueueFormController {
         sceneNavigator.navigate("/com/javafx/csit228capstone/dashboard.fxml", cancelBtn, "/styles/dashboard.css");
     }
     private void onNext(){
-        if (genderRadio.getSelectedToggle() == null ||
-                patientTypeRadio.getSelectedToggle() == null ||
-                purposeCombo.getValue() == null) {
+        if (genderRadio.getSelectedToggle()                 == null ||
+                patientTypeRadio.getSelectedToggle()        == null ||
+                nationalityCombo.getValue()                 == null ||
+                civilStatusRadio.getSelectedToggle()        == null) {
             showError("Complete all fields");
             return;
         }
         String fname = fname_field.getText().trim();
         String mi = mi_field.getText().trim();
         String lname = lname_field.getText().trim();
+        LocalDate BirthDate = birthDatePicker.getValue();
         String ageText = age_field.getText().trim();
         String gender = genderRadio.getSelectedToggle().getUserData().toString();
-        String purpose = purposeCombo.getSelectionModel().getSelectedItem();
-        String symptoms = symptoms_field.getText().trim();
-        String ptype = (String) patientTypeRadio.getSelectedToggle().getUserData();
+        String civilStatus = civilStatusRadio.getSelectedToggle().getUserData().toString();
+        String ptype = patientTypeRadio.getSelectedToggle().getUserData().toString();
+        String address = addressField.getText().trim();
+        String nationality = nationalityCombo.getSelectionModel().getSelectedItem();
+        String religion = religionCombo.getSelectionModel().getSelectedItem();
         String contact = contact_field.getText().trim();
+        String email =  emailAddressField.getText().trim();
+        String contactPerson = contactPersonField.getText().trim();
+        String contactPersonRelation = relationCombo.getSelectionModel().getSelectedItem();
+        String emergencyPersonContact = emergencyContactField.getText().trim();
+        String symptoms = symptoms_field.getText().trim();
 
-        if(fname.isEmpty()
-                || mi.isEmpty()
-                ||  lname.isEmpty()
-                ||  ageText.isEmpty()
-                ||  gender.isEmpty()
-                ||  purpose.isEmpty()
-                ||  symptoms.isEmpty()
-                ||  ptype.isEmpty()
-                ||  contact.isEmpty()
+        if(
+                fname.isEmpty()
+            ||  mi.isEmpty()
+            ||  lname.isEmpty()
+            ||  BirthDate == null
+            ||  ageText.isEmpty()
+            ||  gender.isEmpty()
+            ||  address.isEmpty()
+            ||  nationality.isEmpty()
+            ||  ptype.isEmpty()
+            ||  contact.isEmpty()
         ){
             showError("Complete all fields");
             return;
@@ -326,8 +403,8 @@ public class QueueFormController {
             return;
         }
 
-        formManager.saveForm(new Form(fname,mi,lname,age, gender, purpose,symptoms,ptype,contact,formType));
-        sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue-schedule.fxml", cancelBtn, "/styles/queue-schedule.css", (QueueScheduleController queueScheduleController) -> queueScheduleController.initializeData(formType));
+        formManager.saveForm(new Form(fname,mi,lname, BirthDate, age, gender, civilStatus, symptoms, ptype, address, nationality, religion, contact, email, contactPerson, contactPersonRelation, emergencyPersonContact, formType));
+        sceneNavigator.navigate("/com/javafx/csit228capstone/queue/temp-queue-schedule.fxml", cancelBtn, "/styles/schedule-patient.css", (TempQueueScheduleController queueScheduleController) -> queueScheduleController.initializeData(formType));
     }
     private void showError(String message){
         form.setStyle("-fx-border-color: red;" +

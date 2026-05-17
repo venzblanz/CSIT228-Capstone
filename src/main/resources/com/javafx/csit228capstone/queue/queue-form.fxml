@@ -1,211 +1,370 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../../../../styles/queue-form.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.queue.QueueFormController">
+    <left>
+        <fx:include fx:id="menu" source="../menu-pane.fxml" />
+    </left>
+    <center>
+        <VBox fx:id="mainPane" fillWidth="true" styleClass="main-pane" BorderPane.alignment="CENTER">
+            <children>
 
-<StackPane fx:id="formRoot" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.queue.QueueFormController">
-   <children>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-          <left>
-              <fx:include fx:id="menu" source="../menu-pane.fxml" />
-          </left>
-          <center>
-              <VBox fx:id="mainPane" fillWidth="true" styleClass="main-pane" BorderPane.alignment="CENTER">
-                  <children>
-      
-                            <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="71.0">
-                          <children>
-                              <Label styleClass="screen-label" text="Queue">
-                                  <font>
-                              <Font size="24.0" />
-                           </font>
-                              </Label>
-                              <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                              <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="notification-icon">
+                      <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="71.0">
+                    <children>
+                        <Label styleClass="screen-label" text="Queue">
+                            <font>
+                        <Font size="24.0" />
+                     </font>
+                        </Label>
+                        <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                        <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="notification-icon">
+                     <HBox.margin>
+                        <Insets top="1.0" />
+                     </HBox.margin></Pane>
+                    </children>
+               <VBox.margin>
+                  <Insets right="3.0" />
+               </VBox.margin>
+                </HBox>
+
+                      <VBox alignment="CENTER_LEFT">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="25.0" styleClass="back-to-queuetype">
+                            <children>
+                        <ImageView fx:id="backIconBtn" fitHeight="16.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="arrow-back">
                            <HBox.margin>
-                              <Insets top="1.0" />
+                              <Insets right="5.0" />
                            </HBox.margin>
-                        </Pane>
-                          </children>
-                     <VBox.margin>
-                        <Insets right="3.0" />
-                     </VBox.margin>
-                      </HBox>
-      
-                            <VBox alignment="CENTER_LEFT">
-                          <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="25.0" styleClass="back-to-queuetype">
-                                  <children>
-                              <ImageView fx:id="backIconBtn" fitHeight="16.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="arrow-back">
-                                 <HBox.margin>
-                                    <Insets right="5.0" />
-                                 </HBox.margin>
-                                 <image>
-                                    <Image url="@../../../../images/arrow_blue.png" />
-                                 </image>
-                              </ImageView>
-                                      <Label fx:id="backBtn" prefHeight="0.0" styleClass="back-to-queue" text="Back to Queue Types" />
-                                  </children>
-                              </HBox>
-                              <Label fx:id="typeLabel" text="General Care Form">
-                                  <font>
-                              <Font name="System Bold" size="22.0" />
-                           </font>
-                              </Label>
-                          </children>
-                          <VBox.margin>
-                        <Insets bottom="10.0" right="3.0" top="10.0" />
-                     </VBox.margin>
-                      </VBox>
-      
-                            <HBox alignment="CENTER_LEFT" styleClass="notice">
-                          <children>
-                        <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../images/exclamation-mark.png" />
+                              <Image url="@../../../../images/arrow_blue.png" />
                            </image>
                         </ImageView>
-                              <Label maxWidth="1.7976931348623157E308" styleClass="notice-message" text="Our staff will assess your information and call your queue number when it's your turn." wrapText="true" HBox.hgrow="ALWAYS">
-                                  <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                              </Label>
-                          </children>
-                          <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                          <VBox.margin>
-                        <Insets bottom="10.0" left="9.0" right="3.0" />
-                     </VBox.margin>
-                      </HBox>
-                  <HBox fx:id="error_container" alignment="CENTER">
-                     <children>
-                        <Label fx:id="error_message" styleClass="error-message" text="Label" wrapText="true" />
-                     </children>
-                  </HBox>
-      
-                      <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
-                          <content>
-                              <VBox fx:id="form" styleClass="form">
-                                  <children>
-                              <Pane fx:id="formColorPane" prefHeight="9.0" prefWidth="502.0" styleClass="form-color" />
-            
-                                            <GridPane hgap="10.0" vgap="5.0">
-                                          <columnConstraints>
-                                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="80.0" />
-                                          </columnConstraints>
-                                          <rowConstraints>
-                                              <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-                                          </rowConstraints>
-                                          <children>
-                                              <Label text="First Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                              <Label text="M.I" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                                              <TextField fx:id="fname_field" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                              <TextField fx:id="mi_field" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                              <Label text="Last Name" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                              <TextField fx:id="lname_field" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-                                              <Label text="Age" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                                              <TextField fx:id="age_field" maxHeight="-Infinity" maxWidth="80.0" minHeight="-Infinity" prefHeight="35.0" prefWidth="80.0" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                                              <Label text="Gender" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                                              <HBox alignment="CENTER_LEFT" spacing="20.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7">
-                                                  <children>
-                                                      <RadioButton fx:id="maleRadio" mnemonicParsing="false" styleClass="gender-radio" text="Male">
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="genderRadio" />
-                                             </toggleGroup>
-                                          </RadioButton>
-                                                      <RadioButton fx:id="femaleRadio" mnemonicParsing="false" styleClass="gender-radio" text="Female" toggleGroup="$genderRadio" />
-                                                  </children>
-                                              </HBox>
-                                          </children>
-                                 <VBox.margin>
-                                    <Insets left="20.0" right="20.0" top="16.0" />
-                                 </VBox.margin>
-                                      </GridPane>
-            
-                                            <GridPane hgap="10.0" vgap="5.0">
-                                          <columnConstraints>
-                                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="80.0" />
-                                          </columnConstraints>
-                                          <rowConstraints>
-                                              <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-                                          </rowConstraints>
-                                          <children>
-                                              <Label text="Purpose of Visit" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                              <ComboBox fx:id="purposeCombo" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="35.0" styleClass="-purpose-cb" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                                              <Label text="Symptoms" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                              <TextField fx:id="symptoms_field" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-                                              <Label text="Patient Type" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                                              <HBox alignment="CENTER_LEFT" spacing="20.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5">
-                                                  <children>
-                                                      <RadioButton fx:id="regularRadio" mnemonicParsing="false" styleClass="patient-type-radio" text="Regular">
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="patientTypeRadio" />
-                                             </toggleGroup>
-                                          </RadioButton>
-                                                      <RadioButton fx:id="pwdRadio" mnemonicParsing="false" styleClass="patient-type-radio" text="Person with Disability" toggleGroup="$patientTypeRadio" />
-                                                      <RadioButton fx:id="seniorRadio" mnemonicParsing="false" styleClass="patient-type-radio" text="Senior Citizen" toggleGroup="$patientTypeRadio" />
-                                                      <RadioButton fx:id="pregnantRadio" layoutX="10.0" layoutY="19.0" mnemonicParsing="false" styleClass="patient-type-radio" text="Pregnant" toggleGroup="$patientTypeRadio" />
-                                                  </children>
-                                              </HBox>
-                                          </children>
-                                 <VBox.margin>
-                                    <Insets left="20.0" right="20.0" top="16.0" />
-                                 </VBox.margin>
-                                      </GridPane>
-            
-                                            <VBox spacing="5.0">
-                                          <children>
-                                              <Label text="Contact Number" />
-                                              <TextField fx:id="contact_field" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="35.0" />
-                                          </children>
-                                 <VBox.margin>
-                                    <Insets left="20.0" right="20.0" top="16.0" />
-                                 </VBox.margin>
-                                      </VBox>
-            
-                                            <HBox alignment="CENTER_RIGHT" spacing="10.0">
-                                          <children>
-                                              <Button fx:id="cancelBtn" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" styleClass="cancel-button" text="Cancel" />
-                                              <Button fx:id="nextBtn" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" styleClass="next-button" text="Next" />
-                                          </children>
-                                 <VBox.margin>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="16.0" />
-                                 </VBox.margin>
-                                      </HBox>
-            
-                                        </children>
-                              </VBox>
-                          </content>
-                     <VBox.margin>
+                                <Label fx:id="backBtn" prefHeight="0.0" styleClass="back-to-queue" text="Back to Queue Types" />
+                            </children>
+                        </HBox>
+                        <Label fx:id="typeLabel" text="General Care Form">
+                            <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                        </Label>
+                    </children>
+                    <VBox.margin>
+                  <Insets bottom="10.0" right="3.0" top="10.0" />
+               </VBox.margin>
+                </VBox>
+
+                      <HBox alignment="CENTER_LEFT" styleClass="notice">
+                    <children>
+                  <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/exclamation-mark.png" />
+                     </image>
+                  </ImageView>
+                        <Label maxWidth="1.7976931348623157E308" styleClass="notice-message" text="Our staff will assess your information and call your queue number when it's your turn." wrapText="true" HBox.hgrow="ALWAYS">
+                            <HBox.margin>
                         <Insets left="10.0" />
-                     </VBox.margin>
-                      </ScrollPane>
+                     </HBox.margin>
+                        </Label>
+                    </children>
+                    <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+                    <VBox.margin>
+                  <Insets bottom="10.0" left="9.0" right="3.0" />
+               </VBox.margin>
+                </HBox>
+            <HBox fx:id="error_container" alignment="CENTER">
+               <children>
+                  <Label fx:id="error_message" styleClass="error-message" text="Label" wrapText="true" />
+               </children>
+            </HBox>
+
+                <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
+                    <content>
+                        <VBox fx:id="form" styleClass="form">
+                            <children>
+                        <Pane fx:id="formColorPane" prefHeight="9.0" prefWidth="502.0" styleClass="form-color" />
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label alignment="CENTER" styleClass="form-label" text="Patient Information">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="20.0" />
+                           </VBox.margin>
+                        </Separator>
       
-                        </children>
-                  <padding>
-                      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-                  </padding>
-              </VBox>
-          </center>
-      </BorderPane>
-   </children>
-</StackPane>
+                                      <GridPane hgap="10.0" vgap="5.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="80.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Label text="First Name *" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                        <Label text="M.I *" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                        <TextField fx:id="fname_field" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" promptText="Juan" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                        <TextField fx:id="mi_field" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" promptText="D" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label text="Last Name *" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                        <TextField fx:id="lname_field" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" promptText="Dela Cruz" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                                        <Label text="Age" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                        <TextField fx:id="age_field" editable="false" maxHeight="-Infinity" maxWidth="80.0" minHeight="-Infinity" prefHeight="35.0" prefWidth="80.0" promptText="0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label text="Birth Date *" GridPane.rowIndex="4" />
+                              <DatePicker fx:id="birthDatePicker" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="MM/DD/YYYY" styleClass="field-input" GridPane.rowIndex="5" />
+                                    </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                                </GridPane>
+                        <VBox spacing="10.0">
+                           <children>
+                              <Label text="Gender *" />
+                              <HBox alignment="CENTER_LEFT" spacing="20.0">
+                                 <children>
+                                    <RadioButton fx:id="maleRadio" mnemonicParsing="false" prefWidth="70.0" styleClass="gender-radio" text="Male">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="genderRadio" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="femaleRadio" mnemonicParsing="false" prefWidth="140.0" styleClass="gender-radio" text="Female" toggleGroup="$genderRadio" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox spacing="10.0">
+                           <children>
+                              <Label text="Civil Status *" />
+                              <HBox alignment="CENTER_LEFT" spacing="20.0">
+                                 <children>
+                                    <RadioButton fx:id="singleRadio" mnemonicParsing="false" prefWidth="70.0" styleClass="patient-type-radio" text="Single" HBox.hgrow="ALWAYS">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="civilStatusRadio" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="marriedRadio" mnemonicParsing="false" prefWidth="140.0" styleClass="patient-type-radio" text="Married" toggleGroup="$civilStatusRadio" HBox.hgrow="ALWAYS" />
+                                    <RadioButton fx:id="widowedRadio" mnemonicParsing="false" prefWidth="95.0" styleClass="patient-type-radio" text="Widowed" toggleGroup="$civilStatusRadio" HBox.hgrow="ALWAYS" />
+                                    <RadioButton fx:id="separatedRadio" layoutX="10.0" layoutY="19.0" mnemonicParsing="false" styleClass="patient-type-radio" text="Separated" toggleGroup="$civilStatusRadio" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox spacing="10.0">
+                           <children>
+                              <Label text="Patient Type *" />
+                              <HBox alignment="CENTER_LEFT" spacing="20.0">
+                                 <children>
+                                    <RadioButton fx:id="regularRadio" mnemonicParsing="false" prefWidth="70.0" styleClass="patient-type-radio" text="Regular">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="patientTypeRadio" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="pwdRadio" mnemonicParsing="false" prefWidth="140.0" styleClass="patient-type-radio" text="Person with Disability" toggleGroup="$patientTypeRadio" HBox.hgrow="ALWAYS" />
+                                    <RadioButton fx:id="seniorRadio" mnemonicParsing="false" prefWidth="95.0" styleClass="patient-type-radio" text="Senior Citizen" toggleGroup="$patientTypeRadio" HBox.hgrow="ALWAYS" />
+                                    <RadioButton fx:id="pregnantRadio" layoutX="10.0" layoutY="19.0" mnemonicParsing="false" styleClass="patient-type-radio" text="Pregnant" toggleGroup="$patientTypeRadio" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox spacing="10.0">
+                           <children>
+                              <Label text="Address (Purok - Street - Barangay - City) *" />
+                              <TextField fx:id="addressField" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="35.0" promptText="Purok 128 Brgy 123 Sta. Fe Metro Manila Philippines" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox spacing="10.0">
+                           <children>
+                              <Label text="Nationality *" />
+                              <ComboBox fx:id="nationalityCombo" maxWidth="1.7976931348623157E308" prefHeight="35.0" styleClass="purpose-cb" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox spacing="10.0">
+                           <children>
+                              <Label text="Religion" />
+                              <ComboBox fx:id="religionCombo" maxWidth="1.7976931348623157E308" prefHeight="35.0" styleClass="purpose-cb" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets top="40.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label alignment="CENTER" styleClass="form-label" text="Contact Information">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="20.0" right="20.0" top="16.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="20.0" />
+                           </VBox.margin>
+                        </Separator>
+      
+                                      <VBox spacing="10.0">
+                                    <children>
+                                        <Label text="Contact Number *" />
+                                        <TextField fx:id="contact_field" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="35.0" promptText="09XXXXXXXXX" />
+                                    </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                                </VBox>
+                        <VBox spacing="10.0">
+                           <children>
+                              <Label text="Email Address" />
+                              <TextField fx:id="emailAddressField" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="35.0" promptText="juandelacruz@gmail.com" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox layoutX="30.0" layoutY="547.0" spacing="10.0">
+                           <children>
+                              <Label text="Emergency Contact Person" />
+                              <TextField fx:id="contactPersonField" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="35.0" promptText="Pedro D. Dela Cruz" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox layoutX="30.0" layoutY="620.0" spacing="10.0">
+                           <children>
+                              <Label text="Relation with the contact person" />
+                              <ComboBox fx:id="relationCombo" maxWidth="1.7976931348623157E308" prefHeight="35.0" styleClass="purpose-cb" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox layoutX="30.0" layoutY="620.0" spacing="10.0">
+                           <children>
+                              <Label text="Emergency Contact Number" />
+                              <TextField fx:id="emergencyContactField" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="35.0" promptText="09XXXXXXXXX" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets top="40.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label alignment="CENTER" styleClass="form-label" text="Additional Information">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="20.0" right="20.0" top="16.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="20.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <VBox layoutX="30.0" layoutY="623.0" spacing="10.0">
+                           <children>
+                              <Label text="Additional Notes / Health Concern" />
+                              <TextField fx:id="symptoms_field" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" promptText="Briefly describe your concern, symptoms, or reason for visit..." />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" top="16.0" />
+                           </VBox.margin>
+                        </VBox>
+      
+                                      <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                    <children>
+                                        <Button fx:id="cancelBtn" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" styleClass="cancel-button" text="Cancel" />
+                                        <Button fx:id="nextBtn" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" styleClass="next-button" text="Next" />
+                                    </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="40.0" />
+                           </VBox.margin>
+                                </HBox>
+      
+                                  </children>
+                        </VBox>
+                    </content>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+                </ScrollPane>
+
+                  </children>
+            <padding>
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+            </padding>
+        </VBox>
+    </center>
+</BorderPane>

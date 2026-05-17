@@ -1,7 +1,6 @@
 package com.javafx.csit228capstone.screens.queue;
 
 import com.javafx.csit228capstone.helper.MenuController;
-import com.javafx.csit228capstone.screens.NotificationPanelController;
 import com.javafx.csit228capstone.utils.AnimationHelper;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import javafx.fxml.FXML;
@@ -11,8 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.time.LocalDate;
@@ -34,9 +31,6 @@ public class QueueScheduleController implements Initializable{
     @FXML private Button confirmButton;
     @FXML private VBox timeSlotsContainer;
     @FXML private VBox schedScreen;
-    @FXML private StackPane schedRoot;
-    private NotificationPanelController notifPanelCtrl;
-    @FXML private Pane notification;
 
     private YearMonth currentYearMonth;
     private LocalDate selectedDate;
@@ -66,9 +60,6 @@ public class QueueScheduleController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         AnimationHelper.fadeIn(schedScreen);
-        notifPanelCtrl = new  NotificationPanelController(schedRoot);
-        AnimationHelper.ringAnimation(notification);
-        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
         today = LocalDate.now();
         selectedDate = today;
         currentYearMonth = YearMonth.from(today);

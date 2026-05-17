@@ -4,7 +4,6 @@ import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.Form;
 import com.javafx.csit228capstone.model.QueueInsertValue;
 import com.javafx.csit228capstone.model.QueueTicket;
-import com.javafx.csit228capstone.screens.NotificationPanelController;
 import com.javafx.csit228capstone.utils.*;
 import com.mysql.cj.Session;
 import javafx.animation.Animation;
@@ -17,7 +16,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
@@ -43,9 +41,6 @@ public class QueueNumberController {
     @FXML private ImageView qQrImage;
     @FXML private VBox ticketCard;
     @FXML private VBox ticketScreen;
-    @FXML private StackPane numberRoot;
-    private NotificationPanelController notifPanelCtrl;
-    @FXML private Pane notification;
 
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
@@ -59,36 +54,6 @@ public class QueueNumberController {
     public void initializeData(String type){
         menuController.setActiveButton(menuController.getQueueBtn());
         qType = type;
-
-        Form f = formManager.loadForm();
-        int formId = QueueFormDAO.addForm(
-                f.getFirstName(),
-                f.getMiddleName(),
-                f.getLastName(),
-                f.getAge(),
-                f.getGender(),
-                f.getPurpose(),
-                f.getSymptoms(),
-                f.getPatientType(),
-                f.getContactNumber(),
-                f.getFormType());
-        if (formId == -1) {
-            System.err.println("Form was not saved. Queue will not be created.");
-            return;
-        }
-        qiv = QueueLineDAO.insertQueue(formId, SessionManager.getInstance().getUserId(), qType);
-        assert qiv != null;
-        qt = QueueLineDAO.getQueueTicket(qiv.getQueueId());
-
-        NotificationDAO.insert(
-                SessionManager.getInstance().getUserId(),
-                "Successfully Joined",
-                "You joined the " + qType + " queue. Your number is " + qt.getQueueNumber() + ".",
-                "JOINED"
-        );
-
-        formManager.clearForm();
-
         setCard();
 
         if(type.equals("General Wellness")){
@@ -104,10 +69,7 @@ public class QueueNumberController {
 
     @FXML
     public void initialize() {
-        notifPanelCtrl = new  NotificationPanelController(numberRoot);
         AnimationHelper.fadeIn(ticketScreen);
-        AnimationHelper.ringAnimation(notification);
-        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
         saveBtn.setOnAction(e -> onSave());
         doneBtn.setOnAction(e -> onDone());
     }

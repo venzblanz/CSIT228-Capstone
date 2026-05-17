@@ -11,8 +11,6 @@ module com.javafx.csit228capstone {
     requires java.desktop;
     requires javafx.swing;
     requires com.google.zxing.javase;
-    requires org.kordamp.ikonli.javafx;
-    requires org.kordamp.ikonli.fontawesome5;
 
     opens com.javafx.csit228capstone to javafx.fxml;
     exports com.javafx.csit228capstone;
@@ -29,5 +27,4 @@ module com.javafx.csit228capstone {
     opens com.javafx.csit228capstone.model to javafx.fxml;
     exports com.javafx.csit228capstone.screens.schedule;
     opens com.javafx.csit228capstone.screens.schedule to javafx.fxml;
-    exports com.javafx.csit228capstone.screens.admin;
 }

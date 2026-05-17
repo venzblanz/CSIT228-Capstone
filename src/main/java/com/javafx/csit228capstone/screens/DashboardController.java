@@ -4,12 +4,10 @@ import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.QueueTicket;
 import com.javafx.csit228capstone.model.User;
 import com.javafx.csit228capstone.utils.AnimationHelper;
-import com.javafx.csit228capstone.utils.NotificationDAO;
 import com.javafx.csit228capstone.utils.QueueLineDAO;
 import com.javafx.csit228capstone.utils.SessionManager;
 import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -35,14 +33,11 @@ public class DashboardController {
     @FXML private Label timeLabel;
     @FXML private Pane notification;
     @FXML private VBox dashboardScreen;
-    @FXML private StackPane dashboardRoot;
 
     // ------------- Recents -------------------------------------------------------------------------------------------
     @FXML private VBox recentQueueContainer;
     // ------------- Active Card ---------------------------------------------------------------------------------------
     @FXML private HBox activeCard;
-
-    private NotificationPanelController notifPanelCtrl;
 
     private final LocalDate localDate = LocalDate.now();
     private final SessionManager sessionManager = SessionManager.getInstance();
@@ -53,7 +48,6 @@ public class DashboardController {
 
     @FXML
     public void initialize(){
-        notifPanelCtrl = new  NotificationPanelController(dashboardRoot);
         AnimationHelper.fadeIn(dashboardScreen);
         menuController.setActiveButton(menuController.getDashboardBtn());
 
@@ -69,11 +63,8 @@ public class DashboardController {
         ring.setAutoReverse(true);
 
         notification.setOnMouseEntered(e -> ring.play());
-        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
-
         setUpRecent(queueList);
     }
-
     // ----------- For Dashboard Cards ---------------------------------------------------------------------------------
     private void setUpDashboardCards(QueueTicket activeQueue){
         activeCard.getChildren().clear();

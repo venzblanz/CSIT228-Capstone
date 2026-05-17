@@ -66,7 +66,7 @@ public class QueueLineDAO {
                     q.created_at,
                     q.status,
                     q.staff_assigned,
-                    f.purpose,
+                    f.picked_service,
                     f.first_name,
                     f.middle_initial,
                     f.last_name
@@ -88,7 +88,7 @@ public class QueueLineDAO {
                             rs.getString("last_name"),
                             rs.getTimestamp("created_at").toLocalDateTime(),
                             rs.getString("status"),
-                            rs.getString("purpose"),
+                            rs.getString("picked_service"),
                             rs.getString("staff_assigned")
                     );
                 }
@@ -107,7 +107,7 @@ public class QueueLineDAO {
                 q.created_at,
                 q.status,
                 q.staff_assigned,
-                f.purpose,
+                f.picked_service,
                 f.first_name,
                 f.middle_initial,
                 f.last_name
@@ -140,7 +140,7 @@ public class QueueLineDAO {
                 q.created_at,
                 q.status,
                 q.staff_assigned,
-                f.purpose,
+                f.picked_service,
                 f.first_name,
                 f.middle_initial,
                 f.last_name
@@ -171,7 +171,7 @@ public class QueueLineDAO {
                 q.created_at,
                 q.status,
                 q.staff_assigned,
-                f.purpose,
+                f.picked_service,
                 f.first_name,
                 f.middle_initial,
                 f.last_name
@@ -200,7 +200,7 @@ public class QueueLineDAO {
             q.created_at,
             q.status,
             q.staff_assigned,
-            f.purpose,
+            f.picked_service,
             f.first_name,
             f.middle_initial,
             f.last_name
@@ -224,7 +224,7 @@ public class QueueLineDAO {
                             rs.getString("last_name"),
                             rs.getTimestamp("created_at").toLocalDateTime(),
                             rs.getString("status"),
-                            rs.getString("purpose"),
+                            rs.getString("picked_service"),
                             rs.getString("staff_assigned")
                     );
                 }
@@ -243,7 +243,7 @@ public class QueueLineDAO {
             q.created_at,
             q.status,
             q.staff_assigned,
-            f.purpose,
+            f.picked_service,
             f.first_name,
             f.middle_initial,
             f.last_name
@@ -267,7 +267,7 @@ public class QueueLineDAO {
                             rs.getString("last_name"),
                             rs.getTimestamp("created_at").toLocalDateTime(),
                             rs.getString("status"),
-                            rs.getString("purpose"),
+                            rs.getString("picked_service"),
                             rs.getString("staff_assigned")
                     );
                 }
@@ -291,7 +291,7 @@ public class QueueLineDAO {
                         rs.getString("last_name"),
                         rs.getTimestamp("created_at").toLocalDateTime(),
                         rs.getString("status"),
-                        rs.getString("purpose"),
+                        rs.getString("picked_service"),
                         rs.getString("staff_assigned")
                 );
 
@@ -335,17 +335,5 @@ public class QueueLineDAO {
             System.err.println("[QueueLineDAO] Error getting the queue number " + e.getMessage());
         }
         return prefix + "-01";
-    }
-
-    public static void cancelQueue(String queueNumber) {
-        String sql = "UPDATE queue_line SET status = 'Cancelled' WHERE queue_number = ? AND DATE(created_at) = CURDATE()";
-        try (Connection c = DatabaseConfig.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setString(1, queueNumber);
-            ps.executeUpdate();
-            System.out.println("[QueueLineDAO] Cancelled queue " + queueNumber);
-        } catch (Exception e) {
-            System.err.println("[QueueLineDAO] Error cancelling queue " + e.getMessage());
-        }
     }
 }

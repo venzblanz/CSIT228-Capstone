@@ -8,7 +8,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -31,8 +30,8 @@ public class AdminLiveQueueController {
     @FXML private Label nowServingNumber;
     @FXML private Label nowServingDept;
     @FXML private Label nowServingStaff;
-    @FXML private FlowPane waitingCards;
-    @FXML private FlowPane doneCards;
+    @FXML private HBox waitingCards;
+    @FXML private HBox doneCards;
     @FXML private Label emptyLabel;
     @FXML private Label refreshLabel;
 
@@ -46,16 +45,6 @@ public class AdminLiveQueueController {
     private void initialize() {
         loadQueue();
         startAutoRefresh();
-
-        mainContent.sceneProperty().addListener((obs, oldScene, newScene) -> {
-            if (newScene != null) {
-                newScene.setOnKeyPressed(event -> {
-                    if (event.getCode() == javafx.scene.input.KeyCode.ESCAPE && isFullscreen) {
-                        toggleFullscreen();
-                    }
-                });
-            }
-        });
     }
 
     private void startAutoRefresh() {
@@ -90,8 +79,8 @@ public class AdminLiveQueueController {
                 nowServingStaff.setText(rs.getString("staff_assigned").isEmpty()
                         ? "" : "Staff: " + rs.getString("staff_assigned"));
             } else {
-                nowServingNumber.setText("");
-                nowServingDept.setText("No one currently being served");
+                nowServingNumber.setText("---");
+                nowServingDept.setText("No one being served");
                 nowServingStaff.setText("");
             }
         } catch (Exception e) {
@@ -159,7 +148,13 @@ public class AdminLiveQueueController {
         }
     }
 
-    /* Creates a styled card for the queue.*/
+    /**
+     * Creates a styled card for the queue.
+     * @param queueNumber The ticket number
+     * @param subtitle The department or status
+     * @param isActive True for waiting queue, False for completed/cancelled
+     * @return A fully styled VBox card
+     */
     private VBox createQueueCard(String queueNumber, String subtitle, boolean isActive) {
         // 1. Create the container
         VBox card = new VBox();
@@ -196,13 +191,11 @@ public class AdminLiveQueueController {
             // Hide sidebar
             sidebarRef = (VBox) root.getLeft();
             root.setLeft(null);
-            fullscreenBtn.setVisible(false); // Hide fullscreen button
             fullscreenBtn.setText("✕ Exit Fullscreen");
             isFullscreen = true;
         } else {
             // Show sidebar again
             root.setLeft(sidebarRef);
-            fullscreenBtn.setVisible(true); // Show when exiting
             fullscreenBtn.setText("⛶ Fullscreen");
             isFullscreen = false;
         }
@@ -243,6 +236,4 @@ public class AdminLiveQueueController {
         tabSpecialized.getStyleClass().setAll("queue-tab");
         active.getStyleClass().setAll("queue-tab-active");
     }
-
-
 }

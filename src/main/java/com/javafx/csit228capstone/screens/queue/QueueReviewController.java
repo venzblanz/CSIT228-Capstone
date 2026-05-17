@@ -2,13 +2,10 @@ package com.javafx.csit228capstone.screens.queue;
 
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.Form;
-import com.javafx.csit228capstone.screens.NotificationPanelController;
 import com.javafx.csit228capstone.utils.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.StageStyle;
 
@@ -24,24 +21,33 @@ public class QueueReviewController {
     @FXML private VBox reviewScreen;
 
     // Form
-    @FXML private TextField         fnameField;
-    @FXML private TextField         miField;
-    @FXML private TextField         lnameField;
-    @FXML private TextField         ageField;
-    @FXML private TextField         symptomsField;
-    @FXML private TextField         contactField;
+    @FXML private TextField         fname_field;
+    @FXML private TextField         mi_field;
+    @FXML private TextField         lname_field;
+    @FXML private DatePicker        birthDatePicker;
+    @FXML private TextField         age_field;
     @FXML private ToggleGroup       genderRadio;
+    @FXML private ToggleGroup       civilStatusRadio;
     @FXML private ToggleGroup       patientTypeRadio;
     @FXML private RadioButton       maleRadio;
     @FXML private RadioButton       femaleRadio;
-    @FXML private ComboBox<String>  purposeCombo;
     @FXML private RadioButton       regularRadio;
     @FXML private RadioButton       pwdRadio;
     @FXML private RadioButton       seniorRadio;
     @FXML private RadioButton       pregnantRadio;
-    @FXML private StackPane reviewRoot;
-    private NotificationPanelController notifPanelCtrl;
-    @FXML private Pane notification;
+    @FXML private RadioButton       singleRadio;
+    @FXML private RadioButton       marriedRadio;
+    @FXML private RadioButton       widowedRadio;
+    @FXML private RadioButton       separatedRadio;
+    @FXML private TextField         addressField;
+    @FXML private ComboBox<String>  nationalityCombo;
+    @FXML private ComboBox<String>  religionCombo;
+    @FXML private TextField         contact_field;
+    @FXML private TextField         emailAddressField;
+    @FXML private TextField         contactPersonField;
+    @FXML private ComboBox<String>  relationCombo;
+    @FXML private TextField         emergencyContactField;
+    @FXML private TextField         symptoms_field;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
     private final FormManager formManager = FormManager.getInstance();
@@ -49,6 +55,7 @@ public class QueueReviewController {
 
     private final Form loadedForm = formManager.loadForm();
     RadioButton[] patientRadios;
+    RadioButton[] civilStatusRadios;
     RadioButton[] genderRadios;
 
     private String formType;
@@ -74,10 +81,7 @@ public class QueueReviewController {
 
     @FXML
     public void initialize() {
-        notifPanelCtrl = new  NotificationPanelController(reviewRoot);
         AnimationHelper.fadeIn(reviewScreen);
-        AnimationHelper.ringAnimation(notification);
-        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
         // Radio
         maleRadio.setUserData("Male");
         femaleRadio.setUserData("Female");
@@ -92,6 +96,12 @@ public class QueueReviewController {
                 pregnantRadio,
                 pwdRadio,
                 seniorRadio
+        };
+        civilStatusRadios = new RadioButton[] {
+                singleRadio,
+                marriedRadio,
+                widowedRadio,
+                separatedRadio
         };
         genderRadios = new RadioButton[] {
                 maleRadio,
@@ -122,25 +132,40 @@ public class QueueReviewController {
         if(loadedForm != null){
             String type = loadedForm.getPatientType();
             String gender = loadedForm.getGender();
-            fnameField.setText(loadedForm.getFirstName());
-            miField.setText(loadedForm.getMiddleName());
-            lnameField.setText(loadedForm.getLastName());
-            ageField.setText(String.valueOf(loadedForm.getAge()));
+            String civilStatus = loadedForm.getCivilStatus();
+
+            fname_field.setText(loadedForm.getFirstName());
+            mi_field.setText(loadedForm.getMiddleName());
+            lname_field.setText(loadedForm.getLastName());
+            birthDatePicker.setValue(loadedForm.getBirthDate());
+            age_field.setText(String.valueOf(loadedForm.getAge()));
             for(RadioButton rb : genderRadios){
                 if(rb.getUserData().equals(gender)){
                     genderRadio.selectToggle(rb);
                     break;
                 }
             }
-            purposeCombo.getSelectionModel().select(loadedForm.getPurpose());
-            symptomsField.setText(loadedForm.getSymptoms());
+            for(RadioButton rb : civilStatusRadios){
+                if(rb.getUserData().equals(civilStatus)){
+                    civilStatusRadio.selectToggle(rb);
+                    break;
+                }
+            }
             for(RadioButton rb : patientRadios){
                 if(rb.getUserData().equals(type)){
                     patientTypeRadio.selectToggle(rb);
                     break;
                 }
             }
-            contactField.setText(loadedForm.getContactNumber());
+            addressField.setText(loadedForm.getAddress());
+            nationalityCombo.getSelectionModel().select(loadedForm.getNationality());
+            religionCombo.getSelectionModel().select(loadedForm.getReligion());
+            contact_field.setText(loadedForm.getContactNumber());
+            emailAddressField.setText(loadedForm.getEmailAddress());
+            contactPersonField.setText(loadedForm.getEmergencyPerson());
+            relationCombo.getSelectionModel().select(loadedForm.getEmergencyRelation());
+            emergencyContactField.setText(loadedForm.getEmergencyNumber());
+            symptoms_field.setText(loadedForm.getSymptoms());
         }
     }
     private void onBack(){

@@ -1,8 +1,6 @@
 package com.javafx.csit228capstone.screens.schedule;
 
 import com.javafx.csit228capstone.model.Service;
-import com.javafx.csit228capstone.screens.NotificationPanelController;
-import com.javafx.csit228capstone.utils.AnimationHelper;
 import com.javafx.csit228capstone.utils.DatabaseConfig;
 import com.javafx.csit228capstone.utils.ScheduleDAO;
 import javafx.fxml.FXML;
@@ -12,7 +10,10 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 
 import java.net.URL;
@@ -31,11 +32,8 @@ public class SchedulePatientController implements Initializable {
     @FXML private Button prevMonthButton;
     @FXML private Button nextMonthButton;
     @FXML private VBox timeSlotsContainer;
-    @FXML private StackPane scheduleRoot;
-    @FXML private Pane notification;
 
     @FXML private com.javafx.csit228capstone.helper.MenuController menuController;
-    private NotificationPanelController notifPanelCtrl;
 
     private YearMonth currentYearMonth;
     private LocalDate selectedDate;
@@ -65,9 +63,6 @@ public class SchedulePatientController implements Initializable {
         if (menuController != null) {
             menuController.setActiveButton(menuController.getScheduleBtn());
         }
-        notifPanelCtrl = new  NotificationPanelController(scheduleRoot);
-        AnimationHelper.ringAnimation(notification);
-        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
 
         today = LocalDate.now();
         selectedDate = today;

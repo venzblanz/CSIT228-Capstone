@@ -2,7 +2,6 @@ package com.javafx.csit228capstone.screens.Account;
 
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.User;
-import com.javafx.csit228capstone.screens.NotificationPanelController;
 import com.javafx.csit228capstone.utils.AnimationHelper;
 import com.javafx.csit228capstone.utils.SceneNavigator;
 import com.javafx.csit228capstone.utils.SessionManager;
@@ -14,7 +13,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 
 import java.io.File;
 import java.net.URL;
@@ -29,13 +27,9 @@ public class ConfirmPasswordController implements Initializable {
     @FXML private Button backBtn;
     @FXML private Button confirmBtn;
     @FXML private Pane notification;
-    @FXML private StackPane confirmRoot;
-    private NotificationPanelController notifPanelCtrl;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        notifPanelCtrl = new  NotificationPanelController(confirmRoot);
         AnimationHelper.ringAnimation(notification);
-        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
             menuController.setActiveButton(menuController.getAccountBtn());
             backBtn.setOnAction(e -> onHandleBack());
             confirmBtn.setOnAction(e -> onHandleConfirm());
