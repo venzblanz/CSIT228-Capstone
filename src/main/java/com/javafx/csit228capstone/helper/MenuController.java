@@ -1,6 +1,7 @@
 package com.javafx.csit228capstone.helper;
 
 import com.javafx.csit228capstone.model.User;
+import com.javafx.csit228capstone.screens.schedule.ScheduleController;
 import com.javafx.csit228capstone.utils.*;
 import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
@@ -13,6 +14,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+
+import java.util.function.Consumer;
 
 public class MenuController {
     @FXML private VBox      root;
@@ -107,7 +110,7 @@ public class MenuController {
         sceneNavigator.navigate("/com/javafx/csit228capstone/dashboard.fxml", queueBtn,"/styles/dashboard.css");
     }
     private void goToSchedule() {
-        sceneNavigator.navigate("/com/javafx/csit228capstone/schedule/schedule-patient.fxml", scheduleBtn, "/styles/schedule-patient.css");
+        sceneNavigator.navigate("/com/javafx/csit228capstone/schedule/schedule.fxml", scheduleBtn, "/styles/schedule.css");
     }
     public void goToAccount() {
         sceneNavigator.navigate(

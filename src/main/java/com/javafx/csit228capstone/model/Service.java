@@ -4,21 +4,27 @@ public class Service {
     private int serviceId;
     private String name;
     private String serviceType;
-    private boolean recurring; // NEW
+    private boolean recurring;
+    private String doctorName;
 
-    public Service(int serviceId, String name, String serviceType, boolean recurring) {
+    public Service(int serviceId, String name, String serviceType, String doctorName, boolean recurring) {
         this.serviceId = serviceId;
         this.name = name;
         this.serviceType = serviceType;
+        this.doctorName = doctorName;
         this.recurring = recurring;
     }
 
-    public Service(String name, String serviceType) {
-        this(-1, name, serviceType, true);
+    public Service(int serviceId, String name, String serviceType, boolean recurring) {
+        this(serviceId, name, serviceType, null, recurring);
     }
 
     public Service(String name, String serviceType, boolean recurring) {
-        this(-1, name, serviceType, recurring);
+        this(-1, name, serviceType, null, recurring);
+    }
+
+    public Service(String name, String serviceType) {
+        this(-1, name, serviceType, null, true);
     }
 
     public int getServiceId() {
@@ -37,12 +43,38 @@ public class Service {
         return recurring;
     }
 
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public String getDoctorDisplay() {
+        return (doctorName != null && !doctorName.isBlank())
+                ? doctorName
+                : "No doctor assigned yet";
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setServiceType(String type) {
+        this.serviceType = type;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
     public String getChipColor() {
-        return switch (serviceType) {
-            case "Women's Health"           -> "pink";
-            case "Specialized Fields"       -> "green";
-            case "Diagnostics & Laboratory" -> "purple";
-            default                         -> "blue";
-        };
+        switch (serviceType) {
+            case "Women's Health":
+                return "pink";
+            case "Specialized Fields":
+                return "green";
+            case "Diagnostics & Laboratory":
+                return "purple";
+            default:
+                return "blue";
+        }
     }
 }
