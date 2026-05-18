@@ -59,7 +59,7 @@ public class QueueScheduleController implements Initializable {
     private String activeCategory = null;
 
     private final Map<String, List<Service>> slotServices = new LinkedHashMap<>();
-    private final ScheduleDAO scheduleDAO = new ScheduleDAO(DatabaseConfig.getConnection());
+    private final ScheduleDAO scheduleDAO = ScheduleDAO.getInstance();
     private final FormManager formManager = FormManager.getInstance();
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
 
