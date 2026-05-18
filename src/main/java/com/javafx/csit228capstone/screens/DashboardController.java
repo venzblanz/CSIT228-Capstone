@@ -51,7 +51,7 @@ public class DashboardController {
 
     @FXML
     public void initialize(){
-        AnimationHelper.staggerFadeIn(dashboardScreen);
+        AnimationHelper.fadeIn(dashboardScreen);
         menuController.setActiveButton(menuController.getDashboardBtn());
 
         dateLabel.setText(localDate(localDate));
@@ -140,11 +140,7 @@ public class DashboardController {
                     activeQueue.getQueueNumber()
             );
 
-            if(position == 0){
-                positionLabel.setText("Now");
-            }else{
-                positionLabel.setText(position + "");
-            }
+            positionLabel.setText(position + "");
             scheduleLabel.setText(activeQueue.getTime());
 
             QueueTimeHelper.startCountdown(
@@ -187,11 +183,7 @@ public class DashboardController {
             if (activeQueue.getStatus().equals("Serving")) {
                 pos = new Label("Now");
             } else {
-                if(activeQueue.getDate().isBefore(LocalDate.now())){
-                    pos = new Label("");
-                }else{
-                    pos = new Label("#" + position);
-                }
+                pos = new Label("#" + position);
             }
             pos.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
             pos.getStyleClass().add("q-position");

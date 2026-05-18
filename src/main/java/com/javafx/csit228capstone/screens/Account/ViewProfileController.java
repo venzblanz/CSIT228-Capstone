@@ -30,7 +30,6 @@ public class ViewProfileController implements Initializable {
     @FXML private MenuController menuController;
     @FXML private Label profileNameHeader;
     @FXML private Label profileIdHeader;
-    @FXML private Pane notification;
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
 
     // A flag to keep track of whether an admin is viewing a specific patient row
@@ -38,7 +37,6 @@ public class ViewProfileController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        AnimationHelper.ringAnimation(notification);
 
         // Fixes the active button state highlight on your sidebar menu layout wrapper
         if (menuController != null && menuController.getAccountBtn() != null) {

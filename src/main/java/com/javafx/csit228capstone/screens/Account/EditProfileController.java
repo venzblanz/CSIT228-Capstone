@@ -35,12 +35,10 @@ public class EditProfileController implements Initializable {
     @FXML private Button updateBtn;
     @FXML private DatePicker birthdayDatePicker;
     @FXML private ComboBox<String> genderComboBox;
-    @FXML private Pane notification;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         menuController.setActiveButton(menuController.getAccountBtn());
-        AnimationHelper.ringAnimation(notification);
 
         // ====== FIX: LOCK THE NAME FIELD FROM BEING EDITED BY USER ======
         fullNameField.setEditable(false);

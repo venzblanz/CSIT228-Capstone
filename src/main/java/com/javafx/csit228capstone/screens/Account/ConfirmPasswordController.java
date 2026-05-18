@@ -29,7 +29,6 @@ public class ConfirmPasswordController implements Initializable {
     @FXML private Pane notification;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AnimationHelper.ringAnimation(notification);
             menuController.setActiveButton(menuController.getAccountBtn());
             backBtn.setOnAction(e -> onHandleBack());
             confirmBtn.setOnAction(e -> onHandleConfirm());

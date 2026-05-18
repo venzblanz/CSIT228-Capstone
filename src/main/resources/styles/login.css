@@ -2,6 +2,10 @@
     TODO clean up here as well
 */
 
+.root {
+    -fx-font-family: "Instrument Sans Medium";
+}
+
 /* More on Background and layout designs*/
     .login-logo {
         -fx-background-image: url("../images/medserveLogo.png");

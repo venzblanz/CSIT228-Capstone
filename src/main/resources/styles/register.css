@@ -1,3 +1,7 @@
+.root {
+    -fx-font-family: "Instrument Sans Medium";
+}
+
 .login-logo {
     -fx-background-image: url("../images/medserveLogo.png");
     -fx-background-size: cover;

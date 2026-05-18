@@ -14,7 +14,6 @@
 - Login / Register
 - Account
 - Add / Remove Queue Entry
-- View and Manage Patient Records
 - View Schedule
   
 ## Planned Technologies

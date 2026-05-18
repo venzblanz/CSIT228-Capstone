@@ -220,7 +220,7 @@
 .date-picker-popup .label {
     -fx-text-fill: #1E293B !important;
     -fx-opacity: 1.0 !important;
-    -fx-font-family: 'Instrument Sans' !important;
+    -fx-font-family: 'Instrument Sans Medium' !important;
     -fx-font-weight: bold !important;
 }
 
@@ -263,13 +263,13 @@
 .date-picker-popup .day-cell {
     -fx-background-color: white !important;
     -fx-text-fill: #1E293B !important;
-    -fx-font-family: 'Instrument Sans' !important;
+    -fx-font-family: 'Instrument Sans Medium' !important;
 }
 
 /* Fix the day names (Sun, Mon, Tue...) */
 .date-picker-popup .day-name-cell {
     -fx-text-fill: #64748B !important;
-    -fx-font-family: 'Instrument Sans' !important;
+    -fx-font-family: 'Instrument Sans Medium' !important;
     -fx-font-weight: bold !important;
 }
 

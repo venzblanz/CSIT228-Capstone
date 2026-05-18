@@ -4,7 +4,7 @@
 
 @import "menu-pane.css";
 .root{
-    -fx-font-family: "Instrument Sans";
+    -fx-font-family: "Instrument Sans Medium";
 }
 .main-pane{
     -fx-background-color: #EBF2F6;
@@ -12,7 +12,7 @@
 .screen-labels{
     -fx-text-fill: #218AD5;
     -fx-font-size: 24px;
-    -fx-font-weight: bold;
+    -fx-font-family: "Instrument Sans Bold";
 }
 .util-card{
     -fx-background-color: white;
@@ -169,7 +169,7 @@
 
 .table-view .column-header .label {
     -fx-text-fill: #1E293B !important;
-    -fx-font-weight: bold;
+    -fx-font-family: "Instrument Sans Bold";
     -fx-alignment: CENTER_LEFT;
 }
 
