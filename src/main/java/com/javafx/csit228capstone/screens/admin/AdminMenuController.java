@@ -5,10 +5,14 @@ import com.javafx.csit228capstone.utils.SessionManager;
 import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class AdminMenuController {
@@ -48,9 +52,8 @@ public class AdminMenuController {
                 "/com/javafx/csit228capstone/admin/admin_dashboard.fxml",
                 dashboardBtn, "/styles/dashboard.css"));
 
-        liveQueueBtn.setOnAction(e -> sceneNavigator.navigate(
-                "/com/javafx/csit228capstone/admin/admin_live_queue.fxml",
-                liveQueueBtn, "/styles/dashboard.css"));
+        liveQueueBtn.setOnAction(e -> openLiveQueueWindow());
+
 
         manageQueueBtn.setOnAction(e -> sceneNavigator.navigate(
                 "/com/javafx/csit228capstone/admin/admin-manage-queue.fxml",
@@ -97,5 +100,24 @@ public class AdminMenuController {
 
         logoutBtn.setOnMouseEntered(event -> grow.playFromStart());
         logoutBtn.setOnMouseExited(event -> back.playFromStart());
+    }
+
+    private void openLiveQueueWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/javafx/csit228capstone/admin/live_queue_window.fxml"));
+            VBox root = loader.load();
+            LiveQueueWindowController controller = loader.getController();
+
+            Stage stage = new Stage();
+            stage.setTitle("MedServe — Live Queue");
+            stage.setScene(new Scene(root));
+            stage.setMaximized(true);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setOnCloseRequest(e -> controller.shutdown());
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
