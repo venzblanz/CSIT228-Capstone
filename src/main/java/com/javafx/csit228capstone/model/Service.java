@@ -7,7 +7,7 @@ public class Service {
     private boolean recurring;
     private String doctorName;
 
-    public Service(int serviceId, String name, String serviceType, String doctorName, boolean recurring) {
+    private Service(int serviceId, String name, String serviceType, String doctorName, boolean recurring) {
         this.serviceId = serviceId;
         this.name = name;
         this.serviceType = serviceType;
@@ -15,16 +15,16 @@ public class Service {
         this.recurring = recurring;
     }
 
-    public Service(int serviceId, String name, String serviceType, boolean recurring) {
-        this(serviceId, name, serviceType, null, recurring);
+    public static Service fromDatabase(int serviceId, String name, String serviceType, String doctorName, boolean recurring) {
+        return new Service(serviceId, name, serviceType, doctorName, recurring);
     }
 
-    public Service(String name, String serviceType, boolean recurring) {
-        this(-1, name, serviceType, null, recurring);
+    public static Service createNew(String name, String serviceType, boolean recurring) {
+        return new Service(-1, name, serviceType, null, recurring);
     }
 
-    public Service(String name, String serviceType) {
-        this(-1, name, serviceType, null, true);
+    public static Service createNewWithId(int serviceId, String name, String serviceType, boolean recurring) {
+        return new Service(serviceId, name, serviceType, null, recurring);
     }
 
     public int getServiceId() {
@@ -48,9 +48,7 @@ public class Service {
     }
 
     public String getDoctorDisplay() {
-        return (doctorName != null && !doctorName.isBlank())
-                ? doctorName
-                : "No doctor assigned yet";
+        return (doctorName != null && !doctorName.isBlank()) ? doctorName : "No doctor assigned yet";
     }
 
     public void setName(String name) {

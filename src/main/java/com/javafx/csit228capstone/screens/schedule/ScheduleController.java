@@ -1,18 +1,13 @@
 package com.javafx.csit228capstone.screens.schedule;
 
 import com.javafx.csit228capstone.model.Service;
-import com.javafx.csit228capstone.utils.AnimationHelper;
-import com.javafx.csit228capstone.utils.DatabaseConfig;
-import com.javafx.csit228capstone.utils.ScheduleDAO;
 import javafx.animation.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -20,123 +15,39 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import java.net.URL;
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-import javafx.scene.effect.ColorAdjust;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ScheduleController implements Initializable {
+public class ScheduleController extends BaseScheduleController {
 
     @FXML private com.javafx.csit228capstone.helper.MenuController menuController;
-    @FXML private Label screenLabel;
-    @FXML private Label selectedDateLabel;
-    @FXML private Label monthYearLabel;
-    @FXML private GridPane calendarGrid;
     @FXML private TextField searchField;
-    @FXML private Button prevMonthButton;
-    @FXML private Button nextMonthButton;
-    @FXML private VBox timeSlotsContainer;
-
     @FXML private HBox categoryFilterBar;
     @FXML private Button btnGeneralWellness;
     @FXML private Button btnWomensHealth;
     @FXML private Button btnSpecializedFields;
     @FXML private Button btnDiagnosticsLab;
 
-    private YearMonth currentYearMonth;
-    private LocalDate selectedDate;
-    private LocalDate today;
     private String activeCategory = null;
 
-    private final Map<String, List<Service>> slotServices = new LinkedHashMap<>();
-    private final ScheduleDAO scheduleDAO = new ScheduleDAO(DatabaseConfig.getConnection());
-
-    private static final String CLOSING_TIME = "5:00 PM";
-
-    private static final List<String> TIME_SLOTS = List.of("8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM");
-
-    private static final DateTimeFormatter MONTH_YEAR_FORMATTER = DateTimeFormatter.ofPattern("MMMM yyyy");
-    private static final DateTimeFormatter DATE_HEADER_FORMATTER = DateTimeFormatter.ofPattern("EEEE, MMMM d");
+    @Override
+    protected boolean allowPastDates() {
+        return false;
+    }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    protected void setupSpecifics() {
         if (menuController != null) {
             menuController.setActiveButton(menuController.getScheduleBtn());
         }
 
-        today = LocalDate.now();
-        selectedDate = today;
-        currentYearMonth = YearMonth.from(today);
-
-        for (String slot : TIME_SLOTS) {
-            slotServices.put(slot, new ArrayList<>());
-        }
-
-        prevMonthButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                currentYearMonth = currentYearMonth.minusMonths(1);
-                renderCalendar();
-            }
-        });
-
-        nextMonthButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                currentYearMonth = currentYearMonth.plusMonths(1);
-                renderCalendar();
-            }
-        });
-
         if (searchField != null) {
-            searchField.textProperty().addListener(new javafx.beans.value.ChangeListener<String>() {
-                @Override
-                public void changed(javafx.beans.value.ObservableValue<? extends String> obs, String o, String n) {
-                    handleSearch(n);
-                }
-            });
-        }
-
-        renderCalendar();
-        updateDateHeader();
-        loadServicesForDate(selectedDate);
-        renderTimeSlots();
-
-        AnimationHelper.fadeIn(timeSlotsContainer);
-    }
-
-    private void loadServicesForDate(LocalDate date) {
-        for (String slot : TIME_SLOTS) {
-            slotServices.put(slot, new ArrayList<>());
-        }
-        try {
-            Map<String, List<Service>> scheduleMap = scheduleDAO.getScheduleForDate(date);
-            for (Map.Entry<String, List<Service>> entry : scheduleMap.entrySet()) {
-                slotServices.put(entry.getKey(), entry.getValue());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            searchField.textProperty().addListener((obs, o, n) -> handleSearch(n));
         }
     }
 
-    private void renderTimeSlots() {
-        timeSlotsContainer.getChildren().clear();
-        for (int i = 0; i < TIME_SLOTS.size(); i++) {
-            HBox row = buildTimeRow(TIME_SLOTS.get(i));
-            row.setOpacity(0);
-            timeSlotsContainer.getChildren().add(row);
-
-            FadeTransition ft = new FadeTransition(Duration.millis(280), row);
-            ft.setFromValue(0);
-            ft.setToValue(1);
-            ft.setDelay(Duration.millis(i * 45L));
-            ft.play();
-        }
-    }
-
-    private HBox buildTimeRow(String timeSlot) {
+    @Override
+    protected HBox buildTimeRow(String timeSlot) {
         HBox row = new HBox(8);
         row.setAlignment(Pos.CENTER_LEFT);
         row.getStyleClass().add("time-row");
@@ -216,17 +127,9 @@ public class ScheduleController implements Initializable {
         nameLabel.getStyleClass().add("chip-text");
 
         chip.getChildren().addAll(dot, nameLabel);
+        chip.setOnMouseClicked(e -> showDoctorPopup(service, chip));
 
-        chip.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
-            @Override
-            public void handle(javafx.scene.input.MouseEvent e) {
-                showDoctorPopup(service, chip);
-            }
-        });
-
-        HBox outer = new HBox();
-        outer.getChildren().add(chip);
-        return outer;
+        return chip;
     }
 
     private void showDoctorPopup(Service service, javafx.scene.Node chipNode) {
@@ -316,7 +219,6 @@ public class ScheduleController implements Initializable {
                 screenLabel.setText("Schedule");
             }
         }
-
         renderTimeSlots();
     }
 
@@ -337,24 +239,16 @@ public class ScheduleController implements Initializable {
     }
 
     @FXML
-    private void onClickBtnGeneralWellness() {
-        setActiveCategory("General Wellness", btnGeneralWellness, "filter-btn-blue", "filter-btn-blue-active");
-    }
+    private void onClickBtnGeneralWellness() { setActiveCategory("General Wellness", btnGeneralWellness, "filter-btn-blue", "filter-btn-blue-active"); }
 
     @FXML
-    private void onClickBtnWomensHealth() {
-        setActiveCategory("Women's Health", btnWomensHealth, "filter-btn-pink", "filter-btn-pink-active");
-    }
+    private void onClickBtnWomensHealth() { setActiveCategory("Women's Health", btnWomensHealth, "filter-btn-pink", "filter-btn-pink-active"); }
 
     @FXML
-    private void onClickBtnSpecializedFields() {
-        setActiveCategory("Specialized Fields", btnSpecializedFields, "filter-btn-green", "filter-btn-green-active");
-    }
+    private void onClickBtnSpecializedFields() { setActiveCategory("Specialized Fields", btnSpecializedFields, "filter-btn-green", "filter-btn-green-active"); }
 
     @FXML
-    private void onClickBtnDiagnosticsLab() {
-        setActiveCategory("Diagnostics & Laboratory", btnDiagnosticsLab, "filter-btn-purple", "filter-btn-purple-active");
-    }
+    private void onClickBtnDiagnosticsLab() { setActiveCategory("Diagnostics & Laboratory", btnDiagnosticsLab, "filter-btn-purple", "filter-btn-purple-active"); }
 
     private void handleSearch(String query) {
         if (query == null || query.isBlank()) {
@@ -368,19 +262,14 @@ public class ScheduleController implements Initializable {
         String lower = query.toLowerCase();
 
         for (javafx.scene.Node node : timeSlotsContainer.getChildren()) {
-            if (!(node instanceof HBox)) {
-                continue;
-            }
-
+            if (!(node instanceof HBox)) continue;
             HBox row = (HBox) node;
             boolean matches = false;
 
             if (row.getChildren().size() > 1 && row.getChildren().get(1) instanceof HBox) {
                 HBox chipsBox = (HBox) row.getChildren().get(1);
-
                 matches = searchNodeForText(chipsBox, lower);
             }
-
             node.setVisible(matches);
             node.setManaged(matches);
         }
@@ -400,103 +289,5 @@ public class ScheduleController implements Initializable {
             }
         }
         return false;
-    }
-
-    private void renderCalendar() {
-        calendarGrid.getChildren().clear();
-        monthYearLabel.setText(currentYearMonth.format(MONTH_YEAR_FORMATTER));
-
-        int firstDayOfWeek = currentYearMonth.atDay(1).getDayOfWeek().getValue() % 7;
-        int daysInMonth = currentYearMonth.lengthOfMonth();
-
-        YearMonth prevMonth = currentYearMonth.minusMonths(1);
-        int prevMonthLen = prevMonth.lengthOfMonth();
-
-        for (int i = 0; i < firstDayOfWeek; i++) {
-            int day = prevMonthLen - firstDayOfWeek + i + 1;
-            calendarGrid.add(createDayLabel(String.valueOf(day), "cal-cell-inactive"), i, 0);
-        }
-
-        int col = firstDayOfWeek;
-        int row = 0;
-
-        for (int day = 1; day <= daysInMonth; day++) {
-            LocalDate date = currentYearMonth.atDay(day);
-            Button btn = createDayButton(day, date);
-            btn.setPrefSize(36, 36);
-            btn.setMaxSize(36, 36);
-            calendarGrid.add(btn, col, row);
-            col++;
-            if (col == 7) {
-                col = 0;
-                row++;
-            }
-        }
-
-        int nextDay = 1;
-        while (col != 0) {
-            calendarGrid.add(createDayLabel(String.valueOf(nextDay++), "cal-cell-inactive"), col, row);
-            col++;
-            if (col == 7) {
-                col = 0;
-            }
-        }
-    }
-
-    private Button createDayButton(int day, LocalDate date) {
-        Button btn = new Button(String.valueOf(day));
-        btn.setMaxWidth(Double.MAX_VALUE);
-        btn.setAlignment(Pos.CENTER);
-
-        boolean isPast = date.isBefore(today);
-
-        if (date.equals(selectedDate)) {
-            btn.getStyleClass().add("cal-cell-selected");
-        } else if (date.equals(today)) {
-            btn.getStyleClass().add("cal-cell-today");
-        } else if (isPast) {
-            btn.getStyleClass().add("cal-cell-inactive");
-        } else {
-            btn.getStyleClass().add("cal-cell");
-        }
-
-        if (isPast) {
-            btn.setDisable(true);
-        } else {
-            btn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent e) {
-                    selectedDate = date;
-                    renderCalendar();
-                    updateDateHeader();
-                    loadServicesForDate(selectedDate);
-                    renderTimeSlots();
-                }
-            });
-        }
-
-        return btn;
-    }
-
-    private Label createDayLabel(String text, String styleClass) {
-        Label lbl = new Label(text);
-        lbl.setMaxWidth(Double.MAX_VALUE);
-        lbl.setAlignment(Pos.CENTER);
-        lbl.getStyleClass().add(styleClass);
-        return lbl;
-    }
-
-    private void updateDateHeader() {
-        if (selectedDateLabel != null) {
-            selectedDateLabel.setText(selectedDate.format(DATE_HEADER_FORMATTER));
-        }
-    }
-
-    public LocalDate getSelectedDate() {
-        return selectedDate;
-    }
-
-    public Map<String, List<Service>> getSlotServices() {
-        return slotServices;
     }
 }

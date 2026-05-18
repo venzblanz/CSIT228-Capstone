@@ -3,6 +3,7 @@ package com.javafx.csit228capstone.screens.schedule;
 import com.javafx.csit228capstone.model.Service;
 import com.javafx.csit228capstone.utils.ScheduleDAO;
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -26,18 +27,16 @@ public class ScheduleEditServiceController implements Initializable {
     private Service service;
     private LocalDate date;
     private String timeSlot;
-    private ScheduleDAO scheduleDAO;
+    private final ScheduleDAO scheduleDAO = ScheduleDAO.getInstance();
     private Consumer<String> onSaved;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    }
+    public void initialize(URL url, ResourceBundle rb) { }
 
-    public void init(Service service, LocalDate date, String timeSlot, String dayLabel, ScheduleDAO scheduleDAO, Consumer<String> onSaved) {
+    public void init(Service service, LocalDate date, String timeSlot, String dayLabel, Consumer<String> onSaved) {
         this.service = service;
         this.date = date;
         this.timeSlot = timeSlot;
-        this.scheduleDAO = scheduleDAO;
         this.onSaved = onSaved;
 
         dialogSubtitle.setText(dayLabel + " · " + timeSlot);
@@ -54,13 +53,7 @@ public class ScheduleEditServiceController implements Initializable {
         }
 
         updateNoDoctorHint();
-
-        doctorField.textProperty().addListener(new javafx.beans.value.ChangeListener<String>() {
-            @Override
-            public void changed(javafx.beans.value.ObservableValue<? extends String> obs, String o, String n) {
-                updateNoDoctorHint();
-            }
-        });
+        doctorField.textProperty().addListener((obs, o, n) -> updateNoDoctorHint());
     }
 
     private void updateNoDoctorHint() {
@@ -74,32 +67,27 @@ public class ScheduleEditServiceController implements Initializable {
         String newDoctor = doctorField.getText() == null ? null : doctorField.getText().trim();
         String doctorToSave = (newDoctor == null || newDoctor.isBlank()) ? null : newDoctor;
 
-        try {
-            scheduleDAO.updateDoctorForSlot(date, timeSlot, service.getServiceId(), service.isRecurring(), doctorToSave);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return;
-        }
-
-        onSaved.accept(doctorToSave);
-        close();
+        new Thread(() -> {
+            try {
+                scheduleDAO.updateDoctorForSlot(date, timeSlot, service.getServiceId(), service.isRecurring(), doctorToSave);
+                Platform.runLater(() -> {
+                    onSaved.accept(doctorToSave);
+                    close();
+                });
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }).start();
     }
 
     @FXML
-    private void onCancel() {
-        close();
-    }
+    private void onCancel() { close(); }
 
     private void close() {
         Stage stage = (Stage) saveBtn.getScene().getWindow();
         FadeTransition ft = new FadeTransition(Duration.millis(140), saveBtn.getScene().getRoot());
         ft.setToValue(0);
-        ft.setOnFinished(new javafx.event.EventHandler<javafx.event.ActionEvent>() {
-            @Override
-            public void handle(javafx.event.ActionEvent e) {
-                stage.close();
-            }
-        });
+        ft.setOnFinished(e -> stage.close());
         ft.play();
     }
 }
