@@ -63,7 +63,7 @@ public class LiveQueueWindowController {
 
                 // --- Now Serving ---
                 String servingSql = "SELECT queue_number, department, staff_assigned " +
-                        "FROM queue_line WHERE status = 'Completed'" + whereClause +
+                        "FROM queue_line WHERE status = 'Serving'" + whereClause +
                         " ORDER BY created_at DESC LIMIT 1";
                 try (Connection c = DatabaseConfig.getConnection();
                      PreparedStatement ps = c.prepareStatement(servingSql)) {
