@@ -13,6 +13,7 @@ module com.javafx.csit228capstone {
     requires com.google.zxing.javase;
     requires org.kordamp.ikonli.fontawesome5;
     requires org.kordamp.ikonli.javafx;
+    requires jbcrypt;
 
     opens com.javafx.csit228capstone to javafx.fxml;
     exports com.javafx.csit228capstone;

@@ -3,6 +3,7 @@ package com.javafx.csit228capstone.screens;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.scene.layout.StackPane;
 
 public class TermsPopupController {
     @FXML private HBox backBtn;

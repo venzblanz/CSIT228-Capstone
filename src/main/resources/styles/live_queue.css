@@ -1,10 +1,10 @@
-/* --- MAIN BACKGROUND --- */
+/* MAIN BACKGROUND */
 .root {
     -fx-background-color: #f0f4f8;
     -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
 }
 
-/* --- SECTION HEADERS (WAITING, COMPLETED) --- */
+/* SECTION HEADERS (WAITING, COMPLETED)*/
 .section-header {
     -fx-font-size: 28px;
     -fx-font-weight: bold;
@@ -12,9 +12,7 @@
     -fx-padding: 10px 0 8px 0;
 }
 
-/* =========================================
-   NOW SERVING SECTION
-   ========================================= */
+/* NOW SERVING SECTION */
 .now-serving-card {
     -fx-background-color: #ffffff;
     -fx-background-radius: 15px;
@@ -52,9 +50,7 @@
     -fx-text-fill: #94a3b8;
 }
 
-/* =========================================
-   WAITING QUEUE CARDS
-   ========================================= */
+/* WAITING QUEUE CARDS */
 .queue-card {
     -fx-background-color: #ffffff;
     -fx-background-radius: 12px; /* Rounder corners */
@@ -76,9 +72,7 @@
     -fx-text-fill: #64748b;
 }
 
-/* =========================================
-   COMPLETED / CANCELLED CARDS
-   ========================================= */
+/* COMPLETED / CANCELLED CARDS */
 .queue-card-inactive {
     -fx-background-color: #f8fafc;
     -fx-background-radius: 10px;
@@ -96,32 +90,65 @@
     -fx-text-fill: #94a3b8;
 }
 
-/* =========================================
-   DEPARTMENT TABS
-   ========================================= */
+/* DEPARTMENT TABS */
 .queue-tab {
     -fx-background-color: transparent;
-    -fx-text-fill: #64748b; /* Muted slate gray */
-    -fx-font-size: 14px; /* Large and readable for TV */
+    -fx-text-fill: #64748b;
+    -fx-font-size: 14px;
     -fx-padding: 8px 18px;
     -fx-cursor: hand;
     -fx-border-color: transparent;
-    -fx-border-width: 0 0 4 0; /* Reserves space so the text doesn't jump when active */
+    -fx-border-width: 0 0 4 0;
 }
 
 .queue-tab:hover {
-    -fx-text-fill: #1e293b; /* Darker text when hovered */
-    -fx-background-color: #f8fafc; /* Very subtle background highlight */
+    -fx-text-fill: #1e293b;
+    -fx-background-color: #f8fafc;
 }
 
 .queue-tab-active {
     -fx-background-color: transparent;
-    -fx-text-fill: #2b78e4; /* MedServe Primary Blue */
+    -fx-text-fill: #2b78e4;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-padding: 8px 18px;
-    -fx-cursor: default; /* Already active, so we remove the hand pointer */
-    -fx-border-color: transparent transparent #2b78e4 transparent; /* Blue underline */
-    -fx-border-width: 0 0 4 0; /* Thick 4px line at the bottom */
+    -fx-cursor: default;
+    -fx-border-color: transparent transparent #2b78e4 transparent;
+    -fx-border-width: 0 0 4 0;
 }
 
+/* COMPLETED CARDS */
+.queue-card-completed {
+    -fx-background-color: #f0fdf4;
+    -fx-background-radius: 10px;
+    -fx-border-color: #86efac;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-padding: 6px 14px;
+    -fx-alignment: center;
+    -fx-max-height: 60px;
+}
+
+.queue-card-completed-number {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #16a34a;
+}
+
+/* CANCELLED CARDS */
+.queue-card-cancelled {
+    -fx-background-color: #fef2f2;
+    -fx-background-radius: 10px;
+    -fx-border-color: #fca5a5;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-padding: 6px 14px;
+    -fx-alignment: center;
+    -fx-max-height: 60px;
+}
+
+.queue-card-cancelled-number {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #dc2626;
+}

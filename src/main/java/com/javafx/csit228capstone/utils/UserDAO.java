@@ -1,6 +1,7 @@
 package com.javafx.csit228capstone.utils;
 
 import com.javafx.csit228capstone.model.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,7 +31,7 @@ public class UserDAO {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     String storedPass = rs.getString("password");
-                    if (!storedPass.equals(password)) return null;
+                    if (!BCrypt.checkpw(password, storedPass)) return null;
 
 
                     String status = rs.getString("status");
@@ -246,10 +247,11 @@ public class UserDAO {
         }
     }
     public static boolean updatePassword(int userId, String newPassword) {
+        String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
         String sql = "UPDATE users SET password = ? WHERE user_id = ?";
         try (Connection conn = DatabaseConfig.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, newPassword);
+            pstmt.setString(1, hashedPassword);
             pstmt.setInt(2, userId);
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -258,18 +260,20 @@ public class UserDAO {
         }
     }
     public static boolean verifyPassword(int userId, String password) {
-        String sql = "SELECT password FROM users WHERE user_id = ? AND password = ?";
+        String sql = "SELECT password FROM users WHERE user_id = ?";
         try (Connection c = DatabaseConfig.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setInt(1, userId);
-            ps.setString(2, password);
             try (ResultSet rs = ps.executeQuery()) {
-                return rs.next();
+                if (rs.next()) {
+                    String storedHash = rs.getString("password");
+                    return BCrypt.checkpw(password, storedHash);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
 
     public static boolean updatePatientStatusByPatientId(int patientId, String newStatus) {
