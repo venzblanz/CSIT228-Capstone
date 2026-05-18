@@ -55,7 +55,7 @@ public class ChangePasswordController implements Initializable {
         confirmNewPasswordField.getStyleClass().remove("error-field");
 
 
-        if (newPwd.isEmpty() || newPwd.length() < 6) {
+        if (newPwd.isEmpty() || newPwd.length() < 8 ) {
             newPasswordField.getStyleClass().add("error-field");
             return;
         }
