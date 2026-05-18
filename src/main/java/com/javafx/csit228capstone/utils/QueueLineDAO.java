@@ -1,5 +1,6 @@
 package com.javafx.csit228capstone.utils;
 
+import com.javafx.csit228capstone.model.QueueInformation;
 import com.javafx.csit228capstone.model.QueueInsertValue;
 import com.javafx.csit228capstone.model.QueueTicket;
 
@@ -71,18 +72,23 @@ public class QueueLineDAO {
     }
     public static int getPosition(String department, String queueNumber) {
         String sql = """
-            SELECT position
-            FROM (
-                SELECT 
-                    queue_number,
-                    ROW_NUMBER() OVER (ORDER BY created_at ASC) AS position
-                FROM queue_line
-                WHERE department = ?
-                AND DATE(created_at) = CURDATE()
-                AND status IN ('Serving', 'Waiting')
-            ) ranked
-            WHERE queue_number = ?
-            """;
+        SELECT position
+        FROM (
+            SELECT
+                q.queue_number,
+                ROW_NUMBER() OVER (
+                    ORDER BY
+                        CASE WHEN LOWER(f.patient_type) IN ('pwd', 'pregnant', 'senior') THEN 0 ELSE 1 END ASC,
+                        q.created_at ASC
+                ) AS position
+            FROM queue_line q
+            JOIN queue_form f ON q.form_id = f.form_id
+            WHERE q.department = ?
+            AND DATE(q.created_at) = CURDATE()
+            AND q.status IN ('Serving', 'Waiting')
+        ) ranked
+        WHERE queue_number = ?
+        """;
 
         try (Connection c = DatabaseConfig.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
@@ -98,6 +104,7 @@ public class QueueLineDAO {
 
         } catch (Exception e) {
             System.err.println("[QueueLineDAO] Error getting queue position: " + e.getMessage());
+            e.printStackTrace(); // add this temporarily to see the actual SQL error
         }
 
         return 0;
@@ -141,6 +148,76 @@ public class QueueLineDAO {
         }catch(Exception e){
             System.err.println("[QueueLineDAO] Error getting the queue ticket " + e.getMessage());
         }
+        return null;
+    }
+    public static QueueInformation getQueueInformation(int queueId) {
+        String sql = """
+            SELECT
+                ql.queue_id,
+                ql.queue_number,
+                ql.department,
+                ql.status,
+                ql.created_at,
+                qf.first_name,
+                qf.middle_initial,
+                qf.last_name,
+                qf.age,
+                qf.gender,
+                qf.patient_type,
+                qf.picked_time,
+                qf.picked_date,
+                qf.picked_service,
+                qf.civil_status,
+                qf.nationality,
+                qf.religion,
+                qf.address,
+                qf.birth_date,
+                qf.contact_number,
+                qf.email_address,
+                qf.emergency_person,
+                qf.emergency_person_number,
+                qf.emergency_person_relation,
+                qf.additional_notes
+            FROM queue_line ql
+            INNER JOIN queue_form qf ON ql.form_id = qf.form_id
+            WHERE ql.queue_id = ?
+        """;
+        try(Connection c = DatabaseConfig.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql)){
+            ps.setInt(1, queueId);
+            try(ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    return new QueueInformation(
+                            rs.getString("first_name"),
+                            rs.getString("middle_initial"),
+                            rs.getString("last_name"),
+                            rs.getInt("age"),
+                            rs.getString("gender"),
+                            rs.getString("patient_type"),
+                            rs.getString("department"),
+                            rs.getString("picked_time"),
+                            rs.getDate("picked_date").toLocalDate(),
+                            rs.getString("picked_service"),
+                            rs.getString("civil_status"),
+                            rs.getString("nationality"),
+                            rs.getString("religion"),
+                            rs.getString("address"),
+                            rs.getDate("birth_date").toLocalDate(),
+                            rs.getString("contact_number"),
+                            rs.getString("email_address"),
+                            rs.getString("emergency_person"),
+                            rs.getString("emergency_person_number"),
+                            rs.getString("emergency_person_relation"),
+                            rs.getString("additional_notes"),
+                            rs.getString("queue_number"),
+                            rs.getString("status")
+                    );
+                }
+            }
+        }catch(Exception e){
+            System.err.println("[QueueLineDAO] Error getting the queue information " + e.getMessage());
+        }
+        System.err.println("[QueueLineDAO] No result found for queue_id = " + queueId);
         return null;
     }
     public static List<QueueTicket> getRecentQueue(int userId) {
@@ -255,6 +332,7 @@ public class QueueLineDAO {
             WHERE q.form_id = f.form_id
             AND q.user_id = ?
             AND q.status IN ('Waiting', 'Serving')
+            AND DATE(q.created_at) = CURDATE()
             ORDER BY q.queue_id ASC
         """;
         try(Connection c = DatabaseConfig.getConnection();

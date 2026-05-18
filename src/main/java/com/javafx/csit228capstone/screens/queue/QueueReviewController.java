@@ -21,7 +21,8 @@ public class QueueReviewController {
     @FXML private Button nextBtn;
     @FXML private ImageView backIconBtn;
     @FXML private Label backBtn;
-    @FXML private VBox reviewScreen;
+    @FXML private VBox mainPane;
+    @FXML private VBox              form;
 
     // Form
     @FXML private TextField         fname_field;
@@ -89,7 +90,8 @@ public class QueueReviewController {
 
     @FXML
     public void initialize() {
-        AnimationHelper.fadeIn(reviewScreen);
+        AnimationHelper.staggerFadeIn(mainPane);
+        AnimationHelper.staggerFadeIn(form);
         // Radio
         maleRadio.setUserData("Male");
         femaleRadio.setUserData("Female");
@@ -190,7 +192,7 @@ public class QueueReviewController {
     }
 
     private void onBack(){
-        sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue-schedule.fxml", backBtn, "/styles/schedule-patient.css", (QueueScheduleController queueScheduleController) -> queueScheduleController.initializeData(formType));
+        sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue-schedule.fxml", backBtn, "/styles/queue-schedule.css", (QueueScheduleController queueScheduleController) -> queueScheduleController.initializeData(formType));
     }
     private void onEdit(){
         sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue-form.fxml", editBtn, "/styles/queue-form.css", (QueueFormController queueFormController) -> queueFormController.initializeData(formType));

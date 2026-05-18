@@ -63,7 +63,7 @@ public class AdminLiveQueueController {
         waitingCards.getChildren().clear();
         doneCards.getChildren().clear();
 
-        String whereClause = currentDept.equals("All") ? "" : " AND ql.department = ?";
+        String whereClause = currentDept.equals("All") ? " AND DATE(ql.created_at) = CURDATE()" : " AND ql.department = ? AND DATE(ql.created_at) = CURDATE()";
 
         // 1. Now serving — most recent Serving or last Completed
         String servingSql = "SELECT ql.queue_number, ql.department, ql.staff_assigned " +
@@ -91,7 +91,7 @@ public class AdminLiveQueueController {
 
         // 2. Waiting queue
         String waitingSql = "SELECT queue_number, department FROM queue_line " +
-                "WHERE status = 'Waiting'" +
+                "WHERE status = 'Waiting' AND DATE(created_at) = CURDATE()" +
                 (currentDept.equals("All") ? "" : " AND department = ?") +
                 " ORDER BY created_at ASC";
 
@@ -121,7 +121,7 @@ public class AdminLiveQueueController {
 
         // 3. Completed/Cancelled
         String doneSql = "SELECT queue_number, department, status FROM queue_line " +
-                "WHERE status IN ('Done', 'Cancelled')" +
+                "WHERE status IN ('Done', 'Cancelled') AND DATE(created_at) = CURDATE()" +
                 (currentDept.equals("All") ? "" : " AND department = ?") +
                 " ORDER BY created_at DESC LIMIT 10";
 

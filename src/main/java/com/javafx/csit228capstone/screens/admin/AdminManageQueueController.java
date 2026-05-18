@@ -112,10 +112,13 @@ public class AdminManageQueueController {
         String getWaitingSql =
                 "SELECT ql.queue_number " +
                         "FROM queue_line ql " +
+                        "JOIN queue_form qf ON ql.form_id = qf.form_id " +
                         "WHERE ql.status = 'Waiting' " +
                         "AND DATE(ql.created_at) = ? " +
                         "AND ql.department = ? " +
-                        "ORDER BY ql.created_at ASC " +
+                        "ORDER BY " +
+                        "  CASE WHEN LOWER(qf.patient_type) IN ('pwd','pregnant','senior') THEN 0 ELSE 1 END ASC, " +
+                        "  ql.created_at ASC " +
                         "LIMIT 1";
         try (Connection c = DatabaseConfig.getConnection()) {
             try (PreparedStatement checkPs = c.prepareStatement(checkServingSql)) {
@@ -159,10 +162,13 @@ public class AdminManageQueueController {
                         "FROM queue_line ql " +
                         "JOIN users u ON ql.user_id = u.user_id " +
                         "JOIN patients p ON u.user_id = p.user_id " +
+                        "JOIN queue_form qf ON ql.form_id = qf.form_id " +
                         "WHERE ql.status IN ('Waiting', 'Serving') " +
                         "AND DATE(ql.created_at) = ? " +
                         "AND department = ? " +
-                        "ORDER BY ql.created_at ASC " +
+                        "ORDER BY " +
+                        "  CASE WHEN LOWER(qf.patient_type) IN ('pwd','pregnant','senior') THEN 0 ELSE 1 END ASC, " +
+                        "  ql.created_at ASC " +
                         "LIMIT 10";
 
         try (Connection c = DatabaseConfig.getConnection();

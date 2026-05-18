@@ -96,7 +96,7 @@ public class QueueFormController {
 
     @FXML
     public void initialize() {
-        AnimationHelper.fadeIn(mainPane);
+        AnimationHelper.staggerFadeIn(mainPane);
         menuController.setActiveButton(menuController.getQueueBtn());
         birthDatePicker.setEditable(false);
         // for the whole page except buttons
@@ -110,6 +110,7 @@ public class QueueFormController {
     }
 
     private void initializePage(){
+        AnimationHelper.staggerFadeIn(form);
         error_message.setVisible(false);
 
         // set non character fields to be exclusive
@@ -411,7 +412,7 @@ public class QueueFormController {
         }
 
         formManager.saveForm(new Form(fname,mi,lname, BirthDate, age, gender, civilStatus, symptoms, ptype, address, nationality, religion, contact, email, contactPerson, contactPersonRelation, emergencyPersonContact, formType));
-        sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue-schedule.fxml", cancelBtn, "/styles/schedule-patient.css", (QueueScheduleController queueScheduleController) -> queueScheduleController.initializeData(formType));
+        sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue-schedule.fxml", cancelBtn, "/styles/queue-schedule.css", (QueueScheduleController queueScheduleController) -> queueScheduleController.initializeData(formType));
     }
     private void showError(String message){
         form.setStyle("-fx-border-color: red;" +
