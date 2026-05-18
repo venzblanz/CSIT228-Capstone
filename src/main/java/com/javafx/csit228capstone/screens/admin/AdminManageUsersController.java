@@ -36,7 +36,9 @@ public class AdminManageUsersController {
 
     @FXML
     public void initialize() {
-        menuController.setActiveButton(menuController.getManageUsersBtn());
+        if (menuController != null) {
+            menuController.setActiveButton(menuController.getManageUsersBtn());
+        }
         setupTable();
         loadDataFromDatabase();
         setupSearchAndFilterLogic();
@@ -117,9 +119,9 @@ public class AdminManageUsersController {
 
     private void setupActionControlColumn() {
         colAction.setCellFactory(param -> new TableCell<>() {
-            private ComboBox<String> dropdown;
-            private Button saveBtn;
-            private HBox container;
+            private final ComboBox<String> dropdown;
+            private final Button saveBtn;
+            private final HBox container;
             {
                 dropdown = new ComboBox<>(FXCollections.observableArrayList("active", "inactive"));
                 saveBtn = new Button("Save");
@@ -129,14 +131,41 @@ public class AdminManageUsersController {
                 HBox.setHgrow(dropdown, Priority.ALWAYS);
                 container.setMaxWidth(Double.MAX_VALUE);
 
+                // ====== DROPDOWN STYLING OVERRIDES ======
                 dropdown.setPrefWidth(110);
                 dropdown.setPrefHeight(32);
-                dropdown.setStyle("-fx-font-size: 13px; -fx-text-fill: #1E293B; -fx-cursor: hand;");
+                dropdown.setStyle(
+                        "-fx-background-color: #F8FAFC; " +
+                                "-fx-border-color: #E2E8F0; " +
+                                "-fx-border-radius: 6; " +
+                                "-fx-background-radius: 6; " +
+                                "-fx-font-family: 'Instrument Sans'; " +
+                                "-fx-font-size: 13px; " +
+                                "-fx-text-fill: #1E293B; " +
+                                "-fx-cursor: hand; " +
+                                "-fx-padding: 0 2 0 2;"
+                );
 
-                saveBtn.setFont(javafx.scene.text.Font.font("System", javafx.scene.text.FontWeight.BOLD, 12));
+                // ====== SAVE BUTTON STYLING OVERRIDES ======
                 saveBtn.setPrefWidth(65);
                 saveBtn.setPrefHeight(32);
-                saveBtn.setStyle("-fx-background-color: #7A0016; -fx-text-fill: white; -fx-background-radius: 6; -fx-cursor: hand;");
+                saveBtn.setStyle(
+                        "-fx-background-color: #218AD5; " +
+                                "-fx-text-fill: white; " +
+                                "-fx-font-family: 'Instrument Sans'; " +
+                                "-fx-font-weight: bold; " +
+                                "-fx-font-size: 12px; " +
+                                "-fx-background-radius: 6; " +
+                                "-fx-cursor: hand;"
+                );
+
+                // Responsive dynamic hover configuration bindings
+                saveBtn.setOnMouseEntered(e -> saveBtn.setStyle(
+                        "-fx-background-color: #1A73B2; -fx-text-fill: white; -fx-font-family: 'Instrument Sans'; -fx-font-weight: bold; -fx-font-size: 12px; -fx-background-radius: 6; -fx-cursor: hand;"
+                ));
+                saveBtn.setOnMouseExited(e -> saveBtn.setStyle(
+                        "-fx-background-color: #218AD5; -fx-text-fill: white; -fx-font-family: 'Instrument Sans'; -fx-font-weight: bold; -fx-font-size: 12px; -fx-background-radius: 6; -fx-cursor: hand;"
+                ));
 
                 saveBtn.setOnAction(event -> {
                     User user = getTableView().getItems().get(getIndex());

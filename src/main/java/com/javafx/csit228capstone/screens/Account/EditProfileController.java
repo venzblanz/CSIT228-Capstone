@@ -42,15 +42,18 @@ public class EditProfileController implements Initializable {
         menuController.setActiveButton(menuController.getAccountBtn());
         AnimationHelper.ringAnimation(notification);
 
+        // ====== FIX: LOCK THE NAME FIELD FROM BEING EDITED BY USER ======
+        fullNameField.setEditable(false);
+        fullNameField.setStyle("-fx-background-color: #F1F5F9; -fx-text-fill: #64748B; -fx-cursor: default;");
+
         // ====== UI RESTRECTIONS: GRAY OUT FUTURE DATES ======
         birthdayDatePicker.setDayCellFactory(param -> new DateCell() {
             @Override
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
-                // If the calendar grid date element is after today, completely lock it up
                 if (date != null && date.isAfter(LocalDate.now())) {
                     setDisable(true);
-                    setStyle("-fx-background-color: #E2E8F0; -fx-text-fill: #94A3B8;"); // Minimal modern gray look
+                    setStyle("-fx-background-color: #E2E8F0; -fx-text-fill: #94A3B8;");
                 }
             }
         });
@@ -85,7 +88,6 @@ public class EditProfileController implements Initializable {
 
         birthdayDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                // Prevent showing weird negative age counts if a manual string gets bypassed
                 if (newValue.isAfter(LocalDate.now())) {
                     ageField.setText("0");
                 } else {
@@ -97,8 +99,8 @@ public class EditProfileController implements Initializable {
 
         final User comparisonData = (latestData != null) ? latestData : currentUser;
 
+        // ====== FIX: REMOVED nameUnchanged LOGIC SINCE NAME CANNOT CHANGE ======
         javafx.beans.binding.BooleanBinding noChanges = javafx.beans.binding.Bindings.createBooleanBinding(() -> {
-                    boolean nameUnchanged = fullNameField.getText().trim().equals(comparisonData.getFullname());
                     boolean phoneUnchanged = phoneField.getText().trim().equals(comparisonData.getMobilenumber());
                     boolean addressUnchanged = addressField.getText().trim().equals(
                             (comparisonData.getAddress() == null) ? "" : comparisonData.getAddress()
@@ -109,13 +111,13 @@ public class EditProfileController implements Initializable {
                     boolean birthdayUnchanged = java.util.Objects.equals(birthdayDatePicker.getValue(), originalDate);
                     boolean genderUnchanged = java.util.Objects.equals(genderComboBox.getValue(), comparisonData.getGender());
 
-                    return nameUnchanged && phoneUnchanged && addressUnchanged && birthdayUnchanged && genderUnchanged;
+                    // The update button activates if phone, address, birthday, or gender changes
+                    return phoneUnchanged && addressUnchanged && birthdayUnchanged && genderUnchanged;
                 },
-                fullNameField.textProperty(),
                 phoneField.textProperty(),
                 addressField.textProperty(),
                 birthdayDatePicker.valueProperty(),
-                genderComboBox.valueProperty());
+                genderComboBox.valueProperty()); // Removed fullNameField dependency link
         updateBtn.disableProperty().bind(noChanges);
     }
 
@@ -157,7 +159,6 @@ public class EditProfileController implements Initializable {
 
     @FXML
     private void handleUpdate() {
-        // ====== LOGIC VERIFICATION: BACKEND STOP FOR FUTURE DATES ======
         LocalDate chosenDate = birthdayDatePicker.getValue();
         if (chosenDate != null && chosenDate.isAfter(LocalDate.now())) {
             Alert alert = new Alert(AlertType.ERROR);
@@ -165,13 +166,13 @@ public class EditProfileController implements Initializable {
             alert.setHeaderText("Date Field Entry Error");
             alert.setContentText("You cannot select a birthday that has not happened yet! Please choose a valid date.");
             alert.showAndWait();
-            return; // Hard cancel out of the update stream immediately
+            return;
         }
 
         User currentUser = SessionManager.getInstance().getCurrentUser();
         User pendingUpdate = new User();
         pendingUpdate.setUserID(currentUser.getUserID());
-        pendingUpdate.setFullname(fullNameField.getText());
+        pendingUpdate.setFullname(fullNameField.getText()); // Still passes the existing name cleanly
         pendingUpdate.setMobilenumber(phoneField.getText());
         pendingUpdate.setAddress(addressField.getText());
 

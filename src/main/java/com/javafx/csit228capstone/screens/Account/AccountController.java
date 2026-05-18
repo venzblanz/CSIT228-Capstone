@@ -68,7 +68,7 @@ public class AccountController implements Initializable {
 
         editBtn.setOnAction(e -> onEdit());
 //        patientRecordsRow.setOnMouseClicked(e -> onPatientRecords());
-//        queueStatusRow.setOnMouseClicked(e -> onQueueStatus());
+      queueStatusRow.setOnMouseClicked(e -> onQueueStatus());
 //        myAppointmentsRow.setOnMouseClicked(e -> onMyAppointments());
         securityRow.setOnMouseClicked(e -> onSecurityPrivacy());
         termsRow.setOnMouseClicked(e -> onTermsAndConditions());
@@ -116,7 +116,9 @@ public class AccountController implements Initializable {
     }
 
     private void handleCheckQueueStatus() {
-
+        sceneNavigator.navigate(
+                "/com/javafx/csit228capstone/dashboard.fxml", securityRow, "/styles/dashboard.css"
+        );
     }
 
 

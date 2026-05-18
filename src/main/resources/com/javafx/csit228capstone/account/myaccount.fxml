@@ -128,12 +128,6 @@
                                     </children>
                                 </VBox>
 
-                                <VBox alignment="CENTER" prefHeight="100.0">
-                                    <children>
-                                        <Button fx:id="deleteAccountBtn" mnemonicParsing="false" prefHeight="45.0" prefWidth="350.0" style="-fx-background-color: transparent; -fx-text-fill: #D82F2F; -fx-border-color: #D82F2F; -fx-border-radius: 10; -fx-cursor: hand; -fx-font-family: 'Instrument Sans'; -fx-font-weight: 600;" text="Delete my account" />
-                                    </children>
-                                    <VBox.margin><Insets bottom="40.0" top="20.0" /></VBox.margin>
-                                </VBox>
                             </children>
                             <padding><Insets bottom="30.0" left="35.0" right="35.0" /></padding>
                         </VBox>

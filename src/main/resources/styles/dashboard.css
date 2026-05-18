@@ -160,3 +160,41 @@
 .scroll-pane .scroll-bar:vertical .thumb:hover {
     -fx-background-color: #6DAED6;
 }
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: #F1F5F9 !important;
+    -fx-size: 40px;
+    -fx-border-color: transparent transparent #E2E8F0 transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #1E293B !important;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #F1F5F9 transparent;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected,
+.table-view:focused .table-row-cell:filled:selected,
+.table-row-cell:filled:selected {
+    -fx-background-color: #EBF2F6 !important;
+    -fx-background-background-color: #EBF2F6 !important;
+}
+
+.table-view:focused .table-row-cell:filled:selected .table-cell,
+.table-row-cell:filled:selected .table-cell {
+    -fx-text-fill: #1E293B !important;
+}
+
+.table-row-cell:selected .label {
+    -fx-text-fill: #1E293B !important;
+}
+
+.table-row-cell:filled:hover {
+    -fx-background-color: #F8FAFC !important;
+    -fx-cursor: hand;
+}
