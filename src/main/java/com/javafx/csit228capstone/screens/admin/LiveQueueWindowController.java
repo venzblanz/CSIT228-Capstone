@@ -232,22 +232,22 @@ public class LiveQueueWindowController {
         card.setSpacing(6);
         card.setStyle("-fx-background-color: white; -fx-background-radius: 12px; " +
                 "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 15, 0, 0, 5); " +
-                "-fx-padding: 25px 40px; -fx-min-width: 240px; " +
+                "-fx-padding: 35px 55px; -fx-min-width: 280px; " +
                 "-fx-border-color: #2b78e4 transparent transparent transparent; " +
                 "-fx-border-width: 6px 0 0 0; -fx-border-radius: 12px;");
 
         String shortDept = dept.equals("Diagnostics and Laboratory") ? "Diagnostics & Lab" : dept;
 
         Label nowServingLabel = new Label("NOW SERVING");
-        nowServingLabel.setStyle("-fx-font-size: 11px; -fx-text-fill: #64748b; -fx-font-weight: bold;");
+        nowServingLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #64748b; -fx-font-weight: bold;");
 
         Label numberLabel = new Label(number);
         numberLabel.setStyle(number.equals("---")
-                ? "-fx-font-size: 48px; -fx-font-weight: bold; -fx-text-fill: #cbd5e1;"
-                : "-fx-font-size: 48px; -fx-font-weight: bold; -fx-text-fill: #d32f2f;");
+                ? "-fx-font-size: 58px; -fx-font-weight: bold; -fx-text-fill: #cbd5e1;"
+                : "-fx-font-size: 58px; -fx-font-weight: bold; -fx-text-fill: #d32f2f;");
 
         Label deptLabel = new Label(shortDept);
-        deptLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #2b78e4; -fx-font-weight: bold;");
+        deptLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #2b78e4; -fx-font-weight: bold;");
 
         card.getChildren().addAll(nowServingLabel, numberLabel, deptLabel);
         return card;

@@ -115,26 +115,32 @@
                                 <Font size="16.0" />
                             </font>
                         </Label>
+                        <!-- Password -->
+                        <Label layoutX="81.0" layoutY="289.0" text="Password">
+                            <font><Font size="16.0" /></font>
+                        </Label>
                         <HBox alignment="CENTER" layoutX="81.0" layoutY="313.0" prefHeight="34.0" prefWidth="346.0" styleClass="email-field">
+                            <padding><Insets left="10.0" /></padding>
                             <children>
-                                <PasswordField fx:id="regpassField" prefHeight="25.0" prefWidth="305.0" promptText="Password" styleClass="password-field" />
+                                <PasswordField fx:id="regpassField" prefHeight="25.0" prefWidth="270.0" promptText="Password" styleClass="password-field" />
+                                <TextField fx:id="regpassVisible" prefHeight="25.0" prefWidth="270.0" promptText="Password" styleClass="password-field" visible="false" managed="false" />
+                                <Button fx:id="eyeBtn1" text="👁" onAction="#togglePass1"
+                                        style="-fx-background-color: transparent; -fx-cursor: hand; -fx-font-size: 13px; -fx-padding: 0 6 0 6;" />
                             </children>
-                            <padding>
-                                <Insets left="10.0" />
-                            </padding>
                         </HBox>
+
+                        <!-- Confirm Password -->
                         <Label layoutX="81.0" layoutY="355.0" text="Confirm Password">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
+                            <font><Font size="16.0" /></font>
                         </Label>
                         <HBox alignment="CENTER" layoutX="81.0" layoutY="379.0" prefHeight="34.0" prefWidth="346.0" styleClass="email-field">
+                            <padding><Insets left="10.0" /></padding>
                             <children>
-                                <PasswordField fx:id="regpassField1" prefHeight="25.0" prefWidth="305.0" promptText="Confirm Password" styleClass="password-field" />
+                                <PasswordField fx:id="regpassField1" prefHeight="25.0" prefWidth="270.0" promptText="Confirm Password" styleClass="password-field" />
+                                <TextField fx:id="regpassVisible1" prefHeight="25.0" prefWidth="270.0" promptText="Confirm Password" styleClass="password-field" visible="false" managed="false" />
+                                <Button fx:id="eyeBtn2" text="👁" onAction="#togglePass2"
+                                        style="-fx-background-color: transparent; -fx-cursor: hand; -fx-font-size: 13px; -fx-padding: 0 6 0 6;" />
                             </children>
-                            <padding>
-                                <Insets left="10.0" />
-                            </padding>
                         </HBox>
                         <HBox layoutX="119.0" layoutY="447.0" alignment="CENTER_LEFT" spacing="5.0">
                             <children>
