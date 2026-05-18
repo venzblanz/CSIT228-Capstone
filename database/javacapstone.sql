@@ -368,6 +368,22 @@ ALTER TABLE `schedules`
   ADD CONSTRAINT `schedules_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `services` (`service_id`);
 COMMIT;
 
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+ `notif_id` int(11) NOT NULL,
+ `user_id` int(11) NOT NULL,
+ `title` varchar(100) NOT NULL,
+ `message` varchar(255) NOT NULL,
+ `type` enum('JOINED','CANCELLED','ALMOST_TURN') NOT NULL,
+ `is_read` tinyint(1) DEFAULT 0,
+ `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
