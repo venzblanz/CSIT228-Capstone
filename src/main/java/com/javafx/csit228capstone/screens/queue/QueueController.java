@@ -16,6 +16,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -48,18 +50,6 @@ public class QueueController {
         AnimationHelper.ringAnimation(notification);
     }
 
-    // -------------- Navigators ---------------------------------------------------------------------------------------
-    private void onForm(String type){ goToForm(type); }
-    private void goToForm(String type){
-        sceneNavigator.navigate(
-                "/com/javafx/csit228capstone/queue/queue-form.fxml",
-                gwBtn,
-                "/styles/queue-form.css",
-                (QueueFormController queueFormController) -> queueFormController.initializeData(type)
-        );
-    }
-
-
     // ------------ Initializers ---------------------------------------------------------------------------------------
     private void initializeCards(HBox btn) {
         ScaleTransition scaleUp = new ScaleTransition(Duration.millis(150), btn);
@@ -74,7 +64,7 @@ public class QueueController {
         btn.setOnMouseExited(e -> { scaleDown.playFromStart(); });
     }
     private void generateLayout(){
-        AnimationHelper.fadeIn(queueScreen);
+        AnimationHelper.staggerFadeIn(queueScreen);
         initializeCards(gwBtn);
         initializeCards(whBtn);
         initializeCards(sfBtn);
@@ -111,6 +101,9 @@ public class QueueController {
         }
     }
     private HBox createCard(QueueTicket queueTicket) {
+        // Check lang if ang iyang queue kay lapas na sa karon para matarong ang display
+        boolean isOld = queueTicket.getCreatedAt().isBefore(LocalDate.now().atStartOfDay());
+
         // Design kunohay nga bar HAHAHAHHAAH
         Pane colorBar = new Pane();
         colorBar.setPrefWidth(6);
@@ -167,14 +160,16 @@ public class QueueController {
 
         Label time = new Label();
 
-        if (queueTicket.getStatus().equals("Serving")) {
-            time.setText("Serving now");
-        } else {
-            QueueTimeHelper.startCountdownFromNow(
-                    time,
-                    positionValue,
-                    true
-            );
+        if(!isOld){
+            if (queueTicket.getStatus().equals("Serving")) {
+                time.setText("Serving now");
+            } else {
+                QueueTimeHelper.startCountdownFromNow(
+                        time,
+                        positionValue,
+                        true
+                );
+            }
         }
 
         HBox timeContainer = new HBox();
@@ -197,7 +192,10 @@ public class QueueController {
 
         // VBox for Status
         Label statusLabel = new Label("Status");
-        Label status = new Label(queueTicket.getStatus());
+        Label status = new Label("-");
+        if(!isOld){
+            status.setText(queueTicket.getStatus());
+        }
         VBox.setMargin(status, new Insets(5, 10, 5, 10));
 
         VBox statusContainer = new VBox();
@@ -213,12 +211,15 @@ public class QueueController {
 
         // Vbox for Position
         Label positionLabel = new Label("Position");
-        Label position;
-
-        if (queueTicket.getStatus().equals("Serving")) {
-            position = new Label("Now");
-        } else {
-            position = new Label("#" + positionValue);
+        Label position = null;
+        if(isOld){
+            position = new Label("-");
+        }else{
+            if (queueTicket.getStatus().equals("Serving")) {
+                position = new Label("Now");
+            } else {
+                position = new Label("#" + positionValue);
+            }
         }
         VBox.setMargin(position, new Insets(3, 8, 3, 8));
 
@@ -290,6 +291,9 @@ public class QueueController {
         card.setPrefHeight(80);
         card.getStyleClass().add("active-queue-card");
         card.getChildren().addAll(colorBar, stackPane, queue, s1, waitingTimeContainer, s2, statusContainer, s3, positionContainer);
+
+        card.setOnMouseClicked(e -> goToTicket(queueTicket, card));
+        card.setStyle("-fx-cursor: hand;");
         return card;
     }
     private Separator createSeparator() {
@@ -297,5 +301,24 @@ public class QueueController {
         separator.setOrientation(Orientation.VERTICAL);
         HBox.setMargin(separator, new Insets(20,10,20,10));
         return separator;
+    }
+
+    // -------------- Navigators ---------------------------------------------------------------------------------------
+    private void onForm(String type){ goToForm(type); }
+    private void goToForm(String type){
+        sceneNavigator.navigate(
+                "/com/javafx/csit228capstone/queue/queue-form.fxml",
+                gwBtn,
+                "/styles/queue-form.css",
+                (QueueFormController queueFormController) -> queueFormController.initializeData(type)
+        );
+    }
+    private void goToTicket(QueueTicket queueTicket, HBox card) {
+        sceneNavigator.navigate(
+                "/com/javafx/csit228capstone/queue/queue-info.fxml",
+                card,
+                "/styles/queue-number.css",
+                (QueueInformationController controller) -> controller.initializeData(queueTicket,card)
+        );
     }
 }

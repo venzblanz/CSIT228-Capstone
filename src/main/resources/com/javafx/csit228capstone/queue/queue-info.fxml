@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../../../../styles/queue-number.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.queue.QueueInformationController">
+
+    <left>
+        <fx:include fx:id="menu" source="../menu-pane.fxml" />
+    </left>
+
+    <center>
+        <VBox fx:id="infoScreen" fillWidth="true" styleClass="main-pane" BorderPane.alignment="CENTER">
+            <children>
+
+                <!-- Header -->
+                <HBox alignment="CENTER" prefHeight="71.0">
+                    <children>
+                        <Label styleClass="screen-label" text="Queue" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="notification-icon">
+                            <HBox.margin><Insets top="1.0" /></HBox.margin>
+                        </Pane>
+                    </children>
+                    <VBox.margin><Insets right="3.0" /></VBox.margin>
+                </HBox>
+
+                <!-- Back Button -->
+                <VBox alignment="CENTER_LEFT">
+                    <children>
+                        <Label text="Queue Details">
+                            <font><Font name="System Bold" size="22.0" /></font>
+                        </Label>
+                    </children>
+                    <VBox.margin><Insets bottom="10.0" right="3.0" top="10.0" /></VBox.margin>
+                </VBox>
+
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
+                    <content>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                              <VBox spacing="0.0" HBox.hgrow="ALWAYS">
+      
+                                  <!-- Ticket Card (reuses existing ticket-wrapper style) -->
+                                  <VBox fx:id="ticketCard" minWidth="-Infinity" prefWidth="850.0" styleClass="ticket-wrapper">
+                                      <children>
+      
+                                          <!-- Top Bar — status-aware (controller swaps style class) -->
+                                          <HBox fx:id="topBar" alignment="CENTER_LEFT" spacing="12.0" styleClass="ticket-top-bar">
+                                              <children>
+                                                  <Label fx:id="statusIcon" styleClass="check-icon" text="✓" />
+                                                  <Label fx:id="statusTitle" styleClass="confirmed-title" text="QUEUE ACTIVE" />
+                                                  <Label styleClass="confirmed-divider" text="|" />
+                                                  <Label fx:id="statusMessage" styleClass="confirmed-message" text="Your queue is still active. Please wait for your number." />
+                                                  <Region HBox.hgrow="ALWAYS" />
+                                              </children>
+                                          </HBox>
+      
+                                          <!-- Ticket Body -->
+                                          <HBox styleClass="ticket-body">
+                                              <children>
+      
+                                                  <!-- LEFT SECTION -->
+                                                  <VBox alignment="CENTER_LEFT" spacing="20.0" styleClass="ticket-left" HBox.hgrow="ALWAYS">
+                                                      <children>
+      
+                                                          <!-- Logo -->
+                                                          <HBox alignment="CENTER_LEFT" spacing="12.0">
+                                                              <children>
+                                                                  <ImageView fitHeight="42.0" fitWidth="42.0" preserveRatio="true">
+                                                                      <image>
+                                                         <Image url="@../../../../images/medserveLogo.png" />
+                                                      </image>
+                                                                  </ImageView>
+                                                                  <Label styleClass="ticket-logo-text" text="MedServe" />
+                                                                  <Separator orientation="VERTICAL" prefHeight="40.0" />
+                                                                  <Label styleClass="tagline" text="Your Partner in&#10;Organized HealthCare" />
+                                                              </children>
+                                                          </HBox>
+      
+                                                          <Label styleClass="ticket-heading" text="QUEUE INFORMATION" />
+      
+                                                          <!-- Patient Info Row -->
+                                                          <HBox alignment="CENTER_LEFT" spacing="16.0">
+                                                              <children>
+                                                                  <StackPane prefHeight="58.0" prefWidth="58.0" styleClass="patient-icon-frame">
+                                                                      <children>
+                                                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="34.0" styleClass="patient-icon" />
+                                                                      </children>
+                                                                  </StackPane>
+                                                                  <VBox spacing="5.0">
+                                                                      <children>
+                                                                          <Label fx:id="qNameLabel" styleClass="p-name" text="—" />
+                                                                          <HBox spacing="12.0">
+                                                                              <children>
+                                                                                  <HBox spacing="5.0">
+                                                                                      <children>
+                                                                                          <Label styleClass="field-label" text="Age:" />
+                                                                                          <Label fx:id="qAgeLabel" styleClass="field-value-blue" text="—" />
+                                                                                      </children>
+                                                                                  </HBox>
+                                                                                  <HBox spacing="5.0">
+                                                                                      <children>
+                                                                                          <Label styleClass="field-label" text="Gender:" />
+                                                                                          <Label fx:id="qGenderLabel" styleClass="field-value-blue" text="—" />
+                                                                                      </children>
+                                                                                  </HBox>
+                                                                                  <HBox spacing="5.0">
+                                                                                      <children>
+                                                                                          <Label styleClass="field-label" text="Type:" />
+                                                                                          <Label fx:id="qPatientTypeLabel" styleClass="field-value-blue" text="—" />
+                                                                                      </children>
+                                                                                  </HBox>
+                                                                              </children>
+                                                                          </HBox>
+                                                                      </children>
+                                                                  </VBox>
+                                                              </children>
+                                                          </HBox>
+      
+                                                          <Separator />
+      
+                                                          <!-- Department / Time / Date row -->
+                                                          <HBox alignment="CENTER" spacing="20.0" styleClass="details-row">
+                                                              <children>
+      
+                                                                  <VBox alignment="CENTER" spacing="6.0" HBox.hgrow="ALWAYS">
+                                                                      <children>
+                                                                          <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="52.0" styleClass="small-icon-frame">
+                                                                              <children>
+                                                                                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0" styleClass="department-icon" />
+                                                                              </children>
+                                                                          </StackPane>
+                                                                          <Label styleClass="detail-title" text="DEPARTMENT" />
+                                                                          <Label fx:id="qDepartmentLabel" styleClass="q-type" text="—" />
+                                                                      </children>
+                                                                  </VBox>
+      
+                                                                  <Separator orientation="VERTICAL" prefHeight="75.0" />
+      
+                                                                  <VBox alignment="CENTER" spacing="6.0" HBox.hgrow="ALWAYS">
+                                                                      <children>
+                                                                          <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="52.0" styleClass="small-icon-frame">
+                                                                              <children>
+                                                                                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0" styleClass="time-icon" />
+                                                                              </children>
+                                                                          </StackPane>
+                                                                          <Label styleClass="detail-title" text="APPOINTED TIME" />
+                                                                          <Label fx:id="qTimeLabel" styleClass="q-time" text="—" />
+                                                                      </children>
+                                                                  </VBox>
+      
+                                                                  <Separator orientation="VERTICAL" prefHeight="75.0" />
+      
+                                                                  <VBox alignment="CENTER" spacing="6.0" HBox.hgrow="ALWAYS">
+                                                                      <children>
+                                                                          <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="52.0" styleClass="small-icon-frame">
+                                                                              <children>
+                                                                                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0" styleClass="date-icon" />
+                                                                              </children>
+                                                                          </StackPane>
+                                                                          <Label styleClass="detail-title" text="APPOINTED DATE" />
+                                                                          <Label fx:id="qDateLabel" styleClass="q-date" text="—" />
+                                                                      </children>
+                                                                  </VBox>
+      
+                                                              </children>
+                                                          </HBox>
+      
+                                                          <Separator />
+      
+                                                          <!-- Extra patient details section -->
+                                                          <VBox spacing="10.0">
+                                                              <children>
+                                                                  <Label styleClass="reminder-title" text="PATIENT DETAILS" />
+      
+                                                                  <HBox spacing="30.0">
+                                                                      <children>
+                                                                          <VBox spacing="4.0">
+                                                                              <children>
+                                                                                  <Label styleClass="field-label" text="Civil Status" />
+                                                                                  <Label fx:id="qCivilStatusLabel" styleClass="field-value-blue" text="—" />
+                                                                              </children>
+                                                                          </VBox>
+                                                                          <VBox spacing="4.0">
+                                                                              <children>
+                                                                                  <Label styleClass="field-label" text="Nationality" />
+                                                                                  <Label fx:id="qNationalityLabel" styleClass="field-value-blue" text="—" />
+                                                                              </children>
+                                                                          </VBox>
+                                                                          <VBox spacing="4.0">
+                                                                              <children>
+                                                                                  <Label styleClass="field-label" text="Religion" />
+                                                                                  <Label fx:id="qReligionLabel" styleClass="field-value-blue" text="—" />
+                                                                              </children>
+                                                                          </VBox>
+                                                                      </children>
+                                                                  </HBox>
+                                                   <HBox spacing="30.0">
+                                                      <children>
+            
+                                                                        <VBox spacing="4.0">
+                                                                            <children>
+                                                                                <Label styleClass="field-label" text="Address" />
+                                                                                <Label fx:id="qAddressLabel" styleClass="field-value-blue" text="—" wrapText="true" />
+                                                                            </children>
+                                                                        </VBox>
+                                                         <VBox layoutX="10.0" layoutY="10.0" spacing="4.0">
+                                                            <children>
+                                                               <Label styleClass="field-label" text="Birth Date" />
+                                                               <Label fx:id="qBirthdateLabel" styleClass="field-value-blue" text="—" wrapText="true" />
+                                                            </children>
+                                                         </VBox>
+                                                      </children>
+                                                   </HBox>
+      
+                                                                  <HBox spacing="30.0">
+                                                                      <children>
+                                                                          <VBox spacing="4.0">
+                                                                              <children>
+                                                                                  <Label styleClass="field-label" text="Contact Number" />
+                                                                                  <Label fx:id="qContactLabel" styleClass="field-value-blue" text="—" />
+                                                                              </children>
+                                                                          </VBox>
+                                                                          <VBox spacing="4.0">
+                                                                              <children>
+                                                                                  <Label styleClass="field-label" text="Email Address" />
+                                                                                  <Label fx:id="qEmailLabel" styleClass="field-value-blue" text="—" />
+                                                                              </children>
+                                                                          </VBox>
+                                                                      </children>
+                                                                  </HBox>
+                                                                    <VBox spacing="4.0">
+                                                                        <children>
+                                                                            <Label styleClass="field-label" text="Emergency Contact Person" />
+                                                                            <Label fx:id="qEmergencyContactPersonLabel" styleClass="field-value-blue" text="—" />
+                                                                        </children>
+                                                                    </VBox>
+                                                   <HBox spacing="30.0">
+                                                      <children>
+                                                         <VBox spacing="4.0">
+                                                            <children>
+                                                               <Label styleClass="field-label" text="Emergency Contact" />
+                                                               <Label fx:id="qEmergencyContactLabel" styleClass="field-value-blue" text="—" wrapText="true" />
+                                                            </children>
+                                                         </VBox>
+                                                                          <VBox spacing="4.0">
+                                                                              <children>
+                                                                                  <Label styleClass="field-label" text="Relation" />
+                                                                                  <Label fx:id="qRelationLabel" styleClass="field-value-blue" text="—" />
+                                                                              </children>
+                                                                          </VBox>
+                                                      </children>
+                                                   </HBox>
+      
+                                                                  <VBox spacing="4.0">
+                                                                      <children>
+                                                                          <Label styleClass="field-label" text="Health Concern / Additional Notes" />
+                                                                          <Label fx:id="qSymptomsLabel" styleClass="field-value-blue" text="—" wrapText="true" />
+                                                                      </children>
+                                                                  </VBox>
+      
+                                                              </children>
+                                                          </VBox>
+      
+                                                      </children>
+                                                  </VBox>
+      
+                                                  <!-- Divider -->
+                                                  <Pane styleClass="ticket-divider" />
+      
+                                                  <!-- RIGHT SECTION -->
+                                                  <VBox alignment="CENTER" spacing="22.0" styleClass="ticket-right">
+                                                      <children>
+      
+                                                          <Label fx:id="serviceLabel" styleClass="queue-number-label" text="YOUR QUEUE NUMBER">
+                                                              <font>
+                                                   <Font name="System Bold" size="18.0" />
+                                                </font>
+                                                          </Label>
+      
+                                                          <Label fx:id="qNumberLabel" styleClass="q-number" text="—" />
+      
+                                                          <Separator prefWidth="180.0" />
+      
+                                                          <!-- Position & Status -->
+                                                          <VBox alignment="CENTER" spacing="8.0">
+                                                              <children>
+                                                                  <Label styleClass="detail-title" text="CURRENT POSITION" />
+                                                                  <Label fx:id="qPositionLabel" styleClass="q-time" text="—" />
+                                                              </children>
+                                                          </VBox>
+      
+                                                          <Separator prefWidth="180.0" />
+      
+                                                          <!-- Status Badge -->
+                                                          <VBox alignment="CENTER" spacing="8.0">
+                                                              <children>
+                                                                  <Label styleClass="detail-title" text="STATUS" />
+                                                                  <Label fx:id="qStatusLabel" styleClass="field-value-blue" text="—" />
+                                                              </children>
+                                                          </VBox>
+      
+                                                          <Separator prefWidth="180.0" />
+      
+                                                          <!-- Estimated Wait -->
+                                                          <VBox alignment="CENTER" spacing="8.0">
+                                                              <children>
+                                                                  <Label styleClass="detail-title" text="EST. WAITING TIME" />
+                                                                  <Label fx:id="qWaitTimeLabel" styleClass="q-time" text="—" />
+                                                              </children>
+                                                          </VBox>
+      
+                                                          <HBox alignment="CENTER" spacing="10.0" styleClass="present-box">
+                                                              <children>
+                                                                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="36.0" styleClass="phone-icon">
+                                                                      <HBox.margin>
+                                                         <Insets right="5.0" />
+                                                      </HBox.margin>
+                                                                  </Pane>
+                                                                  <Label styleClass="present-text" text="Present this ticket&#10;when called." />
+                                                              </children>
+                                                          </HBox>
+                                             <VBox alignment="CENTER" spacing="4.0">
+                                                <children>
+                                                   <Label styleClass="field-label" text="Queued on" />
+                                                   <Label fx:id="qCreatedAtLabel" styleClass="field-value-blue" text="—" wrapText="true" />
+                                                </children>
+                                             </VBox>
+      
+                                                      </children>
+                                                  </VBox>
+      
+                                              </children>
+                                              <VBox.margin>
+                                       <Insets />
+                                    </VBox.margin>
+                                          </HBox>
+      
+                                      </children>
+                                      <VBox.margin>
+                                 <Insets left="20.0" right="20.0" />
+                              </VBox.margin>
+                                  </VBox>
+      
+                                  <!-- Back Button -->
+                                  <HBox alignment="CENTER_RIGHT" maxWidth="1000.0" spacing="16.0">
+                                      <children>
+                                          <Button fx:id="backToQueueBtn" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" styleClass="done-button" text="Back to Queue" />
+                                      </children>
+                                      <VBox.margin>
+                                 <Insets bottom="24.0" right="20.0" top="24.0" />
+                              </VBox.margin>
+                                  </HBox>
+      
+                              </VBox>
+                        <Region layoutX="10.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                    </content>
+                    <VBox.margin><Insets left="10.0" /></VBox.margin>
+                </ScrollPane>
+
+            </children>
+            <padding>
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+            </padding>
+        </VBox>
+    </center>
+
+</BorderPane>

@@ -4,6 +4,10 @@ import com.javafx.csit228capstone.model.QueueInsertValue;
 import com.javafx.csit228capstone.model.QueueTicket;
 import com.javafx.csit228capstone.model.Service;
 import com.javafx.csit228capstone.utils.*;
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -16,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -41,6 +46,7 @@ public class QueueScheduleController implements Initializable {
     @FXML private Label sfLabel;
     @FXML private Label dlLabel;
     @FXML private HBox error_container;
+    @FXML private VBox mainscreen;
 
     @FXML private com.javafx.csit228capstone.helper.MenuController menuController;
 
@@ -80,6 +86,8 @@ public class QueueScheduleController implements Initializable {
         menuController.setActiveButton(menuController.getQueueBtn());
         schedType = type;
         setUpScreen(type);
+
+        loadServicesForDate(selectedDate, schedType);
     }
     private void setUpScreen(String type){
         if(type.equals("General Wellness")){
@@ -118,6 +126,12 @@ public class QueueScheduleController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        FadeTransition ft = AnimationHelper.fadeIn1(mainscreen);
+
+        ft.setOnFinished(e -> {
+            renderTimeSlots();
+        });
+
         error_message.setVisible(false);
         error_container.setVisible(false);
         if (menuController != null) {
@@ -188,8 +202,8 @@ public class QueueScheduleController implements Initializable {
         HBox row = new HBox(8);
         row.setAlignment(Pos.CENTER_LEFT);
         row.getStyleClass().add("time-row");
-        row.setPadding(new Insets(10, 10, 10, 10));
-        row.setMinHeight(48);
+        row.setPadding(new Insets(10, 16, 10, 16));
+        row.setMinHeight(52);
 
         Label timeLabel = new Label(timeSlot);
         timeLabel.setMinWidth(65);
@@ -199,46 +213,42 @@ public class QueueScheduleController implements Initializable {
             Label closedLabel = new Label("Closed");
             closedLabel.getStyleClass().add("closed-label");
             row.getChildren().addAll(timeLabel, closedLabel);
-        } else {
-            HBox chipsBox = new HBox(8);
-            chipsBox.setAlignment(Pos.CENTER_LEFT);
-            HBox.setHgrow(chipsBox, Priority.ALWAYS);
-
-            List<Service> services = slotServices.get(timeSlot);
-
-            // apply category filter
-            List<Service> filtered = (activeCategory == null) ? services :
-                    services.stream()
-                    .filter(s -> s.getServiceType().equals(activeCategory))
-                    .toList();
-
-            if (filtered.isEmpty()) {
-                Label emptyLabel = new Label("—");
-                emptyLabel.getStyleClass().add("closed-label");
-                chipsBox.getChildren().add(emptyLabel);
-            } else {
-                for (Service service : filtered) {
-                    HBox chip = buildChip(service);
-                    chip.setOnMouseClicked(e -> {
-                        e.consume();
-                        if (selectedChip != null) {
-                            selectedChip.setStyle("");
-                        }
-                        selectedChip = chip;
-                        selectedChip.setStyle("-fx-background-color: #f0f0f0;");
-                        setQueueSchedule(service, timeSlot);
-                        clearError();
-                    });
-                    chip.setOnMouseEntered(e -> {
-                        chip.setCursor(javafx.scene.Cursor.HAND);
-                    });
-                    chipsBox.getChildren().add(chip);
-                }
-            }
-
-            row.getChildren().addAll(timeLabel, chipsBox);
+            return row;
         }
 
+        HBox chipsBox = new HBox(8);
+        chipsBox.setAlignment(Pos.CENTER_LEFT);
+        HBox.setHgrow(chipsBox, Priority.ALWAYS);
+
+        List<Service> services = slotServices.getOrDefault(timeSlot, List.of());
+        List<Service> filtered = (activeCategory == null) ? services :
+                services.stream()
+                .filter(s -> s.getServiceType().equals(activeCategory))
+                .toList();
+
+        if (filtered.isEmpty()) {
+            Label dash = new Label("—");
+            dash.getStyleClass().add("closed-label");
+            chipsBox.getChildren().add(dash);
+        } else {
+            for (int idx = 0; idx < filtered.size(); idx++) {
+                Service svc = filtered.get(idx);
+                HBox chip = buildChip(svc);
+                animateChipIn(chip, idx * 30L);
+                chip.setOnMouseClicked(e -> {
+                    e.consume();
+                    if (selectedChip != null) selectedChip.setStyle("");
+                    selectedChip = chip;
+                    selectedChip.setStyle("-fx-background-color: #f0f0f0;");
+                    setQueueSchedule(svc, timeSlot);
+                    clearError();
+                });
+                chip.setOnMouseEntered(e -> chip.setCursor(javafx.scene.Cursor.HAND));
+                chipsBox.getChildren().add(chip);
+            }
+        }
+
+        row.getChildren().addAll(timeLabel, chipsBox);
         return row;
     }
 
@@ -246,6 +256,7 @@ public class QueueScheduleController implements Initializable {
         HBox chip = new HBox(6);
         chip.setAlignment(Pos.CENTER_LEFT);
         chip.getStyleClass().addAll("chip", "chip-" + service.getChipColor());
+        chip.setCursor(javafx.scene.Cursor.HAND);
 
         Circle dot = new Circle(3.5);
         dot.getStyleClass().addAll("dot", "dot-" + service.getChipColor());
@@ -409,6 +420,22 @@ public class QueueScheduleController implements Initializable {
     private void clearError(){
         error_container.setVisible(false);
         error_message.setVisible(false);
+    }
+    private void animateChipIn(HBox chip, long delayMs) {
+        chip.setScaleX(0.75);
+        chip.setScaleY(0.75);
+        chip.setOpacity(0);
+
+        ScaleTransition st = new ScaleTransition(Duration.millis(200), chip);
+        st.setToX(1); st.setToY(1);
+        st.setDelay(Duration.millis(delayMs));
+        st.setInterpolator(Interpolator.EASE_OUT);
+
+        FadeTransition ft = new FadeTransition(Duration.millis(200), chip);
+        ft.setToValue(1);
+        ft.setDelay(Duration.millis(delayMs));
+
+        new ParallelTransition(chip, st, ft).play();
     }
 
     public LocalDate getSelectedDate() { return selectedDate; }

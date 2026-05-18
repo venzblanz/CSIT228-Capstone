@@ -103,7 +103,7 @@ public class QueueNumberController {
 
     @FXML
     public void initialize() {
-        AnimationHelper.fadeIn(ticketScreen);
+        AnimationHelper.staggerFadeIn(ticketScreen);
         saveBtn.setOnAction(e -> onSave());
         doneBtn.setOnAction(e -> onDone());
     }
