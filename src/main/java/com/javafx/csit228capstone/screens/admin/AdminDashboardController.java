@@ -24,8 +24,11 @@ public class AdminDashboardController {
     @FXML private VBox recentQueueList;
     @FXML private Label noActivityLabel;
 
+    @FXML private AdminMenuController menuController;
+
     @FXML
     private void initialize() {
+        menuController.setActiveButton(menuController.getDashboardBtn());
         // Set admin name
         String name = SessionManager.getInstance().getCurrentUser().getFullname();
         adminNameLabel.setText(name);

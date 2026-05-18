@@ -30,7 +30,7 @@
                             <children>
                                 <VBox>
                                     <children>
-                                        <Label text="Dashboard" styleClass="screen-label" />
+                                        <Label text="Dashboard" styleClass="screen-labels" />
                                         <Label text="Welcome back," style="-fx-text-fill: #64748B;" />
                                         <Label fx:id="adminNameLabel" text="Admin" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1E293B;">
                                             <font><Font size="28.0" /></font>

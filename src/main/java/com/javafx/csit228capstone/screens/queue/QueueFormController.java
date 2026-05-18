@@ -115,6 +115,7 @@ public class QueueFormController {
         // set non character fields to be exclusive
         age_field.setTextFormatter(new TextFormatter<>(filter));
         contact_field.setTextFormatter(new TextFormatter<>(filter));
+        emergencyContactField.setTextFormatter(new TextFormatter<>(filter));
 
         // Radio
         maleRadio.setUserData("Male");
@@ -380,7 +381,13 @@ public class QueueFormController {
             showError("Please enter only one (1) character for the middle initial");
             return;
         }else if (!contact.matches("^[0-9]{11}$")) {
-            showError("Please enter a valid 10-digit mobile number (e.g. 09123456789).");
+            showError("Please enter a valid 11-digit mobile number (e.g. 09123456789).");
+            return;
+        }else if (!emergencyPersonContact.matches("^[0-9]{11}$")) {
+            showError("Please enter a valid 11-digit mobile number (e.g. 09123456789).");
+            return;
+        }else if (!email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            showError("Please enter a valid email.");
             return;
         }
 
@@ -404,7 +411,7 @@ public class QueueFormController {
         }
 
         formManager.saveForm(new Form(fname,mi,lname, BirthDate, age, gender, civilStatus, symptoms, ptype, address, nationality, religion, contact, email, contactPerson, contactPersonRelation, emergencyPersonContact, formType));
-        sceneNavigator.navigate("/com/javafx/csit228capstone/queue/temp-queue-schedule.fxml", cancelBtn, "/styles/schedule-patient.css", (TempQueueScheduleController queueScheduleController) -> queueScheduleController.initializeData(formType));
+        sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue-schedule.fxml", cancelBtn, "/styles/schedule-patient.css", (QueueScheduleController queueScheduleController) -> queueScheduleController.initializeData(formType));
     }
     private void showError(String message){
         form.setStyle("-fx-border-color: red;" +

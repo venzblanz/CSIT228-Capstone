@@ -8,10 +8,18 @@ import java.util.*;
 
 public class ScheduleDAO {
 
+    private static ScheduleDAO instance;
     private final Connection connection;
 
-    public ScheduleDAO(Connection connection) {
+    private ScheduleDAO(Connection connection) {
         this.connection = connection;
+    }
+
+    public static ScheduleDAO getInstance() {
+        if (instance == null) {
+            instance = new ScheduleDAO(DatabaseConfig.getConnection());
+        }
+        return instance;
     }
 
     public List<Service> getAllServices() throws SQLException {
@@ -22,10 +30,11 @@ public class ScheduleDAO {
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                list.add(new Service(
+                list.add(Service.fromDatabase(
                         rs.getInt("service_id"),
                         rs.getString("service_name"),
                         rs.getString("service_type"),
+                        null,
                         true
                 ));
             }
@@ -58,7 +67,7 @@ public class ScheduleDAO {
                     String slot = rs.getString("time_slot");
                     boolean recurring = rs.getBoolean("is_recurring");
 
-                    Service svc = new Service(
+                    Service svc = Service.fromDatabase(
                             rs.getInt("service_id"),
                             rs.getString("service_name"),
                             rs.getString("service_type"),
@@ -66,12 +75,7 @@ public class ScheduleDAO {
                             recurring
                     );
 
-                    slotMap.computeIfAbsent(slot, new java.util.function.Function<String, List<Service>>() {
-                        @Override
-                        public List<Service> apply(String k) {
-                            return new ArrayList<>();
-                        }
-                    }).add(svc);
+                    slotMap.computeIfAbsent(slot, k -> new ArrayList<>()).add(svc);
                 }
             }
         }
@@ -116,13 +120,11 @@ public class ScheduleDAO {
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, serviceId);
-
             if (recurring) {
                 ps.setInt(2, date.getDayOfWeek().getValue());
             } else {
                 ps.setDate(2, Date.valueOf(date));
             }
-
             ps.setString(3, timeSlot);
             ps.executeUpdate();
         }
@@ -131,15 +133,9 @@ public class ScheduleDAO {
     public void updateDoctorForSlot(LocalDate date, String timeSlot, int serviceId, boolean recurring, String doctorName) throws SQLException {
         String sql;
         if (recurring) {
-            sql = """
-                  UPDATE schedules SET doctor_name = ?
-                  WHERE service_id = ? AND day_of_week = ? AND time_slot = ?
-                  """;
+            sql = "UPDATE schedules SET doctor_name = ? WHERE service_id = ? AND day_of_week = ? AND time_slot = ?";
         } else {
-            sql = """
-                  UPDATE schedules SET doctor_name = ?
-                  WHERE service_id = ? AND specific_date = ? AND time_slot = ?
-                  """;
+            sql = "UPDATE schedules SET doctor_name = ? WHERE service_id = ? AND specific_date = ? AND time_slot = ?";
         }
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -148,15 +144,12 @@ public class ScheduleDAO {
             } else {
                 ps.setString(1, doctorName.trim());
             }
-
             ps.setInt(2, serviceId);
-
             if (recurring) {
                 ps.setInt(3, date.getDayOfWeek().getValue());
             } else {
                 ps.setDate(3, Date.valueOf(date));
             }
-
             ps.setString(4, timeSlot);
             ps.executeUpdate();
         }
@@ -183,6 +176,6 @@ public class ScheduleDAO {
             addOneTimeServiceToSlot(date, timeSlot, newId);
         }
 
-        return new Service(newId, name, serviceType, null, recurring);
+        return Service.createNewWithId(newId, name, serviceType, recurring);
     }
 }

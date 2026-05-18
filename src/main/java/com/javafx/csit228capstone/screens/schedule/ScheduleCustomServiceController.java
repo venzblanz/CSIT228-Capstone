@@ -3,6 +3,7 @@ package com.javafx.csit228capstone.screens.schedule;
 import com.javafx.csit228capstone.model.Service;
 import com.javafx.csit228capstone.utils.ScheduleDAO;
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -25,10 +26,9 @@ public class ScheduleCustomServiceController implements Initializable {
     @FXML private Button addBtn;
 
     private final ToggleGroup categoryGroup = new ToggleGroup();
-
     private LocalDate selectedDate;
     private String timeSlot;
-    private ScheduleDAO scheduleDAO;
+    private final ScheduleDAO scheduleDAO = ScheduleDAO.getInstance();
     private Consumer<Service> onServiceSelected;
 
     @Override
@@ -43,34 +43,20 @@ public class ScheduleCustomServiceController implements Initializable {
         rbDiag.setUserData("Diagnostics & Laboratory");
     }
 
-    public void init(LocalDate selectedDate, String dayName, boolean inheritedRecurring, ScheduleDAO scheduleDAO, String timeSlot, Consumer<Service> onServiceSelected) {
+    public void init(LocalDate selectedDate, String dayName, boolean inheritedRecurring, String timeSlot, Consumer<Service> onServiceSelected) {
         this.selectedDate = selectedDate;
         this.timeSlot = timeSlot;
-        this.scheduleDAO = scheduleDAO;
         this.onServiceSelected = onServiceSelected;
 
         recurringCheck.setSelected(inheritedRecurring);
         recurringCheck.setText("Repeat weekly (every " + dayName + ")");
 
-        nameField.textProperty().addListener(new javafx.beans.value.ChangeListener<String>() {
-            @Override
-            public void changed(javafx.beans.value.ObservableValue<? extends String> obs, String o, String n) {
-                refreshAddBtn();
-            }
-        });
-
-        categoryGroup.selectedToggleProperty().addListener(new javafx.beans.value.ChangeListener<Toggle>() {
-            @Override
-            public void changed(javafx.beans.value.ObservableValue<? extends Toggle> obs, Toggle o, Toggle n) {
-                refreshAddBtn();
-            }
-        });
+        nameField.textProperty().addListener((obs, o, n) -> refreshAddBtn());
+        categoryGroup.selectedToggleProperty().addListener((obs, o, n) -> refreshAddBtn());
     }
 
     @FXML
-    private void onCategorySelected() {
-        refreshAddBtn();
-    }
+    private void onCategorySelected() { refreshAddBtn(); }
 
     private void refreshAddBtn() {
         boolean ready = !nameField.getText().trim().isBlank() && categoryGroup.getSelectedToggle() != null;
@@ -83,31 +69,27 @@ public class ScheduleCustomServiceController implements Initializable {
         String serviceType = (String) categoryGroup.getSelectedToggle().getUserData();
         boolean recurring = recurringCheck.isSelected();
 
-        try {
-            Service service = scheduleDAO.addCustomService(name, serviceType, selectedDate, timeSlot, recurring);
-            onServiceSelected.accept(service);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        close();
+        new Thread(() -> {
+            try {
+                Service service = scheduleDAO.addCustomService(name, serviceType, selectedDate, timeSlot, recurring);
+                Platform.runLater(() -> {
+                    onServiceSelected.accept(service);
+                    close();
+                });
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }).start();
     }
 
     @FXML
-    private void onCancel() {
-        close();
-    }
+    private void onCancel() { close(); }
 
     private void close() {
         Stage stage = (Stage) addBtn.getScene().getWindow();
         FadeTransition ft = new FadeTransition(Duration.millis(140), addBtn.getScene().getRoot());
         ft.setToValue(0);
-        ft.setOnFinished(new javafx.event.EventHandler<javafx.event.ActionEvent>() {
-            @Override
-            public void handle(javafx.event.ActionEvent e) {
-                stage.close();
-            }
-        });
+        ft.setOnFinished(e -> stage.close());
         ft.play();
     }
 }

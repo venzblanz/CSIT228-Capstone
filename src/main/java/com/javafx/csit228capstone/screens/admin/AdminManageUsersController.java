@@ -23,7 +23,7 @@ import java.sql.SQLException;
 import java.util.Comparator;
 
 public class AdminManageUsersController {
-
+    @FXML private AdminMenuController menuController;
     @FXML private TextField searchField;
     @FXML private ComboBox<String> sortComboBox;
     @FXML private TableView<User> userTable;
@@ -36,6 +36,7 @@ public class AdminManageUsersController {
 
     @FXML
     public void initialize() {
+        menuController.setActiveButton(menuController.getManageUsersBtn());
         setupTable();
         loadDataFromDatabase();
         setupSearchAndFilterLogic();

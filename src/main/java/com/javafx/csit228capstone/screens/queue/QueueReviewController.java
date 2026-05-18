@@ -190,7 +190,7 @@ public class QueueReviewController {
     }
 
     private void onBack(){
-        sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue-schedule.fxml", backBtn, "/styles/queue-schedule.css", (QueueScheduleController queueScheduleController) -> queueScheduleController.initializeData(formType));
+        sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue-schedule.fxml", backBtn, "/styles/schedule-patient.css", (QueueScheduleController queueScheduleController) -> queueScheduleController.initializeData(formType));
     }
     private void onEdit(){
         sceneNavigator.navigate("/com/javafx/csit228capstone/queue/queue-form.fxml", editBtn, "/styles/queue-form.css", (QueueFormController queueFormController) -> queueFormController.initializeData(formType));
