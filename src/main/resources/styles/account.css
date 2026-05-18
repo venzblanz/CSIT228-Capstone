@@ -22,7 +22,7 @@
 }
 
 .label {
-    -fx-font-family: "Instrument Sans";
+    -fx-font-family: "Instrument Sans Medium";
 }
 
 .scroll-pane, .scroll-pane > .viewport {

@@ -17,12 +17,10 @@ public class ProfileUpdatedController implements Initializable {
     @FXML private MenuController menuController;
     @FXML private Button continueBtn;
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
-    @FXML private Pane notification;
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AnimationHelper.ringAnimation(notification);
         if (menuController != null) {
             menuController.setActiveButton(menuController.getAccountBtn());
         }

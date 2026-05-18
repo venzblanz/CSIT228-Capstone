@@ -36,6 +36,7 @@ public class DashboardController {
     @FXML private Label timeLabel;
     @FXML private Pane notification;
     @FXML private VBox dashboardScreen;
+    @FXML private StackPane root;
 
     // ------------- Recents -------------------------------------------------------------------------------------------
     @FXML private VBox recentQueueContainer;
@@ -51,6 +52,7 @@ public class DashboardController {
 
     @FXML
     public void initialize(){
+        NotificationPanelController notifPanelCtrl = new NotificationPanelController(root);
         AnimationHelper.fadeIn(dashboardScreen);
         menuController.setActiveButton(menuController.getDashboardBtn());
 
@@ -66,6 +68,7 @@ public class DashboardController {
         ring.setAutoReverse(true);
 
         notification.setOnMouseEntered(e -> ring.play());
+        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
         setUpRecent(queueList);
     }
     // ----------- For Dashboard Cards ---------------------------------------------------------------------------------

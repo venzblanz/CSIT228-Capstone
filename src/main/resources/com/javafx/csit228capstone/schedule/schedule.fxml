@@ -1,130 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.schedule.ScheduleController" styleClass="main-pane">
 
-    <left>
-        <fx:include fx:id="menu" source="../menu-pane.fxml"/>
-    </left>
-
-    <center>
-        <VBox fx:id="scheduleScreen" styleClass="content-root" spacing="0" BorderPane.alignment="CENTER">
-            <padding>
-                <Insets bottom="30.0" left="35.0" right="20.0" top="30.0" />
-            </padding>
-            <children>
-
-                <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="71.0">
-                    <children>
-                        <Label fx:id="screenLabel" styleClass="screen-label" text="Schedule">
-                            <font>
-                                <Font size="24.0" />
-                            </font>
-                        </Label>
-                        <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                        <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="notification-icon" />
-                    </children>
-                </HBox>
-
-                <HBox alignment="CENTER_LEFT" prefHeight="46.0" spacing="0.0" styleClass="search-bar">
-                    <VBox.margin>
-                        <Insets bottom="14.0" />
-                    </VBox.margin>
-                    <children>
-                        <TextField fx:id="searchField" promptText="Search services..." maxWidth="1.7976931348623157E308" prefHeight="46.0" styleClass="search-field" HBox.hgrow="ALWAYS">
-                            <HBox.margin>
-                                <Insets left="16.0" />
-                            </HBox.margin>
-                        </TextField>
-                        <Button mnemonicParsing="false" styleClass="search-button">
-                            <graphic>
-                                <SVGPath content="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="#218AD5" />
-                            </graphic>
-                        </Button>
-                    </children>
-                </HBox>
-
-                <HBox fx:id="categoryFilterBar" styleClass="category-filter-bar" spacing="12" alignment="CENTER_LEFT">
-                    <VBox.margin>
-                        <Insets bottom="14.0" left="0.0" right="0.0" top="6.0" />
-                    </VBox.margin>
-                    <padding>
-                        <Insets top="0" right="0" bottom="0" left="0" />
-                    </padding>
-                    <children>
-                        <Button fx:id="btnGeneralWellness" text="General Wellness" styleClass="filter-btn,filter-btn-blue" onAction="#onClickBtnGeneralWellness"/>
-                        <Button fx:id="btnWomensHealth" text="Women's Health" styleClass="filter-btn,filter-btn-pink" onAction="#onClickBtnWomensHealth"/>
-                        <Button fx:id="btnSpecializedFields" text="Specialized Fields" styleClass="filter-btn,filter-btn-green" onAction="#onClickBtnSpecializedFields"/>
-                        <Button fx:id="btnDiagnosticsLab" text="Diagnostics &amp; Lab" styleClass="filter-btn,filter-btn-purple" onAction="#onClickBtnDiagnosticsLab"/>
-                    </children>
-                </HBox>
-
-                <HBox spacing="20" VBox.vgrow="ALWAYS">
-                    <padding>
-                        <Insets top="0" right="0" bottom="0" left="0"/>
-                    </padding>
-
-                    <VBox styleClass="schedule-panel" HBox.hgrow="ALWAYS" spacing="0">
-
-                        <HBox styleClass="date-header-bar" alignment="CENTER_LEFT" spacing="10">
-                            <Label fx:id="selectedDateLabel" styleClass="schedule-date-header" text=""/>
-                        </HBox>
-
-                        <ScrollPane fx:id="scheduleScrollPane" styleClass="schedule-scroll" fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
-                            <VBox fx:id="timeSlotsContainer" styleClass="slots-container"/>
-                        </ScrollPane>
-
-                    </VBox>
-
-                    <VBox styleClass="calendar-panel" minWidth="340" maxWidth="380" spacing="0">
-
-                        <HBox styleClass="calendar-nav" alignment="CENTER" spacing="0">
-                            <Button fx:id="prevMonthButton" styleClass="cal-arrow-button" text="&#8249;"/>
-                            <Label fx:id="monthYearLabel" styleClass="month-year-label" HBox.hgrow="ALWAYS" alignment="CENTER" maxWidth="Infinity"/>
-                            <Button fx:id="nextMonthButton" styleClass="cal-arrow-button" text="&#8250;"/>
-                        </HBox>
-
-                        <GridPane styleClass="cal-days-panel" hgap="4" vgap="4">
-                            <columnConstraints>
-                                <ColumnConstraints percentWidth="14.28" halignment="CENTER"/>
-                                <ColumnConstraints percentWidth="14.28" halignment="CENTER"/>
-                                <ColumnConstraints percentWidth="14.28" halignment="CENTER"/>
-                                <ColumnConstraints percentWidth="14.28" halignment="CENTER"/>
-                                <ColumnConstraints percentWidth="14.28" halignment="CENTER"/>
-                                <ColumnConstraints percentWidth="14.28" halignment="CENTER"/>
-                                <ColumnConstraints percentWidth="14.28" halignment="CENTER"/>
-                            </columnConstraints>
-                            <Label text="Su" styleClass="cal-day-label" GridPane.columnIndex="0" GridPane.rowIndex="0" maxWidth="Infinity" alignment="CENTER"/>
-                            <Label text="Mo" styleClass="cal-day-label" GridPane.columnIndex="1" GridPane.rowIndex="0" maxWidth="Infinity" alignment="CENTER"/>
-                            <Label text="Tu" styleClass="cal-day-label" GridPane.columnIndex="2" GridPane.rowIndex="0" maxWidth="Infinity" alignment="CENTER"/>
-                            <Label text="We" styleClass="cal-day-label" GridPane.columnIndex="3" GridPane.rowIndex="0" maxWidth="Infinity" alignment="CENTER"/>
-                            <Label text="Th" styleClass="cal-day-label" GridPane.columnIndex="4" GridPane.rowIndex="0" maxWidth="Infinity" alignment="CENTER"/>
-                            <Label text="Fr" styleClass="cal-day-label" GridPane.columnIndex="5" GridPane.rowIndex="0" maxWidth="Infinity" alignment="CENTER"/>
-                            <Label text="Sa" styleClass="cal-day-label" GridPane.columnIndex="6" GridPane.rowIndex="0" maxWidth="Infinity" alignment="CENTER"/>
-                        </GridPane>
-
-                        <GridPane fx:id="calendarGrid" styleClass="cal-grid" hgap="4" vgap="4" VBox.vgrow="NEVER">
-                            <columnConstraints>
-                                <ColumnConstraints percentWidth="14.28" halignment="CENTER"/>
-                                <ColumnConstraints percentWidth="14.28" halignment="CENTER"/>
-                                <ColumnConstraints percentWidth="14.28" halignment="CENTER"/>
-                                <ColumnConstraints percentWidth="14.28" halignment="CENTER"/>
-                                <ColumnConstraints percentWidth="14.28" halignment="CENTER"/>
-                                <ColumnConstraints percentWidth="14.28" halignment="CENTER"/>
-                                <ColumnConstraints percentWidth="14.28" halignment="CENTER"/>
-                            </columnConstraints>
-                        </GridPane>
-
-                    </VBox>
-                </HBox>
-
-            </children>
-        </VBox>
-    </center>
-
-</BorderPane>
+<StackPane fx:id="root" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.schedule.ScheduleController">
+   <children>
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="main-pane">
+      
+          <left>
+              <fx:include fx:id="menu" source="../menu-pane.fxml" />
+          </left>
+      
+          <center>
+              <VBox fx:id="scheduleScreen" spacing="0" styleClass="content-root" BorderPane.alignment="CENTER">
+                  <padding>
+                      <Insets bottom="30.0" left="35.0" right="20.0" top="30.0" />
+                  </padding>
+                  <children>
+      
+                      <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="71.0">
+                          <children>
+                              <Label fx:id="screenLabel" styleClass="screen-label" text="Schedule">
+                                  <font>
+                                      <Font size="24.0" />
+                                  </font>
+                              </Label>
+                              <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                              <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="notification-icon" />
+                          </children>
+                      </HBox>
+      
+                      <HBox alignment="CENTER_LEFT" prefHeight="46.0" spacing="0.0" styleClass="search-bar">
+                          <VBox.margin>
+                              <Insets bottom="14.0" />
+                          </VBox.margin>
+                          <children>
+                              <TextField fx:id="searchField" maxWidth="1.7976931348623157E308" prefHeight="46.0" promptText="Search services..." styleClass="search-field" HBox.hgrow="ALWAYS">
+                                  <HBox.margin>
+                                      <Insets left="16.0" />
+                                  </HBox.margin>
+                              </TextField>
+                              <Button mnemonicParsing="false" styleClass="search-button">
+                                  <graphic>
+                                      <SVGPath content="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="#218AD5" />
+                                  </graphic>
+                              </Button>
+                          </children>
+                      </HBox>
+      
+                      <HBox fx:id="categoryFilterBar" alignment="CENTER_LEFT" spacing="12" styleClass="category-filter-bar">
+                          <VBox.margin>
+                              <Insets bottom="14.0" left="0.0" right="0.0" top="6.0" />
+                          </VBox.margin>
+                          <padding>
+                              <Insets bottom="0" left="0" right="0" top="0" />
+                          </padding>
+                          <children>
+                              <Button fx:id="btnGeneralWellness" onAction="#onClickBtnGeneralWellness" styleClass="filter-btn,filter-btn-blue" text="General Wellness" />
+                              <Button fx:id="btnWomensHealth" onAction="#onClickBtnWomensHealth" styleClass="filter-btn,filter-btn-pink" text="Women's Health" />
+                              <Button fx:id="btnSpecializedFields" onAction="#onClickBtnSpecializedFields" styleClass="filter-btn,filter-btn-green" text="Specialized Fields" />
+                              <Button fx:id="btnDiagnosticsLab" onAction="#onClickBtnDiagnosticsLab" styleClass="filter-btn,filter-btn-purple" text="Diagnostics &amp; Lab" />
+                          </children>
+                      </HBox>
+      
+                      <HBox spacing="20" VBox.vgrow="ALWAYS">
+                          <padding>
+                              <Insets bottom="0" left="0" right="0" top="0" />
+                          </padding>
+      
+                          <VBox spacing="0" styleClass="schedule-panel" HBox.hgrow="ALWAYS">
+      
+                              <HBox alignment="CENTER_LEFT" spacing="10" styleClass="date-header-bar">
+                                  <Label fx:id="selectedDateLabel" styleClass="schedule-date-header" text="" />
+                              </HBox>
+      
+                              <ScrollPane fx:id="scheduleScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="schedule-scroll" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
+                                  <VBox fx:id="timeSlotsContainer" styleClass="slots-container" />
+                              </ScrollPane>
+      
+                          </VBox>
+      
+                          <VBox maxWidth="380" minWidth="340" spacing="0" styleClass="calendar-panel">
+      
+                              <HBox alignment="CENTER" spacing="0" styleClass="calendar-nav">
+                                  <Button fx:id="prevMonthButton" styleClass="cal-arrow-button" text="‹" />
+                                  <Label fx:id="monthYearLabel" alignment="CENTER" maxWidth="Infinity" styleClass="month-year-label" HBox.hgrow="ALWAYS" />
+                                  <Button fx:id="nextMonthButton" styleClass="cal-arrow-button" text="›" />
+                              </HBox>
+      
+                              <GridPane hgap="4" styleClass="cal-days-panel" vgap="4">
+                                  <columnConstraints>
+                                      <ColumnConstraints halignment="CENTER" percentWidth="14.28" />
+                                      <ColumnConstraints halignment="CENTER" percentWidth="14.28" />
+                                      <ColumnConstraints halignment="CENTER" percentWidth="14.28" />
+                                      <ColumnConstraints halignment="CENTER" percentWidth="14.28" />
+                                      <ColumnConstraints halignment="CENTER" percentWidth="14.28" />
+                                      <ColumnConstraints halignment="CENTER" percentWidth="14.28" />
+                                      <ColumnConstraints halignment="CENTER" percentWidth="14.28" />
+                                  </columnConstraints>
+                                  <Label alignment="CENTER" maxWidth="Infinity" styleClass="cal-day-label" text="Su" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                  <Label alignment="CENTER" maxWidth="Infinity" styleClass="cal-day-label" text="Mo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                  <Label alignment="CENTER" maxWidth="Infinity" styleClass="cal-day-label" text="Tu" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                                  <Label alignment="CENTER" maxWidth="Infinity" styleClass="cal-day-label" text="We" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                                  <Label alignment="CENTER" maxWidth="Infinity" styleClass="cal-day-label" text="Th" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                                  <Label alignment="CENTER" maxWidth="Infinity" styleClass="cal-day-label" text="Fr" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+                                  <Label alignment="CENTER" maxWidth="Infinity" styleClass="cal-day-label" text="Sa" GridPane.columnIndex="6" GridPane.rowIndex="0" />
+                           <rowConstraints>
+                              <RowConstraints />
+                           </rowConstraints>
+                              </GridPane>
+      
+                              <GridPane fx:id="calendarGrid" hgap="4" styleClass="cal-grid" vgap="4" VBox.vgrow="NEVER">
+                                  <columnConstraints>
+                                      <ColumnConstraints halignment="CENTER" percentWidth="14.28" />
+                                      <ColumnConstraints halignment="CENTER" percentWidth="14.28" />
+                                      <ColumnConstraints halignment="CENTER" percentWidth="14.28" />
+                                      <ColumnConstraints halignment="CENTER" percentWidth="14.28" />
+                                      <ColumnConstraints halignment="CENTER" percentWidth="14.28" />
+                                      <ColumnConstraints halignment="CENTER" percentWidth="14.28" />
+                                      <ColumnConstraints halignment="CENTER" percentWidth="14.28" />
+                                  </columnConstraints>
+                              </GridPane>
+      
+                          </VBox>
+                      </HBox>
+      
+                  </children>
+              </VBox>
+          </center>
+      
+      </BorderPane>
+   </children>
+</StackPane>
