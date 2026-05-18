@@ -34,6 +34,7 @@ public class AdminLiveQueueController {
     @FXML private HBox doneCards;
     @FXML private Label emptyLabel;
     @FXML private Label refreshLabel;
+    @FXML private AdminMenuController menuController;
 
     private String currentDept = "All";
     private boolean isFullscreen = false;
@@ -43,6 +44,7 @@ public class AdminLiveQueueController {
 
     @FXML
     private void initialize() {
+        menuController.setActiveButton(menuController.getLiveQueueBtn());
         loadQueue();
         startAutoRefresh();
     }

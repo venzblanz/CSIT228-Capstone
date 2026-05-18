@@ -29,6 +29,7 @@ public class AdminManageQueueController {
     @FXML private VBox recentQueueList;
     @FXML private Label noActivityLabel;
     @FXML private DatePicker datePicker;
+    @FXML private AdminMenuController menuController;
     @FXML private Button callNumberButton;
 
     private HBox selectedType;
@@ -37,6 +38,7 @@ public class AdminManageQueueController {
     private String selectedCategory = null;
     @FXML
     public void initialize() {
+        menuController.setActiveButton(menuController.getManageQueueBtn());
         datePicker.setEditable(false);
         today = LocalDate.now();
         date = today;
