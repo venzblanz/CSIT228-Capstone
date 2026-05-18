@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.javafx.csit228capstone.screens.admin.LiveQueueWindowController"
+      stylesheets="@../../../../styles/live_queue.css"
+      style="-fx-background-color: #f0f4f8;"
+      spacing="0">
+
+    <!-- Tab bar -->
+    <HBox fx:id="tabBar" alignment="CENTER_LEFT" prefHeight="50.0" maxHeight="50.0" spacing="5.0"
+          style="-fx-background-color: white; -fx-border-color: #E2E8F0; -fx-border-width: 0 0 2 0;">
+        <padding><Insets left="30.0" right="30.0" /></padding>
+        <children>
+            <Button fx:id="tabAll" text="All" styleClass="queue-tab-active" onAction="#onTabAll" />
+            <Button fx:id="tabDiag" text="Diagnostics &amp; Lab" styleClass="queue-tab" onAction="#onTabDiag" />
+            <Button fx:id="tabWomens" text="Women's Health" styleClass="queue-tab" onAction="#onTabWomens" />
+            <Button fx:id="tabGeneral" text="General Wellness" styleClass="queue-tab" onAction="#onTabGeneral" />
+            <Button fx:id="tabSpecialized" text="Specialized Fields" styleClass="queue-tab" onAction="#onTabSpecialized" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="refreshLabel" text="🔄 Auto-refreshing..."
+                   style="-fx-text-fill: #64748B; -fx-font-size: 12px;" />
+        </children>
+    </HBox>
+
+    <VBox fx:id="queueContent" spacing="12.0" VBox.vgrow="ALWAYS">
+        <padding><Insets bottom="20.0" left="30.0" right="30.0" top="20.0" /></padding>
+        <children>
+
+            <VBox fx:id="nowServingCard" styleClass="now-serving-card"
+                  alignment="CENTER" spacing="8.0"
+                  prefHeight="200.0" maxHeight="200.0">
+                <children>
+                    <Label text="NOW SERVING" styleClass="now-serving-label" />
+                    <Label fx:id="nowServingNumber" text="" styleClass="now-serving-number" />
+                    <Label fx:id="nowServingDept" text="---" styleClass="now-serving-dept" />
+                    <Label fx:id="nowServingStaff" text="" styleClass="now-serving-staff" />
+                </children>
+            </VBox>
+
+            <Label text="WAITING" styleClass="section-header" />
+            <FlowPane fx:id="waitingCards" hgap="15.0" vgap="15.0" />
+
+            <Label text="COMPLETED / CANCELLED" styleClass="section-header" />
+            <FlowPane fx:id="doneCards" hgap="15.0" vgap="15.0" />
+
+        </children>
+    </VBox>
+
+</VBox>

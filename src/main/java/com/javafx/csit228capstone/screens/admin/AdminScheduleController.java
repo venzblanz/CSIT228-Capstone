@@ -3,7 +3,6 @@ package com.javafx.csit228capstone.screens.admin;
 import com.javafx.csit228capstone.model.Service;
 import com.javafx.csit228capstone.screens.schedule.BaseScheduleController;
 import com.javafx.csit228capstone.screens.schedule.ScheduleDialogController;
-import com.javafx.csit228capstone.screens.schedule.ScheduleEditServiceController;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -103,7 +102,6 @@ public class AdminScheduleController extends BaseScheduleController {
         HBox chip = new HBox(4);
         chip.setAlignment(Pos.CENTER_LEFT);
         chip.getStyleClass().addAll("chip", "chip-" + service.getChipColor());
-        chip.setCursor(javafx.scene.Cursor.HAND);
 
         Circle dot = new Circle(3.5);
         dot.getStyleClass().addAll("dot", "dot-" + service.getChipColor());
@@ -138,12 +136,6 @@ public class AdminScheduleController extends BaseScheduleController {
         });
 
         chip.getChildren().addAll(dot, nameLabel, removeBtn);
-        chip.setOnMouseClicked(e -> {
-            if (e.getTarget() != removeBtn) {
-                showEditServiceDialog(service, timeSlot);
-            }
-        });
-
         return chip;
     }
 
@@ -163,50 +155,6 @@ public class AdminScheduleController extends BaseScheduleController {
         addBtn.setOnMouseExited(e -> hoverOut.playFromStart());
 
         return addBtn;
-    }
-
-    private void showEditServiceDialog(Service service, String timeSlot) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/javafx/csit228capstone/schedule/schedule-edit-service.fxml"));
-            Parent root = loader.load();
-
-            ScheduleEditServiceController ctrl = loader.getController();
-            ctrl.init(service, selectedDate, timeSlot, selectedDateLabel.getText(), newDoctor -> {
-                service.setDoctorName(newDoctor);
-                renderTimeSlots();
-            });
-
-            Stage dialog = new Stage(StageStyle.TRANSPARENT);
-            dialog.initModality(Modality.APPLICATION_MODAL);
-            dialog.initOwner(timeSlotsContainer.getScene().getWindow());
-
-            StackPane wrapper = new StackPane(root);
-            wrapper.setStyle("-fx-background-color: transparent; -fx-padding: 24px;");
-
-            Scene scene = new Scene(wrapper);
-            scene.setFill(Color.TRANSPARENT);
-            scene.getStylesheets().add(getClass().getResource("/styles/schedule.css").toExternalForm());
-            dialog.setScene(scene);
-
-            root.setTranslateY(-18);
-            root.setOpacity(0);
-            TranslateTransition tt = new TranslateTransition(Duration.millis(250), root);
-            tt.setToY(0);
-            tt.setInterpolator(Interpolator.EASE_OUT);
-            FadeTransition ft = new FadeTransition(Duration.millis(250), root);
-            ft.setToValue(1);
-            new ParallelTransition(root, tt, ft).play();
-
-            ColorAdjust dim = new ColorAdjust();
-            dim.setBrightness(-0.4);
-            timeSlotsContainer.getScene().getRoot().setEffect(dim);
-            dialog.setOnHidden(e -> timeSlotsContainer.getScene().getRoot().setEffect(null));
-
-            dialog.showAndWait();
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
     private void showAddServiceDialog(String timeSlot, HBox chipsBox, Button addBtn) {

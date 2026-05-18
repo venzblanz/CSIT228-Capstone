@@ -12,7 +12,7 @@
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
             minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="800.0" prefWidth="1280.0"
+            prefHeight="-Infinity" prefWidth="1280.0"
             stylesheets="@../../../../styles/dashboard.css"
             xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.javafx.csit228capstone.screens.admin.AdminDashboardController">
@@ -25,7 +25,6 @@
                 <VBox styleClass="main-pane" spacing="20.0">
                     <padding><Insets bottom="30.0" left="40.0" right="40.0" top="30.0" /></padding>
                     <children>
-                        <!-- Header -->
                         <HBox alignment="CENTER_LEFT">
                             <children>
                                 <VBox>
@@ -47,10 +46,8 @@
                             </children>
                         </HBox>
 
-                        <!-- Stats Cards -->
                         <HBox spacing="20.0">
                             <children>
-                                <!-- Total Patients Today -->
                                 <HBox styleClass="q-utilities-pane" HBox.hgrow="ALWAYS" spacing="15.0" alignment="CENTER_LEFT">
                                     <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                                     <children>
@@ -67,7 +64,6 @@
                                         </VBox>
                                     </children>
                                 </HBox>
-                                <!-- Active Queue -->
                                 <HBox styleClass="q-utilities-pane" HBox.hgrow="ALWAYS" spacing="15.0" alignment="CENTER_LEFT">
                                     <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                                     <children>
@@ -84,7 +80,6 @@
                                         </VBox>
                                     </children>
                                 </HBox>
-                                <!-- Completed Today -->
                                 <HBox styleClass="q-utilities-pane" HBox.hgrow="ALWAYS" spacing="15.0" alignment="CENTER_LEFT">
                                     <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                                     <children>
@@ -101,7 +96,6 @@
                                         </VBox>
                                     </children>
                                 </HBox>
-                                <!-- Total Users -->
                                 <HBox styleClass="q-utilities-pane" HBox.hgrow="ALWAYS" spacing="15.0" alignment="CENTER_LEFT">
                                     <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                                     <children>
@@ -121,7 +115,6 @@
                             </children>
                         </HBox>
 
-                        <!-- Recent Queue Activity -->
                         <VBox styleClass="dashboard-recent-card" spacing="15.0">
                             <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                             <children>

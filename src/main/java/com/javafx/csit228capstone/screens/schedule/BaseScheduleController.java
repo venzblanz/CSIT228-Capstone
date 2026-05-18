@@ -1,6 +1,7 @@
 package com.javafx.csit228capstone.screens.schedule;
 
 import com.javafx.csit228capstone.model.Service;
+import com.javafx.csit228capstone.utils.AnimationHelper;
 import com.javafx.csit228capstone.utils.ScheduleDAO;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
@@ -22,6 +23,7 @@ import java.util.*;
 
 public abstract class BaseScheduleController implements Initializable {
 
+    @FXML protected VBox scheduleScreen;
     @FXML protected Label screenLabel;
     @FXML protected Label selectedDateLabel;
     @FXML protected Label monthYearLabel;
@@ -44,6 +46,10 @@ public abstract class BaseScheduleController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if (scheduleScreen != null) {
+            AnimationHelper.fadeIn(scheduleScreen);
+        }
+
         today = LocalDate.now();
         selectedDate = today;
         currentYearMonth = YearMonth.from(today);
@@ -127,8 +133,8 @@ public abstract class BaseScheduleController implements Initializable {
         for (int day = 1; day <= daysInMonth; day++) {
             LocalDate date = currentYearMonth.atDay(day);
             Button btn = createDayButton(day, date);
-            btn.setPrefSize(36, 36);
-            btn.setMaxSize(36, 36);
+            btn.setPrefSize(44, 44);
+            btn.setMaxSize(44, 44);
             calendarGrid.add(btn, col, row);
             col++;
             if (col == 7) {

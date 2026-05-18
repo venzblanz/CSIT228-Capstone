@@ -34,7 +34,6 @@ public class ScheduleDAO {
                         rs.getInt("service_id"),
                         rs.getString("service_name"),
                         rs.getString("service_type"),
-                        null,
                         true
                 ));
             }
@@ -49,7 +48,6 @@ public class ScheduleDAO {
         String sql = """
             SELECT sc.schedule_id,
                    sc.time_slot,
-                   sc.doctor_name,
                    s.service_id, s.service_name, s.service_type,
                    (sc.day_of_week IS NOT NULL) AS is_recurring
             FROM schedules sc
@@ -71,7 +69,6 @@ public class ScheduleDAO {
                             rs.getInt("service_id"),
                             rs.getString("service_name"),
                             rs.getString("service_type"),
-                            rs.getString("doctor_name"),
                             recurring
                     );
 
@@ -83,10 +80,7 @@ public class ScheduleDAO {
     }
 
     public void addRecurringServiceToSlot(int dayOfWeek, String timeSlot, int serviceId) throws SQLException {
-        String sql = """
-            INSERT INTO schedules (service_id, day_of_week, specific_date, time_slot)
-            VALUES (?, ?, NULL, ?)
-        """;
+        String sql = "INSERT INTO schedules (service_id, day_of_week, specific_date, time_slot) VALUES (?, ?, NULL, ?)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, serviceId);
@@ -97,10 +91,7 @@ public class ScheduleDAO {
     }
 
     public void addOneTimeServiceToSlot(LocalDate date, String timeSlot, int serviceId) throws SQLException {
-        String sql = """
-            INSERT INTO schedules (service_id, day_of_week, specific_date, time_slot)
-            VALUES (?, NULL, ?, ?)
-        """;
+        String sql = "INSERT INTO schedules (service_id, day_of_week, specific_date, time_slot) VALUES (?, NULL, ?, ?)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, serviceId);
@@ -126,31 +117,6 @@ public class ScheduleDAO {
                 ps.setDate(2, Date.valueOf(date));
             }
             ps.setString(3, timeSlot);
-            ps.executeUpdate();
-        }
-    }
-
-    public void updateDoctorForSlot(LocalDate date, String timeSlot, int serviceId, boolean recurring, String doctorName) throws SQLException {
-        String sql;
-        if (recurring) {
-            sql = "UPDATE schedules SET doctor_name = ? WHERE service_id = ? AND day_of_week = ? AND time_slot = ?";
-        } else {
-            sql = "UPDATE schedules SET doctor_name = ? WHERE service_id = ? AND specific_date = ? AND time_slot = ?";
-        }
-
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            if (doctorName == null || doctorName.isBlank()) {
-                ps.setNull(1, Types.VARCHAR);
-            } else {
-                ps.setString(1, doctorName.trim());
-            }
-            ps.setInt(2, serviceId);
-            if (recurring) {
-                ps.setInt(3, date.getDayOfWeek().getValue());
-            } else {
-                ps.setDate(3, Date.valueOf(date));
-            }
-            ps.setString(4, timeSlot);
             ps.executeUpdate();
         }
     }

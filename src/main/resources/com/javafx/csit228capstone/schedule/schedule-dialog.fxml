@@ -6,14 +6,14 @@
 <?import javafx.geometry.*?>
 <?import java.lang.String?>
 
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.javafx.csit228capstone.screens.schedule.ScheduleDialogController" styleClass="dialog-root" spacing="14" prefWidth="400">
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.javafx.csit228capstone.screens.schedule.ScheduleDialogController" styleClass="dialog-root" spacing="16" prefWidth="480">
 
     <stylesheets>
         <String fx:value="/styles/schedule.css"/>
     </stylesheets>
 
     <padding>
-        <Insets top="24" right="24" bottom="24" left="24"/>
+        <Insets top="28" right="28" bottom="28" left="28"/>
     </padding>
 
     <Label text="Add Service" styleClass="dialog-title"/>
@@ -21,25 +21,25 @@
 
     <TextField fx:id="dialogSearchField" promptText="Search services..." styleClass="dialog-search" maxWidth="Infinity"/>
 
-    <ScrollPane styleClass="dialog-scroll" fitToWidth="true" prefHeight="220" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+    <ScrollPane styleClass="dialog-scroll" fitToWidth="true" prefHeight="280" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
         <VBox fx:id="dialogServicesList" styleClass="dialog-services-list" spacing="0"/>
     </ScrollPane>
 
     <CheckBox fx:id="recurringCheck" styleClass="dialog-recurring-check" selected="true"/>
 
-    <HBox fx:id="otherServiceRow" styleClass="other-service-row" spacing="12" alignment="CENTER_LEFT" onMouseClicked="#onOtherServiceClicked">
+    <HBox fx:id="otherServiceRow" styleClass="other-service-row" spacing="14" alignment="CENTER_LEFT" onMouseClicked="#onOtherServiceClicked">
         <padding>
-            <Insets top="12" right="14" bottom="12" left="14"/>
+            <Insets top="14" right="16" bottom="14" left="16"/>
         </padding>
         <Label text="+" styleClass="other-service-icon"/>
-        <VBox HBox.hgrow="ALWAYS" spacing="2">
+        <VBox HBox.hgrow="ALWAYS" spacing="4">
             <Label text="Other Service" styleClass="other-service-title"/>
             <Label text="Type a custom service name &amp; pick category" styleClass="other-service-hint"/>
         </VBox>
         <Label text="›" styleClass="other-service-arrow"/>
     </HBox>
 
-    <HBox spacing="8" alignment="CENTER_RIGHT">
+    <HBox spacing="10" alignment="CENTER_RIGHT">
         <Button text="Cancel" styleClass="dialog-cancel-btn" onAction="#onCancel" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
         <Button fx:id="dialogAddBtn" text="Add Service" styleClass="dialog-add-btn" onAction="#onAdd" maxWidth="Infinity" HBox.hgrow="ALWAYS" disable="true"/>
     </HBox>

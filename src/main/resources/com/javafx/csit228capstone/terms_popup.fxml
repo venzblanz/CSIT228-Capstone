@@ -17,7 +17,6 @@
         <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
     </padding>
     <children>
-        <!-- Back button -->
         <HBox fx:id="backBtn" onMouseClicked="#onBack" alignment="CENTER_LEFT" spacing="5.0"
               style="-fx-cursor: hand;">
             <children>
@@ -30,12 +29,10 @@
             </children>
         </HBox>
 
-        <!-- Title -->
         <Label text="Terms of Service &amp; Privacy Policy">
             <font><Font size="22.0" /></font>
         </Label>
 
-        <!-- Content -->
         <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
                     style="-fx-background-color: #F1F5F9; -fx-background-radius: 8; -fx-border-color: #E2E8F0; -fx-border-radius: 8;">
             <content>

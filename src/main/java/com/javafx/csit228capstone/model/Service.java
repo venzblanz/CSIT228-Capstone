@@ -5,26 +5,24 @@ public class Service {
     private String name;
     private String serviceType;
     private boolean recurring;
-    private String doctorName;
 
-    private Service(int serviceId, String name, String serviceType, String doctorName, boolean recurring) {
+    private Service(int serviceId, String name, String serviceType, boolean recurring) {
         this.serviceId = serviceId;
         this.name = name;
         this.serviceType = serviceType;
-        this.doctorName = doctorName;
         this.recurring = recurring;
     }
 
-    public static Service fromDatabase(int serviceId, String name, String serviceType, String doctorName, boolean recurring) {
-        return new Service(serviceId, name, serviceType, doctorName, recurring);
+    public static Service fromDatabase(int serviceId, String name, String serviceType, boolean recurring) {
+        return new Service(serviceId, name, serviceType, recurring);
     }
 
     public static Service createNew(String name, String serviceType, boolean recurring) {
-        return new Service(-1, name, serviceType, null, recurring);
+        return new Service(-1, name, serviceType, recurring);
     }
 
     public static Service createNewWithId(int serviceId, String name, String serviceType, boolean recurring) {
-        return new Service(serviceId, name, serviceType, null, recurring);
+        return new Service(serviceId, name, serviceType, recurring);
     }
 
     public int getServiceId() {
@@ -43,24 +41,12 @@ public class Service {
         return recurring;
     }
 
-    public String getDoctorName() {
-        return doctorName;
-    }
-
-    public String getDoctorDisplay() {
-        return (doctorName != null && !doctorName.isBlank()) ? doctorName : "No doctor assigned yet";
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
     public void setServiceType(String type) {
         this.serviceType = type;
-    }
-
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
     }
 
     public String getChipColor() {
