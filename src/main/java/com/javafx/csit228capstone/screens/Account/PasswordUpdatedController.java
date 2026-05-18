@@ -17,11 +17,9 @@ public class PasswordUpdatedController implements Initializable {
     @FXML private MenuController menuController;
     @FXML private Button backToSecurityBtn;
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
-    @FXML private Pane notification;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AnimationHelper.ringAnimation(notification);
         if (menuController != null) {
             menuController.setActiveButton(menuController.getAccountBtn());
         }

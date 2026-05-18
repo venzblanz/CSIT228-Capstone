@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class QueueHistoryController {
@@ -27,6 +28,18 @@ public class QueueHistoryController {
     @FXML private TableColumn<QueueTicket, String> dateColumn;
     @FXML private TableColumn<QueueTicket, String> staffColumn;
     @FXML private TableColumn<QueueTicket, String> departmentColumn;
+
+    @FXML private Label dateHeader;
+    @FXML private Label staffHeader;
+    @FXML private Label deptHeader;
+    @FXML private Label statusHeader;
+    @FXML private Label queueNumHeader;
+    @FXML private Label purposeHeader;
+
+    private boolean newestFirst = true;
+
+    @FXML
+    private Button sortBtn;
 
     @FXML private MenuButton departmentFilter;
     @FXML private MenuButton statusFilter;
@@ -43,7 +56,7 @@ public class QueueHistoryController {
     @FXML private DatePicker dateToFilter;
     @FXML private MenuController menuController;
     @FXML private ImageView backIconBtn;
-    @FXML private Label             backBtn;
+    @FXML private Label backBtn;
     @FXML private VBox historyScreen;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
@@ -273,6 +286,23 @@ public class QueueHistoryController {
         womenHealthDept.selectedProperty().addListener(syncAllDept);
         specialFieldsDept.selectedProperty().addListener(syncAllDept);
         diagnosticsLabDept.selectedProperty().addListener(syncAllDept);
+
+    }
+
+    @FXML private void toggleSort() {
+
+        if (newestFirst) {
+            queueTable.getItems().sort(Comparator.comparing(QueueTicket::getCreatedAt));
+
+            sortBtn.setText("OLDEST ↓");
+        } else {
+            queueTable.getItems().sort((a, b) ->
+                    b.getCreatedAt().compareTo(a.getCreatedAt()));
+
+            sortBtn.setText("NEWEST ↑");
+        }
+
+        newestFirst = !newestFirst;
     }
 
     private void initializeTable() {
@@ -282,13 +312,24 @@ public class QueueHistoryController {
         staffColumn.setReorderable(false);
         queueNumberColumn.setReorderable(false);
         departmentColumn.setReorderable(false);
-        queueTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-        serviceColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.25));
-        statusColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.10));
-        dateColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.15));
-        departmentColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.20));
-        staffColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.20));
-        queueNumberColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(0.10));
+        queueNumberColumn.setStyle("-fx-wrap-text: false;");
+        dateColumn.setStyle("-fx-wrap-text: false;");
+        queueTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        dateHeader.prefWidthProperty().bind(dateColumn.widthProperty());
+        queueNumHeader.prefWidthProperty().bind(queueNumberColumn.widthProperty());
+        deptHeader.prefWidthProperty().bind(departmentColumn.widthProperty());
+        purposeHeader.prefWidthProperty().bind(serviceColumn.widthProperty());
+        statusHeader.prefWidthProperty().bind(statusColumn.widthProperty());
+        staffHeader.prefWidthProperty().bind(staffColumn.widthProperty());
+
+        dateColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(150.0 / 1253.0));
+        queueNumberColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(176.0 / 1253.0));
+        departmentColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(232.0 / 1253.0));
+        serviceColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(292.0 / 1253.0));
+        statusColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(198.0 / 1253.0));
+        staffColumn.prefWidthProperty().bind(queueTable.widthProperty().multiply(205.0 / 1253.0));
+
         queueNumberColumn.setCellValueFactory(new PropertyValueFactory<>("queueNumber"));
 
         serviceColumn.setCellValueFactory(new PropertyValueFactory<>("purpose"));
@@ -304,7 +345,38 @@ public class QueueHistoryController {
 
         departmentColumn.setCellValueFactory(new PropertyValueFactory<>("department"));
 
+        statusColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(item);
+
+                    switch (item) {
+                        case "Waiting" ->
+                                setStyle("-fx-text-fill: #218ad5; -fx-font-family: Instrument Sans Bold;");
+
+                        case "Completed" ->
+                                setStyle("-fx-text-fill: #16A34A; -fx-font-family: Instrument Sans Bold;");
+
+                        case "Cancelled" ->
+                                setStyle("-fx-text-fill: #DC2626; -fx-font-family: Instrument Sans Bold;");
+
+                        default ->
+                                setStyle("-fx-text-fill: #64748B;");
+                    }
+                }
+            }
+        });
+
         loadHistory();
+
+        queueTable.getItems().sort((a, b) ->
+                b.getCreatedAt().compareTo(a.getCreatedAt()));
     }
 
     private void updateMenuText(String text, MenuButton menuButton) {

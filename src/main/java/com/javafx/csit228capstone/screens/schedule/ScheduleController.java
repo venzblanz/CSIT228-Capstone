@@ -1,6 +1,7 @@
 package com.javafx.csit228capstone.screens.schedule;
 
 import com.javafx.csit228capstone.model.Service;
+import com.javafx.csit228capstone.screens.NotificationPanelController;
 import com.javafx.csit228capstone.utils.AnimationHelper;
 import javafx.animation.*;
 import javafx.fxml.FXML;
@@ -24,6 +25,7 @@ public class ScheduleController extends BaseScheduleController {
     @FXML private Button btnWomensHealth;
     @FXML private Button btnSpecializedFields;
     @FXML private Button btnDiagnosticsLab;
+    @FXML private StackPane root;
 
     private String activeCategory = null;
 
@@ -39,7 +41,9 @@ public class ScheduleController extends BaseScheduleController {
         }
 
         if (notification != null) {
+            NotificationPanelController notifPanelCtrl = new NotificationPanelController(root);
             AnimationHelper.ringAnimation(notification);
+            notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
         }
 
         if (searchField != null) {

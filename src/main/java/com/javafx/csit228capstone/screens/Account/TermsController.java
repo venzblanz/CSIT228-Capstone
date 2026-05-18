@@ -22,11 +22,9 @@ public class TermsController implements Initializable {
 
     @FXML private CheckBox agreeCheckBox;
     @FXML private Button confirmBtn;
-    @FXML private Pane notification;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AnimationHelper.ringAnimation(notification);
         if (menuController != null) {
             menuController.setActiveButton(menuController.getAccountBtn());
         }

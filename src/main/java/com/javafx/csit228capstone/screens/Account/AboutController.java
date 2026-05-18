@@ -19,7 +19,6 @@ public class AboutController implements Initializable {
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AnimationHelper.ringAnimation(notification);
         if (menuController != null) {
             menuController.setActiveButton(menuController.getAccountBtn());
         }
