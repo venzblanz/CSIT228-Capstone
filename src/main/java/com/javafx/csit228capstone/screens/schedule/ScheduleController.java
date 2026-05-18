@@ -1,26 +1,23 @@
 package com.javafx.csit228capstone.screens.schedule;
 
 import com.javafx.csit228capstone.model.Service;
+import com.javafx.csit228capstone.utils.AnimationHelper;
 import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleController extends BaseScheduleController {
 
     @FXML private com.javafx.csit228capstone.helper.MenuController menuController;
+    @FXML private Pane notification;
     @FXML private TextField searchField;
     @FXML private HBox categoryFilterBar;
     @FXML private Button btnGeneralWellness;
@@ -39,6 +36,10 @@ public class ScheduleController extends BaseScheduleController {
     protected void setupSpecifics() {
         if (menuController != null) {
             menuController.setActiveButton(menuController.getScheduleBtn());
+        }
+
+        if (notification != null) {
+            AnimationHelper.ringAnimation(notification);
         }
 
         if (searchField != null) {
@@ -118,7 +119,6 @@ public class ScheduleController extends BaseScheduleController {
         HBox chip = new HBox(6);
         chip.setAlignment(Pos.CENTER_LEFT);
         chip.getStyleClass().addAll("chip", "chip-" + service.getChipColor());
-        chip.setCursor(javafx.scene.Cursor.HAND);
 
         Circle dot = new Circle(3.5);
         dot.getStyleClass().addAll("dot", "dot-" + service.getChipColor());
@@ -127,69 +127,7 @@ public class ScheduleController extends BaseScheduleController {
         nameLabel.getStyleClass().add("chip-text");
 
         chip.getChildren().addAll(dot, nameLabel);
-        chip.setOnMouseClicked(e -> showDoctorPopup(service, chip));
-
         return chip;
-    }
-
-    private void showDoctorPopup(Service service, javafx.scene.Node chipNode) {
-        Stage popup = new Stage(StageStyle.TRANSPARENT);
-        popup.initModality(Modality.APPLICATION_MODAL);
-        popup.initOwner(timeSlotsContainer.getScene().getWindow());
-
-        Label serviceName = new Label(service.getName());
-        serviceName.getStyleClass().add("dialog-title");
-
-        Label doctorLabel = new Label(service.getDoctorDisplay());
-        doctorLabel.getStyleClass().add("dialog-subtitle");
-
-        Button closeBtn = new Button("Close");
-        closeBtn.getStyleClass().add("dialog-cancel-btn");
-        closeBtn.setCursor(javafx.scene.Cursor.HAND);
-        closeBtn.setOnAction(e -> popup.close());
-
-        VBox content = new VBox(14);
-        content.getChildren().addAll(serviceName, doctorLabel, closeBtn);
-        content.setAlignment(Pos.CENTER_LEFT);
-        content.setPadding(new Insets(24));
-        content.getStyleClass().add("dialog-root");
-        content.setMinWidth(280);
-
-        StackPane rootPane = new StackPane(content);
-        rootPane.setStyle("-fx-background-color: transparent; -fx-padding: 20px;");
-
-        Scene scene = new Scene(rootPane);
-        scene.setFill(Color.TRANSPARENT);
-        scene.getStylesheets().add(getClass().getResource("/styles/schedule.css").toExternalForm());
-        popup.setScene(scene);
-
-        ColorAdjust dim = new ColorAdjust();
-        dim.setBrightness(-0.4);
-        timeSlotsContainer.getScene().getRoot().setEffect(dim);
-        popup.setOnHidden(e -> timeSlotsContainer.getScene().getRoot().setEffect(null));
-
-        rootPane.setOpacity(0);
-        popup.show();
-
-        javafx.geometry.Point2D chipPos = chipNode.localToScreen(0, 0);
-        if (chipPos != null) {
-            double popupWidth = popup.getWidth();
-            double popupHeight = popup.getHeight();
-            double chipWidth = chipNode.getBoundsInLocal().getWidth();
-
-            popup.setX(chipPos.getX() + (chipWidth / 2) - (popupWidth / 2));
-            popup.setY(chipPos.getY() - popupHeight + 5);
-        }
-
-        content.setTranslateY(15);
-        TranslateTransition tt = new TranslateTransition(Duration.millis(250), content);
-        tt.setToY(0);
-        tt.setInterpolator(Interpolator.EASE_OUT);
-
-        FadeTransition ft = new FadeTransition(Duration.millis(250), rootPane);
-        ft.setToValue(1.0);
-
-        new ParallelTransition(tt, ft).play();
     }
 
     private void setActiveCategory(String category, Button clicked, String baseStyle, String activeStyle) {

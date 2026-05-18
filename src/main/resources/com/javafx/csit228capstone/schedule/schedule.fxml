@@ -13,7 +13,7 @@
     </left>
 
     <center>
-        <VBox styleClass="content-root" spacing="0" BorderPane.alignment="CENTER">
+        <VBox fx:id="scheduleScreen" styleClass="content-root" spacing="0" BorderPane.alignment="CENTER">
             <padding>
                 <Insets bottom="30.0" left="35.0" right="20.0" top="30.0" />
             </padding>
@@ -31,14 +31,14 @@
                     </children>
                 </HBox>
 
-                <HBox alignment="CENTER_LEFT" prefHeight="37.0" spacing="0.0" styleClass="search-bar">
+                <HBox alignment="CENTER_LEFT" prefHeight="46.0" spacing="0.0" styleClass="search-bar">
                     <VBox.margin>
-                        <Insets bottom="12.0" />
+                        <Insets bottom="14.0" />
                     </VBox.margin>
                     <children>
-                        <TextField fx:id="searchField" promptText="Search services..." maxWidth="1.7976931348623157E308" prefHeight="37.0" styleClass="search-field" HBox.hgrow="ALWAYS">
+                        <TextField fx:id="searchField" promptText="Search services..." maxWidth="1.7976931348623157E308" prefHeight="46.0" styleClass="search-field" HBox.hgrow="ALWAYS">
                             <HBox.margin>
-                                <Insets left="14.0" />
+                                <Insets left="16.0" />
                             </HBox.margin>
                         </TextField>
                         <Button mnemonicParsing="false" styleClass="search-button">
@@ -49,12 +49,12 @@
                     </children>
                 </HBox>
 
-                <HBox fx:id="categoryFilterBar" styleClass="category-filter-bar" spacing="10" alignment="CENTER_LEFT">
+                <HBox fx:id="categoryFilterBar" styleClass="category-filter-bar" spacing="12" alignment="CENTER_LEFT">
                     <VBox.margin>
-                        <Insets bottom="12.0" left="0.0" right="0.0" top="4.0" />
+                        <Insets bottom="14.0" left="0.0" right="0.0" top="6.0" />
                     </VBox.margin>
                     <padding>
-                        <Insets top="0" right="0" bottom="0" left="0"/>
+                        <Insets top="0" right="0" bottom="0" left="0" />
                     </padding>
                     <children>
                         <Button fx:id="btnGeneralWellness" text="General Wellness" styleClass="filter-btn,filter-btn-blue" onAction="#onClickBtnGeneralWellness"/>
@@ -64,24 +64,24 @@
                     </children>
                 </HBox>
 
-                <HBox spacing="16" VBox.vgrow="ALWAYS">
+                <HBox spacing="20" VBox.vgrow="ALWAYS">
                     <padding>
                         <Insets top="0" right="0" bottom="0" left="0"/>
                     </padding>
 
                     <VBox styleClass="schedule-panel" HBox.hgrow="ALWAYS" spacing="0">
 
-                        <HBox styleClass="date-header-bar" alignment="CENTER_LEFT" spacing="8">
+                        <HBox styleClass="date-header-bar" alignment="CENTER_LEFT" spacing="10">
                             <Label fx:id="selectedDateLabel" styleClass="schedule-date-header" text=""/>
                         </HBox>
 
-                        <ScrollPane fx:id="scheduleScrollPane" styleClass="schedule-scroll" fitToWidth="true" VBox.vgrow="ALWAYS" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+                        <ScrollPane fx:id="scheduleScrollPane" styleClass="schedule-scroll" fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
                             <VBox fx:id="timeSlotsContainer" styleClass="slots-container"/>
                         </ScrollPane>
 
                     </VBox>
 
-                    <VBox styleClass="calendar-panel" minWidth="280" maxWidth="300" spacing="0">
+                    <VBox styleClass="calendar-panel" minWidth="340" maxWidth="380" spacing="0">
 
                         <HBox styleClass="calendar-nav" alignment="CENTER" spacing="0">
                             <Button fx:id="prevMonthButton" styleClass="cal-arrow-button" text="&#8249;"/>
@@ -119,29 +119,6 @@
                                 <ColumnConstraints percentWidth="14.28" halignment="CENTER"/>
                             </columnConstraints>
                         </GridPane>
-
-                        <VBox fx:id="legendBox" styleClass="legend-box" spacing="6">
-                            <padding>
-                                <Insets top="16" right="16" bottom="16" left="16"/>
-                            </padding>
-                            <Label styleClass="legend-title" text="Categories"/>
-                            <HBox spacing="6" alignment="CENTER_LEFT">
-                                <Circle radius="5" styleClass="dot,dot-blue"/>
-                                <Label text="General Wellness" styleClass="legend-label"/>
-                            </HBox>
-                            <HBox spacing="6" alignment="CENTER_LEFT">
-                                <Circle radius="5" styleClass="dot,dot-pink"/>
-                                <Label text="Women's Health" styleClass="legend-label"/>
-                            </HBox>
-                            <HBox spacing="6" alignment="CENTER_LEFT">
-                                <Circle radius="5" styleClass="dot,dot-green"/>
-                                <Label text="Specialized Fields" styleClass="legend-label"/>
-                            </HBox>
-                            <HBox spacing="6" alignment="CENTER_LEFT">
-                                <Circle radius="5" styleClass="dot,dot-purple"/>
-                                <Label text="Diagnostics &amp; Lab" styleClass="legend-label"/>
-                            </HBox>
-                        </VBox>
 
                     </VBox>
                 </HBox>

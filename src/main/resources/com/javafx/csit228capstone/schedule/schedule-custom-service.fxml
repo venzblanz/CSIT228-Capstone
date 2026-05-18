@@ -5,14 +5,14 @@
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.javafx.csit228capstone.screens.schedule.ScheduleCustomServiceController" styleClass="dialog-root" spacing="14" prefWidth="380">
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.javafx.csit228capstone.screens.schedule.ScheduleCustomServiceController" styleClass="dialog-root" spacing="16" prefWidth="460">
 
     <stylesheets>
         <String fx:value="/styles/schedule.css"/>
     </stylesheets>
 
     <padding>
-        <Insets top="24" right="24" bottom="24" left="24"/>
+        <Insets top="28" right="28" bottom="28" left="28"/>
     </padding>
 
     <Label text="Other Service" styleClass="dialog-title"/>
@@ -21,7 +21,7 @@
 
     <Label text="Category" styleClass="dialog-subtitle"/>
 
-    <VBox spacing="10">
+    <VBox spacing="12">
         <RadioButton fx:id="rbGeneral" text="General Wellness" styleClass="category-radio-blue" onAction="#onCategorySelected"/>
         <RadioButton fx:id="rbWomens" text="Women's Health" styleClass="category-radio-pink" onAction="#onCategorySelected"/>
         <RadioButton fx:id="rbSpecial" text="Specialized Fields" styleClass="category-radio-green" onAction="#onCategorySelected"/>
@@ -30,7 +30,7 @@
 
     <CheckBox fx:id="recurringCheck" styleClass="dialog-recurring-check" selected="true"/>
 
-    <HBox spacing="8" alignment="CENTER_RIGHT">
+    <HBox spacing="10" alignment="CENTER_RIGHT">
         <Button text="Cancel" styleClass="dialog-cancel-btn" onAction="#onCancel" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
         <Button fx:id="addBtn" text="Add Service" styleClass="dialog-add-btn" onAction="#onAdd" maxWidth="Infinity" HBox.hgrow="ALWAYS" disable="true"/>
     </HBox>

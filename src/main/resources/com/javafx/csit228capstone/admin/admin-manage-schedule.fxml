@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import java.lang.String?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.csit228capstone.screens.admin.AdminScheduleController" styleClass="main-pane">
 
@@ -24,37 +25,41 @@
     </left>
 
     <center>
-        <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+        <ScrollPane fitToWidth="true" fitToHeight="true" styleClass="scroll-pane">
             <content>
-                <VBox spacing="20.0" styleClass="content-root">
+                <VBox fx:id="scheduleScreen" spacing="24.0" styleClass="content-root">
                     <padding>
-                        <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+                        <Insets bottom="30.0" left="35.0" right="20.0" top="30.0" />
                     </padding>
                     <children>
 
-                        <HBox alignment="CENTER_LEFT">
+                        <HBox alignment="CENTER_LEFT" prefHeight="71.0">
                             <children>
-                                <VBox>
+                                <VBox alignment="CENTER_LEFT">
                                     <children>
-                                        <Label fx:id="screenLabel" styleClass="screen-label" text="Manage Schedule" />
+                                        <Label fx:id="screenLabel" styleClass="screen-label" text="Manage Schedule">
+                                            <font>
+                                                <Font size="24.0" />
+                                            </font>
+                                        </Label>
                                     </children>
                                 </VBox>
                                 <Region HBox.hgrow="ALWAYS" />
                                 <VBox alignment="CENTER_RIGHT">
                                     <children>
-                                        <Label style="-fx-text-fill: #64748B;" text="Today" />
-                                        <Label fx:id="selectedDateLabel" style="-fx-font-weight: bold; -fx-font-size: 14px;" text="" />
+                                        <Label style="-fx-text-fill: #64748B; -fx-font-size: 14px;" text="Today" />
+                                        <Label fx:id="selectedDateLabel" style="-fx-font-weight: bold; -fx-font-size: 16px;" text="" />
                                     </children>
                                 </VBox>
                             </children>
                         </HBox>
 
-                        <HBox spacing="16.0" VBox.vgrow="ALWAYS">
+                        <HBox spacing="20.0" VBox.vgrow="ALWAYS">
                             <children>
 
                                 <VBox styleClass="schedule-panel" HBox.hgrow="ALWAYS" spacing="0">
                                     <children>
-                                        <ScrollPane fx:id="scheduleScrollPane" styleClass="schedule-scroll" fitToWidth="true" VBox.vgrow="ALWAYS" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+                                        <ScrollPane fx:id="scheduleScrollPane" styleClass="schedule-scroll" fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
                                             <content>
                                                 <VBox fx:id="timeSlotsContainer" styleClass="slots-container"/>
                                             </content>
@@ -62,7 +67,7 @@
                                     </children>
                                 </VBox>
 
-                                <VBox styleClass="calendar-panel" minWidth="280.0" maxWidth="300.0" spacing="0">
+                                <VBox styleClass="calendar-panel" minWidth="340.0" maxWidth="380.0" spacing="0">
                                     <children>
                                         <HBox styleClass="calendar-nav" alignment="CENTER" spacing="0">
                                             <children>
@@ -105,33 +110,33 @@
                                             </columnConstraints>
                                         </GridPane>
 
-                                        <VBox fx:id="legendBox" styleClass="legend-box" spacing="6.0">
+                                        <VBox fx:id="legendBox" styleClass="legend-box" spacing="8.0">
                                             <padding>
-                                                <Insets top="16.0" right="16.0" bottom="16.0" left="16.0"/>
+                                                <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
                                             </padding>
                                             <children>
                                                 <Label styleClass="legend-title" text="Categories"/>
-                                                <HBox spacing="6.0" alignment="CENTER_LEFT">
+                                                <HBox spacing="8.0" alignment="CENTER_LEFT">
                                                     <children>
-                                                        <Circle radius="5.0" styleClass="dot,dot-blue"/>
+                                                        <Circle radius="6.0" styleClass="dot,dot-blue"/>
                                                         <Label text="General Wellness" styleClass="legend-label"/>
                                                     </children>
                                                 </HBox>
-                                                <HBox spacing="6.0" alignment="CENTER_LEFT">
+                                                <HBox spacing="8.0" alignment="CENTER_LEFT">
                                                     <children>
-                                                        <Circle radius="5.0" styleClass="dot,dot-pink"/>
+                                                        <Circle radius="6.0" styleClass="dot,dot-pink"/>
                                                         <Label text="Women's Health" styleClass="legend-label"/>
                                                     </children>
                                                 </HBox>
-                                                <HBox spacing="6.0" alignment="CENTER_LEFT">
+                                                <HBox spacing="8.0" alignment="CENTER_LEFT">
                                                     <children>
-                                                        <Circle radius="5.0" styleClass="dot,dot-green"/>
+                                                        <Circle radius="6.0" styleClass="dot,dot-green"/>
                                                         <Label text="Specialized Fields" styleClass="legend-label"/>
                                                     </children>
                                                 </HBox>
-                                                <HBox spacing="6.0" alignment="CENTER_LEFT">
+                                                <HBox spacing="8.0" alignment="CENTER_LEFT">
                                                     <children>
-                                                        <Circle radius="5.0" styleClass="dot,dot-purple"/>
+                                                        <Circle radius="6.0" styleClass="dot,dot-purple"/>
                                                         <Label text="Diagnostics &amp; Lab" styleClass="legend-label"/>
                                                     </children>
                                                 </HBox>
