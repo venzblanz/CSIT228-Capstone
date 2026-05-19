@@ -233,17 +233,22 @@ public class QueueScheduleController implements Initializable {
         } else {
             for (int idx = 0; idx < filtered.size(); idx++) {
                 Service svc = filtered.get(idx);
-                HBox chip = buildChip(svc);
+                HBox chip = buildChip(svc, isSlotInPast(timeSlot)); // pass past flag
                 animateChipIn(chip, idx * 30L);
-                chip.setOnMouseClicked(e -> {
-                    e.consume();
-                    if (selectedChip != null) selectedChip.setStyle("");
-                    selectedChip = chip;
-                    selectedChip.setStyle("-fx-background-color: #f0f0f0;");
-                    setQueueSchedule(svc, timeSlot);
-                    clearError();
-                });
-                chip.setOnMouseEntered(e -> chip.setCursor(javafx.scene.Cursor.HAND));
+
+                if (!isSlotInPast(timeSlot)) {
+                    chip.setOnMouseClicked(e -> {
+                        e.consume();
+                        if (selectedChip != null) selectedChip.setStyle("");
+                        selectedChip = chip;
+                        selectedChip.setStyle("-fx-background-color: #f0f0f0;");
+                        setQueueSchedule(svc, timeSlot);
+                        clearError();
+                    });
+                    chip.setOnMouseEntered(e -> chip.setCursor(javafx.scene.Cursor.HAND));
+                } else {
+                    chip.setCursor(javafx.scene.Cursor.DEFAULT);
+                }
                 chipsBox.getChildren().add(chip);
             }
         }
@@ -252,11 +257,17 @@ public class QueueScheduleController implements Initializable {
         return row;
     }
 
-    private HBox buildChip(Service service) {
+    private HBox buildChip(Service service, boolean disabled) {
         HBox chip = new HBox(6);
         chip.setAlignment(Pos.CENTER_LEFT);
         chip.getStyleClass().addAll("chip", "chip-" + service.getChipColor());
-        chip.setCursor(javafx.scene.Cursor.HAND);
+
+        if (disabled) {
+            chip.setOpacity(0.4);
+            chip.setStyle("-fx-background-color: #e2e8f0;");
+        } else {
+            chip.setCursor(javafx.scene.Cursor.HAND);
+        }
 
         Circle dot = new Circle(3.5);
         dot.getStyleClass().addAll("dot", "dot-" + service.getChipColor());
@@ -436,6 +447,16 @@ public class QueueScheduleController implements Initializable {
         ft.setDelay(Duration.millis(delayMs));
 
         new ParallelTransition(chip, st, ft).play();
+    }
+    private boolean isSlotInPast(String timeSlot) {
+        if (!selectedDate.equals(today)) return false; // only restrict today's slots
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a", Locale.US);
+            java.time.LocalTime slotTime = java.time.LocalTime.parse(timeSlot, formatter);
+            return slotTime.isBefore(java.time.LocalTime.now());
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public LocalDate getSelectedDate() { return selectedDate; }
