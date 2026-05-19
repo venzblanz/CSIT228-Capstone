@@ -52,6 +52,7 @@
         -fx-background-position: center;
     }
     .password-field{
+        -fx-font-family: Arial;
         -fx-background-color: lightgray;
         -fx-prompt-text-fill: black;
         -fx-background-radius: 10;

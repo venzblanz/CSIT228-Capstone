@@ -36,7 +36,7 @@ public class LiveQueueWindowController {
     @FXML
     private void initialize() {
         loadQueue();
-        autoRefresh = new Timeline(new KeyFrame(Duration.seconds(10), e -> loadQueue()));
+        autoRefresh = new Timeline(new KeyFrame(Duration.seconds(3), e -> loadQueue()));
         autoRefresh.setCycleCount(Timeline.INDEFINITE);
         autoRefresh.play();
     }
@@ -68,7 +68,7 @@ public class LiveQueueWindowController {
                             "Specialized Fields"
                     };
                     String servingSql = "SELECT queue_number FROM queue_line " +
-                            "WHERE status = 'Serving' AND department = ? " +
+                            "WHERE status = 'Serving' AND department = ? AND DATE(created_at) = CURDATE() " +
                             "ORDER BY created_at DESC LIMIT 1";
                     for (String d : departments) {
                         try (Connection c = DatabaseConfig.getConnection();
@@ -86,7 +86,7 @@ public class LiveQueueWindowController {
                     }
                 } else {
                     String servingSql = "SELECT queue_number, department " +
-                            "FROM queue_line WHERE status = 'Serving' AND department = ? " +
+                            "FROM queue_line WHERE status = 'Serving' AND department = ? AND DATE(created_at) = CURDATE() " +
                             "ORDER BY created_at DESC LIMIT 1";
                     try (Connection c = DatabaseConfig.getConnection();
                          PreparedStatement ps = c.prepareStatement(servingSql)) {
@@ -105,7 +105,7 @@ public class LiveQueueWindowController {
 
                 // Waiting
                 String waitingSql = "SELECT queue_number, department FROM queue_line " +
-                        "WHERE status = 'Waiting'" +
+                        "WHERE status = 'Waiting' AND DATE(created_at) = CURDATE()" +
                         (dept.equals("All") ? "" : " AND department = ?") +
                         " ORDER BY created_at ASC";
                 try (Connection c = DatabaseConfig.getConnection();
@@ -124,7 +124,7 @@ public class LiveQueueWindowController {
 
                 // Completed
                 String completedSql = "SELECT queue_number FROM queue_line " +
-                        "WHERE status = 'Completed'" +
+                        "WHERE status = 'Done' AND DATE(created_at) = CURDATE()" +
                         (dept.equals("All") ? "" : " AND department = ?") +
                         " ORDER BY created_at DESC LIMIT 10";
                 try (Connection c = DatabaseConfig.getConnection();
@@ -140,10 +140,9 @@ public class LiveQueueWindowController {
 
                 // Cancelled
                 String cancelledSql = "SELECT queue_number FROM queue_line " +
-                        "WHERE status = 'Cancelled'" +
+                        "WHERE status = 'Cancelled' AND DATE(created_at) = CURDATE()" +
                         (dept.equals("All") ? "" : " AND department = ?") +
-                        " ORDER BY created_at DESC LIMIT 10";
-                try (Connection c = DatabaseConfig.getConnection();
+                        " ORDER BY created_at DESC LIMIT 10";                try (Connection c = DatabaseConfig.getConnection();
                      PreparedStatement ps = c.prepareStatement(cancelledSql)) {
                     if (!dept.equals("All")) ps.setString(1, dept);
                     ResultSet rs = ps.executeQuery();

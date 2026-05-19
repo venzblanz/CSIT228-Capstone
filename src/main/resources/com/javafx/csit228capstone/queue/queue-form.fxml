@@ -118,7 +118,7 @@
                                     </rowConstraints>
                                     <children>
                                         <Label text="First Name *" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                        <Label text="M.I *" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                        <Label text="M.I " GridPane.columnIndex="1" GridPane.rowIndex="0" />
                                         <TextField fx:id="fname_field" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" promptText="Juan" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                                         <TextField fx:id="mi_field" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" promptText="D" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                         <Label text="Last Name *" GridPane.columnIndex="0" GridPane.rowIndex="2" />
@@ -254,7 +254,7 @@
                                 </VBox>
                         <VBox spacing="10.0">
                            <children>
-                              <Label text="Email Address" />
+                              <Label text="Email Address *" />
                               <TextField fx:id="emailAddressField" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="35.0" promptText="juandelacruz@gmail.com" />
                            </children>
                            <VBox.margin>

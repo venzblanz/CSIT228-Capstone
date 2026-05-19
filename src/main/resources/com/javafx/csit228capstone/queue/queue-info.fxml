@@ -328,6 +328,7 @@
                                                    <Label fx:id="qCreatedAtLabel" styleClass="field-value-blue" text="—" wrapText="true" />
                                                 </children>
                                              </VBox>
+                                                          <Button fx:id="cancelQueueBtn" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" styleClass="save-image-button" text="Cancel Queue" />
       
                                                       </children>
                                                   </VBox>

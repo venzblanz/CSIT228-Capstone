@@ -48,3 +48,7 @@
     -fx-prompt-text-fill: #999999;
     -fx-text-fill: black;
 }
+
+.password-field {
+    -fx-font-family: Arial;
+}
