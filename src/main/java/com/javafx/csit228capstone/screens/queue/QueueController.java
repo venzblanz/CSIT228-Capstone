@@ -2,6 +2,7 @@ package com.javafx.csit228capstone.screens.queue;
 
 import com.javafx.csit228capstone.helper.MenuController;
 import com.javafx.csit228capstone.model.QueueTicket;
+import com.javafx.csit228capstone.screens.NotificationPanelController;
 import com.javafx.csit228capstone.utils.*;
 import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
@@ -30,6 +31,7 @@ public class QueueController {
     @FXML private HBox whBtn;
     @FXML private HBox sfBtn;
     @FXML private HBox dlBtn;
+    @FXML private StackPane root;
     @FXML private Label seeAllBtn;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
@@ -48,6 +50,8 @@ public class QueueController {
 
         // for notification animation
         AnimationHelper.ringAnimation(notification);
+        NotificationPanelController notifPanelCtrl = new NotificationPanelController(root);
+        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
     }
 
     // ------------ Initializers ---------------------------------------------------------------------------------------

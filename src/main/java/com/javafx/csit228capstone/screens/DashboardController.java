@@ -48,6 +48,7 @@ public class DashboardController {
     private final User currentUser = sessionManager.getCurrentUser();
     private final List<QueueTicket> queueList = QueueLineDAO.getRecentQueue(sessionManager.getUserId());
     private final QueueTicket qt = QueueLineDAO.getFirstActiveQueue(sessionManager.getUserId());
+    @FXML private StackPane root;
 
     @FXML
     public void initialize(){
@@ -66,6 +67,8 @@ public class DashboardController {
         ring.setAutoReverse(true);
 
         notification.setOnMouseEntered(e -> ring.play());
+        NotificationPanelController notifPanelCtrl = new NotificationPanelController(root);
+        notification.setOnMouseClicked(e -> notifPanelCtrl.openPanel());
         setUpRecent(queueList);
     }
     // ----------- For Dashboard Cards ---------------------------------------------------------------------------------

@@ -37,11 +37,7 @@
                             </HBox.margin>
                         </Label>
                         <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                        <Pane fx:id="notification" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="32.0" styleClass="notification-icon">
-                            <HBox.margin>
-                                <Insets />
-                            </HBox.margin>
-                  </Pane>
+
                     </children>
                 </HBox>
             <Label fx:id="scheduleLabel1" text="General Care Schedule">
