@@ -1,6 +1,7 @@
 package com.javafx.csit228capstone.screens.admin;
 
 import com.javafx.csit228capstone.utils.DatabaseConfig;
+import com.javafx.csit228capstone.utils.NotificationDAO;
 import com.javafx.csit228capstone.utils.QueueLineDAO;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -228,7 +229,28 @@ public class AdminManageQueueController {
                         cancel.setVisible(true);
                         complete.setVisible(true);
                         cancel.setOnAction(e -> {
-                            QueueLineDAO.updateQueue(queueNumberValue, false);
+                            // 1. Fetch the patient's user_id before cancelling
+                            String fetchSql = "SELECT user_id FROM queue_line WHERE queue_number = ? AND DATE(created_at) = CURDATE()";
+                            try (Connection ca = DatabaseConfig.getConnection();
+                                 PreparedStatement psa = ca.prepareStatement(fetchSql)) {
+                                psa.setString(1, queueNumberValue);
+                                ResultSet rsa = psa.executeQuery();
+                                if (rsa.next()) {
+                                    int patientUserId = rsa.getInt("user_id");
+                                    // 2. Cancel the queue
+                                    QueueLineDAO.updateQueue(queueNumberValue, false);
+                                    // 3. Notify the patient
+                                    NotificationDAO.insert(
+                                            patientUserId,
+                                            "Queue Cancelled",
+                                            "Your queue #" + queueNumberValue + " for " + selectedCategory
+                                                    + " has been cancelled by the staff.",
+                                            "CANCELLED"
+                                    );
+                                }
+                            } catch (Exception ex) {
+                                System.err.println("[CancelQueue] " + ex.getMessage());
+                            }
                             loadRecentQueue(selectedCategory);
                         });
                         complete.setOnAction(e -> {

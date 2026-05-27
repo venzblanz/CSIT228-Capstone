@@ -463,4 +463,16 @@ public class QueueLineDAO {
         }
         return prefix + "-01";
     }
+
+    public static boolean cancelQueue(int queueId) {
+        String sql = "UPDATE queue_line SET status = 'Cancelled' WHERE queue_id = ?";
+        try (Connection c = DatabaseConfig.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, queueId);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.err.println("[CancelQueue] " + e.getMessage());
+            return false;
+        }
+    }
 }
