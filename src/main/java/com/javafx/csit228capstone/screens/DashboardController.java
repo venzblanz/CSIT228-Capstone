@@ -91,8 +91,6 @@ public class DashboardController {
             activeCard.setMaxHeight(Region.USE_PREF_SIZE);
             colorBar.setStyle("-fx-background-color: #218ad5;");
 
-            // ------- Children for empty card
-            // Image
             Image image = new Image(getClass().getResource("/images/no-active.png").toExternalForm());
             ImageView imageView = new ImageView();
             imageView.setFitHeight(450);
@@ -101,7 +99,6 @@ public class DashboardController {
             HBox.setMargin(imageView, new Insets(10,10,10,20));
             imageView.setImage(image);
 
-            // VBox for description
             Label noActive = new Label("No Active Queue");
             noActive.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
             Label desc1 = new Label("You are not currently waiting in any queue.");
@@ -137,29 +134,33 @@ public class DashboardController {
             HBox.setHgrow(imageView, Priority.ALWAYS);
             HBox.setHgrow(description, Priority.ALWAYS);
             activeCard.getChildren().addAll(colorBar, imageView, description);
-        }else{
+        } else {
+            boolean isOld = !activeQueue.getDate().isEqual(LocalDate.now());
+
             int position = QueueLineDAO.getPosition(
                     activeQueue.getDepartment(),
                     activeQueue.getQueueNumber()
             );
 
-            positionLabel.setText(position + "");
+            positionLabel.setText(isOld ? "-" : position + "");
             scheduleLabel.setText(activeQueue.getTime());
 
-            QueueTimeHelper.startCountdown(
-                    timeLabel,
-                    activeQueue.getCreatedAt(),
-                    position,
-                    false
-            );
+            if (isOld) {
+                timeLabel.setText("-");
+            } else {
+                QueueTimeHelper.startCountdown(
+                        timeLabel,
+                        activeQueue.getCreatedAt(),
+                        position,
+                        false
+                );
+            }
 
             activeCard.setPrefHeight(150);
             activeCard.setMinHeight(Region.USE_PREF_SIZE);
             activeCard.setMaxHeight(Region.USE_PREF_SIZE);
             colorBar.setPrefSize(6,140);
 
-            // ------- Children for the card
-            // VBox for Active Queue Components
             Label dot = new Label("● ");
             dot.setStyle("-fx-font-size: 10px;");
             dot.getStyleClass().add("active-dot");
@@ -179,20 +180,23 @@ public class DashboardController {
             queueVBox.setPadding(new Insets(5,0,10,28));
             queueVBox.getChildren().addAll(labelContainer, queueNumber, yourQueue);
 
-            // VBox for Additional Queue Info
             Label department = new Label(activeQueue.getDepartment());
             department.setStyle("-fx-font-size: 18px;");
             Label pos;
-            if (activeQueue.getStatus().equals("Serving")) {
+            if (isOld) {
+                pos = new Label("-");
+            } else if (activeQueue.getStatus().equals("Serving")) {
                 pos = new Label("Now");
             } else {
                 pos = new Label("#" + position);
             }
             pos.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
             pos.getStyleClass().add("q-position");
-            Label wait = new Label();
 
-            if (activeQueue.getStatus().equals("Serving")) {
+            Label wait = new Label();
+            if (isOld) {
+                wait.setText("-");
+            } else if (activeQueue.getStatus().equals("Serving")) {
                 wait.setText("Serving now");
             } else {
                 QueueTimeHelper.startCountdown(
@@ -202,6 +206,7 @@ public class DashboardController {
                         true
                 );
             }
+
             Label nowServing = new Label("Now serving " + Objects.requireNonNull(QueueLineDAO.getFirstLineQueue(activeQueue.getDepartment())).getQueueNumber());
             nowServing.getStyleClass().add("recent");
             VBox infoContainer = new VBox();
@@ -209,7 +214,6 @@ public class DashboardController {
             infoContainer.setPadding(new Insets(0,28,0,28));
             infoContainer.getChildren().addAll(department, pos, wait, nowServing);
 
-            // The actual card
             activeCard.getChildren().addAll(colorBar, queueVBox, infoContainer);
         }
     }

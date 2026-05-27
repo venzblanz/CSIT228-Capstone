@@ -5,6 +5,7 @@ import com.javafx.csit228capstone.model.QueueInsertValue;
 import com.javafx.csit228capstone.model.QueueTicket;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -222,35 +223,52 @@ public class QueueLineDAO {
     }
     public static List<QueueTicket> getRecentQueue(int userId) {
         String sql = """
-            SELECT
-                q.queue_id,
-                q.queue_number,
-                q.department,
-                q.created_at,
-                q.status,
-                q.staff_assigned,
-                f.picked_service,
-                f.first_name,
-                f.middle_initial,
-                f.last_name
-            FROM queue_line q, queue_form f
-            WHERE q.form_id = f.form_id
-            AND q.user_id = ?
-            ORDER BY q.queue_id DESC
-            """;
-
+        SELECT
+            q.queue_id,
+            q.queue_number,
+            q.department,
+            q.created_at,
+            q.status,
+            q.staff_assigned,
+            f.picked_service,
+            f.first_name,
+            f.middle_initial,
+            f.last_name,
+            f.picked_date
+        FROM queue_line q, queue_form f
+        WHERE q.form_id = f.form_id
+        AND q.user_id = ?
+        ORDER BY q.queue_id DESC
+        """;
         List<QueueTicket> queueList = new ArrayList<>();
-
         try (Connection c = DatabaseConfig.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
-
             ps.setInt(1, userId);
-
-            fetchQueueHistory(queueList, ps);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    LocalDate pickedDate = rs.getDate("picked_date") != null
+                            ? rs.getDate("picked_date").toLocalDate()
+                            : null;
+                    QueueTicket ticket = new QueueTicket(
+                            rs.getInt("queue_id"),
+                            rs.getString("queue_number"),
+                            rs.getString("department"),
+                            rs.getString("first_name"),
+                            rs.getString("middle_initial"),
+                            rs.getString("last_name"),
+                            rs.getTimestamp("created_at").toLocalDateTime(),
+                            rs.getString("status"),
+                            rs.getString("picked_service"),
+                            pickedDate,
+                            null,
+                            rs.getString("staff_assigned")
+                    );
+                    queueList.add(ticket);
+                }
+            }
         } catch (Exception e) {
             System.err.println("[QueueLineDAO] Error getting the queue history " + e.getMessage());
         }
-
         return queueList;
     }
     public static List<QueueTicket> getAllRecords() {
@@ -286,28 +304,50 @@ public class QueueLineDAO {
     }
     public static List<QueueTicket> getActiveQueue(int userId) {
         String sql = """
-            SELECT
-                q.queue_id,
-                q.queue_number,
-                q.department,
-                q.created_at,
-                q.status,
-                q.staff_assigned,
-                f.picked_service,
-                f.first_name,
-                f.middle_initial,
-                f.last_name
-            FROM queue_line q, queue_form f
-            WHERE q.form_id = f.form_id
-            AND q.user_id = ?
-            AND q.status IN ('Waiting', 'Serving')
-            ORDER BY q.queue_id DESC
-            """;
+        SELECT
+            q.queue_id,
+            q.queue_number,
+            q.department,
+            q.created_at,
+            q.status,
+            q.staff_assigned,
+            f.picked_service,
+            f.first_name,
+            f.middle_initial,
+            f.last_name,
+            f.picked_date
+        FROM queue_line q, queue_form f
+        WHERE q.form_id = f.form_id
+        AND q.user_id = ?
+        AND q.status IN ('Waiting', 'Serving')
+        ORDER BY q.queue_id DESC
+        """;
         List<QueueTicket> queueList = new ArrayList<>();
         try (Connection c = DatabaseConfig.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
-             ps.setInt(1, userId);
-             fetchQueueHistory(queueList, ps);
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    LocalDate pickedDate = rs.getDate("picked_date") != null
+                            ? rs.getDate("picked_date").toLocalDate()
+                            : null;
+                    QueueTicket ticket = new QueueTicket(
+                            rs.getInt("queue_id"),
+                            rs.getString("queue_number"),
+                            rs.getString("department"),
+                            rs.getString("first_name"),
+                            rs.getString("middle_initial"),
+                            rs.getString("last_name"),
+                            rs.getTimestamp("created_at").toLocalDateTime(),
+                            rs.getString("status"),
+                            rs.getString("picked_service"),
+                            pickedDate,
+                            null,
+                            rs.getString("staff_assigned")
+                    );
+                    queueList.add(ticket);
+                }
+            }
         } catch (Exception e) {
             System.err.println("[QueueLineDAO] Error getting the active queue " + e.getMessage());
         }

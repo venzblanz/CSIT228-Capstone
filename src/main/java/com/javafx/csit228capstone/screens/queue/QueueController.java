@@ -35,6 +35,7 @@ public class QueueController {
     @FXML private Label seeAllBtn;
 
     private final SceneNavigator sceneNavigator = SceneNavigator.getInstance();
+    private final SessionManager sessionManager = SessionManager.getInstance();
     private Boolean isActive = false;
 
     @FXML
@@ -85,7 +86,7 @@ public class QueueController {
     }
     private void showActiveQueue(Boolean isActive){
         activeQueueContainer.getChildren().clear();
-        List<QueueTicket> queueList = QueueLineDAO.getActiveQueue(SessionManager.getInstance().getUserId());
+        List<QueueTicket> queueList = QueueLineDAO.getActiveQueue(sessionManager.getUserId());
         int index = 0;
         if (queueList.isEmpty()) {
             seeAllBtn.setVisible(false);
@@ -105,16 +106,12 @@ public class QueueController {
         }
     }
     private HBox createCard(QueueTicket queueTicket) {
-        // Check lang if ang iyang queue kay lapas na sa karon para matarong ang display
-        boolean isOld = queueTicket.getCreatedAt().isBefore(LocalDate.now().atStartOfDay());
-
-        // Design kunohay nga bar HAHAHAHHAAH
+        boolean isOld = !queueTicket.getDate().isEqual(LocalDate.now());
         Pane colorBar = new Pane();
         colorBar.setPrefWidth(6);
         colorBar.setMaxWidth(Region.USE_PREF_SIZE);
         colorBar.setMinWidth(Region.USE_PREF_SIZE);
 
-        // For department Icon
         Pane icon = new Pane();
         icon.setPrefSize(30, 30);
         icon.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
@@ -126,8 +123,6 @@ public class QueueController {
         stackPane.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         HBox.setMargin(stackPane, new Insets(20, 20, 20, 20));
 
-
-        // Vbox for department and Queue number
         Label department = new Label(queueTicket.getDepartment());
         department.setStyle("-fx-font-size: 14;" +
                 "-fx-font-weight: bold;");
@@ -142,18 +137,12 @@ public class QueueController {
         queue.setAlignment(Pos.CENTER_LEFT);
         queue.getChildren().addAll(department, queueNumber);
 
-
-        // Separator
         Separator s1 = createSeparator();
 
-
-        // VBox for Waiting time
         Label estimteLabel = new Label("Estimated Waiting Time");
         ImageView clock = new ImageView();
         clock.setFitHeight(15);
         clock.setFitWidth(15);
-
-
         clock.setPreserveRatio(true);
         HBox.setMargin(clock, new Insets(5, 5, 5, 5));
 
@@ -163,17 +152,16 @@ public class QueueController {
         );
 
         Label time = new Label();
-
-        if(!isOld){
-            if (queueTicket.getStatus().equals("Serving")) {
-                time.setText("Serving now");
-            } else {
-                QueueTimeHelper.startCountdownFromNow(
-                        time,
-                        positionValue,
-                        true
-                );
-            }
+        if (isOld) {
+            time.setText("-");
+        } else if (queueTicket.getStatus().equals("Serving")) {
+            time.setText("Serving now");
+        } else {
+            QueueTimeHelper.startCountdownFromNow(
+                    time,
+                    positionValue,
+                    true
+            );
         }
 
         HBox timeContainer = new HBox();
@@ -189,17 +177,10 @@ public class QueueController {
         HBox.setHgrow(waitingTimeContainer, Priority.ALWAYS);
         waitingTimeContainer.getChildren().addAll(estimteLabel, timeContainer);
 
-
-        // Separator
         Separator s2 = createSeparator();
 
-
-        // VBox for Status
         Label statusLabel = new Label("Status");
-        Label status = new Label("-");
-        if(!isOld){
-            status.setText(queueTicket.getStatus());
-        }
+        Label status = new Label(isOld ? "-" : queueTicket.getStatus());
         VBox.setMargin(status, new Insets(5, 10, 5, 10));
 
         VBox statusContainer = new VBox();
@@ -208,22 +189,16 @@ public class QueueController {
         HBox.setHgrow(statusContainer, Priority.ALWAYS);
         statusContainer.getChildren().addAll(statusLabel, status);
 
-
-        // Separator
         Separator s3 = createSeparator();
 
-
-        // Vbox for Position
         Label positionLabel = new Label("Position");
-        Label position = null;
-        if(isOld){
+        Label position;
+        if (isOld) {
             position = new Label("-");
-        }else{
-            if (queueTicket.getStatus().equals("Serving")) {
-                position = new Label("Now");
-            } else {
-                position = new Label("#" + positionValue);
-            }
+        } else if (queueTicket.getStatus().equals("Serving")) {
+            position = new Label("Now");
+        } else {
+            position = new Label("#" + positionValue);
         }
         VBox.setMargin(position, new Insets(3, 8, 3, 8));
 
@@ -233,7 +208,6 @@ public class QueueController {
         HBox.setHgrow(positionContainer, Priority.ALWAYS);
         positionContainer.getChildren().addAll(positionLabel, position);
 
-        // Card UI uniformity
         Image image = null;
         switch (queueTicket.getDepartment()) {
             case "General Wellness":
